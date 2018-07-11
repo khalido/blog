@@ -1,7 +1,7 @@
-baseURL = "http://www.example.com"
-title = "Numberology"
+baseURL = "http://khalido.com"
+title = "looking at numbers"
 # for smart copyright line, leave this blank and check [params.copyright]
-copyright = "KO"
+copyright = ""
 
 theme = "minimo"
 
@@ -22,7 +22,7 @@ enableEmoji = true
 defaultContentLanguage = "en"
 
 [params.info]
-description = "KO's pythonic data science blog"
+description = "a pythonic data science blog"
 title404 = "Nothing's here!"
 
 [params.assets]
@@ -43,7 +43,7 @@ dateFormat = "2006, Jan 02"
 listDateFormat = "2006, Jan 02"
 archiveDateFormat = "Jan 02"
 hideEntryNavigation = ["page"] # boolean / array of sections
-showReadingTime = true
+showReadingTime = false
 taxonomyCloudShuffle = true
 accentColor = "#ffcd00"
 hideMainMenu = false
@@ -69,17 +69,17 @@ page = "" # Twitter page username
 titleSeparator = "•"
 
 [params.social]
-#codepen = "MunifTanjim"
-#email = "contact@example.com"
-#facebook = "MunifTanjim"
+#codepen = ""
+#email = ""
+#facebook = ""
 github = "khalido"
-#gitlab = "MunifTanjim"
-#instagram = "MunifTanjim"
+#gitlab = ""
+#instagram = ""
 linkedin = "khalido"
 twitter = "KO"
-#telegram = "MunifTanjim"
-#google_scholar = "qc6CJjYAAAAJ"
-#youtube = "UCT-U0rNerYxItGcuoPX-WYA"
+#telegram = ""
+#google_scholar = ""
+#youtube = ""
 
 [params.comments]
 enable = false
@@ -124,7 +124,7 @@ page = "/:slug/"
 name = "Repo"
 weight = -10
 identifier = "repository"
-url = "https://github.com/MunifTanjim/minimo"
+url = "https://github.com/khalido"
 
 [blackfriday]
 hrefTargetBlank = true

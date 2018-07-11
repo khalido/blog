@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>http://khalido.com/posts/my-first-post/</loc>
+    <lastmod>2018-07-11T05:23:13+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://khalido.com/authors/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://khalido.com/categories/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://khalido.com/posts/</loc>
+    <lastmod>2018-07-11T05:23:13+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://khalido.com/series/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://khalido.com/tags/site/</loc>
+    <lastmod>2018-07-11T05:23:13+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://khalido.com/tags/</loc>
+    <lastmod>2018-07-11T05:23:13+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://khalido.com/</loc>
+    <lastmod>2018-07-11T05:23:13+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+</urlset>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Site on looking at numbers</title>
+    <link>http://khalido.com/tags/site/</link>
+    <description>Recent content in Site on looking at numbers</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Wed, 11 Jul 2018 05:23:13 +0000</lastBuildDate>
+    
+	<atom:link href="http://khalido.com/tags/site/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>setting up this site</title>
+      <link>http://khalido.com/posts/my-first-post/</link>
+      <pubDate>Wed, 11 Jul 2018 05:23:13 +0000</pubDate>
+      
+      <guid>http://khalido.com/posts/my-first-post/</guid>
+      <description>Starting out a blog to document my learnings in python, data science and AI.
+First up, getting a hugo powered blog using the minimo theme up and running on netlify with continuous deployment every time I push new content to github.</description>
+    </item>
+    
+  </channel>
+</rss>
