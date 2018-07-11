@@ -22,7 +22,7 @@ enableEmoji = true
 defaultContentLanguage = "en"
 
 [params.info]
-description = "to be described"
+description = "KO's pythonic data science blog"
 title404 = "Nothing's here!"
 
 [params.assets]
