@@ -6,6 +6,7 @@ tags:
 - python
 - courses
 - AI
+- deep learning
 ---
 
 My notes & files for [Udacity's Deep Learning intro course](https://www.udacity.com/course/deep-learning-nanodegree-foundation--nd101).
@@ -394,3 +395,7 @@ Putting this here becuase there must be better/simpler easier way to do batch_no
 todo: reimplement in Keras
 
 [Project notebok](https://github.com/khalido/nd101-projects/blob/master/dlnd_face_generation.ipynb)
+
+## All done!
+
+Link to the official [course certificate](https://confirm.udacity.com/FMMYQCGE).

@@ -6,7 +6,7 @@ logo = "/img/ko_logo.png"  # my logo
 
 [recent_posts]
 title = ""
-length = 5
+length = 10
 excludeTypes = ["page"]
 
 [search]
@@ -23,4 +23,4 @@ platforms = ["github","facebook","twitter","instagram","email","codepen","gitlab
 [taxonomy_cloud]
 title = ""
 taxonomy = "tags"
-shuffle = true
+shuffle = false
