@@ -31,12 +31,12 @@ Day    | Kind of Problem | Notes
 ------ | --------------- | -----
 Day 1  | Path | I found the simple things like turning directions tougher than the bigger problem. So doing it in pieces really helped.
 Day 2 | move around a numpad | used both numpy and lists. Key takeaway: use a char to demarcate edges
-Day 3 | simple math and slicing a grid | numpy for the win, basically use numpy if there is anything like a grid to deal with. 
+Day 3 | simple math and slicing a grid | numpy for the win, basically use numpy if there is anything like a grid to deal with.
 Day 4 | ? | use Counter and namedtuples
 Day 5 | find a password | used hashlib, was an interesting problem
 Day 6  | Path | I found the simple things like turning directions tougher than the bigger problem. So doing it in pieces really helped.
 Day 7 | move around a numpad | used both numpy and lists. Key takeaway: use a char to demarcate edges
-Day 8 | simple math and slicing a grid | numpy for the win, basically use numpy if there is anything like a grid to deal with. 
+Day 8 | simple math and slicing a grid | numpy for the win, basically use numpy if there is anything like a grid to deal with.
 Day 9 | ? | use Counter and namedtuples
 Day 10  | parsing instructions | was a challange to fully comprehend the problem, though easy to code.
 Day 11 | building the right kind of graph with breadth first search | solved part 1 using a dumb BFS, but part two the search space is so big that I need to optimize. #TODO
@@ -45,6 +45,6 @@ Day 13 | build a map and find a path | used bfs, easy enough, but need to implem
 Day 14 | find a password | used hashlib, was an interesting problem
 Day 15 | solve a system | find positions of a moving system at time t. Could have used math instead.
 Day 16 | find a password | used hashlib, was an interesting problem
-Day 17 | Get shortest, than longest path | looked similar to day 13, but different. 
+Day 17 | Get shortest, than longest path | looked similar to day 13, but different.
 
 Note: link jupyter notebooks and highlight the interesting part of each days challange.
