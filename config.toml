@@ -121,10 +121,10 @@ tag = "tags"
 page = "/:slug/"
 
 [[menu.main]]
-name = "Repo"
-weight = -10
-identifier = "repository"
-url = "https://github.com/khalido"
+#name = "Repo"
+#weight = -10
+#identifier = "repository"
+#url = "https://github.com/khalido"
 
 [blackfriday]
 hrefTargetBlank = true
