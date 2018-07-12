@@ -62,7 +62,7 @@ appID = ""
 pageID = ""
 
 [params.opengraph.twitter]
-page = "" # Twitter page username
+page = "KO" # Twitter page username
 
 [params.seo]
 # Title Separator: - – — · • * ⋆ | ~ « » < >
