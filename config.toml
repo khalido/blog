@@ -8,7 +8,7 @@ theme = "minimo"
 disqusShortname = ""
 googleAnalytics = ""
 
-Paginate = 10
+Paginate = 20
 preserveTaxonomyNames = true
 
 enableRobotsTXT = true # generate robots.txt
@@ -52,6 +52,7 @@ hideMainMenu = false
 enable = true
 
 [params.widgets]
+#homepage = ["taxonomy_cloud"]
 homepage = ["recent_posts","taxonomy_cloud"]
 sidebar = ["about","search","sidebar_menu","taxonomy_cloud"]
 footer = ["social_menu"]
@@ -121,10 +122,10 @@ tag = "tags"
 page = "/:slug/"
 
 [[menu.main]]
-#name = "Repo"
-#weight = -10
-#identifier = "repository"
-#url = "https://github.com/khalido"
+name = "Github"
+weight = -10
+identifier = "repository"
+url = "https://github.com/khalido"
 
 [blackfriday]
 hrefTargetBlank = true
