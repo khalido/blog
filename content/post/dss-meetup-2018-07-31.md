@@ -39,7 +39,7 @@ Data Science Sydney's [2018-07 meetup](https://www.meetup.com/Data-Science-Sydne
 - and there is a lot more stuff they are doing
 - think about: **what is my mission in data science?**
 
-q&a:
+**q&a:**
 
 - what tools to use?
   - most important is the ability to frame the problem and deliver a simple solution visually.
@@ -72,7 +72,7 @@ q&a:
 - used standard data science models like decision trees, boosting, random forests (more) to data science the data. three models were fit for each data type
 - finally, expressed models as decision treer, combined with classic techniques
 
-q&a
+**q&a**
 
 - how to optimize model?
   - first did feature selection - so already knew all the important factors / significant predictors - looked at deviance, r-squared, lasso regression, then fit a GLM model
@@ -100,5 +100,3 @@ q&a
   - data audit, checks and cleaning
 - did you consider other approaches like interpretative model?
   - regulators hire consultants, who are generally econometrician, who accept linear models, otherwise they would have used decision trees or something like that
-
----
