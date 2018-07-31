@@ -1,7 +1,6 @@
 ---
 title: "DSS-2018-07: Michael Allwright and Inna Kolyshkina"
 date: 2018-07-31
-draft: true
 tags:
 - meetup
 ---
@@ -13,8 +12,6 @@ Data Science Sydney's [2018-07 meetup](https://www.meetup.com/Data-Science-Sydne
 # Michael Allwright: "DATA FOR BAD OR GOOD? THE MINERVA COLLECTIVE"
 
 > Michael is Co-Founder and CEO of The [Minerva Collective](http://www.minervacollective.org), a not for profit which uses data and data sharing for social good, and runs a data analytics consulting company focussed on using data for good.
-
-talk notes:
 
 - we all have tons of data being collected about us, by shops, banks, facebook, health records, etc
 - its scary - which is why we have talks about data privacy etc
@@ -62,9 +59,9 @@ q&a:
 
 > This talk describes a recent project delivered to a large Australian utilities company [..] it enabled the organisation to proactively identify problematic or costly assets prior to asset failure and to use predicted future costs to inform annual maintenance planning.
 
-- founded [IAPA](https://www.iapa.org.au/), first data scientist at the big4 in Australia
+- founded [IAPA](https://www.iapa.org.au/), first data scientist at a big4 in Australia
 - Predictive Asset Management analytics - asset owning companies want to proactively optimize maintainence planning and prevent failures
-- in the past, they used common sense - this doesn't work to well. Of the shelf solutions developed for other countries didn't work too well either, and regulators wanted better ones (company had to justify funding to regulators)
+- in the past, client used common sense - this doesn't work to well. Of the shelf solutions developed for other countries didn't work too well either, and regulators wanted better/local ones (company had to justify funding to regulators)
 - had 12 years of data, which they wanted to use to forecast the next 10 years of asset maintainence cost, failure occurence and duration for several types of assets
 - solution had to be transparent and auditable, easy to implement and compliant with regulation
 - Data was huge and untidy - this is normal. millions of records, 500 variables, different types
@@ -103,3 +100,5 @@ q&a
   - data audit, checks and cleaning
 - did you consider other approaches like interpretative model?
   - regulators hire consultants, who are generally econometrician, who accept linear models, otherwise they would have used decision trees or something like that
+
+---
