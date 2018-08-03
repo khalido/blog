@@ -60,10 +60,30 @@ Regularization
 Dropout regularization
 
 - for each iteration, use a probablity to determine whether to "drop" a neuron. So each iteration through the NN drops a different, random set of neurons.
+- each layer in the NN can have a different dropout probability, the downside is that we have more hyperparameters to tweak
+- in computer vision, we almost always use dropout becuase we are almost always overfitting in vision problems
+- a downside of dropout is that the cost function is no longer well defined, so turn off dropout to see that the loss is dropping, which implies that our model is working, then turn on dropout for better training
 - remove dropout at test time
 - dropout intuitions:
-  - can't rely on on any given neuron, so have to spread out
+  - can't rely on on any given neuron, so have to spread out weights
   - can work similar to L2 regularization
   - helps prevent overfitting
 
-data augmentation
+Data augmentation
+
+- inexpensive way to get more data - e.g with images flip, distory, crop, rotate etc to get more images
+- this helps as a regularization technique
+-
+
+Early stopping
+
+- stop training the NN when the dev set and training set error start diverging - get the huperparameters from the lowest dev and training set cost.
+- this prevents the NN from overfitting on the training set but stops gradient descent early
+- Andrew NG generally prefers using L2 regularization instead of early stopping as that
+
+
+Deep NN suffer from vanishing and exploding gradients
+
+- this happens when gradients become very small or big
+- in a deep NN if activations are linear, than the activations and derivates will increase exponentially with layers
+
