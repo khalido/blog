@@ -1,8 +1,9 @@
 ---
 title: "SML: Deep Reinforcement Learning"
-date: 2018-08-05
+date: 2018-08-08
 tags:
 - meetup
+- deep reinforcement
 ---
 
 SML's [2018-08 meetup](https://www.meetup.com/Sydney-Machine-Learning/events/252760610/).
@@ -41,7 +42,6 @@ SML's [2018-08 meetup](https://www.meetup.com/Sydney-Machine-Learning/events/252
 - a lot of RL is building a simulator to train an agent, then taking it to the real world
 - todo: research transfer learning in RL
 - research happening in hierarchical learning - break up things so learn individual goals which build to the final goal
-
 - Some real world applicatoins:
   - a few cities have implemented deep RL algos in traffic optimisation. RL is also useful for devising plans on how to handle breakdowns, like a road out of commision.
   - energy reduction
@@ -49,6 +49,16 @@ SML's [2018-08 meetup](https://www.meetup.com/Sydney-Machine-Learning/events/252
 - RL models are simulation agnostic, but transition from simulation to the real world can be extremely troublesome
   - continually review simulators
   - where are the reward predictions going wrong
+
+q & a
+
+- How do you reward differnt/multiple objectives?
+  - for a wide range of objectives, scale up rewards at different levels - example reward individual contract signings and also bigger level revenue goals
+- is RL limited by the complexity of the simulation?
+  - some things can be simulated by very simple things like graphs written in python - sims don't have to be complex and visual
+- arbitary rewards can cause problems - whats a good fix?
+  - its a hot area - ppl are figuring out best utility functions for rewards
+
 
 # [Alex Long](https://www.linkedin.com/in/alex-long-rl/): Deep Reinforcement Learning (Deep-RL)
 
