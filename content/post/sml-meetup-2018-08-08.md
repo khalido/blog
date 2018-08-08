@@ -91,4 +91,9 @@ q & a
 - how many policies do u keep track of?
   - only two - current and one step ahead
 - is there a q value in PPO?
-  -in policy gradient methods you don't have a q
+  - in policy gradient methods you don't have a q
+- catostrophic policy updates - how often do u have to abondon?
+  - vanialla policy gradients, have to restart all the time, then tune hyperparameters
+  - PPO almost never, it generally figures things out
+- how efficient is RL
+  - RL uses huge amounts of compute but is progessing very fast. RL algos are speeding up in orders of magnitude. At the moment its prohibitvely expensive for normal ppl to train things like DOTA bots but it keeps getting computationaly cheaper.
