@@ -86,6 +86,7 @@ q & a
 
 - problem of local minima?
   - in a multi-dimensional world, the local minima generally disappear, as there are so many directions to move. It does exist, but in a different way from SL.
+  - there is a problem of getting stuck in a bad policy space so never learning 'good' moves.
 - what about overfitting?
   - we can't overfit - there is no test set. We're doing RL in an environment where we want it to win the mostest.
 - how many policies do u keep track of?
