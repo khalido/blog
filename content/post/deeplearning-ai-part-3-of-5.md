@@ -1,6 +1,6 @@
 ---
 title: "deeplearning.ai: Structuring Machine Learning Projects"
-date: 2018-08-07
+date: 2018-08-14
 cover: /img/deeplearningai-3-of-5-cert.png
 tags:
 - courses
@@ -17,6 +17,37 @@ This course covers how to think about and improve machine learning systems.
 - [Course home](https://www.coursera.org/learn/machine-learning-projects/home/welcome)
 - [Discussion forum](https://www.coursera.org/learn/machine-learning-projects/discussions)
 
+- [Week 1: ML Strategy](#week-1-ml-strategy)
+    - [Orthogonalization](#orthogonalization)
+    - [Setting up your goal](#setting-up-your-goal)
+        - [Single number evaluation metric](#single-number-evaluation-metric)
+        - [Satisficing and Optimizing metric](#satisficing-and-optimizing-metric)
+        - [Train/dev/test distributions](#traindevtest-distributions)
+        - [Size of the dev and test sets](#size-of-the-dev-and-test-sets)
+        - [When to change dev/test sets and metrics](#when-to-change-devtest-sets-and-metrics)
+    - [Comparing to human-level performance](#comparing-to-human-level-performance)
+        - [Why human-level performance?](#why-human-level-performance)
+        - [Avoidable bias](#avoidable-bias)
+        - [Understanding human-level performance](#understanding-human-level-performance)
+        - [Surpassing human-level performance](#surpassing-human-level-performance)
+        - [Improving your model performance](#improving-your-model-performance)
+    - [Andrej Karpathy interview](#andrej-karpathy-interview)
+- [Week 2: More ML Strategy](#week-2-more-ml-strategy)
+    - [Error Analysis](#error-analysis)
+        - [Carrying out error analysis](#carrying-out-error-analysis)
+        - [Cleaning up incorrectly labeled data](#cleaning-up-incorrectly-labeled-data)
+        - [Build your first system quickly, then iterate](#build-your-first-system-quickly-then-iterate)
+    - [Mismatched training and dev/test data](#mismatched-training-and-devtest-data)
+        - [Training and testing on different distributions](#training-and-testing-on-different-distributions)
+        - [Bias and Variance with mismatched data distributions](#bias-and-variance-with-mismatched-data-distributions)
+        - [Addressing data mismatch](#addressing-data-mismatch)
+    - [Learning from multiple tasks](#learning-from-multiple-tasks)
+        - [Transfer learning](#transfer-learning)
+        - [Multi-task learning](#multi-task-learning)
+    - [End-to-end deep learning](#end-to-end-deep-learning)
+        - [What is end-to-end deep learning](#what-is-end-to-end-deep-learning)
+        - [Whether to use end-to-end deep learning](#whether-to-use-end-to-end-deep-learning)
+    - [Ruslan Salakhutdinov interview](#ruslan-salakhutdinov-interview)
 
 ## Week 1: ML Strategy
 
