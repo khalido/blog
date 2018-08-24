@@ -58,5 +58,118 @@ Q&A:
 - hot shoe
   - figures she can use the hot shoe in a camera to communicate with the light - so she can write light settings in the exif data
 - what can she do with this which she can’t do with a traditional flash kit?
-  - led’s blink, so u need them in blink in coordination with your camera settings. this allows her to focus on a specific part of an object. traidtional flashes are bigger, whole panels of lights
+  - led’s blink, so u need them in blink in coordination with your camera settings. this allows her to focus on a specific part of an object. traditional flashes are bigger, whole panels of lights
+
+
+## [Writing fast and efficient MicroPython](https://2018.pycon-au.org/talks/45358-writing-fast-and-efficient-micropython/)
+
+> MicroPython is a reimplementation of Python which is specifically designed to run on computing devices that have very few resources, such as CPU power, RAM and storage. Often when you write scripts in MicroPython you want to make the most of your available resources, and have code run as fast as possible (faster code usually saves power, which is important when running from a battery!) and there are certain ways of writing MicroPython code that are more efficient than others. In this talk I will go over the tricks and techniques for writing fast and efficient Python code in MicroPython. As part of this I will delve into some technical details of how MicroPython works, in order to better understand what it’s doing behind the scenes and how to make the most of it. I will discuss general techniques for making things run faster (some of which would be applicable to normal Python), as well as ways to completely avoid memory allocation, which is important for both efficiency and making code execution deterministic. The talk will include some hardware demos to show off the techniques, including five different ways to blink an LED fast.
+
+- [Damien George](http://dpgeorge.net/) - creator of [MicroPython](https://twitter.com/micropython)
+- loading local variables is fast, global variables is slow. So try to use local variables.
+- its slow to call functions from within a function
+- some things allocate memory on the heap, others don't - try not to allocate memory.
+- don't allocate memory: All the basic statements like if/else, local variables, int arthimetic, some builtin funcs like any, len, etc
+- does allocate memory: importing, defining functions and classes, global variables, data structures
+- tips to reduce cpu time:
+  - use funcs - for example put a loop within a func and call the func
+  - don't use global, try to use local variables as much as possible
+  - cache funcs
+  - cache variables as local
+  - prefer longer expressions, not split up ones
+  - use consts `from micropython import const`
+- tips to reduce ram usage:
+  - don't use heap when possible
+  - use short variable names
+  - temp buffers
+  - use XXX_into methods
+  - don't use 8 or ** args
+  - use const, minify scripts
+  - use mpy-cross to produce .mpy - this saves a lof ot time in compiling the script on the device
+  - ultimate solution is to freeze scripts into the firmware (bytecode gets stored into flash storage, advanced)
+- within a func, preload methods `on = led.on` and then use `on()`. So when calling a method multiple times this is much faster.
+- for small loops, unroll the loop
+- viper mode - undocumented, being written, writes registers directly to say turn on/off leds
+- can also write inline assembler in python syntax
+- pre allocate a buffer and write to it
+
+## [Asyncio in (Micro)Python](https://2018.pycon-au.org/talks/45338-asyncio-in-micropython/)
+
+*Friday August 24 2018, Internet of Things Track, C3.6, 11:10 AEST*
+
+> Asyncio provides a way to achieve concurrency in a relatively simplistic fashion. However, first-time users still struggle with the concepts so let’s sort them out! Then we’ll see why it’s especially useful in an embedded environment.
+
+
+## [Embedded applications using Python and Debian](https://2018.pycon-au.org/talks/41830-embedded-applications-using-python-and-debian/)
+
+*Friday August 24 2018, Internet of Things Track, C3.6, 11:50 AEST*
+
+
+## [Workplace Environment Sensing with Python](https://2018.pycon-au.org/talks/45376-workplace-environment-sensing-with-python/)
+
+*Friday August 24 2018, Internet of Things Track, C3.6, 14:10 AEST*
+
+
+## [Internet of Human Connectedness](https://2018.pycon-au.org/talks/44085-internet-of-human-connectedness-how-my-iot-project-increased-my-connectedness-with-the-world/)
+
+*Friday August 24 2018, Internet of Things Track, C3.6, 16:00 AEST*
+
+
+## [Design for Non-Designers](https://2018.pycon-au.org/talks/43052-design-for-nondesigners/)
+
+*Friday August 24 2018, DjangoCon AU Track, C3.3, 16:40 AEST*
+
+
+----------
+## [First-timers Session](https://2018.pycon-au.org/talks/899-first-timers-session/)
+
+*Saturday August 25 2018, Cockle Bay, 08:30 AEST*
+
+
+## [Annie Parker](https://2018.pycon-au.org/talks/annie)
+
+*Saturday August 25 2018, Cockle Bay, 09:15 AEST*
+
+
+## [Python & Spreadsheets: Earth Dog Edition](https://2018.pycon-au.org/talks/45310-python-spreadsheets-earth-dog-edition/)
+
+Saturday August 25 2018, C3.6, 11:50 AEST
+
+## [Context Managers: You Can Write Your Own!](https://2018.pycon-au.org/talks/45062-context-managers-you-can-write-your-own/)
+
+Saturday August 25 2018, C3.6, 14:10 AEST
+
+## [Resurrecting the dead with deep learning](https://2018.pycon-au.org/talks/45179-resurrecting-the-dead-with-deep-learning/)
+
+*Saturday August 25 2018, C3.3, 14:50 AEST*
+
+
+
+## [Tom Eastman](https://2018.pycon-au.org/talks/tom)
+
+*Saturday August 25 2018, Cockle Bay, 16:00 AEST*
+
+
+## [Tracy Osborn](https://2018.pycon-au.org/talks/tracy)
+
+*Sunday August 26 2018, Cockle Bay, 09:10 AEST*
+
+
+## [Guide to your own artificial intelligence application in 3 easy steps](https://2018.pycon-au.org/talks/45386-guide-to-your-own-artificial-intelligence-application-in-3-easy-steps/)
+
+*Sunday August 26 2018, C3.3, 10:30 AEST*
+
+
+## [Hello to the World in 8 Web Frameworks (Micro, Batteries Included & Async)](https://2018.pycon-au.org/talks/45282-hello-to-the-world-in-8-web-frameworks-micro-batteries-included-async/)
+
+*Sunday August 26 2018, C3.4 & C3.5, 11:10 AEST*
+
+
+## [You Don't Need That!](https://2018.pycon-au.org/talks/45184-you-dont-need-that/)
+
+*Sunday August 26 2018, C3.4 & C3.5, 13:30 AEST*
+
+## [How To Publish A Package On PyPI](https://2018.pycon-au.org/talks/44349-how-to-publish-a-package-on-pypi/)
+
+*Sunday August 26 2018, C3.3, 14:10 AEST*
 
