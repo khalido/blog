@@ -9,11 +9,9 @@ ChromeOS supports a built in Linux - running inside a container running insde a 
 
 Most of these tips are from the [reddit crostini wiki](https://www.reddit.com/r/Crostini/wiki/index), I've put all the ones I'm using in one page for a handy reference.
 
-## install many softwares
+## add backports to apt install recent packages
 
 Now, there are many ways to do this, but the easiest and nicest is to sudo apt all-the-things. But, this is Google, so not only do you have to do this insided a container in a virtual machine inside some some weird linux/chrome melting pot, you get old software. so first up, update the container itself:
-
-### add backports
 
 the default crostini container/vm whatever is running debian stretch, which is nice and stable, but has a lot of old packages in its repo. To keep things simple, just add backports. Backports is a repo which contains newer packages from debian testing and unstable.
 
@@ -30,7 +28,7 @@ by default apt will pull packages from stretch itself, so to install something f
 
 the line `-t stretch-backports` above is telling apt to target stretch-backports,
 
-#### updating debian to testing
+### updating debian to testing
 
 **hold the upgrade to testing, turns out Google is really aiming at stretch so updating to testing breaks things like the file integration with chromeos and who knows what else.**
 
@@ -40,7 +38,7 @@ change `sources.list` so it reads (comment out any other lines by putting # at t
 
 Update the information from the new repos and then upgrade: `sudo apt update && sudo apt upgrade`
 
-### install anaconda
+## install anaconda for a better python
 
 Only do this if you already know why you are doing this, else you don't need to.
 
@@ -74,7 +72,7 @@ curl -L https://go.microsoft.com/fwlink/?LinkID=760868 > vscode.deb
 sudo apt install ./vscode.deb
 ```
 
-### edit markdown
+## edit markdown
 
 vs code can handle markdown nicely, but I found it a bit slow after adding markdown plugins. Caret is nicer for markdown, vs code is better for coding:
 
@@ -134,3 +132,36 @@ unbind %
 ### jazz up the shell
 
 rumour has it that crostini can have a heart attack if you change the shell, so stick with bash. Consider [oh-my-bash](https://github.com/ohmybash/oh-my-bash) or [bash-it](https://github.com/ohmybash/oh-my-bash) for hacker level coding
+
+### setup vim proper like
+
+install plugin manager for vim - I went with [vim-plug](https://github.com/junegunn/vim-plug):
+
+edit `~/.vimrc` so it has this stuff:
+
+```
+" install vim-plug if not installed
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+" plugin directory, don't use standard Vim names like 'plugin'
+call plug#begin('~/.vim/plugged')
+
+" plugins go here
+" ---------------
+
+" find a good markdown plugin for auto-formatting
+"
+
+" adds a status bar: https://github.com/itchyny/lightline.vim
+Plug 'itchyny/lightline.vim'
+
+
+" Initialize plugin system
+call plug#end()
+```
+
+run `:PlugInstall` in vim to install plugs
