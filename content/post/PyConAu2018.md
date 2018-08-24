@@ -36,3 +36,27 @@ Q&A
 
 - Why not docker swarm?
   - wanted to use consul
+
+## [Lighting Macro Photographs with CircuitPython](https://2018.pycon-au.org/talks/45177-lighting-macro-photographs-with-circuitpython/)
+
+> LED lighting rigs are expensive. Worse, they have little to no controls aside from on/off. Most are not dimmable and changing colors requires the use of gels. In this talk I will discuss how CircuitPython was used in conjunction with LEDs and microcontrollers to make a custom LED photo lighting rig.
+
+
+- Stacey Morse [geekgirlbeta](https://twitter.com/geekgirlbeta), [web](https://geekgirlbeta.wordpress.com/) is an artist who also does macro photography, web dev in python
+- art is awesome, but led lights are very expensive and crap. the intersection b/w art and tech: both are very process drivenl
+- had a conversation with a python programmer who suggested python controlled lights could solve her lighting issues - and thus she started to learn how to program in micropython
+- macro photography is very technical - there is a lot of math involved, understanding light, lens dynamics, lighting
+- lights: on/off, select number of leds, control brightness, colour
+- hardware: microcontroller, leds, rotary encoder, buttons, ir remote
+- software: [CircuitPython](https://learn.adafruit.com/welcome-to-circuitpython) (very beginner friendly), [MicroPython](https://micropython.org/)
+- went with neopixels for the lights - gives true white light as its RGBW
+- used Feather M4 Express for the microcontroller
+- the [code](https://github.com/geekgirlbeta/MacroLighting/blob/master/code.py) is very straightforward
+
+Q&A:
+
+- hot shoe
+  - figures she can use the hot shoe in a camera to communicate with the light - so she can write light settings in the exif data
+- what can she do with this which she can’t do with a traditional flash kit?
+  - led’s blink, so u need them in blink in coordination with your camera settings. this allows her to focus on a specific part of an object. traidtional flashes are bigger, whole panels of lights
+
