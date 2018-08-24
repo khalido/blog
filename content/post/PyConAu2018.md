@@ -147,16 +147,92 @@ Q&A
 
 ## [Embedded applications using Python and Debian](https://2018.pycon-au.org/talks/41830-embedded-applications-using-python-and-debian/)
 
+> Embedded boards such as Raspberry Pi and BeagleBone are programmed using Python and run on Linux Debian platform. Raspian is one of the widely used Linux platform on Raspberry Pi.The talk would be about the support provided by Python and Debian for embedded application.
+
+- [Jaminy Prabaharan](https://www.linkedin.com/in/jaminy-prabaharan/) worked as an embedded engineer, was part of Google's Summer of Code
+- 95% of code for embedded systems is writter in C/C++
+- python vs c - python is very easy to use, but is slow - C runs fast but is slow to write/debug.
+- some devices can run Cpython, like RPi running Raspbian
 
 
 ## [Workplace Environment Sensing with Python](https://2018.pycon-au.org/talks/45376-workplace-environment-sensing-with-python/)
 
-*Friday August 24 2018, Internet of Things Track, C3.6, 14:10 AEST*
+> Connecting IoT devices using low power over wide area wireless (LoRaWAN) makes sense. But how LoRaWAN works, duty cycles, frequency plans, receive windows, etc. doesn’t.
+
+> This talk will demystify how LoRaWAN works using PyCom devices.
+
+- talk by Brian Danilko of [Likeable Software](http://www.likeablesoftware.com/)
+- LoPy
+- [Pycom](https://pycom.io/) has lots of examples for LoRa and LoRaWAN
+- LoRa is the transport layer - patented, developed by Cycleo, Semtech owns it
+  - uses a Chirp Spread Spectrum (CSS) to transmit info reliably using low power
+  - uses different power levels, frequencies, bandwidths, spread factors to optimize power use vs time on air vs distance
+- LoRoWAN adds the wide area network on top of LoRa
+  - connects end nodes to the internet through gateways
+  - encrypts for secure transmission, controls what devices can join the network, confirms and retries (but this doubles power and clogs airways so don't use if not needed)
+- you have multiple end nodes talking to one gateway, which connects to the internet via a wired link (can be wireless too)
+- can have multiple gateways for backup - so nodes can connect to multiple gateways
+- join a LoRaWAN network by OTAA (over the air, same keys embedded in all devices) or ABP (unique keys)
+- frequencies for gateways and nodes have to be the same - something to be aware of when setting up devices
+
+## [Workplace Environment Sensing with Python](https://2018.pycon-au.org/talks/45376-workplace-environment-sensing-with-python/)
+
+> Have you often wondered where the quietest spot in the office is right now? In this talk, we explain how we built a real-time system that does just that using CircuitPython.
+
+- Aiden Ray, works at [BVN](http://www.bvn.com.au/)
+- building awards are handed out before ppl use them - very little feedback from real users
+- the web is totally instrumented, you know exactly whats going on
+- the physical world is a lot less instrumented
+- Amaon Go is sensored everywhere - this is where the world is moving, you get tons of data, can see where to improve
+- Circuit Playground Express by Adafruit
+- C/C++ vs Python boils down to runtime speed vs development speed
+- Circuit Python is Adafruits fork of MicroPython, more beginner focused, doesn't have access to async, so you have a basic event loop
+- `if sys.implementation == 'circuitpython'` to check implementation
 
 
-## [Internet of Human Connectedness](https://2018.pycon-au.org/talks/44085-internet-of-human-connectedness-how-my-iot-project-increased-my-connectedness-with-the-world/)
+## [Automating Your Home with Python, Raspberry Pi and Homekit](https://2018.pycon-au.org/talks/45170-automating-your-home-with-python-raspberry-pi-and-homekit/)
 
-*Friday August 24 2018, Internet of Things Track, C3.6, 16:00 AEST*
+> Home Automation is a fun new field for the modern Pythonista. In this talk I will be walking through how a developer can leverage a python library to use the HomeKit service and automate the devices in their home. I will be covering topics like hardware selection for local and remote access, HomeKit service registration and management and potential security concerns around IoT.
+
+- Sean Johnson [twtr](https://twitter.com/seansonbronson) [ln](https://www.linkedin.com/in/sean-johnson-50030280/)
+- homekit is a software framework for controlling smart hardware, built on Apples HomeKit Accessory Protocol
+- there are a few opensource implementations in node and python
+- apple predefines hardware configurations, you can't define your own
+- Home App allows manual and automated control of devices
+- there are many existing hardware, from ikea to phillips
+- Raspberry Pi - supports python
+- uses [HAP-Python](https://github.com/ikalchev/HAP-python), demo of a controlling an aircon via infrared
+- pretty straightforward, except tied to Apple and Siri
+
+q & a
+
+- IR is unidirectional so what happens if u miss a packet?
+  - every packet is single state, so contains all the info in one go. So if a packet fails, the next one doesn't rely on it. Also, leep transmitter close to the receiver so the signal is clear.
+
+
+## [Education Seminar Student Showcase](https://2018.pycon-au.org/education-showcase)
+
+Friday August 24 2018, Education Track, C3.4 & C3.5, 16:00 AEST
+
+> Eight short talks from high school students across Australia. They’ll be talking about projects they’ve built with Python using machine learning, robotics, natural language processing, and more
+
+
+### MENACE - building a learning matchbox machine in Python.
+
+### PyVlov’s Dog
+
+### Text Summariser
+
+### NOR: creating generated worlds on iPad
+
+### Rule-Based Machine Translation
+
+### SVG Graph Calculator
+
+### Emojifer in @ school
+
+### Optimising Memory Retention via a Machine Learning based Flashcard System built in Python
+
 
 
 ## [Design for Non-Designers](https://2018.pycon-au.org/talks/43052-design-for-nondesigners/)
