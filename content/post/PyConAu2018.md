@@ -214,25 +214,93 @@ q & a
 
 Friday August 24 2018, Education Track, C3.4 & C3.5, 16:00 AEST
 
-> Eight short talks from high school students across Australia. They’ll be talking about projects they’ve built with Python using machine learning, robotics, natural language processing, and more
+> Eight short (10 min) talks from high school students across Australia. They’ll be talking about projects they’ve built with Python using machine learning, robotics, natural language processing, and more
 
+### MENACE - building a learning matchbox machine in Python
 
-### MENACE - building a learning matchbox machine in Python.
-
-### PyVlov’s Dog
-
-### Text Summariser
-
-### NOR: creating generated worlds on iPad
-
-### Rule-Based Machine Translation
-
-### SVG Graph Calculator
-
-### Emojifer in @ school
+- machine learning is the use of programming to make a computer learn from data
+- inspired by Matt Parker from Standup Math channel on youtube
+- problems with indexing errors leading to endless loop
+- wants to use pygame or kivy to make a actual game
 
 ### Optimising Memory Retention via a Machine Learning based Flashcard System built in Python
 
+> This project aims to leverage Python’s machine learning capabilities, combined with psychological theories of learning and forgetting, to construct predictive models of human memory in order to improve upon traditional flashcard systems.
+
+> In this talk, I will share my experience of: (1) utilising Python’s sci-kit-learn package, alongside the Latent Skill Embedding package, to train, evaluate and visualise the performance of various models; (2) implementing the model into a web-based flashcard application built in Flask - a popular Python micro framework; and (3) testing the effectiveness of the system through a classroom experiment on 36 Japanese language students.
+
+- http://josephtey.com/
+- researched various techniques for the optimal time to review
+- experimented on 40 students
+- started with R, but how do u deploy with R? so moved on to Python as it can both train a model and an app to serve it with
+
+### Text Summariser
+
+> The Text Summariser is a program I built for when one is unable or unwilling to summarise information from a large block of text themselves. In my talk, I will discuss how it works, what inspired the project, and how I overcame the (many) challenges of building my program. I will also talk about computational linguistics and Natural Language Processing (NLP), two big components of how the text summariser works. After listening to this talk, you will have learnt some basic Natural Language Processing, and how you can apply it in Python Programs.
+
+- sorts words by type - verbs, nouns, etc
+- uses markov chains to summarize
+
+### NOR: creating generated worlds on iPad
+
+> NOR is a 2d puzzle exploration game for iPad that I made over the course of year 10. It features procedurally generated landscapes that collide with and can be edited by the player. The landscapes are host to procedurally generated bushes, trees and puzzles. My talk will discuss how I reached the point where I could set off on a large scale python coding project, how I built up the game and made the systems work, and how anyone can pick up an iPad and start developing.
+
+- learned calculus for the game movements etc
+- things are based on each other
+- uses monte carlo to generate gaphics, of a random seed, which are dependend on the ground and level number
+- used [pythonista](http://omz-software.com/pythonista/)
+- uses momemtum + inertia for players movement
+
+### Rule-Based Machine Translation
+
+> The Text Summariser is a program I built for when one is unable or unwilling to summarise information from a large block of text themselves. In my talk, I will discuss how it works, what inspired the project, and how I overcame the (many) challenges of building my program. I will also talk about computational linguistics and Natural Language Processing (NLP), two big components of how the text summariser works. After listening to this talk, you will have learnt some basic Natural Language Processing, and how you can apply it in Python Programs.
+
+- uses machine translation to switch from english to latin
+- four main ways to translate: rule based, example based, statistical, neural
+- Google Translate sucks at Latin translation
+- very impressive work
+
+### SVG Graph Calculator
+
+> The name of my project is somewhat self-explanatory, it is an SVG Graph calculator. I know right? My talk is going to be about how I decided to do this project, and my struggles and innovations in making this project happen.
+
+- turns an equation into a SVG graph
+- Why? had to draw graphs for yr9 math class. There are online tools which do this already, but decided it would be fun to do this
+- thought of writing it in python turtle, but too slow
+- wanted something which worked on web
+- had to reverse engineer SVG file
+- if looking for inspiration, just copy something
+
+### Emojifer in @ school
+
+> Emojifer is an implementation of a sequence model in Machine Learning. It will analyse the meaning of a sentence and give it the appropriate emoji. Emojifier plays an important role in @ school which is a cloud-based learning management system written in React with Flask served as the server. Come along to this talk, if you want to know what’s under the hood of Emojfier and how I make it happen. Additionally, I’ll talk about some of the problems I’ve encountered so far and how I overcame it. This talk will give you an idea of how to get started in Machine Learning as well as full-stack web development if you’re new to the area.
+
+- http://emojifier.surge.sh/#/
+- https://github.com/anhphamduy/emojifier_model
+- uses RNN and LSTM
+- keras and flask
+- made his own training data
+- lessons: best way to learn is to teach, jump in head first, pair program, stack overflow is awesome
+
+### PyVlov’s Dog
+
+> PyVlov’s Dog is a simulation software created to dynamically train neural networks for the control of basic robots. When we started this project we had a limited understanding of neural networks, so we simplified the problem by visualising it as training a dog.
+
+> We developed this project as a way to streamline the concept of neural networks through this metaphor of training a dog, so as to facilitate its use as an education tool. In this talk we will talk about how we made the software, the difficulties we faced in creating it and the way in which it works. We will also discuss the development of the robot’s hardware and the way in which it is represented within the simulation. Finally, we will cover the way in which we developed the principles of ease of use, and visual clarity within the program, to allow for use by people of all skill sets.
+
+- purpose of project was to understand neural networks, and did this through training a dog to do what its told to do (by creating a set of rules)
+- sensors are the input to a NN, which gives a output to a motor
+- made a simulation to train the NN - user defines a dog and an environment, once happy with the NN, throw it into the actual robot
+- uses arduino to control motors, raspberry pi to run NN
+- hardware is hard!
+- used pymunk to handle the physics of the sim, but is only 2d, so they had to work around that
+- needed to use tkinter with pygame
+- https://pyvlov.wordpress.com/
+
+### wrap up
+
+- learnt a lot from throwing themselves in the deep end to do a project.
+- python is a fantastic learning language, don't babyfeed students, support them in the deep end
 
 
 ## [Design for Non-Designers](https://2018.pycon-au.org/talks/43052-design-for-nondesigners/)
@@ -250,6 +318,19 @@ Friday August 24 2018, Education Track, C3.4 & C3.5, 16:00 AEST
 
 *Saturday August 25 2018, Cockle Bay, 09:15 AEST*
 
+> Annie is a co-founder of Techfugees Australia - a global movement connecting the technology ecosystem together with newly arrived refugees here in Australia to help them integrate into their new communities. In this talk, Annie will be sharing her experience of how Techfugees works and some of the success stories they’ve had along the way
+
+## [What is the most common street name in Australia?](https://2018.pycon-au.org/talks/45005-what-is-the-most-common-street-name-in-australia/)
+
+Saturday August 25 2018, C3.4 & C3.5, 11:10 AEST
+
+> Finding the most common street name in Australia may sound like a simple thing to do - but it quickly devolves into a scenic tour of all the things that go wrong when doing data analytics. I’ll be giving advice on how to avoid these speed bumps along with how to work with OpenStreetMaps in Python.
+
+## [End-to-end Energy Monitoring in Python](https://2018.pycon-au.org/talks/45073-endtoend-energy-monitoring-in-python/)
+
+Saturday August 25 2018, C3.3, 11:10 AEST
+
+> This talk presents the development of an open-source (hardware and software) Energy Monitoring system with as much Python as possible. With the firmware written in Micropython (successfully tested on ESP8266 and ESP32 using virtually the same code), Unix port of micropython was used as the dev environment. Data collection platform using the classic Graphite Time-series database and some fun neural-network based analysis of the collected data also in Python with Keras, just to cover AI/ML buzzwords as well.
 
 ## [Python & Spreadsheets: Earth Dog Edition](https://2018.pycon-au.org/talks/45310-python-spreadsheets-earth-dog-edition/)
 
