@@ -1,5 +1,5 @@
 ---
-title: "Setting up Linux on a Chromebook with Crostine"
+title: "Setting up Linux on a Chromebook with Crostini"
 date: 2018-08-24
 tags:
 - chromebooks
