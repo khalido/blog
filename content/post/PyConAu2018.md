@@ -95,14 +95,58 @@ Q&A:
 
 ## [Asyncio in (Micro)Python](https://2018.pycon-au.org/talks/45338-asyncio-in-micropython/)
 
-*Friday August 24 2018, Internet of Things Track, C3.6, 11:10 AEST*
-
 > Asyncio provides a way to achieve concurrency in a relatively simplistic fashion. However, first-time users still struggle with the concepts so let’s sort them out! Then we’ll see why it’s especially useful in an embedded environment.
+
+- [Matt Trentini](https://twitter.com/matt_trentini) - a software engineer, has worked with lots of projects with embedded firmware with c compilers, has been looking for better alternatives
+- micropython is the way forward for embedded development
+- Coroutines - the ability to run things concurrently
+  - use yield points to relingquish control and an event loop to scedule tasks
+  - provides cooperative multitasking
+  - concurrency isn't parallelism
+- a lot of async funcs is similar - just needs `async def func` and `await` where are are awaiting stuff.
+- coroutines (tasks) --><-- event loop --><--- blocking operatoins (network access, sleep, database queries)
+- what about threads? wasn't this a solved problem? threads provid pre-emptive multi-tasking, but they get complex, are heavy (each thread needs its own stack) and hesienbergs
+- Coroutines are better cause:
+  - minimal overhead, high performance
+  - locking is less problematic
+  - more closely reemble synchrous code
+- Coroutines in python are biult on generators and use `async/await` keywords
+- [PEP 492](https://www.python.org/dev/peps/pep-0492/) in Python 3.5 brought async
+- Python needed async to stay relevant and competitive with other async languages
+- async needs all the funcs to support async code, so hard to use with older synchronus code
+- async is in active development
+- coroutines in micropython is a subset but for practical use the same
+- async in embedded devices is exciting as threading support is limited and many embedded operations are cncurrent by nature
+- classic problem in embedded space: Debouce
+  - need to wait for a button to stop bouncing - since they're typically not digital
+  - async lets us write a loop which pools the button, and when a button is pressed, it can await the sleep so the controller can do other things instead of just waiting on the button
+- there is micropython-async - look up tutorial from Peter Hinch
+- uPTV - counts down minutes to next train
+  - NTP - time support `import ntptime`
+  - HTTP request - uses a requests library - python has aiohttp, micropython has a very crude version
+  - LED control
+  - asyncio to create loop and run it forver - sync time, poll for train, update LED
+- LED strip controller
+  - rotary encoder to set brightness and push on/off
+  - uses a async fade routine to smoothly fade to brightness
+  - async means can change the brightness while still fading, so no waiting
+
+Q&A
+
+- ppl using coroutines for real time?
+  - in experimental stage - if u request 5ms sleep, it can be less or more depending on what the other coroutines are doing
+- how is it implemented?
+  - in micropython uses queues implemnted in C
+- timing and checking length of executable paths
+  - up to you to define - for example a fade routine might have a 5ms delay b/w levels so `await sleep(5ms)`
+- how do you deal with a blocking library?
+  - put timeouts on things - call a func, if it takes too long to run, interrupt it, or use threads - async can push things into threads
+- with asyncio, do you apprach problems differently from threads?
+  - async feels more natural - you can state what you want to do. With threading you have to think a lot about synchronization and how long things will take.
 
 
 ## [Embedded applications using Python and Debian](https://2018.pycon-au.org/talks/41830-embedded-applications-using-python-and-debian/)
 
-*Friday August 24 2018, Internet of Things Track, C3.6, 11:50 AEST*
 
 
 ## [Workplace Environment Sensing with Python](https://2018.pycon-au.org/talks/45376-workplace-environment-sensing-with-python/)
