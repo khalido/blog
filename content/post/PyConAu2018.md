@@ -400,6 +400,33 @@ q & a:
 
 > Finding the most common street name in Australia may sound like a simple thing to do - but it quickly devolves into a scenic tour of all the things that go wrong when doing data analytics. I’ll be giving advice on how to avoid these speed bumps along with how to work with OpenStreetMaps in Python.
 
+- Rachel [git](https://github.com/RachelBunder), [twtr](https://twitter.com/ADuckIsMyFiend), [ln](https://www.linkedin.com/in/rachelbunder/) works at Solar Analytics 
+- read an article about most common street names in America, got her interested about Australian streets
+- G-NAF is australian geocoded data containing every address/street
+- used OSM, since it has every country, instead of G-NAF
+- couldn't just export all of Australia data from OSM
+- used metro extracts to download geojson, which has now gone offline
+- geojson includes a geometery feature e.g roads defined as a series of points (a line!)
+- used [geopandas](http://geopandas.org/) - works like pandas
+- osm has all kinds of road types, so have to think about it, so what exactly is a street? She went with a street is something with a name which a car can drive on
+- see her [blogpost on cleaning OSM data](https://rachelbunder.github.io/Cleaning-OSM/)
+- she got victoria rd and pacific highway as most common street names in Sydney, which didn't sound right
+- so drew a plot, and found out OSM saw streets as segments, so long streets appeared many times
+- shapely is a package which merges line segments together, but didn't do a great job
+- so she wrote her own function to knit streets together - get road segments with same name, find ones which are close together, merge
+- there is a distance func to find distance b/w geometeries
+- had to parse names, as street names have a name and a descriptor, like parade, street, avenue, etc. This was not easy as there are a lot of variations, too many!
+- what about Little Street? is that same as Street? 
+- she wanted to use this for different countries, but each country has different street descriptors, so the Australia model didnt' work for other countries
+- used [overpass turbo](https://overpass-turbo.eu/) api to get all of Australia's data - but was hitting api limits so had to break Au into a grid and make multiple calls
+- most common street names in Australia: Park, Railway, George, Church, Victoria
+- learnings:
+  - start small - Sydney over Australia
+  - choose something familiar
+  - check your biases
+  - constant vigilant - test, draw stuff (she plotted streets on a map)
+  - know your problem
+
 ## [End-to-end Energy Monitoring in Python](https://2018.pycon-au.org/talks/45073-endtoend-energy-monitoring-in-python/)
 
 > This talk presents the development of an open-source (hardware and software) Energy Monitoring system with as much Python as possible. With the firmware written in Micropython (successfully tested on ESP8266 and ESP32 using virtually the same code), Unix port of micropython was used as the dev environment. Data collection platform using the classic Graphite Time-series database and some fun neural-network based analysis of the collected data also in Python with Keras, just to cover AI/ML buzzwords as well.
