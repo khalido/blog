@@ -377,10 +377,10 @@ Saturday talks
 - if we have a Person class and tons of Person objects, we write just one descriptor which covers all the objects
 - `from weakref import WeakKeyDictionary` - when we delete an object which is also in the dict, it automatically removes it from the dictionary
 - look up some example descriptors using weakref - he gave an example of using a descriptor to make sure names are capitilized
-- descriptors have use cases like: 
+- descriptors have use cases like:
   - replicating customization for multiple attrs without caring about name
   - django generic foreign keys
-  - custom validation e.g only non negative integers for age 
+  - custom validation e.g only non negative integers for age
   - better error msgs - can prepend the name of attribute being set to the error msg so its more descriptive
 - talk code: https://github.com/mattjegan/describing-descriptors
 
@@ -389,18 +389,18 @@ q & a:
 - runtime perf
   - depends on impementation, external calls
 - can you chain descriptors?
-  - should be possible, but haven't done it. 
+  - should be possible, but haven't done it.
 - how do u replace the descriptor itself?
   - delete it off the class itself
 - what happens if you pickle an object with a descriptor?
   - pickle is unsecure so don't use it
-- 
+-
 
 ## [What is the most common street name in Australia?](https://2018.pycon-au.org/talks/45005-what-is-the-most-common-street-name-in-australia/)
 
 > Finding the most common street name in Australia may sound like a simple thing to do - but it quickly devolves into a scenic tour of all the things that go wrong when doing data analytics. I’ll be giving advice on how to avoid these speed bumps along with how to work with OpenStreetMaps in Python.
 
-- Rachel [git](https://github.com/RachelBunder), [twtr](https://twitter.com/ADuckIsMyFiend), [ln](https://www.linkedin.com/in/rachelbunder/) works at Solar Analytics 
+- Rachel [git](https://github.com/RachelBunder), [twtr](https://twitter.com/ADuckIsMyFiend), [ln](https://www.linkedin.com/in/rachelbunder/) works at Solar Analytics
 - read an article about most common street names in America, got her interested about Australian streets
 - G-NAF is australian geocoded data containing every address/street
 - used OSM, since it has every country, instead of G-NAF
@@ -416,7 +416,7 @@ q & a:
 - so she wrote her own function to knit streets together - get road segments with same name, find ones which are close together, merge
 - there is a distance func to find distance b/w geometeries
 - had to parse names, as street names have a name and a descriptor, like parade, street, avenue, etc. This was not easy as there are a lot of variations, too many!
-- what about Little Street? is that same as Street? 
+- what about Little Street? is that same as Street?
 - she wanted to use this for different countries, but each country has different street descriptors, so the Australia model didnt' work for other countries
 - used [overpass turbo](https://overpass-turbo.eu/) api to get all of Australia's data - but was hitting api limits so had to break Au into a grid and make multiple calls
 - most common street names in Australia: Park, Railway, George, Church, Victoria
@@ -441,22 +441,22 @@ q & a:
 
 > Come to this talk if you want to know more about the typing system in Python, how to gradually add it to your codebase and what benefits will your team get in the long run! I will also cover some advanced tools like the runtime type collection system, MonkeyType, and the just open sourced type checker, Pyre!
 
-- Luka Sterbic [git](https://github.com/Sterbic) works at Facebook 
+- Luka Sterbic [git](https://github.com/Sterbic) - works at Facebook
 - [talk slides and code](https://github.com/Sterbic/PyCon-AU-2018)
 - why should I care about typing?
   - you can call modules from far away, in a large codebase can be many imports away, so its not clear what kind of data object gets returned
   - with typed codes, its obvious what the input and output is, and in a modern IDE like PyCharm its just one click away
-  - for new engineers, typed code makes it much easier to start coding as its both obvoius from the code and there is more context provided by the IDE 
-- Are Python types Pythonic? 
+  - for new engineers, typed code makes it much easier to start coding as its both obvoius from the code and there is more context provided by the IDE
+- Are Python types Pythonic?
   - typing in python is optional and doesn't impact runtime
-  - zen of python says explicit is better, reduce mbiguity and readbility counts - and type hints delivers all this
+  - zen of python says explicit is better, reduce ambiguity and readability counts - and type hints delivers all this
   - Guido said so
 - typing 101
   - what needs to be annotated - variables going into a function
   - covers most: `from typing import List, Set, Dict, Tuple`
-  - Union `from typing import Union, Optional` gives a way to return one of a list of objectsm like `Union[User, Page, None]` indicates any one of those three objects can be returned
+  - Union `from typing import Union, Optional` gives a way to return one of a list of objects like `Union[User, Page, None]` indicates any one of those three objects can be returned
     - can also use Optional to indicate return is optional
-  - `from typing import Type, TypeVar` 
+  - `from typing import Type, TypeVar`
     - `TypeVar` are placeholders
 - mypy is the most commonly used type checker
 - advanced topics: forward references, TYPE_CHECKING, @overload
@@ -476,9 +476,44 @@ q & a:
   - type: ignore - silence typing error on a statement
 - summary: types are pythonic, more readable, safer. use gradual typing!
 
-## [Context Managers: You Can Write Your Own!](https://2018.pycon-au.org/talks/45062-context-managers-you-can-write-your-own/)
+## [Running Python web applications in Docker](https://2018.pycon-au.org/talks/45205-running-python-web-applications-in-docker/)
 
-Saturday August 25 2018, C3.6, 14:10 AEST
+- Tim Heap [@tim_heap](https://twitter.com/tim_heap) [git](https://github.com/timheap)
+- talk [code and slides](https://github.com/timheap/python-apps-in-docker)
+- [Docker](https://www.docker.com/) is a determinisitic application image, runs in a isolated execution environment, composable containers
+- how to structure your python app to make it easy to deploy in docker
+  - built as normal, with some constraints
+  - runs as a WSGI app, connects to a web service like apache
+  - project code all in one top level module, which can have submodules
+  - a seperate directory for deployment and development
+  - have one config file in the main project directory with all the base settings the app needs to run, seperate ones for development
+  - dev just hard code config variables, production pull in from the environment `os.environ`
+- Testing
+- you might want some other tasks running in a seperate container to the web server
+
+q & a:
+
+- why seperate config files for dev and prod?
+  - cause in dev you often need some weird things which you don't need/want for production.
+- how do u manage logging in an app?
+  - configure it the normal way, then pipe it somewhere. its just running python so just do it in the normal way
+- why we wouldn't use docker-compose in production
+  - there isn't a way to gracefully bring it down and back up. In production use something like kubernetes which does all the magic
+- process monitoring like supervisord
+  - say u have a webapp image, a celery image, the supervisord runs those images. you would rarely run supervisord inside a docker container
+
+Docker is convuluted. I wish the world would just rather clean up linux so we can go back to running things directly instead of having to faff around with docker containers.
+
+## [Swing and a Miss: Deploying machine learning models for IoT enabled devices using Python](https://2018.pycon-au.org/talks/43169-swing-and-a-miss-deploying-machine-learning-models-for-iot-enabled-devices-using-python/)
+
+> The primary objective of this talk is to walk through how we use Python to process data from an IoT enabled sensor attached to a cricket bat, build machine learning models on the data, and use open source tools to deploy our models in the sensor device as a smart IoT application.
+
+- Sanjiv Soni - [ln](https://www.linkedin.com/in/sanjiv-soni/), [@sanjivsoni7](https://twitter.com/sanjivsoni7), works at Str8bat Sport Tech, Bangalore
+-
+
+
+
+
 
 ## [Resurrecting the dead with deep learning](https://2018.pycon-au.org/talks/45179-resurrecting-the-dead-with-deep-learning/)
 
