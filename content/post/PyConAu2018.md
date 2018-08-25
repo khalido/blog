@@ -12,7 +12,7 @@ My notes for the [PyConAU 2018 talks](https://2018.pycon-au.org/schedule/) I wen
 - [Writing fast and efficient MicroPython](#writing-fast-and-efficient-micropython)
 - [Asyncio in (Micro)Python](#asyncio-in-micropython)
 - [Embedded applications using Python and Debian](#embedded-applications-using-python-and-debian)
-- [Workplace Environment Sensing with Python](#workplace-environment-sensing-with-python)
+- [Demystifying LoRaWAN with PyCom](#demystifying-lorawan-with-pycom)
 - [Workplace Environment Sensing with Python](#workplace-environment-sensing-with-python)
 - [Automating Your Home with Python, Raspberry Pi and Homekit](#automating-your-home-with-python-raspberry-pi-and-homekit)
 - [Education Seminar Student Showcase](#education-seminar-student-showcase)
@@ -25,7 +25,7 @@ My notes for the [PyConAU 2018 talks](https://2018.pycon-au.org/schedule/) I wen
   - [Emojifer in @ school](#emojifer-in--school)
   - [PyVlov’s Dog](#pyvlovs-dog)
   - [wrap up](#wrap-up)
-- [Annie Parker](#annie-parker)
+- [Annie Parker - Techfugees](#annie-parker---techfugees)
 - [Describing Descriptors](#describing-descriptors)
 - [What is the most common street name in Australia?](#what-is-the-most-common-street-name-in-australia)
 - [End-to-end Energy Monitoring in Python](#end-to-end-energy-monitoring-in-python)
@@ -33,7 +33,7 @@ My notes for the [PyConAU 2018 talks](https://2018.pycon-au.org/schedule/) I wen
 - [Running Python web applications in Docker](#running-python-web-applications-in-docker)
 - [Context Managers: You Can Write Your Own!](#context-managers-you-can-write-your-own)
 - [Snakes in your Games](#snakes-in-your-games)
-- [Tom Eastman](#tom-eastman)
+- [Tom Eastman on getting better](#tom-eastman-on-getting-better)
 - [Lightening talks](#lightening-talks)
   - [Digital Earth Australia](#digital-earth-australia)
   - [FuPy](#fupy)
@@ -52,9 +52,9 @@ My notes for the [PyConAU 2018 talks](https://2018.pycon-au.org/schedule/) I wen
 - [You Don't Need That!](#you-dont-need-that)
 - [How To Publish A Package On PyPI](#how-to-publish-a-package-on-pypi)
 
-## [How Python saved a rescue dog - a foster fail story](https://2018.pycon-au.org/talks/45067-how-python-saved-a-rescue-dog-a-foster-fail-story/)
+## How Python saved a rescue dog - a foster fail story
 
-> This talk will tell the story of a foster fail, how Python helped to save the life of a rescue dog and how the initial medication feeder grew from a single IoT device into a full Internet of Dog (IoD) madness. I will show the design and implementation of the initial Python-based medication feeder, what we have learned from running it over the summer and how it has continued to grow into a multi IoT device, Python-powered, full dog carer solution. There will be microservice architecture drawings, Python code, and, of course, pictures of the dog!
+> This talk will tell the story of a foster fail, how Python helped to save the life of a rescue dog and how the initial medication feeder grew from a single IoT device into a full Internet of Dog (IoD) madness. I will show the design and implementation of the initial Python-based medication feeder, what we have learned from running it over the summer and how it has continued to grow into a multi IoT device, Python-powered, full dog carer solution. There will be microservice architecture drawings, Python code, and, of course, pictures of the dog! [#](https://2018.pycon-au.org/talks/45067-how-python-saved-a-rescue-dog-a-foster-fail-story/)
 
 - Works at [ANSTO](https://www.ansto.gov.au/research/facilities/australian-synchrotron/overview) - works on scientific software in Python
 - were fostering a dog, Willow - fostering: look after for a limited time and prepare for adoption
@@ -80,9 +80,9 @@ Q&A
 - Why not docker swarm?
   - wanted to use consul
 
-## [Lighting Macro Photographs with CircuitPython](https://2018.pycon-au.org/talks/45177-lighting-macro-photographs-with-circuitpython/)
+## Lighting Macro Photographs with CircuitPython
 
-> LED lighting rigs are expensive. Worse, they have little to no controls aside from on/off. Most are not dimmable and changing colors requires the use of gels. In this talk I will discuss how CircuitPython was used in conjunction with LEDs and microcontrollers to make a custom LED photo lighting rig.
+> LED lighting rigs are expensive. Worse, they have little to no controls aside from on/off. Most are not dimmable and changing colors requires the use of gels. In this talk I will discuss how CircuitPython was used in conjunction with LEDs and microcontrollers to make a custom LED photo lighting rig. [#](https://2018.pycon-au.org/talks/45177-lighting-macro-photographs-with-circuitpython/)
 
 
 - Stacey Morse [geekgirlbeta](https://twitter.com/geekgirlbeta), [web](https://geekgirlbeta.wordpress.com/) is an artist who also does macro photography, web dev in python
@@ -104,9 +104,9 @@ Q&A:
   - led’s blink, so u need them in blink in coordination with your camera settings. this allows her to focus on a specific part of an object. traditional flashes are bigger, whole panels of lights
 
 
-## [Writing fast and efficient MicroPython](https://2018.pycon-au.org/talks/45358-writing-fast-and-efficient-micropython/)
+## Writing fast and efficient MicroPython
 
-> MicroPython is a reimplementation of Python which is specifically designed to run on computing devices that have very few resources, such as CPU power, RAM and storage. Often when you write scripts in MicroPython you want to make the most of your available resources, and have code run as fast as possible (faster code usually saves power, which is important when running from a battery!) and there are certain ways of writing MicroPython code that are more efficient than others. In this talk I will go over the tricks and techniques for writing fast and efficient Python code in MicroPython. As part of this I will delve into some technical details of how MicroPython works, in order to better understand what it’s doing behind the scenes and how to make the most of it. I will discuss general techniques for making things run faster (some of which would be applicable to normal Python), as well as ways to completely avoid memory allocation, which is important for both efficiency and making code execution deterministic. The talk will include some hardware demos to show off the techniques, including five different ways to blink an LED fast.
+> MicroPython is a reimplementation of Python which is specifically designed to run on computing devices that have very few resources, such as CPU power, RAM and storage. Often when you write scripts in MicroPython you want to make the most of your available resources, and have code run as fast as possible (faster code usually saves power, which is important when running from a battery!) and there are certain ways of writing MicroPython code that are more efficient than others. In this talk I will go over the tricks and techniques for writing fast and efficient Python code in MicroPython. As part of this I will delve into some technical details of how MicroPython works, in order to better understand what it’s doing behind the scenes and how to make the most of it. I will discuss general techniques for making things run faster (some of which would be applicable to normal Python), as well as ways to completely avoid memory allocation, which is important for both efficiency and making code execution deterministic. The talk will include some hardware demos to show off the techniques, including five different ways to blink an LED fast. [#](https://2018.pycon-au.org/talks/45358-writing-fast-and-efficient-micropython/)
 
 - [Damien George](http://dpgeorge.net/) - creator of [MicroPython](https://twitter.com/micropython)
 - loading local variables is fast, global variables is slow. So try to use local variables.
@@ -136,9 +136,9 @@ Q&A:
 - can also write inline assembler in python syntax
 - pre allocate a buffer and write to it
 
-## [Asyncio in (Micro)Python](https://2018.pycon-au.org/talks/45338-asyncio-in-micropython/)
+## Asyncio in (Micro)Python
 
-> Asyncio provides a way to achieve concurrency in a relatively simplistic fashion. However, first-time users still struggle with the concepts so let’s sort them out! Then we’ll see why it’s especially useful in an embedded environment.
+> Asyncio provides a way to achieve concurrency in a relatively simplistic fashion. However, first-time users still struggle with the concepts so let’s sort them out! Then we’ll see why it’s especially useful in an embedded environment.[#](https://2018.pycon-au.org/talks/45338-asyncio-in-micropython/)
 
 - [Matt Trentini](https://twitter.com/matt_trentini) - a software engineer, has worked with lots of projects with embedded firmware with c compilers, has been looking for better alternatives
 - micropython is the way forward for embedded development
@@ -188,9 +188,9 @@ Q&A
   - async feels more natural - you can state what you want to do. With threading you have to think a lot about synchronization and how long things will take.
 
 
-## [Embedded applications using Python and Debian](https://2018.pycon-au.org/talks/41830-embedded-applications-using-python-and-debian/)
+## Embedded applications using Python and Debian
 
-> Embedded boards such as Raspberry Pi and BeagleBone are programmed using Python and run on Linux Debian platform. Raspian is one of the widely used Linux platform on Raspberry Pi.The talk would be about the support provided by Python and Debian for embedded application.
+> Embedded boards such as Raspberry Pi and BeagleBone are programmed using Python and run on Linux Debian platform. Raspian is one of the widely used Linux platform on Raspberry Pi.The talk would be about the support provided by Python and Debian for embedded application. [#](https://2018.pycon-au.org/talks/41830-embedded-applications-using-python-and-debian/)
 
 - [Jaminy Prabaharan](https://www.linkedin.com/in/jaminy-prabaharan/) worked as an embedded engineer, was part of Google's Summer of Code
 - 95% of code for embedded systems is writter in C/C++
@@ -198,9 +198,9 @@ Q&A
 - some devices can run Cpython, like RPi running Raspbian
 
 
-## [Workplace Environment Sensing with Python](https://2018.pycon-au.org/talks/45376-workplace-environment-sensing-with-python/)
+## Demystifying LoRaWAN with PyCom
 
-> Connecting IoT devices using low power over wide area wireless (LoRaWAN) makes sense. But how LoRaWAN works, duty cycles, frequency plans, receive windows, etc. doesn’t.
+> Connecting IoT devices using low power over wide area wireless (LoRaWAN) makes sense. But how LoRaWAN works, duty cycles, frequency plans, receive windows, etc. doesn’t. [#](https://2018.pycon-au.org/talks/44704-demystifying-lorawan-with-pycom/)
 
 > This talk will demystify how LoRaWAN works using PyCom devices.
 
@@ -218,9 +218,9 @@ Q&A
 - join a LoRaWAN network by OTAA (over the air, same keys embedded in all devices) or ABP (unique keys)
 - frequencies for gateways and nodes have to be the same - something to be aware of when setting up devices
 
-## [Workplace Environment Sensing with Python](https://2018.pycon-au.org/talks/45376-workplace-environment-sensing-with-python/)
+## Workplace Environment Sensing with Python
 
-> Have you often wondered where the quietest spot in the office is right now? In this talk, we explain how we built a real-time system that does just that using CircuitPython.
+> Have you often wondered where the quietest spot in the office is right now? In this talk, we explain how we built a real-time system that does just that using CircuitPython. [#](https://2018.pycon-au.org/talks/45376-workplace-environment-sensing-with-python/)
 
 - Aiden Ray, works at [BVN](http://www.bvn.com.au/)
 - building awards are handed out before ppl use them - very little feedback from real users
@@ -233,9 +233,9 @@ Q&A
 - `if sys.implementation == 'circuitpython'` to check implementation
 
 
-## [Automating Your Home with Python, Raspberry Pi and Homekit](https://2018.pycon-au.org/talks/45170-automating-your-home-with-python-raspberry-pi-and-homekit/)
+## Automating Your Home with Python, Raspberry Pi and Homekit
 
-> Home Automation is a fun new field for the modern Pythonista. In this talk I will be walking through how a developer can leverage a python library to use the HomeKit service and automate the devices in their home. I will be covering topics like hardware selection for local and remote access, HomeKit service registration and management and potential security concerns around IoT.
+> Home Automation is a fun new field for the modern Pythonista. In this talk I will be walking through how a developer can leverage a python library to use the HomeKit service and automate the devices in their home. I will be covering topics like hardware selection for local and remote access, HomeKit service registration and management and potential security concerns around IoT. [#](https://2018.pycon-au.org/talks/45170-automating-your-home-with-python-raspberry-pi-and-homekit/)
 
 - Sean Johnson [twtr](https://twitter.com/seansonbronson) [ln](https://www.linkedin.com/in/sean-johnson-50030280/)
 - homekit is a software framework for controlling smart hardware, built on Apples HomeKit Accessory Protocol
@@ -253,11 +253,11 @@ q & a
   - every packet is single state, so contains all the info in one go. So if a packet fails, the next one doesn't rely on it. Also, leep transmitter close to the receiver so the signal is clear.
 
 
-## [Education Seminar Student Showcase](https://2018.pycon-au.org/education-showcase)
+## Education Seminar Student Showcase
 
 Friday August 24 2018, Education Track, C3.4 & C3.5, 16:00 AEST
 
-> Eight short (10 min) talks from high school students across Australia. They’ll be talking about projects they’ve built with Python using machine learning, robotics, natural language processing, and more
+> Eight short (10 min) talks from high school students across Australia. They’ll be talking about projects they’ve built with Python using machine learning, robotics, natural language processing, and more [#](https://2018.pycon-au.org/education-showcase)
 
 ### MENACE - building a learning matchbox machine in Python
 
@@ -349,9 +349,9 @@ Friday August 24 2018, Education Track, C3.4 & C3.5, 16:00 AEST
 
 Saturday talks
 
-## [Annie Parker](https://2018.pycon-au.org/talks/annie)
+## Annie Parker - Techfugees 
 
-> [Annie](https://twitter.com/annie_parker) is a co-founder of [Techfugees Australia](https://techfugees.com/chapters/australia/) - a global movement connecting the technology ecosystem together with newly arrived refugees here in Australia to help them integrate into their new communities. In this talk, Annie will be sharing her experience of how Techfugees works and some of the success stories they’ve had along the way
+> [Annie](https://twitter.com/annie_parker) is a co-founder of [Techfugees Australia](https://techfugees.com/chapters/australia/) - a global movement connecting the technology ecosystem together with newly arrived refugees here in Australia to help them integrate into their new communities. In this talk, Annie will be sharing her experience of how Techfugees works and some of the success stories they’ve had along the way [#](https://2018.pycon-au.org/talks/annie)
 
 - 68.5M displaced ppl around the world, with 25M refugees
 - the tech community can help, done 5 hackathons so far
@@ -368,9 +368,9 @@ Saturday talks
 - most refugees have good knowledge of tech, smart phones
 - 50% of business in Australia have been started by a refugee or a migrant
 
-## [Describing Descriptors](https://2018.pycon-au.org/talks/42582-describing-descriptors/)
+## Describing Descriptors
 
-> Descriptors are a little known feature of Python. They provide a way for a programmer to customize the storage and retrieval of different instance variables. In this talk, you will learn about the descriptor protocol, what it can be used for, and how to implement a descriptor.
+> Descriptors are a little known feature of Python. They provide a way for a programmer to customize the storage and retrieval of different instance variables. In this talk, you will learn about the descriptor protocol, what it can be used for, and how to implement a descriptor. [#](https://2018.pycon-au.org/talks/42582-describing-descriptors/)
 
 - Matthew Egan [web](https://mattjegan.com/) [twtr](https://twitter.com/NullMatthew)
 - why descriptors? often overlooked, used primarily by library developers
@@ -407,9 +407,9 @@ q & a:
   - pickle is unsecure so don't use it
 -
 
-## [What is the most common street name in Australia?](https://2018.pycon-au.org/talks/45005-what-is-the-most-common-street-name-in-australia/)
+## What is the most common street name in Australia?
 
-> Finding the most common street name in Australia may sound like a simple thing to do - but it quickly devolves into a scenic tour of all the things that go wrong when doing data analytics. I’ll be giving advice on how to avoid these speed bumps along with how to work with OpenStreetMaps in Python.
+> Finding the most common street name in Australia may sound like a simple thing to do - but it quickly devolves into a scenic tour of all the things that go wrong when doing data analytics. I’ll be giving advice on how to avoid these speed bumps along with how to work with OpenStreetMaps in Python. [#](https://2018.pycon-au.org/talks/45005-what-is-the-most-common-street-name-in-australia/)
 
 - Rachel [git](https://github.com/RachelBunder), [twtr](https://twitter.com/ADuckIsMyFiend), [ln](https://www.linkedin.com/in/rachelbunder/) works at Solar Analytics
 - read an article about most common street names in America, got her interested about Australian streets
@@ -438,19 +438,19 @@ q & a:
   - constant vigilant - test, draw stuff (she plotted streets on a map)
   - know your problem
 
-## [End-to-end Energy Monitoring in Python](https://2018.pycon-au.org/talks/45073-endtoend-energy-monitoring-in-python/)
+## End-to-end Energy Monitoring in Python
 
-> This talk presents the development of an open-source (hardware and software) Energy Monitoring system with as much Python as possible. With the firmware written in Micropython (successfully tested on ESP8266 and ESP32 using virtually the same code), Unix port of micropython was used as the dev environment. Data collection platform using the classic Graphite Time-series database and some fun neural-network based analysis of the collected data also in Python with Keras, just to cover AI/ML buzzwords as well.
+> This talk presents the development of an open-source (hardware and software) Energy Monitoring system with as much Python as possible. With the firmware written in Micropython (successfully tested on ESP8266 and ESP32 using virtually the same code), Unix port of micropython was used as the dev environment. Data collection platform using the classic Graphite Time-series database and some fun neural-network based analysis of the collected data also in Python with Keras, just to cover AI/ML buzzwords as well. [#](https://2018.pycon-au.org/talks/45073-endtoend-energy-monitoring-in-python/)
 
 - did not attend, look up talk notes/video/github
 
-## [Why you should care about types: How Python typing helped my team scale](https://2018.pycon-au.org/talks/45224-why-you-should-care-about-types-how-python-typing-helped-my-team-scale/)
+## Why you should care about types: How Python typing helped my team scale
 
 > By now you have probably all heard about Python static typing. But why should you care? Are types in Python even Pythonic? Is Python turning into Java? Type annotations are Pythonic, trust Guido’s word for it, and Python is definitely not turning into Java.
 
 > The greatest benefit of types in large Python codebases is the fact that the input and output structures of a function are obvious from just looking at the signature. In the untyped world the definition for the class you are looking for may be N jumps away, hidden somewhere deep in the codebase, and you don’t have a direct reference to it. In the best possible case grepping for it will yield just a few results and you will be able to spot what you are looking for. In the worst case though, you will have hundreds of hits and you will have to start your application and inspect the type at runtime to figure out what is going on, which make the development cycle slow and tedious.
 
-> Come to this talk if you want to know more about the typing system in Python, how to gradually add it to your codebase and what benefits will your team get in the long run! I will also cover some advanced tools like the runtime type collection system, MonkeyType, and the just open sourced type checker, Pyre!
+> Come to this talk if you want to know more about the typing system in Python, how to gradually add it to your codebase and what benefits will your team get in the long run! I will also cover some advanced tools like the runtime type collection system, MonkeyType, and the just open sourced type checker, Pyre![#](https://2018.pycon-au.org/talks/45224-why-you-should-care-about-types-how-python-typing-helped-my-team-scale/)
 
 - Luka Sterbic [git](https://github.com/Sterbic) - works at Facebook
 - [talk slides and code](https://github.com/Sterbic/PyCon-AU-2018)
@@ -487,7 +487,9 @@ q & a:
   - type: ignore - silence typing error on a statement
 - summary: types are pythonic, more readable, safer. use gradual typing!
 
-## [Running Python web applications in Docker](https://2018.pycon-au.org/talks/45205-running-python-web-applications-in-docker/)
+## Running Python web applications in Docker
+
+> An introduction on running Python web applications in Docker, covering how to structure your project, running the project in both development and production, testing the project, and compiling static assets for your frontend. [#](https://2018.pycon-au.org/talks/45205-running-python-web-applications-in-docker/)
 
 - Tim Heap [@tim_heap](https://twitter.com/tim_heap) [git](https://github.com/timheap)
 - talk [code and slides](https://github.com/timheap/python-apps-in-docker)
@@ -515,9 +517,9 @@ q & a:
 
 Docker is convuluted. I wish the world would just rather clean up linux so we can go back to running things directly instead of having to faff around with docker containers.
 
-## [Context Managers: You Can Write Your Own!](https://2018.pycon-au.org/talks/45062-context-managers-you-can-write-your-own/)
+## Context Managers: You Can Write Your Own!
 
-> Did you know context managers go beyond with open('myfile.txt', 'r') as f? In fact, you can even write your own! Context managers are an amazing tool for managing resources safely. They make your code look great, and they’re now easier to write than ever thanks to contextlib! Come get contextual!
+> Did you know context managers go beyond with open('myfile.txt', 'r') as f? In fact, you can even write your own! Context managers are an amazing tool for managing resources safely. They make your code look great, and they’re now easier to write than ever thanks to contextlib! Come get contextual!  [#](https://2018.pycon-au.org/talks/45062-context-managers-you-can-write-your-own/)
 
 - Dan [git](https://github.com/banool) [web](https://dport.me/)
 - [talk slides: dport.me/pycon.pdf](https://dport.me/pycon.pdf)
@@ -557,9 +559,9 @@ with suppress(ProcessLookupError):
 
 
 
-## [Tom Eastman](https://2018.pycon-au.org/talks/tom)
+## Tom Eastman on getting better
 
-> how we learn to get better at our craft, and also how we – all too easily – do the opposite.
+> how we learn to get better at our craft, and also how we – all too easily – do the opposite. [#](https://2018.pycon-au.org/talks/tom)
 
 - [twtr](https://twitter.com/tveastman) [web](https://eastman.net.nz/)
 - been using Python since 2002! Python was hip way back then
@@ -667,26 +669,38 @@ with suppress(ProcessLookupError):
 
 ---
 
-## [Tracy Osborn](https://2018.pycon-au.org/talks/tracy)
+## Tracy Osborn
 
-*Sunday August 26 2018, Cockle Bay, 09:10 AEST*
+> Tracy Osborn is the author, designer, and self-publisher of three books and the solo founder of a venture-backed startup. Each of these achievements has something in common — being completely clueless about the work and problems involved in each. In this keynote, Tracy will tell stories about how she launched her projects and what she learned (after already being neck-deep.) [#](https://2018.pycon-au.org/talks/tracy)
+
+- [twtr](https://twitter.com/limedaring) 
 
 
-## [Guide to your own artificial intelligence application in 3 easy steps](https://2018.pycon-au.org/talks/45386-guide-to-your-own-artificial-intelligence-application-in-3-easy-steps/)
+## Guide to your own artificial intelligence application in 3 easy steps
+
+> What do you think of when you hear “artificial intelligence”? Perhaps self-driving cars, autonomous robots and Siri, Alexa or Google Home? But it doesn’t have to be that complex. You can build a powerful image classification model within a topic that inspires and interests you - with 3 easy steps. [#](https://2018.pycon-au.org/talks/45386-guide-to-your-own-artificial-intelligence-application-in-3-easy-steps/)
 
 *Sunday August 26 2018, C3.3, 10:30 AEST*
 
 
-## [Hello to the World in 8 Web Frameworks (Micro, Batteries Included & Async)](https://2018.pycon-au.org/talks/45282-hello-to-the-world-in-8-web-frameworks-micro-batteries-included-async/)
+## Hello to the World in 8 Web Frameworks (Micro, Batteries Included & Async)
+
+> We’ll start with the current crop of microframeworks, showing how to achieve the same task in each, before progressing to “Batteries included” and then the more specialised async frameworks. For developers who perhaps have only used a single framework or even none at all, this talk gives them an opportunity to get out and explore the world (of web frameworks) and broaden their horizons, with plenty of Jules Verne inspired fun along the way. [#](https://2018.pycon-au.org/talks/45282-hello-to-the-world-in-8-web-frameworks-micro-batteries-included-async/)
 
 *Sunday August 26 2018, C3.4 & C3.5, 11:10 AEST*
 
 
-## [You Don't Need That!](https://2018.pycon-au.org/talks/45184-you-dont-need-that/)
+## You Don't Need That!
+
+> Not every design pattern makes sense in Python. This talk builds up design patterns commonly used in enterprise languages, and shows the features in Python that make these approaches unnecessary. [#]((https://2018.pycon-au.org/talks/45184-you-dont-need-that/))
 
 *Sunday August 26 2018, C3.4 & C3.5, 13:30 AEST*
 
-## [How To Publish A Package On PyPI](https://2018.pycon-au.org/talks/44349-how-to-publish-a-package-on-pypi/)
+## How To Publish A Package On PyPI
+
+> Starting with nothing, we’ll build a package and publish it on PyPI using current best practices! Learn how to structure, document and test your project on different platforms. Discover the difference between setup.py and Pipfile. Finally, use CookieCutter to avoid doing it twice (or even once)! [#](https://2018.pycon-au.org/talks/44349-how-to-publish-a-package-on-pypi/)
+
+- Mark Smith [twtr](https://twitter.com/judy2k)
 
 *Sunday August 26 2018, C3.3, 14:10 AEST*
 
