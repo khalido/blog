@@ -512,12 +512,39 @@ Docker is convuluted. I wish the world would just rather clean up linux so we ca
 -
 
 
+## [Context Managers: You Can Write Your Own!](https://2018.pycon-au.org/talks/45062-context-managers-you-can-write-your-own/)
 
+> Did you know context managers go beyond with open('myfile.txt', 'r') as f? In fact, you can even write your own! Context managers are an amazing tool for managing resources safely. They make your code look great, and they’re now easier to write than ever thanks to contextlib! Come get contextual!
+
+- Dan [git](https://github.com/banool) [web](https://dport.me/)
+- [talk slides: dport.me/pycon.pdf](https://dport.me/pycon.pdf)
+- context managers manage your context, like the famous `with file as :`
+- why use them: you can't forget to close resources and they make code prettier by abstracting
+- `contexlib` has all kind of goodies in it, so look it up
+
+```python
+from contextlib import suppress
+
+def kill_process(pid):
+with suppress(ProcessLookupError):
+  os.kill(pid, signal.SIGKILL)
+```
+
+- write your own context managers - see slide deck for examples
+- its just a class with a dunder enter and a dunder exit method
+- decorator is just a func which takes a func and returns a new func
+  - `@decorator` on top of a func is just syntactic sugar for `decorator(func)`
+- generators return one value at a time until they have nothing else to return
+  - they maintain state until exhausted
+- `from contextlib import contextmanager` decorator builds the enter and exit methods for you - the enter method is everything before yield, the the exit method is evreything after yield
+- scope - variables defined inside context managers still exist after its closed
+- context managers can deal with exceptions, can use suppress
 
 
 ## [Resurrecting the dead with deep learning](https://2018.pycon-au.org/talks/45179-resurrecting-the-dead-with-deep-learning/)
 
-*Saturday August 25 2018, C3.3, 14:50 AEST*
+- [Aditthya Ramakrishnan](https://www.linkedin.com/in/aditthya), [@ad137hya](https://twitter.com/ad137hya), Next Tech Lab
+ 
 
 
 
