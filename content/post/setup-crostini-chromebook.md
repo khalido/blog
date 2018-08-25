@@ -127,7 +127,7 @@ the only thing I really do with tmux is to split the terminal horizontally, then
 start tmux by typing `tmux`, then press `ctrl+b` to enter command mode. `"` splits the window horizontally and `%` splits it vertically. To move around, press `ctrl-b arrow-key`
 
 
-For more customizatoin, make a `tmux.conf` in the home directory and add:
+For more customizatoin, make a `.tmux.conf` in the home directory and add:
 
 ```
 # Enable mouse mode (tmux 2.1 and above)

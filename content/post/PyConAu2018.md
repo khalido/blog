@@ -31,7 +31,7 @@ My notes for the talks I attended:
 - [Describing Descriptors](#describing-descriptors)
 - [What is the most common street name in Australia?](#what-is-the-most-common-street-name-in-australia)
 - [End-to-end Energy Monitoring in Python](#end-to-end-energy-monitoring-in-python)
-- [Python & Spreadsheets: Earth Dog Edition](#python--spreadsheets-earth-dog-edition)
+- [Why you should care about types: How Python typing helped my team scale](#why-you-should-care-about-types-how-python-typing-helped-my-team-scale)
 - [Context Managers: You Can Write Your Own!](#context-managers-you-can-write-your-own)
 - [Resurrecting the dead with deep learning](#resurrecting-the-dead-with-deep-learning)
 - [Tom Eastman](#tom-eastman)
@@ -433,9 +433,48 @@ q & a:
 
 - did not attend, look up talk notes/video/github
 
-## [Python & Spreadsheets: Earth Dog Edition](https://2018.pycon-au.org/talks/45310-python-spreadsheets-earth-dog-edition/)
+## [Why you should care about types: How Python typing helped my team scale](https://2018.pycon-au.org/talks/45224-why-you-should-care-about-types-how-python-typing-helped-my-team-scale/)
 
-Saturday August 25 2018, C3.6, 11:50 AEST
+> By now you have probably all heard about Python static typing. But why should you care? Are types in Python even Pythonic? Is Python turning into Java? Type annotations are Pythonic, trust Guido’s word for it, and Python is definitely not turning into Java.
+
+> The greatest benefit of types in large Python codebases is the fact that the input and output structures of a function are obvious from just looking at the signature. In the untyped world the definition for the class you are looking for may be N jumps away, hidden somewhere deep in the codebase, and you don’t have a direct reference to it. In the best possible case grepping for it will yield just a few results and you will be able to spot what you are looking for. In the worst case though, you will have hundreds of hits and you will have to start your application and inspect the type at runtime to figure out what is going on, which make the development cycle slow and tedious.
+
+> Come to this talk if you want to know more about the typing system in Python, how to gradually add it to your codebase and what benefits will your team get in the long run! I will also cover some advanced tools like the runtime type collection system, MonkeyType, and the just open sourced type checker, Pyre!
+
+- Luka Sterbic [git](https://github.com/Sterbic) works at Facebook 
+- [talk slides and code](https://github.com/Sterbic/PyCon-AU-2018)
+- why should I care about typing?
+  - you can call modules from far away, in a large codebase can be many imports away, so its not clear what kind of data object gets returned
+  - with typed codes, its obvious what the input and output is, and in a modern IDE like PyCharm its just one click away
+  - for new engineers, typed code makes it much easier to start coding as its both obvoius from the code and there is more context provided by the IDE 
+- Are Python types Pythonic? 
+  - typing in python is optional and doesn't impact runtime
+  - zen of python says explicit is better, reduce mbiguity and readbility counts - and type hints delivers all this
+  - Guido said so
+- typing 101
+  - what needs to be annotated - variables going into a function
+  - covers most: `from typing import List, Set, Dict, Tuple`
+  - Union `from typing import Union, Optional` gives a way to return one of a list of objectsm like `Union[User, Page, None]` indicates any one of those three objects can be returned
+    - can also use Optional to indicate return is optional
+  - `from typing import Type, TypeVar` 
+    - `TypeVar` are placeholders
+- mypy is the most commonly used type checker
+- advanced topics: forward references, TYPE_CHECKING, @overload
+  - Pyre is facebook's open source type checker, much faster than mypy
+- typing in the real world
+  - new project, just type everything from day 1, use a type checker in CI
+  - exisiting projects: understand gradual typing. if a function isn't annotated, then if it calls a annotated function then all type errors are ignored. You delay triggering errors until the calling function is also type hinted.
+    - type common libraries, like utils.py which is used all over the place
+    - keep running the type checker
+    - add type checker into CI
+    - add types to new code
+  - MonkeyType - created by Instagram
+    - collects typing info at runtime and logs them, generates type stubs then applies them
+- tips and tricks:
+  - say you have a class, but you want to pass in a superclass - that will fail. use Protocol from typing_extensions
+  - typeshed
+  - type: ignore - silence typing error on a statement
+- summary: types are pythonic, more readable, safer. use gradual typing!
 
 ## [Context Managers: You Can Write Your Own!](https://2018.pycon-au.org/talks/45062-context-managers-you-can-write-your-own/)
 
