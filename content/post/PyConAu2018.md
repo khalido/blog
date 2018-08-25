@@ -361,19 +361,50 @@ Saturday talks
 
 > Descriptors are a little known feature of Python. They provide a way for a programmer to customize the storage and retrieval of different instance variables. In this talk, you will learn about the descriptor protocol, what it can be used for, and how to implement a descriptor.
 
+- Matthew Egan [web](https://mattjegan.com/) [twtr](https://twitter.com/NullMatthew)
+- why descriptors? often overlooked, used primarily by library developers
+- so we have a basic class, Person, which stores info like name, etc
+- our dream Person class makes sure names are capitilized properly
+- `__setattr__(self, attr, value)` is called inside a class when an attribute is being set, so if Person.name is assigned, it runs through the setattr method which can can modify the variable from `name` to `Name`
+- can use setter methods like `@name.setter` inside the class, but this only applies to the specific class
+- the descriptor protocl allows a more general solution, has four attributes: get, set, deelte, set_name
+  - `__get__(self, instance, owner)`
+  - `__set__(self, instance, value)`
+  - `__delete__(self, ??)`
+  - `__set_name__(self, owner, name)` - doesn't take instance argument as its only called on class creation
+- when you access an attribute in python, it goes through a lookup process, which gets it from a dict, a data descriptor or a non_data descriptor
+- non-data descrptors: staticmethod, classmethod, abc.abstractmethod
+- if we have a Person class and tons of Person objects, we write just one descriptor which covers all the objects
+- `from weakref import WeakKeyDictionary` - when we delete an object which is also in the dict, it automatically removes it from the dictionary
+- look up some example descriptors using weakref - he gave an example of using a descriptor to make sure names are capitilized
+- descriptors have use cases like: 
+  - replicating customization for multiple attrs without caring about name
+  - django generic foreign keys
+  - custom validation e.g only non negative integers for age 
+  - better error msgs - can prepend the name of attribute being set to the error msg so its more descriptive
+- talk code: https://github.com/mattjegan/describing-descriptors
+
+q & a:
+
+- runtime perf
+  - depends on impementation, external calls
+- can you chain descriptors?
+  - should be possible, but haven't done it. 
+- how do u replace the descriptor itself?
+  - delete it off the class itself
+- what happens if you pickle an object with a descriptor?
+  - pickle is unsecure so don't use it
 - 
 
 ## [What is the most common street name in Australia?](https://2018.pycon-au.org/talks/45005-what-is-the-most-common-street-name-in-australia/)
-
-Saturday August 25 2018, C3.4 & C3.5, 11:10 AEST
 
 > Finding the most common street name in Australia may sound like a simple thing to do - but it quickly devolves into a scenic tour of all the things that go wrong when doing data analytics. I’ll be giving advice on how to avoid these speed bumps along with how to work with OpenStreetMaps in Python.
 
 ## [End-to-end Energy Monitoring in Python](https://2018.pycon-au.org/talks/45073-endtoend-energy-monitoring-in-python/)
 
-Saturday August 25 2018, C3.3, 11:10 AEST
-
 > This talk presents the development of an open-source (hardware and software) Energy Monitoring system with as much Python as possible. With the firmware written in Micropython (successfully tested on ESP8266 and ESP32 using virtually the same code), Unix port of micropython was used as the dev environment. Data collection platform using the classic Graphite Time-series database and some fun neural-network based analysis of the collected data also in Python with Keras, just to cover AI/ML buzzwords as well.
+
+- did not attend, look up talk notes/video/github
 
 ## [Python & Spreadsheets: Earth Dog Edition](https://2018.pycon-au.org/talks/45310-python-spreadsheets-earth-dog-edition/)
 
