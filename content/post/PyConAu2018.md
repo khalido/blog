@@ -7,6 +7,55 @@ tags:
 
 My notes for the [PyConAU 2018 talks](https://2018.pycon-au.org/schedule/) I went to.
 
+<!-- TOC -->
+
+- [[How Python saved a rescue dog - a foster fail story](https://2018.pycon-au.org/talks/45067-how-python-saved-a-rescue-dog-a-foster-fail-story/)](#how-python-saved-a-rescue-dog---a-foster-fail-storyhttps2018pycon-auorgtalks45067-how-python-saved-a-rescue-dog-a-foster-fail-story)
+- [[Lighting Macro Photographs with CircuitPython](https://2018.pycon-au.org/talks/45177-lighting-macro-photographs-with-circuitpython/)](#lighting-macro-photographs-with-circuitpythonhttps2018pycon-auorgtalks45177-lighting-macro-photographs-with-circuitpython)
+- [[Writing fast and efficient MicroPython](https://2018.pycon-au.org/talks/45358-writing-fast-and-efficient-micropython/)](#writing-fast-and-efficient-micropythonhttps2018pycon-auorgtalks45358-writing-fast-and-efficient-micropython)
+- [[Asyncio in (Micro)Python](https://2018.pycon-au.org/talks/45338-asyncio-in-micropython/)](#asyncio-in-micropythonhttps2018pycon-auorgtalks45338-asyncio-in-micropython)
+- [[Embedded applications using Python and Debian](https://2018.pycon-au.org/talks/41830-embedded-applications-using-python-and-debian/)](#embedded-applications-using-python-and-debianhttps2018pycon-auorgtalks41830-embedded-applications-using-python-and-debian)
+- [[Workplace Environment Sensing with Python](https://2018.pycon-au.org/talks/45376-workplace-environment-sensing-with-python/)](#workplace-environment-sensing-with-pythonhttps2018pycon-auorgtalks45376-workplace-environment-sensing-with-python)
+- [[Workplace Environment Sensing with Python](https://2018.pycon-au.org/talks/45376-workplace-environment-sensing-with-python/)](#workplace-environment-sensing-with-pythonhttps2018pycon-auorgtalks45376-workplace-environment-sensing-with-python-1)
+- [[Automating Your Home with Python, Raspberry Pi and Homekit](https://2018.pycon-au.org/talks/45170-automating-your-home-with-python-raspberry-pi-and-homekit/)](#automating-your-home-with-python-raspberry-pi-and-homekithttps2018pycon-auorgtalks45170-automating-your-home-with-python-raspberry-pi-and-homekit)
+- [[Education Seminar Student Showcase](https://2018.pycon-au.org/education-showcase)](#education-seminar-student-showcasehttps2018pycon-auorgeducation-showcase)
+    - [MENACE - building a learning matchbox machine in Python](#menace---building-a-learning-matchbox-machine-in-python)
+    - [Optimising Memory Retention via a Machine Learning based Flashcard System built in Python](#optimising-memory-retention-via-a-machine-learning-based-flashcard-system-built-in-python)
+    - [Text Summariser](#text-summariser)
+    - [NOR: creating generated worlds on iPad](#nor-creating-generated-worlds-on-ipad)
+    - [Rule-Based Machine Translation](#rule-based-machine-translation)
+    - [SVG Graph Calculator](#svg-graph-calculator)
+    - [Emojifer in @ school](#emojifer-in--school)
+    - [PyVlov’s Dog](#pyvlovs-dog)
+    - [wrap up](#wrap-up)
+- [[Annie Parker](https://2018.pycon-au.org/talks/annie)](#annie-parkerhttps2018pycon-auorgtalksannie)
+- [[Describing Descriptors](https://2018.pycon-au.org/talks/42582-describing-descriptors/)](#describing-descriptorshttps2018pycon-auorgtalks42582-describing-descriptors)
+- [[What is the most common street name in Australia?](https://2018.pycon-au.org/talks/45005-what-is-the-most-common-street-name-in-australia/)](#what-is-the-most-common-street-name-in-australiahttps2018pycon-auorgtalks45005-what-is-the-most-common-street-name-in-australia)
+- [[End-to-end Energy Monitoring in Python](https://2018.pycon-au.org/talks/45073-endtoend-energy-monitoring-in-python/)](#end-to-end-energy-monitoring-in-pythonhttps2018pycon-auorgtalks45073-endtoend-energy-monitoring-in-python)
+- [[Why you should care about types: How Python typing helped my team scale](https://2018.pycon-au.org/talks/45224-why-you-should-care-about-types-how-python-typing-helped-my-team-scale/)](#why-you-should-care-about-types-how-python-typing-helped-my-team-scalehttps2018pycon-auorgtalks45224-why-you-should-care-about-types-how-python-typing-helped-my-team-scale)
+- [[Running Python web applications in Docker](https://2018.pycon-au.org/talks/45205-running-python-web-applications-in-docker/)](#running-python-web-applications-in-dockerhttps2018pycon-auorgtalks45205-running-python-web-applications-in-docker)
+- [[Context Managers: You Can Write Your Own!](https://2018.pycon-au.org/talks/45062-context-managers-you-can-write-your-own/)](#context-managers-you-can-write-your-ownhttps2018pycon-auorgtalks45062-context-managers-you-can-write-your-own)
+- [Snakes in your Games](#snakes-in-your-games)
+- [[Tom Eastman](https://2018.pycon-au.org/talks/tom)](#tom-eastmanhttps2018pycon-auorgtalkstom)
+- [Lightening talks](#lightening-talks)
+    - [Digital Earth Australia](#digital-earth-australia)
+    - [FuPy](#fupy)
+    - [flip flop operators in Ruby](#flip-flop-operators-in-ruby)
+    - [python in the classroom](#python-in-the-classroom)
+    - [DRF Model Pusher](#drf-model-pusher)
+    - [Watching water from space](#watching-water-from-space)
+    - [Captcha Cracker](#captcha-cracker)
+    - [Rockertry](#rockertry)
+    - [cyrpto money](#cyrpto-money)
+    - [Peter Lovett](#peter-lovett)
+    - [Giving thanks](#giving-thanks)
+- [[Tracy Osborn](https://2018.pycon-au.org/talks/tracy)](#tracy-osbornhttps2018pycon-auorgtalkstracy)
+- [[Guide to your own artificial intelligence application in 3 easy steps](https://2018.pycon-au.org/talks/45386-guide-to-your-own-artificial-intelligence-application-in-3-easy-steps/)](#guide-to-your-own-artificial-intelligence-application-in-3-easy-stepshttps2018pycon-auorgtalks45386-guide-to-your-own-artificial-intelligence-application-in-3-easy-steps)
+- [[Hello to the World in 8 Web Frameworks (Micro, Batteries Included & Async)](https://2018.pycon-au.org/talks/45282-hello-to-the-world-in-8-web-frameworks-micro-batteries-included-async/)](#hello-to-the-world-in-8-web-frameworks-micro-batteries-included--asynchttps2018pycon-auorgtalks45282-hello-to-the-world-in-8-web-frameworks-micro-batteries-included-async)
+- [[You Don't Need That!](https://2018.pycon-au.org/talks/45184-you-dont-need-that/)](#you-dont-need-thathttps2018pycon-auorgtalks45184-you-dont-need-that)
+- [[How To Publish A Package On PyPI](https://2018.pycon-au.org/talks/44349-how-to-publish-a-package-on-pypi/)](#how-to-publish-a-package-on-pypihttps2018pycon-auorgtalks44349-how-to-publish-a-package-on-pypi)
+
+<!-- /TOC -->
+
 ## [How Python saved a rescue dog - a foster fail story](https://2018.pycon-au.org/talks/45067-how-python-saved-a-rescue-dog-a-foster-fail-story/)
 
 > This talk will tell the story of a foster fail, how Python helped to save the life of a rescue dog and how the initial medication feeder grew from a single IoT device into a full Internet of Dog (IoD) madness. I will show the design and implementation of the initial Python-based medication feeder, what we have learned from running it over the summer and how it has continued to grow into a multi IoT device, Python-powered, full dog carer solution. There will be microservice architecture drawings, Python code, and, of course, pictures of the dog!
