@@ -59,6 +59,8 @@ go to the [Anaconda linux download page](https://www.anaconda.com/download/#linu
 
 Install by `bash Anaconda3-5.2.0-Linux-x86_64.sh` # change filename to whatever the downloaded file name is.
 
+### jupyter lab
+
 Now I use anaconda to run jupyter, so to make that run properly, generate a default config file:
 
 `jupyter notebook --generate-config`
@@ -71,6 +73,16 @@ c.NotebookApp.ip = '*' # listen on all IPs
 ```
 
 now running `jupyter lab` starts the jupyter server in the current directory and opens up a tab in chromeos.
+
+Other useful stuff for Jupyter:
+
+To install [extensions](https://github.com/mauhai/awesome-jupyterlab), first install nodejs:
+
+`conda install -c conda-forge nodejs`
+
+useful jupyter extensions:
+
+- show a [toc](https://github.com/jupyterlab/jupyterlab-toc) from markdown headings: `jupyter labextension install @jupyterlab/toc`
 
 todo: try out [nteract](https://nteract.io/) - a react based desktop front end for jupyter.
 
@@ -116,6 +128,8 @@ fix this by pressing `ctrl-shift-p` inside terminal, then scroll down to keyboar
 }
 ```
 
+This has to be done only once, since ChromeOS remembers the terminal settings across devices. So handy after a powerwash.
+
 ### multiplex all the things
 
 install tmux, the internets fav terminal multiplexer:
@@ -150,7 +164,7 @@ install plugin manager for vim - I went with [vim-plug](https://github.com/juneg
 
 edit `~/.vimrc` so it has this stuff:
 
-```
+```bash
 " install vim-plug if not installed
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
@@ -169,6 +183,8 @@ Plug 'w0rp/ale'
 Plug 'itchyny/lightline.vim'
 " distraction free writing: https://github.com/junegunn/goyo.vim
 Plug 'junegunn/goyo.vim'
+" for python auto completion: https://github.com/davidhalter/jedi-vim
+Plug 'davidhalter/jedi-vim'
 
 
 " Initialize plugin system

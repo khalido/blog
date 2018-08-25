@@ -349,7 +349,7 @@ Friday August 24 2018, Education Track, C3.4 & C3.5, 16:00 AEST
 
 Saturday talks
 
-## Annie Parker - Techfugees 
+## Annie Parker - Techfugees
 
 > [Annie](https://twitter.com/annie_parker) is a co-founder of [Techfugees Australia](https://techfugees.com/chapters/australia/) - a global movement connecting the technology ecosystem together with newly arrived refugees here in Australia to help them integrate into their new communities. In this talk, Annie will be sharing her experience of how Techfugees works and some of the success stories they’ve had along the way [#](https://2018.pycon-au.org/talks/annie)
 
@@ -669,12 +669,34 @@ with suppress(ProcessLookupError):
 
 ---
 
-## Tracy Osborn
+## Tracy Osborn: Clueless
 
 > Tracy Osborn is the author, designer, and self-publisher of three books and the solo founder of a venture-backed startup. Each of these achievements has something in common — being completely clueless about the work and problems involved in each. In this keynote, Tracy will tell stories about how she launched her projects and what she learned (after already being neck-deep.) [#](https://2018.pycon-au.org/talks/tracy)
 
-- [twtr](https://twitter.com/limedaring) 
-
+- [twtr](https://twitter.com/limedaring)
+- wrote easy/friendnly [hello web app books](https://twitter.com/HelloWebBooks)
+- unusual background to pycon. went through high school building websites.
+- quit computer science in college cause bad experience, switched to art
+- ended up working as a designer and web developer - design/html/css - scared of javascript
+- learnt from cs experience how difficult it is to pick up programming and how important teaching styles are
+- see her djangocon 2017 keynote
+- wanted to do a startup, didn't want to code but couldn't find a technical cofounder
+- husband works in python, introduced her to django. learnt django and launched her first webapp in 6 weeks
+- you don't have to make things perfect, or understand how they work under the hood
+- lessons learned:
+  - barring security issues, ugly code can be ok
+  - learn by doing - picked up programming much faster by having a real project to work on
+  - startups are stressful but if you like to constantly be learning and doing something different most days they are great
+- she didn't like the way django was taught, which is where her book came from
+- customizable tutorials, project based - she teaches how to build a web app, not how to code
+- wrote book instead of tutorial cause "go big or go home". low royalites with publishers, so used kickstarter to raise 12k to self publish.
+- lessons learned:
+  - keep marketing in mind when building a product
+  - took way longer then planned - 1yr late. build a big buffer
+  - keep it simple- instead of markdown etc, used google docs - very useful for edit help, or sending drafts to ppl
+  - used indesign to lay out the book - used skillshare to pick it up.
+- are paperback books worth it?
+- easypost - api's for shipping
 
 ## Guide to your own artificial intelligence application in 3 easy steps
 
