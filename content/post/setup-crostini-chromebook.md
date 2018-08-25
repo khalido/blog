@@ -163,12 +163,12 @@ call plug#begin('~/.vim/plugged')
 
 " plugins go here
 " ---------------
-
-" find a good markdown plugin for auto-formatting
-"
-
+" highlights code problems: https://github.com/w0rp/ale
+Plug 'w0rp/ale'
 " adds a status bar: https://github.com/itchyny/lightline.vim
 Plug 'itchyny/lightline.vim'
+" distraction free writing: https://github.com/junegunn/goyo.vim
+Plug 'junegunn/goyo.vim'
 
 
 " Initialize plugin system

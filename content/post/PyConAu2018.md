@@ -5,41 +5,7 @@ tags:
 - python
 ---
 
-Schedule: https://2018.pycon-au.org/schedule/
-
-My notes for the talks I attended:
-
-- [How Python saved a rescue dog - a foster fail story](#how-python-saved-a-rescue-dog---a-foster-fail-story)
-- [Lighting Macro Photographs with CircuitPython](#lighting-macro-photographs-with-circuitpython)
-- [Writing fast and efficient MicroPython](#writing-fast-and-efficient-micropython)
-- [Asyncio in (Micro)Python](#asyncio-in-micropython)
-- [Embedded applications using Python and Debian](#embedded-applications-using-python-and-debian)
-- [Workplace Environment Sensing with Python](#workplace-environment-sensing-with-python)
-- [Workplace Environment Sensing with Python](#workplace-environment-sensing-with-python)
-- [Automating Your Home with Python, Raspberry Pi and Homekit](#automating-your-home-with-python-raspberry-pi-and-homekit)
-- [Education Seminar Student Showcase](#education-seminar-student-showcase)
-  - [MENACE - building a learning matchbox machine in Python](#menace---building-a-learning-matchbox-machine-in-python)
-  - [Optimising Memory Retention via a Machine Learning based Flashcard System built in Python](#optimising-memory-retention-via-a-machine-learning-based-flashcard-system-built-in-python)
-  - [Text Summariser](#text-summariser)
-  - [NOR: creating generated worlds on iPad](#nor-creating-generated-worlds-on-ipad)
-  - [Rule-Based Machine Translation](#rule-based-machine-translation)
-  - [SVG Graph Calculator](#svg-graph-calculator)
-  - [Emojifer in @ school](#emojifer-in--school)
-  - [PyVlov’s Dog](#pyvlovs-dog)
-  - [wrap up](#wrap-up)
-- [Annie Parker](#annie-parker)
-- [Describing Descriptors](#describing-descriptors)
-- [What is the most common street name in Australia?](#what-is-the-most-common-street-name-in-australia)
-- [End-to-end Energy Monitoring in Python](#end-to-end-energy-monitoring-in-python)
-- [Why you should care about types: How Python typing helped my team scale](#why-you-should-care-about-types-how-python-typing-helped-my-team-scale)
-- [Context Managers: You Can Write Your Own!](#context-managers-you-can-write-your-own)
-- [Resurrecting the dead with deep learning](#resurrecting-the-dead-with-deep-learning)
-- [Tom Eastman](#tom-eastman)
-- [Tracy Osborn](#tracy-osborn)
-- [Guide to your own artificial intelligence application in 3 easy steps](#guide-to-your-own-artificial-intelligence-application-in-3-easy-steps)
-- [Hello to the World in 8 Web Frameworks (Micro, Batteries Included & Async)](#hello-to-the-world-in-8-web-frameworks-micro-batteries-included--async)
-- [You Don't Need That!](#you-dont-need-that)
-- [How To Publish A Package On PyPI](#how-to-publish-a-package-on-pypi)
+My notes for the [PyConAU 2018 talks](https://2018.pycon-au.org/schedule/) I went to.
 
 ## [How Python saved a rescue dog - a foster fail story](https://2018.pycon-au.org/talks/45067-how-python-saved-a-rescue-dog-a-foster-fail-story/)
 
@@ -504,14 +470,6 @@ q & a:
 
 Docker is convuluted. I wish the world would just rather clean up linux so we can go back to running things directly instead of having to faff around with docker containers.
 
-## [Swing and a Miss: Deploying machine learning models for IoT enabled devices using Python](https://2018.pycon-au.org/talks/43169-swing-and-a-miss-deploying-machine-learning-models-for-iot-enabled-devices-using-python/)
-
-> The primary objective of this talk is to walk through how we use Python to process data from an IoT enabled sensor attached to a cricket bat, build machine learning models on the data, and use open source tools to deploy our models in the sensor device as a smart IoT application.
-
-- Sanjiv Soni - [ln](https://www.linkedin.com/in/sanjiv-soni/), [@sanjivsoni7](https://twitter.com/sanjivsoni7), works at Str8bat Sport Tech, Bangalore
--
-
-
 ## [Context Managers: You Can Write Your Own!](https://2018.pycon-au.org/talks/45062-context-managers-you-can-write-your-own/)
 
 > Did you know context managers go beyond with open('myfile.txt', 'r') as f? In fact, you can even write your own! Context managers are an amazing tool for managing resources safely. They make your code look great, and they’re now easier to write than ever thanks to contextlib! Come get contextual!
@@ -540,18 +498,129 @@ with suppress(ProcessLookupError):
 - scope - variables defined inside context managers still exist after its closed
 - context managers can deal with exceptions, can use suppress
 
+## Snakes in your Games
 
-## [Resurrecting the dead with deep learning](https://2018.pycon-au.org/talks/45179-resurrecting-the-dead-with-deep-learning/)
+> When thinking about where to start with python and games, the first thing that might come to mind is pygame. However, python has been used in many well known commercial games titles and can be used in many different ways throughout the game development process. This talk will examine a range of game titles, genres and platforms, from AAA to Indie, to show how python is being used in each; discussing the strength and weaknesses of using python, how it has been done, and how it might be in the future.
 
-- [Aditthya Ramakrishnan](https://www.linkedin.com/in/aditthya), [@ad137hya](https://twitter.com/ad137hya), Next Tech Lab
- 
+- [@ducky_tape](https://twitter.com/ducky_tape)
+- lots of python gaming platforms like [Ren'Py](https://www.renpy.org/), PyVida
+- open source tools like Gimp have python plugins
+- PyAudioGame, Audio Game Kit for Python
+- 3d engines: [panda3d](https://www.panda3d.org/) - but need tools like Maya to make animations - python is very handy for scripting animations
+- python is used a lot for automation inside games
+- post release: for some big titles python is used to make addons
 
 
 
 ## [Tom Eastman](https://2018.pycon-au.org/talks/tom)
 
-*Saturday August 25 2018, Cockle Bay, 16:00 AEST*
+> how we learn to get better at our craft, and also how we – all too easily – do the opposite.
 
+- [twtr](https://twitter.com/tveastman) [web](https://eastman.net.nz/)
+- been using Python since 2002! Python was hip way back then
+- joined a super smart team, felt out of place
+- new knowledge deepens your understanding of what you already know
+- we are poor judges of whne we're learning well or not
+- real learning feels sucky, like when trying to debug broken code with multiple layers of abstraction
+- effortful retreival - have to write down stuff in your own words to understand. don't absorb the words, absorb the knowledge
+- using is the the only way to make it stick.
+- use spaced repitition. flashcards are highly effective.
+  - buid my own flashdeck
+- did a contract job for which had to learn ruby in 4 days. got two big fat books on ruby, used a pomodoro app on phone, and read both books cover to cover.
+  - restate things in terms you understand
+  - absorbed more than had expected
+  - primed by layout of boks, which makes it faster to look up bits as needed
+  - learning an unfamiliar language made him a better python developer
+- sticking to only one language deprives you of experience
+- self sabotage - when you think you're smart, you tend to avoid things which make you look not smart. internalized that effort is whats needed when you're not talented.
+- Carol Dweck's "fixed vs growth mindset" - are our abilities fixed or can we grow them?
+- Growth mindset: we can improve with effort, this is the one we want
+- be careful about excuses
+- thinking I should have been been good at this by now is deafeatist
+- you can have a fixed mindset for ages about many things
+- sitting down and working on a thing is an amazingly powerful way to learn that thing
+- takeaways:
+  - effort of learning isn't comfy - if feeling comfortable learning its a warning sign
+  - don't feel bad about being bad at something
+
+## Lightening talks
+
+### Digital Earth Australia
+
+- archive of Australia's space/earth/ocean data
+- they try and figure out how to display things to see changes over time, showed impressive animationg of pictures alongside a graph of flow changing over time
+- code is all open source: [GeoscienceAustralia github](https://github.com/GeoscienceAustralia)
+
+### FuPy
+
+- [web](fupy.github.com)
+- hardware is hard, FPGA makes hardware into software, making it easier to fix bugs
+- FPGA generally don't support python, but along came Migen and Misoc and LiteX which support python by putting a cpu in the FPGA
+- FuPy project is to run MicroPython on FPGA
+
+### flip flop operators in Ruby
+
+- @merxplat
+- flips b/w two statements
+- its from perl, which got it from sed/awk, who got it from electronics
+- being removed from ruby, no one uses it
+- looks pretty handy and terse to me!
+
+### python in the classroom
+
+- math teacher who now teaches python to kids in a low income area
+- coding keeps kids engaged
+- they use [grok learning](https://groklearning.com/)
+
+### DRF Model Pusher
+
+- sends realtime updates using Pusher over websockets
+- django stuff
+
+### Watching water from space
+
+- [Claire](https://twitter.com/claire_science), climate scientist at Geoscience Australia
+- works with agricultural data from space
+- when are farm storage dams being filled and emptied
+  - dams were manually labeleed on satellite photos before
+  - now algorithim to detect dams, run automatically every time there is new imagery
+  - they build a flagging system to alert for drainage
+- working to improve this and pass it to stake holders
+
+### Captcha Cracker
+
+- yr 12 student
+- we have so much info to learn from, but programs have very limited info
+- writing a program that uses the SIFT Algorithm to get through a ReCaptcha
+- [see their website](https://captchacracker.wordpress.com/)
+
+### Rockertry
+
+- MEMS is making things a lot cheaper
+- used MEMS sensors with ESP32 to make lots of telemetry modules
+- of course used micropython
+- look up MQTT
+- the feeling of something actually happening is awesome
+
+### cyrpto money
+
+- bitcoin uses tons of electricity
+- theft
+- ethereum contracts cause software
+- great overview of cycrptocurrencies
+
+### Peter Lovett
+
+- teaches Python
+- python is readable, everyone loves it for that
+- pep505
+- python needs to grow, but we don't want to loose sight of what we have
+
+### Giving thanks
+
+- project to fund the packages you use: [phildini/thanks](https://github.com/phildini/thanks)
+
+---
 
 ## [Tracy Osborn](https://2018.pycon-au.org/talks/tracy)
 
