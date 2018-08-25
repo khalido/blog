@@ -9,6 +9,17 @@ ChromeOS supports a built in Linux - running inside a container running insde a 
 
 Most of these tips are from the [reddit crostini wiki](https://www.reddit.com/r/Crostini/wiki/index), I've put all the ones I'm using in one page for a handy reference.
 
+- [add backports to apt install recent packages](#add-backports-to-apt-install-recent-packages)
+  - [updating debian to testing](#updating-debian-to-testing)
+- [install anaconda for a better python](#install-anaconda-for-a-better-python)
+  - [vs code](#vs-code)
+- [edit markdown](#edit-markdown)
+- [make the terminal nicer to use](#make-the-terminal-nicer-to-use)
+  - [fix window shortcuts](#fix-window-shortcuts)
+  - [multiplex all the things](#multiplex-all-the-things)
+  - [jazz up the shell](#jazz-up-the-shell)
+  - [setup vim proper like](#setup-vim-proper-like)
+
 ## add backports to apt install recent packages
 
 Now, there are many ways to do this, but the easiest and nicest is to sudo apt all-the-things. But, this is Google, so not only do you have to do this insided a container in a virtual machine inside some some weird linux/chrome melting pot, you get old software. so first up, update the container itself:

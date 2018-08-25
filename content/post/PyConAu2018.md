@@ -9,6 +9,38 @@ Schedule: https://2018.pycon-au.org/schedule/
 
 My notes for the talks I attended:
 
+- [How Python saved a rescue dog - a foster fail story](#how-python-saved-a-rescue-dog---a-foster-fail-story)
+- [Lighting Macro Photographs with CircuitPython](#lighting-macro-photographs-with-circuitpython)
+- [Writing fast and efficient MicroPython](#writing-fast-and-efficient-micropython)
+- [Asyncio in (Micro)Python](#asyncio-in-micropython)
+- [Embedded applications using Python and Debian](#embedded-applications-using-python-and-debian)
+- [Workplace Environment Sensing with Python](#workplace-environment-sensing-with-python)
+- [Workplace Environment Sensing with Python](#workplace-environment-sensing-with-python)
+- [Automating Your Home with Python, Raspberry Pi and Homekit](#automating-your-home-with-python-raspberry-pi-and-homekit)
+- [Education Seminar Student Showcase](#education-seminar-student-showcase)
+  - [MENACE - building a learning matchbox machine in Python](#menace---building-a-learning-matchbox-machine-in-python)
+  - [Optimising Memory Retention via a Machine Learning based Flashcard System built in Python](#optimising-memory-retention-via-a-machine-learning-based-flashcard-system-built-in-python)
+  - [Text Summariser](#text-summariser)
+  - [NOR: creating generated worlds on iPad](#nor-creating-generated-worlds-on-ipad)
+  - [Rule-Based Machine Translation](#rule-based-machine-translation)
+  - [SVG Graph Calculator](#svg-graph-calculator)
+  - [Emojifer in @ school](#emojifer-in--school)
+  - [PyVlov’s Dog](#pyvlovs-dog)
+  - [wrap up](#wrap-up)
+- [Annie Parker](#annie-parker)
+- [Describing Descriptors](#describing-descriptors)
+- [What is the most common street name in Australia?](#what-is-the-most-common-street-name-in-australia)
+- [End-to-end Energy Monitoring in Python](#end-to-end-energy-monitoring-in-python)
+- [Python & Spreadsheets: Earth Dog Edition](#python--spreadsheets-earth-dog-edition)
+- [Context Managers: You Can Write Your Own!](#context-managers-you-can-write-your-own)
+- [Resurrecting the dead with deep learning](#resurrecting-the-dead-with-deep-learning)
+- [Tom Eastman](#tom-eastman)
+- [Tracy Osborn](#tracy-osborn)
+- [Guide to your own artificial intelligence application in 3 easy steps](#guide-to-your-own-artificial-intelligence-application-in-3-easy-steps)
+- [Hello to the World in 8 Web Frameworks (Micro, Batteries Included & Async)](#hello-to-the-world-in-8-web-frameworks-micro-batteries-included--async)
+- [You Don't Need That!](#you-dont-need-that)
+- [How To Publish A Package On PyPI](#how-to-publish-a-package-on-pypi)
+
 ## [How Python saved a rescue dog - a foster fail story](https://2018.pycon-au.org/talks/45067-how-python-saved-a-rescue-dog-a-foster-fail-story/)
 
 > This talk will tell the story of a foster fail, how Python helped to save the life of a rescue dog and how the initial medication feeder grew from a single IoT device into a full Internet of Dog (IoD) madness. I will show the design and implementation of the initial Python-based medication feeder, what we have learned from running it over the summer and how it has continued to grow into a multi IoT device, Python-powered, full dog carer solution. There will be microservice architecture drawings, Python code, and, of course, pictures of the dog!
@@ -302,23 +334,34 @@ Friday August 24 2018, Education Track, C3.4 & C3.5, 16:00 AEST
 - learnt a lot from throwing themselves in the deep end to do a project.
 - python is a fantastic learning language, don't babyfeed students, support them in the deep end
 
-
-## [Design for Non-Designers](https://2018.pycon-au.org/talks/43052-design-for-nondesigners/)
-
-*Friday August 24 2018, DjangoCon AU Track, C3.3, 16:40 AEST*
-
-
 ----------
-## [First-timers Session](https://2018.pycon-au.org/talks/899-first-timers-session/)
 
-*Saturday August 25 2018, Cockle Bay, 08:30 AEST*
-
+Saturday talks
 
 ## [Annie Parker](https://2018.pycon-au.org/talks/annie)
 
-*Saturday August 25 2018, Cockle Bay, 09:15 AEST*
+> [Annie](https://twitter.com/annie_parker) is a co-founder of [Techfugees Australia](https://techfugees.com/chapters/australia/) - a global movement connecting the technology ecosystem together with newly arrived refugees here in Australia to help them integrate into their new communities. In this talk, Annie will be sharing her experience of how Techfugees works and some of the success stories they’ve had along the way
 
-> Annie is a co-founder of Techfugees Australia - a global movement connecting the technology ecosystem together with newly arrived refugees here in Australia to help them integrate into their new communities. In this talk, Annie will be sharing her experience of how Techfugees works and some of the success stories they’ve had along the way
+- 68.5M displaced ppl around the world, with 25M refugees
+- the tech community can help, done 5 hackathons so far
+- 6th hackathon 24/25th Nov in Blacktown - signup
+  - looking for ppl who can put togther really early stage stuff and know whats out there to use
+  - don't need to be deeply skilled
+- they've made significant changes  - new companies, connected investors to customers, jobs, community impact, media stories, inspiration
+- case studies:
+  - refugeetalent created at first hackathon in 2015, placed 150 ppl into jobs
+  - onestep founded at second hackathon, connects refugees
+  - muralisto - makes community art
+- Shaqaeq Rezai [ln](https://www.linkedin.com/in/shaqaeq-rezai/), [twtr](https://twitter.com/r_Shaqaeq) - 18yr hazara Afghan refugee, moved to Australia from Iran where she faced a lot of discrimination - attended a hackathon, built an AI to track moods, got scholarship, started [Directa Australia](https://www.linkedin.com/company/directa-australia/). Met the CEO of the Iconic through the startup scene, who is also Aghan.
+  - wants to help ppl through tech
+- most refugees have good knowledge of tech, smart phones
+- 50% of business in Australia have been started by a refugee or a migrant
+
+## [Describing Descriptors](https://2018.pycon-au.org/talks/42582-describing-descriptors/)
+
+> Descriptors are a little known feature of Python. They provide a way for a programmer to customize the storage and retrieval of different instance variables. In this talk, you will learn about the descriptor protocol, what it can be used for, and how to implement a descriptor.
+
+- 
 
 ## [What is the most common street name in Australia?](https://2018.pycon-au.org/talks/45005-what-is-the-most-common-street-name-in-australia/)
 
