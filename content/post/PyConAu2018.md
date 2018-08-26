@@ -56,7 +56,7 @@ My notes for the [PyConAU 2018 talks](https://2018.pycon-au.org/schedule/) I wen
 
 > This talk will tell the story of a foster fail, how Python helped to save the life of a rescue dog and how the initial medication feeder grew from a single IoT device into a full Internet of Dog (IoD) madness. I will show the design and implementation of the initial Python-based medication feeder, what we have learned from running it over the summer and how it has continued to grow into a multi IoT device, Python-powered, full dog carer solution. There will be microservice architecture drawings, Python code, and, of course, pictures of the dog! [#](https://2018.pycon-au.org/talks/45067-how-python-saved-a-rescue-dog-a-foster-fail-story/)
 
-- Works at [ANSTO](https://www.ansto.gov.au/research/facilities/australian-synchrotron/overview) - works on scientific software in Python
+- Andreas Moll - [twtr](https://twitter.com/SciAndreas) - Works at [ANSTO](https://www.ansto.gov.au/research/facilities/australian-synchrotron/overview) - works on scientific software in Python
 - were fostering a dog, Willow - fostering: look after for a limited time and prepare for adoption
 - Willow was badly treated by previous owner and needed anti-anxiety medication every 8 hrs
 - 4 weeks of meds, improved Willow a lot. But then they both went back to work, and nobody had adopted Willow. So they had two issues: monitor Willow and afternoon medication
@@ -87,7 +87,7 @@ Q&A
 > LED lighting rigs are expensive. Worse, they have little to no controls aside from on/off. Most are not dimmable and changing colors requires the use of gels. In this talk I will discuss how CircuitPython was used in conjunction with LEDs and microcontrollers to make a custom LED photo lighting rig. [#](https://2018.pycon-au.org/talks/45177-lighting-macro-photographs-with-circuitpython/)
 
 
-- Stacey Morse [geekgirlbeta](https://twitter.com/geekgirlbeta), [web](https://geekgirlbeta.wordpress.com/) is an artist who also does macro photography, web dev in python
+- Stacey Morse - [geekgirlbeta](https://twitter.com/geekgirlbeta), [web](https://geekgirlbeta.wordpress.com/) is an artist who also does macro photography, web dev in python
 - art is awesome, but led lights are very expensive and crap. the intersection b/w art and tech: both are very process drivenl
 - had a conversation with a python programmer who suggested python controlled lights could solve her lighting issues - and thus she started to learn how to program in micropython
 - macro photography is very technical - there is a lot of math involved, understanding light, lens dynamics, lighting
@@ -771,9 +771,9 @@ with suppress(ProcessLookupError):
 
 > Have you ever eavesdropped on FP developers talking about programming and wondered which planet you landed on? I attended LambdaJam 2018 and felt your pain! Let’s demystify Either, Semigroups, Monoids, Functors, Monads, Traversable, Natural transformations etc. by implementing them in Python. [#](https://2018.pycon-au.org/talks/45075-fp-demystified/)
 
-- Eugene Van den Bulke [twtr](https://twitter.com/3KWA)
-- went to lambdajam, two takeaways:
-  - [Eugenia Cheng](http://eugeniacheng.com/) - read her books
+- Eugene Van den Bulke - [twtr](https://twitter.com/3KWA)
+- went to [lambdajam](https://lambdajam.yowconference.com.au/)
+- [Eugenia Cheng](http://eugeniacheng.com/) - read her books
 - Professor Frisby introduces functional programming in javascript - we are going to cover it in python
 - Functor: something that can be mapped over
 - Currying: this makes no sense. instead of a func which takes in multiple arguments you have some weird chain of funcs which take in arguments one at a time
