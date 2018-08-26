@@ -512,7 +512,7 @@ q & a:
 
 > An introduction on running Python web applications in Docker, covering how to structure your project, running the project in both development and production, testing the project, and compiling static assets for your frontend. [#](https://2018.pycon-au.org/talks/45205-running-python-web-applications-in-docker/)
 
-{{<M youtube 9L6x2j-7eVQ >}}
+{{< youtube 9L6x2j-7eVQ >}}
 
 - Tim Heap [@tim_heap](https://twitter.com/tim_heap) [git](https://github.com/timheap)
 - talk [code and slides](https://github.com/timheap/python-apps-in-docker)
