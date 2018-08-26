@@ -15,27 +15,29 @@ My notes for the [PyConAU 2018 talks](https://2018.pycon-au.org/schedule/) I wen
 - [Workplace Environment Sensing with Python](#workplace-environment-sensing-with-python)
 - [Automating Your Home with Python, Raspberry Pi and Homekit](#automating-your-home-with-python-raspberry-pi-and-homekit)
 - [Education Seminar Student Showcase](#education-seminar-student-showcase)
-- [Annie Parker - Techfugees](#annie-parker---techfugees)
+- [Keynote: Annie Parker on Techfugees](#keynote-annie-parker-on-techfugees)
 - [Describing Descriptors](#describing-descriptors)
 - [What is the most common street name in Australia?](#what-is-the-most-common-street-name-in-australia)
 - [Why you should care about types: How Python typing helped my team scale](#why-you-should-care-about-types-how-python-typing-helped-my-team-scale)
 - [Running Python web applications in Docker](#running-python-web-applications-in-docker)
 - [Context Managers: You Can Write Your Own!](#context-managers-you-can-write-your-own)
 - [Snakes in your Games](#snakes-in-your-games)
-- [Tom Eastman on getting better](#tom-eastman-on-getting-better)
-- [Lightening talks](#lightening-talks)
+- [Keynote: Tom Eastman on getting better](#keynote-tom-eastman-on-getting-better)
+- [Saturday Lightening talks](#saturday-lightening-talks)
 - [Tracy Osborn: Clueless](#tracy-osborn-clueless)
 - [Guide to your own artificial intelligence application in 3 easy steps](#guide-to-your-own-artificial-intelligence-application-in-3-easy-steps)
-- [Hello to the World in 8 Web Frameworks (Micro, Batteries Included & Async)](#hello-to-the-world-in-8-web-frameworks-micro-batteries-included--async)
+- [Hello to the World in 8 Web Frameworks](#hello-to-the-world-in-8-web-frameworks)
 - [Functional Programming demystified](#functional-programming-demystified)
 - [You Don't Need That!](#you-dont-need-that)
 - [There is no "now" and sensor data's the worst](#there-is-no-%22now%22-and-sensor-datas-the-worst)
 - [Watch out for Safety Bandits!](#watch-out-for-safety-bandits)
-- [Lightening talks](#lightening-talks)
+- [Sunday Lightening talks](#sunday-lightening-talks)
 
 ## How Python saved a rescue dog - a foster fail story
 
 > This talk will tell the story of a foster fail, how Python helped to save the life of a rescue dog and how the initial medication feeder grew from a single IoT device into a full Internet of Dog (IoD) madness. I will show the design and implementation of the initial Python-based medication feeder, what we have learned from running it over the summer and how it has continued to grow into a multi IoT device, Python-powered, full dog carer solution. There will be microservice architecture drawings, Python code, and, of course, pictures of the dog! [#](https://2018.pycon-au.org/talks/45067-how-python-saved-a-rescue-dog-a-foster-fail-story/)
+
+{{< youtube EqQj5os3Mfw >}}
 
 - Andreas Moll - [twtr](https://twitter.com/SciAndreas) - Works at [ANSTO](https://www.ansto.gov.au/research/facilities/australian-synchrotron/overview) - works on scientific software in Python
 - were fostering a dog, Willow - fostering: look after for a limited time and prepare for adoption
@@ -67,6 +69,7 @@ Q&A
 
 > LED lighting rigs are expensive. Worse, they have little to no controls aside from on/off. Most are not dimmable and changing colors requires the use of gels. In this talk I will discuss how CircuitPython was used in conjunction with LEDs and microcontrollers to make a custom LED photo lighting rig. [#](https://2018.pycon-au.org/talks/45177-lighting-macro-photographs-with-circuitpython/)
 
+{{< youtube JAgCZ70Q3sg >}
 
 - Stacey Morse - [geekgirlbeta](https://twitter.com/geekgirlbeta), [web](https://geekgirlbeta.wordpress.com/) is an artist who also does macro photography, web dev in python
 - art is awesome, but led lights are very expensive and crap. the intersection b/w art and tech: both are very process drivenl
@@ -91,6 +94,8 @@ Q&A:
 ## Writing fast and efficient MicroPython
 
 > MicroPython is a reimplementation of Python which is specifically designed to run on computing devices that have very few resources, such as CPU power, RAM and storage. Often when you write scripts in MicroPython you want to make the most of your available resources, and have code run as fast as possible (faster code usually saves power, which is important when running from a battery!) and there are certain ways of writing MicroPython code that are more efficient than others. In this talk I will go over the tricks and techniques for writing fast and efficient Python code in MicroPython. As part of this I will delve into some technical details of how MicroPython works, in order to better understand what it’s doing behind the scenes and how to make the most of it. I will discuss general techniques for making things run faster (some of which would be applicable to normal Python), as well as ways to completely avoid memory allocation, which is important for both efficiency and making code execution deterministic. The talk will include some hardware demos to show off the techniques, including five different ways to blink an LED fast. [#](https://2018.pycon-au.org/talks/45358-writing-fast-and-efficient-micropython/)
+
+{{< youtube hHec4qL00x0 >}}
 
 - [Damien George](http://dpgeorge.net/) - creator of [MicroPython](https://twitter.com/micropython)
 - loading local variables is fast, global variables is slow. So try to use local variables.
@@ -184,6 +189,8 @@ Q&A
 
 > This talk will demystify how LoRaWAN works using PyCom devices.
 
+{{< youtube L-fh7PSpPMc >}}
+
 - talk by Brian Danilko of [Likeable Software](http://www.likeablesoftware.com/)
 - LoPy
 - [Pycom](https://pycom.io/) has lots of examples for LoRa and LoRaWAN
@@ -220,6 +227,8 @@ Q&A
 
 > Home Automation is a fun new field for the modern Pythonista. In this talk I will be walking through how a developer can leverage a python library to use the HomeKit service and automate the devices in their home. I will be covering topics like hardware selection for local and remote access, HomeKit service registration and management and potential security concerns around IoT. [#](https://2018.pycon-au.org/talks/45170-automating-your-home-with-python-raspberry-pi-and-homekit/)
 
+{{< youtube SiLtPgeTZLA >}}
+
 - Sean Johnson [twtr](https://twitter.com/seansonbronson) [ln](https://www.linkedin.com/in/sean-johnson-50030280/)
 - homekit is a software framework for controlling smart hardware, built on Apples HomeKit Accessory Protocol
 - there are a few opensource implementations in node and python
@@ -242,6 +251,8 @@ q & a
 Friday August 24 2018, Education Track, C3.4 & C3.5, 16:00 AEST
 
 > Eight short (10 min) talks from high school students across Australia. They’ll be talking about projects they’ve built with Python using machine learning, robotics, natural language processing, and more [#](https://2018.pycon-au.org/education-showcase)
+
+{{ < youtube QNAgPjbn0Ws >}}
 
 **MENACE - building a learning matchbox machine in Python**
 
@@ -350,10 +361,13 @@ Friday August 24 2018, Education Track, C3.4 & C3.5, 16:00 AEST
 
 Saturday talks
 
-## Annie Parker - Techfugees
+## Keynote: Annie Parker on Techfugees
 
 > [Annie](https://twitter.com/annie_parker) is a co-founder of [Techfugees Australia](https://techfugees.com/chapters/australia/) - a global movement connecting the technology ecosystem together with newly arrived refugees here in Australia to help them integrate into their new communities. In this talk, Annie will be sharing her experience of how Techfugees works and some of the success stories they’ve had along the way [#](https://2018.pycon-au.org/talks/annie)
 
+{{< youtube GlMVcZfFFGI >}}
+
+- technology has a huge impact on changing peoples lives
 - 68.5M displaced ppl around the world, with 25M refugees
 - the tech community can help, done 5 hackathons so far
 - 6th hackathon 24/25th Nov in Blacktown - signup
@@ -374,6 +388,8 @@ Saturday talks
 ## Describing Descriptors
 
 > Descriptors are a little known feature of Python. They provide a way for a programmer to customize the storage and retrieval of different instance variables. In this talk, you will learn about the descriptor protocol, what it can be used for, and how to implement a descriptor. [#](https://2018.pycon-au.org/talks/42582-describing-descriptors/)
+
+{{< youyube lmcgtUw5djw >}}
 
 - Matthew Egan [web](https://mattjegan.com/) [twtr](https://twitter.com/NullMatthew)
 - why descriptors? often overlooked, used primarily by library developers
@@ -415,6 +431,8 @@ q & a:
 
 > Finding the most common street name in Australia may sound like a simple thing to do - but it quickly devolves into a scenic tour of all the things that go wrong when doing data analytics. I’ll be giving advice on how to avoid these speed bumps along with how to work with OpenStreetMaps in Python. [#](https://2018.pycon-au.org/talks/45005-what-is-the-most-common-street-name-in-australia/)
 
+{{< youtube eGgBU2Pl6iA >}}
+
 - Rachel [git](https://github.com/RachelBunder), [twtr](https://twitter.com/ADuckIsMyFiend), [ln](https://www.linkedin.com/in/rachelbunder/) works at Solar Analytics
 - read an article about most common street names in America, got her interested about Australian streets
 - G-NAF is australian geocoded data containing every address/street
@@ -451,6 +469,8 @@ q & a:
 > The greatest benefit of types in large Python codebases is the fact that the input and output structures of a function are obvious from just looking at the signature. In the untyped world the definition for the class you are looking for may be N jumps away, hidden somewhere deep in the codebase, and you don’t have a direct reference to it. In the best possible case grepping for it will yield just a few results and you will be able to spot what you are looking for. In the worst case though, you will have hundreds of hits and you will have to start your application and inspect the type at runtime to figure out what is going on, which make the development cycle slow and tedious.
 
 > Come to this talk if you want to know more about the typing system in Python, how to gradually add it to your codebase and what benefits will your team get in the long run! I will also cover some advanced tools like the runtime type collection system, MonkeyType, and the just open sourced type checker, Pyre![#](https://2018.pycon-au.org/talks/45224-why-you-should-care-about-types-how-python-typing-helped-my-team-scale/)
+
+{{< youtube h1cD3a7ys8Q >}}
 
 - Luka Sterbic [git](https://github.com/Sterbic) - works at Facebook
 - [talk slides and code](https://github.com/Sterbic/PyCon-AU-2018)
@@ -492,6 +512,8 @@ q & a:
 
 > An introduction on running Python web applications in Docker, covering how to structure your project, running the project in both development and production, testing the project, and compiling static assets for your frontend. [#](https://2018.pycon-au.org/talks/45205-running-python-web-applications-in-docker/)
 
+{{<M youtube 9L6x2j-7eVQ >}}
+
 - Tim Heap [@tim_heap](https://twitter.com/tim_heap) [git](https://github.com/timheap)
 - talk [code and slides](https://github.com/timheap/python-apps-in-docker)
 - [Docker](https://www.docker.com/) is a determinisitic application image, runs in a isolated execution environment, composable containers
@@ -521,6 +543,8 @@ q & a:
 ## Context Managers: You Can Write Your Own!
 
 > Did you know context managers go beyond with open('myfile.txt', 'r') as f? In fact, you can even write your own! Context managers are an amazing tool for managing resources safely. They make your code look great, and they’re now easier to write than ever thanks to contextlib! Come get contextual!  [#](https://2018.pycon-au.org/talks/45062-context-managers-you-can-write-your-own/)
+
+{{< youtube tpn94V9vK4 >}}
 
 - Dan [git](https://github.com/banool) [web](https://dport.me/)
 - [talk slides: dport.me/pycon.pdf](https://dport.me/pycon.pdf)
@@ -552,6 +576,8 @@ with suppress(ProcessLookupError):
 
 > When thinking about where to start with python and games, the first thing that might come to mind is pygame. However, python has been used in many well known commercial games titles and can be used in many different ways throughout the game development process. This talk will examine a range of game titles, genres and platforms, from AAA to Indie, to show how python is being used in each; discussing the strength and weaknesses of using python, how it has been done, and how it might be in the future.
 
+{{< youtube WbnZqeLL1a8 >}}
+
 - [@ducky_tape](https://twitter.com/ducky_tape)
 - lots of python gaming platforms like [Ren'Py](https://www.renpy.org/), PyVida
 - open source tools like Gimp have python plugins
@@ -562,9 +588,11 @@ with suppress(ProcessLookupError):
 
 **my takeaway:** there is a lot of python out there.
 
-## Tom Eastman on getting better
+## Keynote: Tom Eastman on getting better
 
 > how we learn to get better at our craft, and also how we – all too easily – do the opposite. [#](https://2018.pycon-au.org/talks/tom)
+
+{{< youtube 9E3qhqWFJ2c >}}
 
 - [twtr](https://twitter.com/tveastman) [web](https://eastman.net.nz/)
 - been using Python since 2002! Python was hip way back then
@@ -595,7 +623,9 @@ with suppress(ProcessLookupError):
 
 **my takeaway:** think you can do it, and learn by doing. don't get comfy and don't feel bad about sucking at something.
 
-## Lightening talks
+## Saturday Lightening talks
+
+{{< youtube BmWLhVMWC9I >}}
 
 Digital Earth Australia
 
@@ -646,7 +676,7 @@ Captcha Cracker
 - writing a program that uses the SIFT Algorithm to get through a ReCaptcha
 - [see their website](https://captchacracker.wordpress.com/)
 
-Rockertry
+Rocketry
 
 - MEMS is making things a lot cheaper
 - used MEMS sensors with ESP32 to make lots of telemetry modules
@@ -677,6 +707,8 @@ Giving thanks
 ## Tracy Osborn: Clueless
 
 > Tracy Osborn is the author, designer, and self-publisher of three books and the solo founder of a venture-backed startup. Each of these achievements has something in common — being completely clueless about the work and problems involved in each. In this keynote, Tracy will tell stories about how she launched her projects and what she learned (after already being neck-deep.) [#](https://2018.pycon-au.org/talks/tracy)
+
+{{> youtube fOzJ-OIZRZw }}
 
 - [twtr](https://twitter.com/limedaring)
 - wrote easy/friendnly [hello web app books](https://twitter.com/HelloWebBooks)
@@ -710,6 +742,8 @@ Giving thanks
 
 > What do you think of when you hear “artificial intelligence”? Perhaps self-driving cars, autonomous robots and Siri, Alexa or Google Home? But it doesn’t have to be that complex. You can build a powerful image classification model within a topic that inspires and interests you - with 3 easy steps. [#](https://2018.pycon-au.org/talks/45386-guide-to-your-own-artificial-intelligence-application-in-3-easy-steps/)
 
+{{< youtube ymRr0AkMb5E >}}
+
 - Norah Klintberg Sakal [ln](https://www.linkedin.com/in/norah-klintberg-sakal-5b81322a/) - data scientist doing a masters thesis at [Chan Zuckerberg Biohub](https://www.czbiohub.org/)
 - [talk github, includes code](https://github.com/norahsakal/pyconau-2018-shades)
 - ususally when u think of AI or DL u think of self driving cars, Alexa, cancer diagnosis
@@ -729,9 +763,11 @@ Giving thanks
 
 **takeaway:** this was suprisingly easy for something which sounds so complex. build my own mini app using keras and flask
 
-## Hello to the World in 8 Web Frameworks (Micro, Batteries Included & Async)
+## Hello to the World in 8 Web Frameworks
 
 > We’ll start with the current crop of microframeworks, showing how to achieve the same task in each, before progressing to “Batteries included” and then the more specialised async frameworks. For developers who perhaps have only used a single framework or even none at all, this talk gives them an opportunity to get out and explore the world (of web frameworks) and broaden their horizons, with plenty of Jules Verne inspired fun along the way. [#](https://2018.pycon-au.org/talks/45282-hello-to-the-world-in-8-web-frameworks-micro-batteries-included-async/)
+
+{{< youtube z9Ek6fefMYk >}}
 
 - Aaron Bassett [twtr](https://twitter.com/aaronbassett) dev advocate at Nexmo - an api company for telephony
 - task: return a json string
@@ -755,6 +791,8 @@ Giving thanks
 
 > Have you ever eavesdropped on FP developers talking about programming and wondered which planet you landed on? I attended LambdaJam 2018 and felt your pain! Let’s demystify Either, Semigroups, Monoids, Functors, Monads, Traversable, Natural transformations etc. by implementing them in Python. [#](https://2018.pycon-au.org/talks/45075-fp-demystified/)
 
+{{< youtube p9_r36fIrqc >}}
+
 - Eugene Van den Bulke - [twtr](https://twitter.com/3KWA)
 - went to [lambdajam](https://lambdajam.yowconference.com.au/)
 - [Eugenia Cheng](http://eugeniacheng.com/) - read her books
@@ -771,6 +809,8 @@ Giving thanks
 ## You Don't Need That!
 
 > Not every design pattern makes sense in Python. This talk builds up design patterns commonly used in enterprise languages, and shows the features in Python that make these approaches unnecessary. [#]((https://2018.pycon-au.org/talks/45184-you-dont-need-that/))
+
+{{< youtube imW-trt0i9I >}}
 
 - Christopher Neugebauer [twtr](https://twitter.com/chrisjrn) [web](https://chris.neugebauer.id.au/) works at AlpaSigts, Director of PSF
 - Deisign Patterns let you express ideas that are hard to express... in a familiar way
@@ -799,6 +839,8 @@ Giving thanks
 
 > Audience members will be asked to go to a webpage on their phone that reads accelerometer data and transmits it to the presentation. This data will then be used to highlight the issues of collecting a processing data from distributed sensors - what happens when all the data is not received at once and not perfectly in time? what happens if there is an outage? How do you turn all this noise into something tha t can be managed? [#](https://2018.pycon-au.org/talks/45064-there-is-no-now-and-sensor-datas-the-worst/)
 
+{{< youtube KQzjA08c >}}
+
 - Mike Leonard [twtr](https://twitter.com/mikerleonard) Reposit Power
 - presentation demo fail - was hosted on kubernets cluster. Reminder that all this clustering business is hard.
 - collecting IOT sensor data is hard - too small a polling interval will ddos your server, but too long means loosing out on realtime data.
@@ -813,6 +855,8 @@ Giving thanks
 
 > The presentation itself will go into the details of example security vulnerabilities, explain why it’s important to fix them, and show how integrating these two tools into your process will better protect you and your software. Beginners will get an appreciation for the kinds of security problems that can occur, and an introduction to continuous integration workflows. [#](https://2018.pycon-au.org/talks/43518-watch-out-for-safety-bandits/)
 
+{{< youtube Wa2pgDihWaw >}}
+
 - Tennessee Leeuwenburg [twtr](https://twitter.com/tleeuwenburg) Head of Secure Coding at the Australian Bureau of Meteorology.
 - use python tools called [Safety](https://pyup.io/safety/) and  [Bandit](https://github.com/PyCQA/bandit)
 - tools like [CVE](https://www.cvedetails.com/) track security vulnerabilities - there are heaps all the time in commonly used packages
@@ -825,7 +869,9 @@ Giving thanks
 
 **takeaway:** integrate Safety Bandits into CI.
 
-## Lightening talks
+## Sunday Lightening talks
+
+{{< youtube rNkbmu4e3MA >}}
 
 chunks() the story of a generator
 
