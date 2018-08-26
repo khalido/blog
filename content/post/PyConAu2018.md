@@ -46,11 +46,13 @@ My notes for the [PyConAU 2018 talks](https://2018.pycon-au.org/schedule/) I wen
   - [cyrpto money](#cyrpto-money)
   - [Peter Lovett](#peter-lovett)
   - [Giving thanks](#giving-thanks)
-- [Tracy Osborn](#tracy-osborn)
+- [Tracy Osborn: Clueless](#tracy-osborn-clueless)
 - [Guide to your own artificial intelligence application in 3 easy steps](#guide-to-your-own-artificial-intelligence-application-in-3-easy-steps)
 - [Hello to the World in 8 Web Frameworks (Micro, Batteries Included & Async)](#hello-to-the-world-in-8-web-frameworks-micro-batteries-included--async)
+- [Functional Programming demystified](#functional-programming-demystified)
 - [You Don't Need That!](#you-dont-need-that)
-- [How To Publish A Package On PyPI](#how-to-publish-a-package-on-pypi)
+- [There is no "now" and sensor data's the worst](#there-is-no-%22now%22-and-sensor-datas-the-worst)
+- [Watch out for Safety Bandits!](#watch-out-for-safety-bandits)
 
 ## How Python saved a rescue dog - a foster fail story
 
@@ -803,14 +805,17 @@ with suppress(ProcessLookupError):
 > Audience members will be asked to go to a webpage on their phone that reads accelerometer data and transmits it to the presentation. This data will then be used to highlight the issues of collecting a processing data from distributed sensors - what happens when all the data is not received at once and not perfectly in time? what happens if there is an outage? How do you turn all this noise into something tha t can be managed? [#](https://2018.pycon-au.org/talks/45064-there-is-no-now-and-sensor-datas-the-worst/)
 
 - Mike Leonard [twtr](https://twitter.com/mikerleonard) Reposit Power
--
+- presentation demo fail - was hosted on kubernets cluster. Reminder that all this clustering business is hard.
+- collecting IOT sensor data is hard - too small a polling interval will ddos your server, but too long means loosing out on realtime data.
+- during an outage you want to keep data loss to a minimum - so log data on the device, but when they came back online you don't want to get ddos'd. so each time a device fails to transmit, it doubles the delay, also introduce some randomness so each device is sending data at different times
+- realtime is tricky, scale is hard, distributed sensors are the worst
+- python backend using Flask, Flask-SocketIO, React & Socket.IO + browser api
+- recommends using [socket.io](https://socket.io/) over websockets - [python implementation](https://github.com/miguelgrinberg/python-socketio)
 
+**takeaway:** think orchestration. how many devices, what when how do they log/send data and how to deal with loss/latency.
 
-## How To Publish A Package On PyPI
+## Watch out for Safety Bandits!
 
-> Starting with nothing, we’ll build a package and publish it on PyPI using current best practices! Learn how to structure, document and test your project on different platforms. Discover the difference between setup.py and Pipfile. Finally, use CookieCutter to avoid doing it twice (or even once)! [#](https://2018.pycon-au.org/talks/44349-how-to-publish-a-package-on-pypi/)
+> The presentation itself will go into the details of example security vulnerabilities, explain why it’s important to fix them, and show how integrating these two tools into your process will better protect you and your software. Beginners will get an appreciation for the kinds of security problems that can occur, and an introduction to continuous integration workflows. [#](https://2018.pycon-au.org/talks/43518-watch-out-for-safety-bandits/)
 
-- Mark Smith [twtr](https://twitter.com/judy2k)
-
-*Sunday August 26 2018, C3.3, 14:10 AEST*
-
+- Tennessee Leeuwenburg [twtr](https://twitter.com/tleeuwenburg) Head of Secure Coding at the Australian Bureau of Meteorology.
