@@ -15,15 +15,6 @@ My notes for the [PyConAU 2018 talks](https://2018.pycon-au.org/schedule/) I wen
 - [Workplace Environment Sensing with Python](#workplace-environment-sensing-with-python)
 - [Automating Your Home with Python, Raspberry Pi and Homekit](#automating-your-home-with-python-raspberry-pi-and-homekit)
 - [Education Seminar Student Showcase](#education-seminar-student-showcase)
-  - [MENACE - building a learning matchbox machine in Python](#menace---building-a-learning-matchbox-machine-in-python)
-  - [Optimising Memory Retention via a Machine Learning based Flashcard System built in Python](#optimising-memory-retention-via-a-machine-learning-based-flashcard-system-built-in-python)
-  - [Text Summariser](#text-summariser)
-  - [NOR: creating generated worlds on iPad](#nor-creating-generated-worlds-on-ipad)
-  - [Rule-Based Machine Translation](#rule-based-machine-translation)
-  - [SVG Graph Calculator](#svg-graph-calculator)
-  - [Emojifer in @ school](#emojifer-in--school)
-  - [PyVlov’s Dog](#pyvlovs-dog)
-  - [wrap up](#wrap-up)
 - [Annie Parker - Techfugees](#annie-parker---techfugees)
 - [Describing Descriptors](#describing-descriptors)
 - [What is the most common street name in Australia?](#what-is-the-most-common-street-name-in-australia)
@@ -252,7 +243,7 @@ Friday August 24 2018, Education Track, C3.4 & C3.5, 16:00 AEST
 
 > Eight short (10 min) talks from high school students across Australia. They’ll be talking about projects they’ve built with Python using machine learning, robotics, natural language processing, and more [#](https://2018.pycon-au.org/education-showcase)
 
-### MENACE - building a learning matchbox machine in Python
+**MENACE - building a learning matchbox machine in Python**
 
 - machine learning is the use of programming to make a computer learn from data
 - inspired by Matt Parker from Standup Math channel on youtube
@@ -261,7 +252,7 @@ Friday August 24 2018, Education Track, C3.4 & C3.5, 16:00 AEST
 
 **takeaway:** awesome.
 
-### Optimising Memory Retention via a Machine Learning based Flashcard System built in Python
+**Optimising Memory Retention via a Machine Learning based Flashcard System built in Python**
 
 > This project aims to leverage Python’s machine learning capabilities, combined with psychological theories of learning and forgetting, to construct predictive models of human memory in order to improve upon traditional flashcard systems.
 
@@ -274,7 +265,7 @@ Friday August 24 2018, Education Track, C3.4 & C3.5, 16:00 AEST
 
 **takeaway:** build my own flash cards to learn stuff with spaced repetition.
 
-### Text Summariser
+**Text Summariser**
 
 > The Text Summariser is a program I built for when one is unable or unwilling to summarise information from a large block of text themselves. In my talk, I will discuss how it works, what inspired the project, and how I overcame the (many) challenges of building my program. I will also talk about computational linguistics and Natural Language Processing (NLP), two big components of how the text summariser works. After listening to this talk, you will have learnt some basic Natural Language Processing, and how you can apply it in Python Programs.
 
@@ -283,7 +274,7 @@ Friday August 24 2018, Education Track, C3.4 & C3.5, 16:00 AEST
 
 **takeaway:** too much cleverness going on to summarize.
 
-### NOR: creating generated worlds on iPad
+**NOR: creating generated worlds on iPad**
 
 > NOR is a 2d puzzle exploration game for iPad that I made over the course of year 10. It features procedurally generated landscapes that collide with and can be edited by the player. The landscapes are host to procedurally generated bushes, trees and puzzles. My talk will discuss how I reached the point where I could set off on a large scale python coding project, how I built up the game and made the systems work, and how anyone can pick up an iPad and start developing.
 
@@ -295,7 +286,7 @@ Friday August 24 2018, Education Track, C3.4 & C3.5, 16:00 AEST
 
 **takeaway:** procedural generation is awesome.
 
-### Rule-Based Machine Translation
+**Rule-Based Machine Translation**
 
 > The Text Summariser is a program I built for when one is unable or unwilling to summarise information from a large block of text themselves. In my talk, I will discuss how it works, what inspired the project, and how I overcame the (many) challenges of building my program. I will also talk about computational linguistics and Natural Language Processing (NLP), two big components of how the text summariser works. After listening to this talk, you will have learnt some basic Natural Language Processing, and how you can apply it in Python Programs.
 
@@ -306,7 +297,7 @@ Friday August 24 2018, Education Track, C3.4 & C3.5, 16:00 AEST
 
 **takeaway:** NLP for the win.
 
-### SVG Graph Calculator
+**SVG Graph Calculator**
 
 > The name of my project is somewhat self-explanatory, it is an SVG Graph calculator. I know right? My talk is going to be about how I decided to do this project, and my struggles and innovations in making this project happen.
 
@@ -319,7 +310,7 @@ Friday August 24 2018, Education Track, C3.4 & C3.5, 16:00 AEST
 
 **takeaway:** good basis for building a equation solver.
 
-### Emojifer in @ school
+**Emojifer in @ school**
 
 > Emojifer is an implementation of a sequence model in Machine Learning. It will analyse the meaning of a sentence and give it the appropriate emoji. Emojifier plays an important role in @ school which is a cloud-based learning management system written in React with Flask served as the server. Come along to this talk, if you want to know what’s under the hood of Emojfier and how I make it happen. Additionally, I’ll talk about some of the problems I’ve encountered so far and how I overcame it. This talk will give you an idea of how to get started in Machine Learning as well as full-stack web development if you’re new to the area.
 
@@ -332,7 +323,7 @@ Friday August 24 2018, Education Track, C3.4 & C3.5, 16:00 AEST
 
 **takeaway:** everyone needs a emojifier.
 
-### PyVlov’s Dog
+**PyVlov’s Dog**
 
 > PyVlov’s Dog is a simulation software created to dynamically train neural networks for the control of basic robots. When we started this project we had a limited understanding of neural networks, so we simplified the problem by visualising it as training a dog.
 
@@ -349,8 +340,9 @@ Friday August 24 2018, Education Track, C3.4 & C3.5, 16:00 AEST
 
 **takeaway:** interesting project to follow. The future is training your own robot to do something.
 
-### wrap up
+**educational talks wrap up**
 
+- high school students are doing amazing stuff
 - learnt a lot from throwing themselves in the deep end to do a project.
 - python is a fantastic learning language, don't babyfeed students, support them in the deep end
 
