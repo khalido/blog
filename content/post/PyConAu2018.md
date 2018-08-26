@@ -708,7 +708,7 @@ Giving thanks
 
 > Tracy Osborn is the author, designer, and self-publisher of three books and the solo founder of a venture-backed startup. Each of these achievements has something in common — being completely clueless about the work and problems involved in each. In this keynote, Tracy will tell stories about how she launched her projects and what she learned (after already being neck-deep.) [#](https://2018.pycon-au.org/talks/tracy)
 
-{{> youtube fOzJ-OIZRZw }}
+{{< youtube fOzJ-OIZRZw >}}
 
 - [twtr](https://twitter.com/limedaring)
 - wrote easy/friendnly [hello web app books](https://twitter.com/HelloWebBooks)
