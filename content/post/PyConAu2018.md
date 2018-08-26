@@ -10,7 +10,7 @@ My notes for the [PyConAU 2018 talks](https://2018.pycon-au.org/schedule/) I wen
 - [How Python saved a rescue dog - a foster fail story](#how-python-saved-a-rescue-dog---a-foster-fail-story)
 - [Lighting Macro Photographs with CircuitPython](#lighting-macro-photographs-with-circuitpython)
 - [Writing fast and efficient MicroPython](#writing-fast-and-efficient-micropython)
-- [Asyncio in (Micro)Python](#asyncio-in-micropython)
+- [Asyncio in MicroPython](#asyncio-in-micropython)
 - [Demystifying LoRaWAN with PyCom](#demystifying-lorawan-with-pycom)
 - [Workplace Environment Sensing with Python](#workplace-environment-sensing-with-python)
 - [Automating Your Home with Python, Raspberry Pi and Homekit](#automating-your-home-with-python-raspberry-pi-and-homekit)
