@@ -211,6 +211,8 @@ Q&A
 
 > Have you often wondered where the quietest spot in the office is right now? In this talk, we explain how we built a real-time system that does just that using CircuitPython. [#](https://2018.pycon-au.org/talks/45376-workplace-environment-sensing-with-python/)
 
+{{< youtube u4rSKNX_spA >}}
+
 - Aiden Ray, works at [BVN](http://www.bvn.com.au/)
 - building awards are handed out before ppl use them - very little feedback from real users
 - the web is totally instrumented, you know exactly whats going on
@@ -252,7 +254,7 @@ Friday August 24 2018, Education Track, C3.4 & C3.5, 16:00 AEST
 
 > Eight short (10 min) talks from high school students across Australia. They’ll be talking about projects they’ve built with Python using machine learning, robotics, natural language processing, and more [#](https://2018.pycon-au.org/education-showcase)
 
-{{ < youtube QNAgPjbn0Ws >}}
+{{< youtube QNAgPjbn0Ws >}}
 
 **MENACE - building a learning matchbox machine in Python**
 
@@ -544,7 +546,7 @@ q & a:
 
 > Did you know context managers go beyond with open('myfile.txt', 'r') as f? In fact, you can even write your own! Context managers are an amazing tool for managing resources safely. They make your code look great, and they’re now easier to write than ever thanks to contextlib! Come get contextual!  [#](https://2018.pycon-au.org/talks/45062-context-managers-you-can-write-your-own/)
 
-{{< youtube tpn94V9vK4 >}}
+{{< youtube -tpn94V9vK4 >}}
 
 - Dan [git](https://github.com/banool) [web](https://dport.me/)
 - [talk slides: dport.me/pycon.pdf](https://dport.me/pycon.pdf)
@@ -839,7 +841,7 @@ Giving thanks
 
 > Audience members will be asked to go to a webpage on their phone that reads accelerometer data and transmits it to the presentation. This data will then be used to highlight the issues of collecting a processing data from distributed sensors - what happens when all the data is not received at once and not perfectly in time? what happens if there is an outage? How do you turn all this noise into something tha t can be managed? [#](https://2018.pycon-au.org/talks/45064-there-is-no-now-and-sensor-datas-the-worst/)
 
-{{< youtube KQzjA08c >}}
+{{< youtube uv-KQzjA08c >}}
 
 - Mike Leonard [twtr](https://twitter.com/mikerleonard) Reposit Power
 - presentation demo fail - was hosted on kubernets cluster. Reminder that all this clustering business is hard.
