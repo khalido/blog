@@ -11,7 +11,6 @@ My notes for the [PyConAU 2018 talks](https://2018.pycon-au.org/schedule/) I wen
 - [Lighting Macro Photographs with CircuitPython](#lighting-macro-photographs-with-circuitpython)
 - [Writing fast and efficient MicroPython](#writing-fast-and-efficient-micropython)
 - [Asyncio in (Micro)Python](#asyncio-in-micropython)
-- [Embedded applications using Python and Debian](#embedded-applications-using-python-and-debian)
 - [Demystifying LoRaWAN with PyCom](#demystifying-lorawan-with-pycom)
 - [Workplace Environment Sensing with Python](#workplace-environment-sensing-with-python)
 - [Automating Your Home with Python, Raspberry Pi and Homekit](#automating-your-home-with-python-raspberry-pi-and-homekit)
@@ -28,7 +27,6 @@ My notes for the [PyConAU 2018 talks](https://2018.pycon-au.org/schedule/) I wen
 - [Annie Parker - Techfugees](#annie-parker---techfugees)
 - [Describing Descriptors](#describing-descriptors)
 - [What is the most common street name in Australia?](#what-is-the-most-common-street-name-in-australia)
-- [End-to-end Energy Monitoring in Python](#end-to-end-energy-monitoring-in-python)
 - [Why you should care about types: How Python typing helped my team scale](#why-you-should-care-about-types-how-python-typing-helped-my-team-scale)
 - [Running Python web applications in Docker](#running-python-web-applications-in-docker)
 - [Context Managers: You Can Write Your Own!](#context-managers-you-can-write-your-own)
@@ -82,6 +80,8 @@ Q&A
 - Why not docker swarm?
   - wanted to use consul
 
+**takeaway:** genius AND way overkill. but infrastructure is hard. consider using orchestration tools.
+
 ## Lighting Macro Photographs with CircuitPython
 
 > LED lighting rigs are expensive. Worse, they have little to no controls aside from on/off. Most are not dimmable and changing colors requires the use of gels. In this talk I will discuss how CircuitPython was used in conjunction with LEDs and microcontrollers to make a custom LED photo lighting rig. [#](https://2018.pycon-au.org/talks/45177-lighting-macro-photographs-with-circuitpython/)
@@ -105,6 +105,7 @@ Q&A:
 - what can she do with this which she can’t do with a traditional flash kit?
   - led’s blink, so u need them in blink in coordination with your camera settings. this allows her to focus on a specific part of an object. traditional flashes are bigger, whole panels of lights
 
+**takeaway:** building a real tangible project is fun. Curcuit Python looks super easy to use.
 
 ## Writing fast and efficient MicroPython
 
@@ -137,6 +138,8 @@ Q&A:
 - viper mode - undocumented, being written, writes registers directly to say turn on/off leds
 - can also write inline assembler in python syntax
 - pre allocate a buffer and write to it
+
+**takeaway:** micropython can be fast. don't use globals, but everyone knows that already, so instead apply some of the tricks from above, like caching methods, and for micropython don't have too many funcs.
 
 ## Asyncio in (Micro)Python
 
@@ -189,15 +192,7 @@ Q&A
 - with asyncio, do you apprach problems differently from threads?
   - async feels more natural - you can state what you want to do. With threading you have to think a lot about synchronization and how long things will take.
 
-
-## Embedded applications using Python and Debian
-
-> Embedded boards such as Raspberry Pi and BeagleBone are programmed using Python and run on Linux Debian platform. Raspian is one of the widely used Linux platform on Raspberry Pi.The talk would be about the support provided by Python and Debian for embedded application. [#](https://2018.pycon-au.org/talks/41830-embedded-applications-using-python-and-debian/)
-
-- [Jaminy Prabaharan](https://www.linkedin.com/in/jaminy-prabaharan/) worked as an embedded engineer, was part of Google's Summer of Code
-- 95% of code for embedded systems is writter in C/C++
-- python vs c - python is very easy to use, but is slow - C runs fast but is slow to write/debug.
-- some devices can run Cpython, like RPi running Raspbian
+**takeaway:** get micropython hardware and start coding. Understand async better, it seems pretty straightforward, and on slow hardware a godsend - i.e async sending logs + async doing other stuff makes for easy real time monitering even if the machine is stuck on something..
 
 
 ## Demystifying LoRaWAN with PyCom
@@ -220,6 +215,8 @@ Q&A
 - join a LoRaWAN network by OTAA (over the air, same keys embedded in all devices) or ABP (unique keys)
 - frequencies for gateways and nodes have to be the same - something to be aware of when setting up devices
 
+**takeaway:** look at LoRo/PyCom if using wireless IOT away from wifi.
+
 ## Workplace Environment Sensing with Python
 
 > Have you often wondered where the quietest spot in the office is right now? In this talk, we explain how we built a real-time system that does just that using CircuitPython. [#](https://2018.pycon-au.org/talks/45376-workplace-environment-sensing-with-python/)
@@ -234,6 +231,7 @@ Q&A
 - Circuit Python is Adafruits fork of MicroPython, more beginner focused, doesn't have access to async, so you have a basic event loop
 - `if sys.implementation == 'circuitpython'` to check implementation
 
+**takeaway:** pervasive monitoring is creepy but its going to happen. Circuit Python is amazingly easy. Make something with it.
 
 ## Automating Your Home with Python, Raspberry Pi and Homekit
 
@@ -254,6 +252,7 @@ q & a
 - IR is unidirectional so what happens if u miss a packet?
   - every packet is single state, so contains all the info in one go. So if a packet fails, the next one doesn't rely on it. Also, leep transmitter close to the receiver so the signal is clear.
 
+**takeaway:** No Apple, hence no homekit for me.
 
 ## Education Seminar Student Showcase
 
@@ -268,6 +267,8 @@ Friday August 24 2018, Education Track, C3.4 & C3.5, 16:00 AEST
 - problems with indexing errors leading to endless loop
 - wants to use pygame or kivy to make a actual game
 
+**takeaway:** awesome.
+
 ### Optimising Memory Retention via a Machine Learning based Flashcard System built in Python
 
 > This project aims to leverage Python’s machine learning capabilities, combined with psychological theories of learning and forgetting, to construct predictive models of human memory in order to improve upon traditional flashcard systems.
@@ -279,12 +280,16 @@ Friday August 24 2018, Education Track, C3.4 & C3.5, 16:00 AEST
 - experimented on 40 students
 - started with R, but how do u deploy with R? so moved on to Python as it can both train a model and an app to serve it with
 
+**takeaway:** build my own flash cards to learn stuff with spaced repetition.
+
 ### Text Summariser
 
 > The Text Summariser is a program I built for when one is unable or unwilling to summarise information from a large block of text themselves. In my talk, I will discuss how it works, what inspired the project, and how I overcame the (many) challenges of building my program. I will also talk about computational linguistics and Natural Language Processing (NLP), two big components of how the text summariser works. After listening to this talk, you will have learnt some basic Natural Language Processing, and how you can apply it in Python Programs.
 
 - sorts words by type - verbs, nouns, etc
 - uses markov chains to summarize
+
+**takeaway:** too much cleverness going on to summarize.
 
 ### NOR: creating generated worlds on iPad
 
@@ -296,6 +301,8 @@ Friday August 24 2018, Education Track, C3.4 & C3.5, 16:00 AEST
 - used [pythonista](http://omz-software.com/pythonista/)
 - uses momemtum + inertia for players movement
 
+**takeaway:** procedural generation is awesome.
+
 ### Rule-Based Machine Translation
 
 > The Text Summariser is a program I built for when one is unable or unwilling to summarise information from a large block of text themselves. In my talk, I will discuss how it works, what inspired the project, and how I overcame the (many) challenges of building my program. I will also talk about computational linguistics and Natural Language Processing (NLP), two big components of how the text summariser works. After listening to this talk, you will have learnt some basic Natural Language Processing, and how you can apply it in Python Programs.
@@ -304,6 +311,8 @@ Friday August 24 2018, Education Track, C3.4 & C3.5, 16:00 AEST
 - four main ways to translate: rule based, example based, statistical, neural
 - Google Translate sucks at Latin translation
 - very impressive work
+
+**takeaway:** NLP for the win.
 
 ### SVG Graph Calculator
 
@@ -316,6 +325,8 @@ Friday August 24 2018, Education Track, C3.4 & C3.5, 16:00 AEST
 - had to reverse engineer SVG file
 - if looking for inspiration, just copy something
 
+**takeaway:** good basis for building a equation solver.
+
 ### Emojifer in @ school
 
 > Emojifer is an implementation of a sequence model in Machine Learning. It will analyse the meaning of a sentence and give it the appropriate emoji. Emojifier plays an important role in @ school which is a cloud-based learning management system written in React with Flask served as the server. Come along to this talk, if you want to know what’s under the hood of Emojfier and how I make it happen. Additionally, I’ll talk about some of the problems I’ve encountered so far and how I overcame it. This talk will give you an idea of how to get started in Machine Learning as well as full-stack web development if you’re new to the area.
@@ -326,6 +337,8 @@ Friday August 24 2018, Education Track, C3.4 & C3.5, 16:00 AEST
 - keras and flask
 - made his own training data
 - lessons: best way to learn is to teach, jump in head first, pair program, stack overflow is awesome
+
+**takeaway:** everyone needs a emojifier.
 
 ### PyVlov’s Dog
 
@@ -341,6 +354,8 @@ Friday August 24 2018, Education Track, C3.4 & C3.5, 16:00 AEST
 - used pymunk to handle the physics of the sim, but is only 2d, so they had to work around that
 - needed to use tkinter with pygame
 - https://pyvlov.wordpress.com/
+
+**takeaway:** interesting project to follow. The future is training your own robot to do something.
 
 ### wrap up
 
@@ -444,12 +459,6 @@ q & a:
   - know your problem
 
 **my takeaway:** a suprisingly simple question can lead to a whole lot of learning. Answer a few simple q's myself using python.
-
-## End-to-end Energy Monitoring in Python
-
-> This talk presents the development of an open-source (hardware and software) Energy Monitoring system with as much Python as possible. With the firmware written in Micropython (successfully tested on ESP8266 and ESP32 using virtually the same code), Unix port of micropython was used as the dev environment. Data collection platform using the classic Graphite Time-series database and some fun neural-network based analysis of the collected data also in Python with Keras, just to cover AI/ML buzzwords as well. [#](https://2018.pycon-au.org/talks/45073-endtoend-energy-monitoring-in-python/)
-
-- did not attend, look up talk notes/video/github
 
 ## Why you should care about types: How Python typing helped my team scale
 
@@ -734,6 +743,8 @@ with suppress(ProcessLookupError):
 - **App:** Flask to take photo and predict image
 - an important part of learning is to make something end to end. take a simple problem and make a app for it
 
+**takeaway:** this was suprisingly easy for something which sounds so complex. build my own mini app using keras and flask
+
 ## Hello to the World in 8 Web Frameworks (Micro, Batteries Included & Async)
 
 > We’ll start with the current crop of microframeworks, showing how to achieve the same task in each, before progressing to “Batteries included” and then the more specialised async frameworks. For developers who perhaps have only used a single framework or even none at all, this talk gives them an opportunity to get out and explore the world (of web frameworks) and broaden their horizons, with plenty of Jules Verne inspired fun along the way. [#](https://2018.pycon-au.org/talks/45282-hello-to-the-world-in-8-web-frameworks-micro-batteries-included-async/)
@@ -819,3 +830,13 @@ with suppress(ProcessLookupError):
 > The presentation itself will go into the details of example security vulnerabilities, explain why it’s important to fix them, and show how integrating these two tools into your process will better protect you and your software. Beginners will get an appreciation for the kinds of security problems that can occur, and an introduction to continuous integration workflows. [#](https://2018.pycon-au.org/talks/43518-watch-out-for-safety-bandits/)
 
 - Tennessee Leeuwenburg [twtr](https://twitter.com/tleeuwenburg) Head of Secure Coding at the Australian Bureau of Meteorology.
+- use python tools called [Safety](https://pyup.io/safety/) and  [Bandit](https://github.com/PyCQA/bandit)
+- tools like [CVE](https://www.cvedetails.com/) track security vulnerabilities - there are heaps all the time in commonly used packages
+- Safety tells you all the secure packages you are using using their [cli tool](https://pyup.io/safety/) or [hosted service](https://pyup.io/)
+- some security vulnerablities are just "whoops I forgot to..."
+- Bandit helps us with these problems - its a security linter which checks for common security issues in your code
+  - very handy for going through code to find code smells
+  - can put into code so it runs with CI and raises alerts
+- the tools are noisy so you have understand what to pay attention to and what to tune out
+
+**takeaway:** integrate Safety Bandits into CI.
