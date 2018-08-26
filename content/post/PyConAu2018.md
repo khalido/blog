@@ -797,7 +797,7 @@ Giving thanks
 - went to [lambdajam](https://lambdajam.yowconference.com.au/)
 - [Eugenia Cheng](http://eugeniacheng.com/) - read her books
 - Professor Frisby introduces functional programming in javascript - we are going to cover it in python
-- Functor: something that can be mapped over
+- Functor: something that can be mapped over.
 - Currying: this makes no sense. instead of a func which takes in multiple arguments you have some weird chain of funcs which take in arguments one at a time
 - Applicative functors: put a func in a box and apply to objects in other boxes
 - Either Left of Right: basically a [flipfloperator](https://pypi.org/project/flipfloperator/)
