@@ -33,17 +33,6 @@ My notes for the [PyConAU 2018 talks](https://2018.pycon-au.org/schedule/) I wen
 - [Snakes in your Games](#snakes-in-your-games)
 - [Tom Eastman on getting better](#tom-eastman-on-getting-better)
 - [Lightening talks](#lightening-talks)
-  - [Digital Earth Australia](#digital-earth-australia)
-  - [FuPy](#fupy)
-  - [flip flop operators in Ruby](#flip-flop-operators-in-ruby)
-  - [python in the classroom](#python-in-the-classroom)
-  - [DRF Model Pusher](#drf-model-pusher)
-  - [Watching water from space](#watching-water-from-space)
-  - [Captcha Cracker](#captcha-cracker)
-  - [Rockertry](#rockertry)
-  - [cyrpto money](#cyrpto-money)
-  - [Peter Lovett](#peter-lovett)
-  - [Giving thanks](#giving-thanks)
 - [Tracy Osborn: Clueless](#tracy-osborn-clueless)
 - [Guide to your own artificial intelligence application in 3 easy steps](#guide-to-your-own-artificial-intelligence-application-in-3-easy-steps)
 - [Hello to the World in 8 Web Frameworks (Micro, Batteries Included & Async)](#hello-to-the-world-in-8-web-frameworks-micro-batteries-included--async)
@@ -51,6 +40,7 @@ My notes for the [PyConAU 2018 talks](https://2018.pycon-au.org/schedule/) I wen
 - [You Don't Need That!](#you-dont-need-that)
 - [There is no "now" and sensor data's the worst](#there-is-no-%22now%22-and-sensor-datas-the-worst)
 - [Watch out for Safety Bandits!](#watch-out-for-safety-bandits)
+- [Lightening talks](#lightening-talks)
 
 ## How Python saved a rescue dog - a foster fail story
 
