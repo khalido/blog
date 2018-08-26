@@ -39,7 +39,7 @@ My notes for the [PyConAU 2018 talks](https://2018.pycon-au.org/schedule/) I wen
 
 {{< youtube EqQj5os3Mfw >}}
 
-- Andreas Moll - [twtr](https://twitter.com/SciAndreas) - Works at [ANSTO](https://www.ansto.gov.au/research/facilities/australian-synchrotron/overview) - works on scientific software in Python
+- Andreas Moll - [twtr](https://twitter.com/SciAndreas) - Works at [ANSTO](https://www.ansto.gov.au/research/facilities/australian-synchrotron/overview) on scientific software in Python
 - were fostering a dog, Willow - fostering: look after for a limited time and prepare for adoption
 - Willow was badly treated by previous owner and needed anti-anxiety medication every 8 hrs
 - 4 weeks of meds, improved Willow a lot. But then they both went back to work, and nobody had adopted Willow. So they had two issues: monitor Willow and afternoon medication
