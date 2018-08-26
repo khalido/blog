@@ -702,8 +702,22 @@ with suppress(ProcessLookupError):
 
 > What do you think of when you hear “artificial intelligence”? Perhaps self-driving cars, autonomous robots and Siri, Alexa or Google Home? But it doesn’t have to be that complex. You can build a powerful image classification model within a topic that inspires and interests you - with 3 easy steps. [#](https://2018.pycon-au.org/talks/45386-guide-to-your-own-artificial-intelligence-application-in-3-easy-steps/)
 
-*Sunday August 26 2018, C3.3, 10:30 AEST*
-
+- Norah Klintberg Sakal [ln](https://www.linkedin.com/in/norah-klintberg-sakal-5b81322a/) - data scientist doing a masters thesis at [Chan Zuckerberg Biohub](https://www.czbiohub.org/)
+- [talk github, includes code](https://github.com/norahsakal/pyconau-2018-shades)
+- ususally when u think of AI or DL u think of self driving cars, Alexa, cancer diagnosis
+- but we can apply things to day to day problems
+- Idea - Data - Training
+- wanted to look at makeup tutorials, too many on the internet, so how do you know which one of the 30M videos is relevant ($400B industry)
+- **Idea:** use deep learning to answer this
+- **Data:** looked at videos, eye shapes jumped out - there are 4 distinct shapes
+  - created dataset by looking at celeb images and cropping out eye shapes - 200 training, 100 validation
+- **Train:** used transfer learning - pretrained weights from Imagenet (architecture VGG16)
+  - there are a lot of models to choose from, used VGG-16 since its fairly simple to understand and easy to play around with
+  - locked all the conv layers since they already knew how to understand images
+  - using keras to grab VGG16 minus the top layer
+  - got 93% accuracy
+- **App:** Flask to take photo and predict image
+- an important part of learning is to make something end to end. take a simple problem and make a app for it
 
 ## Hello to the World in 8 Web Frameworks (Micro, Batteries Included & Async)
 
