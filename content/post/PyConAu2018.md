@@ -389,7 +389,7 @@ Saturday talks
 
 > Descriptors are a little known feature of Python. They provide a way for a programmer to customize the storage and retrieval of different instance variables. In this talk, you will learn about the descriptor protocol, what it can be used for, and how to implement a descriptor. [#](https://2018.pycon-au.org/talks/42582-describing-descriptors/)
 
-{{< youyube lmcgtUw5djw >}}
+{{< youtube lmcgtUw5djw >}}
 
 - Matthew Egan [web](https://mattjegan.com/) [twtr](https://twitter.com/NullMatthew)
 - why descriptors? often overlooked, used primarily by library developers
