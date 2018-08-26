@@ -894,6 +894,16 @@ Flip Flip Face Offerator
 
  - a flipfloperator faceoff
 
+Micropython.. Jupyter.. Live
+
+- micropython is re-inventing embedded development
+- but theres no debugging in micropython
+- can talk to micropython from jupyter, use interactive widgets
+- look up jupyter-micropyton-remote - very impressive
+
+Nick - core CPython dev
+
+- talk about Peps which introduced now accepted features
 
 
 
