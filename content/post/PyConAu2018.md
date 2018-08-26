@@ -368,6 +368,8 @@ Saturday talks
 - most refugees have good knowledge of tech, smart phones
 - 50% of business in Australia have been started by a refugee or a migrant
 
+**my takeaway:** this is awesome, go to their hackathon in Nov. Don't need ninja skills, a lot is just about knowing what is out there in the tech space which can help.
+
 ## Describing Descriptors
 
 > Descriptors are a little known feature of Python. They provide a way for a programmer to customize the storage and retrieval of different instance variables. In this talk, you will learn about the descriptor protocol, what it can be used for, and how to implement a descriptor. [#](https://2018.pycon-au.org/talks/42582-describing-descriptors/)
@@ -405,7 +407,8 @@ q & a:
   - delete it off the class itself
 - what happens if you pickle an object with a descriptor?
   - pickle is unsecure so don't use it
--
+
+**my takeaway:** descriptors are useful, can apply across classes, so makes for better code
 
 ## What is the most common street name in Australia?
 
@@ -437,6 +440,8 @@ q & a:
   - check your biases
   - constant vigilant - test, draw stuff (she plotted streets on a map)
   - know your problem
+
+**my takeaway:** a suprisingly simple question can lead to a whole lot of learning. Answer a few simple q's myself using python.
 
 ## End-to-end Energy Monitoring in Python
 
@@ -485,7 +490,8 @@ q & a:
   - say you have a class, but you want to pass in a superclass - that will fail. use Protocol from typing_extensions
   - typeshed
   - type: ignore - silence typing error on a statement
-- summary: types are pythonic, more readable, safer. use gradual typing!
+
+**my takeaway:** types are pythonic, more readable, safer. use gradual typing and go all in!
 
 ## Running Python web applications in Docker
 
@@ -515,7 +521,7 @@ q & a:
 - process monitoring like supervisord
   - say u have a webapp image, a celery image, the supervisord runs those images. you would rarely run supervisord inside a docker container
 
-Docker is convuluted. I wish the world would just rather clean up linux so we can go back to running things directly instead of having to faff around with docker containers.
+**my takeaway:** Docker is convuluted. I wish the world would just rather clean up linux so we can go back to running things directly instead of having to faff around with docker containers.
 
 ## Context Managers: You Can Write Your Own!
 
@@ -545,6 +551,8 @@ with suppress(ProcessLookupError):
 - scope - variables defined inside context managers still exist after its closed
 - context managers can deal with exceptions, can use suppress
 
+**my takeaway:** use more decorators and context managers
+
 ## Snakes in your Games
 
 > When thinking about where to start with python and games, the first thing that might come to mind is pygame. However, python has been used in many well known commercial games titles and can be used in many different ways throughout the game development process. This talk will examine a range of game titles, genres and platforms, from AAA to Indie, to show how python is being used in each; discussing the strength and weaknesses of using python, how it has been done, and how it might be in the future.
@@ -557,7 +565,7 @@ with suppress(ProcessLookupError):
 - python is used a lot for automation inside games
 - post release: for some big titles python is used to make addons
 
-
+**my takeaway:** there is a lot of python out there.
 
 ## Tom Eastman on getting better
 
@@ -589,6 +597,8 @@ with suppress(ProcessLookupError):
 - takeaways:
   - effort of learning isn't comfy - if feeling comfortable learning its a warning sign
   - don't feel bad about being bad at something
+
+**my takeaway:** think you can do it, and learn by doing. don't get comfy and don't feel bad about sucking at something.
 
 ## Lightening talks
 
@@ -698,6 +708,9 @@ with suppress(ProcessLookupError):
 - are paperback books worth it?
 - easypost - api's for shipping
 
+**my takeaway:** pick a simple project and just do it.
+
+
 ## Guide to your own artificial intelligence application in 3 easy steps
 
 > What do you think of when you hear “artificial intelligence”? Perhaps self-driving cars, autonomous robots and Siri, Alexa or Google Home? But it doesn’t have to be that complex. You can build a powerful image classification model within a topic that inspires and interests you - with 3 easy steps. [#](https://2018.pycon-au.org/talks/45386-guide-to-your-own-artificial-intelligence-application-in-3-easy-steps/)
@@ -725,26 +738,73 @@ with suppress(ProcessLookupError):
 
 - Aaron Bassett [twtr](https://twitter.com/aaronbassett) dev advocate at Nexmo - an api company for telephony
 - task: return a json string
-- [Flask] - uses functional based views (does support class views too)
-- [cherrypy] - uses class based views
-- [falcon] - api first framework, designed to do json based microservices and be really fast 5x faster than flask, 10x django
-- [hug] - make development driven python apis as simple as possible - uses falcon under the hood, just adds a simplified interface to falcon.
+- [Flask](http://flask.pocoo.org/) - uses functional based views (does support class views too)
+- [cherrypy](https://cherrypy.org/) - uses class based views
+- [falcon](https://falconframework.org/) - api first framework, designed to do json based microservices and be really fast 5x faster than flask, 10x django
+- [hug](http://www.hug.rest/) - make development driven python apis as simple as possible - uses falcon under the hood, just adds a simplified interface to falcon.
 - microframeworks make it very easy to do something simple, you also have the freedom to change things or bolt on whatever bits you want.
 - but with great power comes great responsibility - you start with great intentions and end up building a monolithic app
 - in real world situations your fantastic ORM isn't going to be usable by other ppl or well documented
 - [Django](https://www.djangoproject.com) in the real world, every other project is essentially structured the same. which leads us to django, which is batteries included.
   - but its somewhat complex - basic project has a bunch of stuff, and for a basic api you end up with multiple files to deal with
   - prefers class based views, though some controversy there
-- [Pyramid] - start small - for basic stuff not much code, finish big - includes batteries if needed
-- [Tornado] - async framework, pretty small code
-- [Sanic] - flask like async, but can't recommend it at the moment. prone to crashes and vulnerabilities
-- ignore differences in syntax - whats important is documentation, bug/issue tracker activity, release management, community
+- [Pyramid](https://trypyramid.com/) - start small - for basic stuff not much code, finish big - includes batteries if needed
+- [Tornado](http://www.tornadoweb.org/en/stable/) - async framework, pretty small code
+- [Sanic](https://sanic.readthedocs.io/en/latest/) - flask like async, but can't recommend it at the moment. prone to crashes and vulnerabilities
+
+**my takeaway:** use any, ignore differences in syntax - whats important is documentation, bug/issue tracker activity, release management, community, and of course the scope of the project and the number of "batteries" you need. Don't end up rebuilding a bastardized undocumented django on top of a microframework, just use django if thats where you're headed.
+
+## Functional Programming demystified
+
+> Have you ever eavesdropped on FP developers talking about programming and wondered which planet you landed on? I attended LambdaJam 2018 and felt your pain! Let’s demystify Either, Semigroups, Monoids, Functors, Monads, Traversable, Natural transformations etc. by implementing them in Python. [#](https://2018.pycon-au.org/talks/45075-fp-demystified/)
+
+- Eugene Van den Bulke [twtr](https://twitter.com/3KWA)
+- went to lambdajam, two takeaways:
+  - [Eugenia Cheng](http://eugeniacheng.com/) - read her books
+- Professor Frisby introduces functional programming in javascript - we are going to cover it in python
+- Functor: something that can be mapped over
+- Currying: this makes no sense. instead of a func which takes in multiple arguments you have some weird chain of funcs which take in arguments one at a time
+- Applicative functors: put a func in a box and apply to objects in other boxes
+- Either Left of Right: basically a [flipfloperator](https://pypi.org/project/flipfloperator/)
+- Monoid - ok now things are getting into the deep end
+
+**my takeaway:** functional programming is interesting but deeply unpythonic. don't use unless there is a clear need to.
+
 
 ## You Don't Need That!
 
 > Not every design pattern makes sense in Python. This talk builds up design patterns commonly used in enterprise languages, and shows the features in Python that make these approaches unnecessary. [#]((https://2018.pycon-au.org/talks/45184-you-dont-need-that/))
 
-*Sunday August 26 2018, C3.4 & C3.5, 13:30 AEST*
+- Christopher Neugebauer [twtr](https://twitter.com/chrisjrn) [web](https://chris.neugebauer.id.au/) works at AlpaSigts, Director of PSF
+- Deisign Patterns let you express ideas that are hard to express... in a familiar way
+  - most patterns are object oriented ones from the mid 90's, back when C and Java were the hot languages
+- so how would design patterns be done pythonically?
+- the simplest design pattern is a Singleton
+- **Singleton:** a class that can only be constructed once
+  - can use `del` to delete class definition after having called it once to make sure it never gets called again
+- but why do we want a singleton? what do we want to achieve?
+- back in the good old days Java needed singletons for namespaces, but python already has pretty good namespace seperation
+- python can achieve this by using modules - so instead of classes we can have modules to hold data. Python makes sure you always get the same object regardless of how many times we import it.
+- Modules are objects, so we don't need Singletons
+- Dependency infection: provide dependecies to classes as constructor arguments (useful for unit testing)
+- Mocks - pretend version of functions, most lanugages have mocking frameworks
+- Unit Testing - `unittest.mock` has a patch function, so we don't need to write our own mock funcs
+- Iterators - python provides `for` loops to consume iterators. But what are we trying to achieve? use `yield` to write generators for your own iterators
+- perform a common operation on a collection - python does this natively with `for item in Class`
+- python doesn't need Visitors becuase generators
+- there are some design patterns which do make sense in python
+- **Factories** - used all through the python library
+- book on useful patterns in python: [python-patterns.guide](http://python-patterns.guide/)
+
+**takeaway:** a lot of design patterns exist becuase they were needed in some language or other. (java, shudder). Use python's pythonic features, don't reach for older patterns unless its truly a good idea.
+
+## There is no "now" and sensor data's the worst
+
+> Audience members will be asked to go to a webpage on their phone that reads accelerometer data and transmits it to the presentation. This data will then be used to highlight the issues of collecting a processing data from distributed sensors - what happens when all the data is not received at once and not perfectly in time? what happens if there is an outage? How do you turn all this noise into something tha t can be managed? [#](https://2018.pycon-au.org/talks/45064-there-is-no-now-and-sensor-datas-the-worst/)
+
+- Mike Leonard [twtr](https://twitter.com/mikerleonard) Reposit Power
+-
+
 
 ## How To Publish A Package On PyPI
 
