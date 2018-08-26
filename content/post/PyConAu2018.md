@@ -613,20 +613,20 @@ with suppress(ProcessLookupError):
 
 ## Lightening talks
 
-### Digital Earth Australia
+Digital Earth Australia
 
 - archive of Australia's space/earth/ocean data
 - they try and figure out how to display things to see changes over time, showed impressive animationg of pictures alongside a graph of flow changing over time
 - code is all open source: [GeoscienceAustralia github](https://github.com/GeoscienceAustralia)
 
-### FuPy
+FuPy
 
 - [web](fupy.github.com)
 - hardware is hard, FPGA makes hardware into software, making it easier to fix bugs
 - FPGA generally don't support python, but along came Migen and Misoc and LiteX which support python by putting a cpu in the FPGA
 - FuPy project is to run MicroPython on FPGA
 
-### flip flop operators in Ruby
+flip flop operators in Ruby
 
 - @merxplat
 - flips b/w two statements
@@ -634,18 +634,18 @@ with suppress(ProcessLookupError):
 - being removed from ruby, no one uses it
 - looks pretty handy and terse to me!
 
-### python in the classroom
+python in the classroom
 
 - math teacher who now teaches python to kids in a low income area
 - coding keeps kids engaged
 - they use [grok learning](https://groklearning.com/)
 
-### DRF Model Pusher
+DRF Model Pusher
 
 - sends realtime updates using Pusher over websockets
 - django stuff
 
-### Watching water from space
+Watching water from space
 
 - [Claire](https://twitter.com/claire_science), climate scientist at Geoscience Australia
 - works with agricultural data from space
@@ -655,14 +655,14 @@ with suppress(ProcessLookupError):
   - they build a flagging system to alert for drainage
 - working to improve this and pass it to stake holders
 
-### Captcha Cracker
+Captcha Cracker
 
 - yr 12 student
 - we have so much info to learn from, but programs have very limited info
 - writing a program that uses the SIFT Algorithm to get through a ReCaptcha
 - [see their website](https://captchacracker.wordpress.com/)
 
-### Rockertry
+Rockertry
 
 - MEMS is making things a lot cheaper
 - used MEMS sensors with ESP32 to make lots of telemetry modules
@@ -670,21 +670,21 @@ with suppress(ProcessLookupError):
 - look up MQTT
 - the feeling of something actually happening is awesome
 
-### cyrpto money
+cyrpto money
 
 - bitcoin uses tons of electricity
 - theft
 - ethereum contracts cause software
 - great overview of cycrptocurrencies
 
-### Peter Lovett
+Peter Lovett
 
 - teaches Python
 - python is readable, everyone loves it for that
 - pep505
 - python needs to grow, but we don't want to loose sight of what we have
 
-### Giving thanks
+Giving thanks
 
 - project to fund the packages you use: [phildini/thanks](https://github.com/phildini/thanks)
 
@@ -840,3 +840,60 @@ with suppress(ProcessLookupError):
 - the tools are noisy so you have understand what to pay attention to and what to tune out
 
 **takeaway:** integrate Safety Bandits into CI.
+
+## Lightening talks
+
+chunks() the story of a generator
+
+- break an iterable into chunks of n - lots of implementations from stackoverflow
+- `itertools.islice` slices iterators but returns an emptry iterator if gets an empty iterator
+- code at [gist.github.com/timheap](https://gist.github.com/timheap/4e283fea7143e64852dcc09b14a183f7)
+
+PyCon Anthology
+
+- write a short story, art, poetry, pg-13, deadline Sep 1
+- [submit through github](https://github.com/oboechick/pyfanfic)
+
+Tracking trucks in Africa
+
+- [Lori Systems](https://www.lorisystems.com/)
+- tracks trucks, but how to do it best? truckers in Africa don't have reliable phones, handing out phones didn't really work
+- Traccar - java based IOT gps tracking system for trucks
+- Zappa is an alternative to celery
+
+Software release reports with Python Sphinx & Jira
+
+- Cochlear, heavily regulated, need a software release report: bugs fixed, improvements, known bugs
+- used MS Word, so time to automate. Data in Jira, which has a python interface.
+- python script gets info from Jira
+
+why text encoding
+
+- we need to encode text - so whats text encoding
+
+phy py physics
+
+- @cormacKikert
+- A 3D physics sandbox game built using pygame
+- cool demo - [code on github]9https://github.com/cormackikkert/Py-PHY)
+
+Python Bugs
+
+- first lightening talk
+
+Bad code
+
+- examples of over engineered code
+
+Goto
+
+- in yr10! doing a arduino assigment
+- missed goto, wrote his own in python
+
+Flip Flip Face Offerator
+
+ - a flipfloperator faceoff
+
+
+
+

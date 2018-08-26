@@ -186,9 +186,12 @@ Plug 'junegunn/goyo.vim'
 " for python auto completion: https://github.com/davidhalter/jedi-vim
 Plug 'davidhalter/jedi-vim'
 
-
 " Initialize plugin system
 call plug#end()
+
+" don't break mid word
+set linebreak
+
 ```
 
-run `:PlugInstall` in vim to install plugs
+run `:PlugInstall` in vim to install plugs (if needed).
