@@ -69,7 +69,7 @@ Q&A
 
 > LED lighting rigs are expensive. Worse, they have little to no controls aside from on/off. Most are not dimmable and changing colors requires the use of gels. In this talk I will discuss how CircuitPython was used in conjunction with LEDs and microcontrollers to make a custom LED photo lighting rig. [#](https://2018.pycon-au.org/talks/45177-lighting-macro-photographs-with-circuitpython/)
 
-{{< youtube JAgCZ70Q3sg >}
+{{< youtube JAgCZ70Q3sg >}}
 
 - Stacey Morse - [geekgirlbeta](https://twitter.com/geekgirlbeta), [web](https://geekgirlbeta.wordpress.com/) is an artist who also does macro photography, web dev in python
 - art is awesome, but led lights are very expensive and crap. the intersection b/w art and tech: both are very process drivenl
@@ -140,7 +140,7 @@ Q&A:
   - provides cooperative multitasking
   - concurrency isn't parallelism
 - a lot of async funcs is similar - just needs `async def func` and `await` where are are awaiting stuff.
-- coroutines (tasks) --><-- event loop --><--- blocking operatoins (network access, sleep, database queries)
+- `coroutines (tasks) --><-- event loop --><--- blocking operations` (network access, sleep, database queries)
 - what about threads? wasn't this a solved problem? threads provid pre-emptive multi-tasking, but they get complex, are heavy (each thread needs its own stack) and hesienbergs
 - Coroutines are better cause:
   - minimal overhead, high performance
