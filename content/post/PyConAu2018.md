@@ -122,7 +122,7 @@ Q&A:
 
 **takeaway:** micropython can be fast. don't use globals, but everyone knows that already, so instead apply some of the tricks from above, like caching methods, and for micropython don't have too many funcs.
 
-## Asyncio in (Micro)Python
+## Asyncio in MicroPython
 
 > Asyncio provides a way to achieve concurrency in a relatively simplistic fashion. However, first-time users still struggle with the concepts so let’s sort them out! Then we’ll see why it’s especially useful in an embedded environment.[#](https://2018.pycon-au.org/talks/45338-asyncio-in-micropython/)
 
