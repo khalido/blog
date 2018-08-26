@@ -723,8 +723,22 @@ with suppress(ProcessLookupError):
 
 > We’ll start with the current crop of microframeworks, showing how to achieve the same task in each, before progressing to “Batteries included” and then the more specialised async frameworks. For developers who perhaps have only used a single framework or even none at all, this talk gives them an opportunity to get out and explore the world (of web frameworks) and broaden their horizons, with plenty of Jules Verne inspired fun along the way. [#](https://2018.pycon-au.org/talks/45282-hello-to-the-world-in-8-web-frameworks-micro-batteries-included-async/)
 
-*Sunday August 26 2018, C3.4 & C3.5, 11:10 AEST*
-
+- Aaron Bassett [twtr](https://twitter.com/aaronbassett) dev advocate at Nexmo - an api company for telephony
+- task: return a json string
+- [Flask] - uses functional based views (does support class views too)
+- [cherrypy] - uses class based views
+- [falcon] - api first framework, designed to do json based microservices and be really fast 5x faster than flask, 10x django
+- [hug] - make development driven python apis as simple as possible - uses falcon under the hood, just adds a simplified interface to falcon.
+- microframeworks make it very easy to do something simple, you also have the freedom to change things or bolt on whatever bits you want.
+- but with great power comes great responsibility - you start with great intentions and end up building a monolithic app
+- in real world situations your fantastic ORM isn't going to be usable by other ppl or well documented
+- [Django](https://www.djangoproject.com) in the real world, every other project is essentially structured the same. which leads us to django, which is batteries included.
+  - but its somewhat complex - basic project has a bunch of stuff, and for a basic api you end up with multiple files to deal with
+  - prefers class based views, though some controversy there
+- [Pyramid] - start small - for basic stuff not much code, finish big - includes batteries if needed
+- [Tornado] - async framework, pretty small code
+- [Sanic] - flask like async, but can't recommend it at the moment. prone to crashes and vulnerabilities
+- ignore differences in syntax - whats important is documentation, bug/issue tracker activity, release management, community
 
 ## You Don't Need That!
 
