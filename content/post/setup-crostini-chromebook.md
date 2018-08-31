@@ -12,6 +12,7 @@ Most of these tips are from the [reddit crostini wiki](https://www.reddit.com/r/
 - [add backports to apt install recent packages](#add-backports-to-apt-install-recent-packages)
   - [updating debian to testing](#updating-debian-to-testing)
 - [install anaconda for a better python](#install-anaconda-for-a-better-python)
+  - [jupyter lab](#jupyter-lab)
   - [vs code](#vs-code)
 - [edit markdown](#edit-markdown)
 - [make the terminal nicer to use](#make-the-terminal-nicer-to-use)
@@ -19,6 +20,7 @@ Most of these tips are from the [reddit crostini wiki](https://www.reddit.com/r/
   - [multiplex all the things](#multiplex-all-the-things)
   - [jazz up the shell](#jazz-up-the-shell)
   - [setup vim proper like](#setup-vim-proper-like)
+- [Download all my git repos](#download-all-my-git-repos)
 
 ## add backports to apt install recent packages
 
@@ -99,7 +101,7 @@ sudo apt install ./vscode.deb
 
 vs code can handle markdown nicely, but I found it a bit slow after adding markdown plugins. Caret is nicer for markdown, vs code is better for coding:
 
-[caret](http://caret.io/) is my fav markdown editor. install it by downloading the [latest beta release .deb](https://github.com/careteditor/releases-beta/releases) and:
+[caret](http://caret.io/) is a great markdown editor. install it by downloading the [latest beta release .deb](https://github.com/careteditor/releases-beta/releases) and:
 
 `sudo apt install ./caret-beta.deb`
 
@@ -156,7 +158,14 @@ unbind %
 
 ### jazz up the shell
 
-rumour has it that crostini can have a heart attack if you change the shell, so stick with bash. Consider [oh-my-bash](https://github.com/ohmybash/oh-my-bash) or [bash-it](https://github.com/ohmybash/oh-my-bash) for hacker level coding
+rumour has it that crostini can have a heart attack if you change the shell, so stick with bash. Consider [oh-my-bash](https://github.com/ohmybash/oh-my-bash) or [bash-it](https://github.com/ohmybash/oh-my-bash) for hacker level coding.
+
+also install [powerline-fonts](https://github.com/powerline/fonts) and select a powerline font for the terminal. 
+
+`sudo apt -t stretch-backports install fonts-powerline`
+
+Useful shell tools: tldr bat
+
 
 ### setup vim proper like
 
@@ -195,3 +204,11 @@ set linebreak
 ```
 
 run `:PlugInstall` in vim to install plugs (if needed).
+
+## Download all my git repos
+
+This command will grab json output of the first (or last) 200 repos in my github and git clone them all one by one into the directory this command was run.
+
+```bash
+curl -s https://api.github.com/users/khalido/repos?per_page=200 | grep \"clone_url\" | awk '{print $2}' | sed -e 's/"//g' -e 's/,//g' | xargs -n1 git clone
+```
