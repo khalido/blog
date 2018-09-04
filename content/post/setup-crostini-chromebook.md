@@ -90,20 +90,39 @@ todo: try out [nteract](https://nteract.io/) - a react based desktop front end f
 
 ### vs code
 
-edit all the things by [installing vs code](https://www.reddit.com/r/Crostini/wiki/howto/install-vscode):
+Anaconda can automatically install VS Code, but to [install it directly](https://www.reddit.com/r/Crostini/wiki/howto/install-vscode):
 
-```
+```bash
 curl -L https://go.microsoft.com/fwlink/?LinkID=760868 > vscode.deb
 sudo apt install ./vscode.deb
 ```
+Useful plugins:
 
+- [Markdown All in One](https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one)
+- [Python](https://marketplace.visualstudio.com/items?itemName=ms-python.python)
+
+Also consider:
+
+- [Visual Studio IntelliCode](https://marketplace.visualstudio.com/items?itemName=VisualStudioExptTeam.vscodeintellicode)
 ## edit markdown
 
-vs code can handle markdown nicely, but I found it a bit slow after adding markdown plugins. Caret is nicer for markdown, vs code is better for coding:
+vs code can handle markdown nicely, but I found it a bit slow on Crostini. I prefer [Typora.io](https://typora.io/) or [Caret.io](http://caret.io/) for markdown and vs code is for coding.
 
-[caret](http://caret.io/) is a great markdown editor. install it by downloading the [latest beta release .deb](https://github.com/careteditor/releases-beta/releases) and:
+Install Caret by downloading the [latest beta release .deb](https://github.com/careteditor/releases-beta/releases) and:
 
 `sudo apt install ./caret-beta.deb`
+
+Install Typora - haven't tested this out, especially adding repo. Apparently you have to `sudo apt install software-properties-common` first before adding a repo.
+
+
+```bash
+# add Typora's repository
+sudo add-apt-repository 'deb https://typora.io/linux ./'
+sudo apt update
+
+# install typora
+sudo apt install typora
+```
 
 ## make the terminal nicer to use
 
@@ -120,7 +139,7 @@ First up, the terminal gobbles up some of my fav chromeos shortcuts, namely:
 
 fix this by pressing `ctrl-shift-p` inside terminal, then scroll down to keyboard preferences and enter
 
-```
+```bash
 {
   "Alt-187": "PASS",
   "Alt-189": "PASS",
@@ -145,15 +164,9 @@ start tmux by typing `tmux`, then press `ctrl+b` to enter command mode. `"` spli
 
 For more customizatoin, make a `.tmux.conf` in the home directory and add:
 
-```
+```bash
 # Enable mouse mode (tmux 2.1 and above)
 set -g mouse on
-
-# split panes using | and -
-bind | split-window -h
-bind - split-window -v
-unbind '"'
-unbind %
 ```
 
 ### jazz up the shell
