@@ -9,12 +9,13 @@ ChromeOS supports a built in Linux - running inside a container running insde a 
 
 Most of these tips are from the [reddit crostini wiki](https://www.reddit.com/r/Crostini/wiki/index), I've put all the ones I'm using in one page for a handy reference.
 
-- [add backports to apt install recent packages](#add-backports-to-apt-install-recent-packages)
+- [Install all the apps](#install-all-the-apps)
+  - [add backports to apt install recent packages](#add-backports-to-apt-install-recent-packages)
   - [updating debian to testing](#updating-debian-to-testing)
+  - [vs code](#vs-code)
+  - [markdown app](#markdown-app)
 - [install anaconda for a better python](#install-anaconda-for-a-better-python)
   - [jupyter lab](#jupyter-lab)
-  - [vs code](#vs-code)
-- [edit markdown](#edit-markdown)
 - [make the terminal nicer to use](#make-the-terminal-nicer-to-use)
   - [fix window shortcuts](#fix-window-shortcuts)
   - [multiplex all the things](#multiplex-all-the-things)
@@ -22,7 +23,9 @@ Most of these tips are from the [reddit crostini wiki](https://www.reddit.com/r/
   - [setup vim proper like](#setup-vim-proper-like)
 - [Download all my git repos](#download-all-my-git-repos)
 
-## add backports to apt install recent packages
+## Install all the apps
+
+### add backports to apt install recent packages
 
 Now, there are many ways to do this, but the easiest and nicest is to sudo apt all-the-things. But, this is Google, so not only do you have to do this insided a container in a virtual machine inside some some weird linux/chrome melting pot, you get old software. so first up, update the container itself:
 
@@ -50,6 +53,41 @@ change `sources.list` so it reads (comment out any other lines by putting # at t
 `deb http://deb.debian.org/debian stretch testing contrib non-free`
 
 Update the information from the new repos and then upgrade: `sudo apt update && sudo apt upgrade`
+
+### vs code
+
+Anaconda can automatically install VS Code, but to [install it directly](https://www.reddit.com/r/Crostini/wiki/howto/install-vscode):
+
+```bash
+curl -L https://go.microsoft.com/fwlink/?LinkID=760868 > vscode.deb
+sudo apt install ./vscode.deb
+```
+Useful plugins:
+
+- [Markdown All in One](https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one)
+- [Python](https://marketplace.visualstudio.com/items?itemName=ms-python.python)
+
+### markdown app
+
+ Currently I'm using [Caret](http://thomaswilburn.net/caret/) - a chromeos text editor app which runs lightening fast.
+
+vs code can handle markdown nicely, but I find it too slow on Crostini. I prefer [Typora.io](https://typora.io/) or [Caret.io](http://caret.io/) for markdown and vs code is for coding. BUT all these apps are based on electron, and currently run slow on Crostini, and will continue being slow until Crostini gets GPU accleration.
+
+Install Caret by downloading the [latest beta release .deb](https://github.com/careteditor/releases-beta/releases) and:
+
+`sudo apt install ./caret-beta.deb`
+
+Install Typora - haven't tested this out, especially adding repo. Apparently you have to `sudo apt install software-properties-common` first before adding a repo.
+
+
+```bash
+# add Typora's repository
+sudo add-apt-repository 'deb https://typora.io/linux ./'
+sudo apt update
+
+# install typora
+sudo apt install typora
+```
 
 ## install anaconda for a better python
 
@@ -88,41 +126,6 @@ useful jupyter extensions:
 
 todo: try out [nteract](https://nteract.io/) - a react based desktop front end for jupyter.
 
-### vs code
-
-Anaconda can automatically install VS Code, but to [install it directly](https://www.reddit.com/r/Crostini/wiki/howto/install-vscode):
-
-```bash
-curl -L https://go.microsoft.com/fwlink/?LinkID=760868 > vscode.deb
-sudo apt install ./vscode.deb
-```
-Useful plugins:
-
-- [Markdown All in One](https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one)
-- [Python](https://marketplace.visualstudio.com/items?itemName=ms-python.python)
-
-Also consider:
-
-- [Visual Studio IntelliCode](https://marketplace.visualstudio.com/items?itemName=VisualStudioExptTeam.vscodeintellicode)
-## edit markdown
-
-vs code can handle markdown nicely, but I found it a bit slow on Crostini. I prefer [Typora.io](https://typora.io/) or [Caret.io](http://caret.io/) for markdown and vs code is for coding.
-
-Install Caret by downloading the [latest beta release .deb](https://github.com/careteditor/releases-beta/releases) and:
-
-`sudo apt install ./caret-beta.deb`
-
-Install Typora - haven't tested this out, especially adding repo. Apparently you have to `sudo apt install software-properties-common` first before adding a repo.
-
-
-```bash
-# add Typora's repository
-sudo add-apt-repository 'deb https://typora.io/linux ./'
-sudo apt update
-
-# install typora
-sudo apt install typora
-```
 
 ## make the terminal nicer to use
 
@@ -177,7 +180,12 @@ also install [powerline-fonts](https://github.com/powerline/fonts) and select a 
 
 `sudo apt -t stretch-backports install fonts-powerline`
 
-Useful shell tools: tldr bat
+Useful shell tools: 
+
+[tldr](https://github.com/tldr-pages/tldr-python-client) shows a short and useful help page for commands, e.g type `tldr curl` to get a synopsis of how to use curl. 
+`pip install tldr` on chromeos.
+
+[bat](https://github.com/sharkdp/bat) a replacement for cat, displays files with syntax highlighting in the terminal. Right now as rendering problems in crostini, but hopefully will improve. Install by downloading the .deb and `sudo apt install ./bat_file.deb`.
 
 
 ### setup vim proper like
