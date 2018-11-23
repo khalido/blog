@@ -1,6 +1,6 @@
 ---
 title: "Techfugees Sydney Hackathon 2018"
-date: 2018-11-24
+date: 2018-11-23
 tags:
 - hackathon
 ---
