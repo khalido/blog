@@ -110,10 +110,85 @@ More advanced:
 - Google Sheets - API
 - https://airtable.com - database backend
 - consider using rasa stack for the chatbot - its an opensource AI bot framework which makes it easy to customize & plugin other services like translation, answers, wikipedia, everything
--
+- [flask-restplus](https://flask-restplus.readthedocs.io/en/stable/quickstart.html) - build apis using flask
 
 ## look at
 
 - https://refugeetalent.com/ - conencting refugees to jobs
 - onestepapp - connects ppl for walks
-- artwork
+- [donotpay bots](https://motherboard.vice.com/en_us/article/bj43y8/donotpay-app-lets-you-sue-anyone-by-pressing-a-button)
+
+# Pitches
+
+## the belong program
+
+- supplement existing migrant programs
+- provide confidence to refugees
+- connects refugees to others, volunteers
+- judges loved it, special mention
+
+## help migrant children integrate in schools
+
+- refugee children drop out of school at 5x
+- build profiles for kids so teachers can understand them better and how to help in class
+- provide customized lesson plans for refugees
+- cultural context, sourced from multiple ngo's
+- optional: migrant's personal story
+
+## firstpath
+
+- school is tough for new migrants - simple things like selecting subjects is impossible
+- don't know where to get help, end up choosing the wrong subjects for them, lots of regret
+- solution: provide user friendly content, scrape in real time from sources
+- make content for younger kids, not enough help content
+- first prize winners
+
+## Amplify/Unify techfugees website & outreach
+
+- fixing/updating techfugees website and social presence
+- unify all their challanges
+- much needed work which needed to happen
+
+## recruit refugees from where they are
+
+- works with partner companies to find refugees
+- recruit refugees remotely
+- six visas lodged, couple in the pipeline
+
+## sheila caceres
+
+- http://sheilacaceres.com
+- teach language immersively by using AR glasses to project names on objects
+- objects are labelled in your language, you can hear too
+
+## young h4ck3rs
+
+- pair ppl with relevant others using a chatbot
+- help refugees connect, build community
+- #findmyself
+- third place
+
+## elavate
+
+- match migrants to internships, opportunities
+- database of opportnities, tailors to ppl, translates to their language
+- already got one refugee an internship in the field she wanted - IT
+- uses a website which asks questions to narrow down the universe of internships/jobs, and presents a list along with adivce videos tailored to help apply for that kind of job
+- second place
+
+# wrapup
+
+- its not about winning hackathons, its the long term effort. refugeetalent didn't win their hackathon, but was the most successful outcome from all the hackathons
+- 3 yrs ago, [onestepapp](https://twitter.com/onestepapp) won third prize, but went on to setup an actual thing, came back to a meetup to present, still going on
+- meetup in three months
+- techfugees encourages hackathoners to think of themselves as part of their community and keep doing stuff
+- thanks to all the sponsors:
+  - Settlement Services Australia
+  - STARTTS
+  - Academy XI
+  - Devpost
+  - Microsoft for Startups
+  - Chief Disrupter
+  - Spark Festival
+  - Blacktown Venue
+
