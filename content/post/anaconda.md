@@ -28,20 +28,19 @@ So here we create a new environment which will use Python 3.7x and pip.
 
 Use this environment:
 
-`source activate python37`
-
+`conda activate python37`
 
 And a few basic commands:
 
 - `conda list` - shows all packages installed in the active env
-- 
+
+Shows all conda envs:
 
 `conda env list`
 
 Delete an environment:
 
-`conda env remove -n python37`
-
+`conda env remove -n python37 --all`
 
 ### Write the packages in use to disk:
 
