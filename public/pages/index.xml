@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Pages on looking at numbers</title>
+    <link>http://khalido.com/pages/</link>
+    <description>Recent content in Pages on looking at numbers</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Wed, 11 Jul 2018 05:23:13 +0000</lastBuildDate>
+    
+	<atom:link href="http://khalido.com/pages/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>About</title>
+      <link>http://khalido.com/pages/about/</link>
+      <pubDate>Wed, 11 Jul 2018 05:23:13 +0000</pubDate>
+      
+      <guid>http://khalido.com/pages/about/</guid>
+      <description>Hi, I&amp;rsquo;m Khalid, data scientist in the making.
+After my MBA, I worked in investment analysis for a time, which led me to work with humongous spreadsheets and VBA, which led me to think there has to be a better way to crunch numbers&amp;hellip; which led me to python.
+Some of the more useful learnings I did along the way:
+Harvards CS109 data science class - this was a comprehensive introduction to data science, and covers a lot of ground from intermediate python all the way to different machine learning techniques and neural networks.</description>
+    </item>
+    
+    <item>
+      <title>Search</title>
+      <link>http://khalido.com/pages/search/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://khalido.com/pages/search/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

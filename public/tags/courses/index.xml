@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>courses on looking at numbers</title>
+    <link>http://khalido.com/tags/courses/</link>
+    <description>Recent content in courses on looking at numbers</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Tue, 14 Aug 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://khalido.com/tags/courses/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>deeplearning.ai: Structuring Machine Learning Projects</title>
+      <link>http://khalido.com/posts/deeplearning-ai-part-3-of-5/</link>
+      <pubDate>Tue, 14 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://khalido.com/posts/deeplearning-ai-part-3-of-5/</guid>
+      <description>This course covers how to think about and improve machine learning systems.
+ You will learn how to build a successful machine learning project. If you aspire to be a technical leader in AI, and know how to set direction for your team&amp;rsquo;s work, this course will show you how.
+ Course Resources
+ Course home Discussion forum
+ Week 1: ML Strategy
+ Orthogonalization Setting up your goal  Single number evaluation metric Satisficing and Optimizing metric Train/dev/test distributions Size of the dev and test sets When to change dev/test sets and metrics  Comparing to human-level performance  Why human-level performance?</description>
+    </item>
+    
+    <item>
+      <title>deeplearning.ai: Improving Deep Neural Networks</title>
+      <link>http://khalido.com/posts/deeplearning-ai-part-2-of-5/</link>
+      <pubDate>Sun, 05 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://khalido.com/posts/deeplearning-ai-part-2-of-5/</guid>
+      <description>Improving Deep Neural Networks: Hyperparameter tuning, Regularization and Optimization
+Course Resources
+ Discussion forum YouTube playlist for Course 1 course reviews: 1  Week 1: Practical aspects of Deep Learning Train / Dev / Test sets
+ training is a highly iterative process as you test ideas and parameters even highly skilled practicioners find it impossible to predict the best parameters for a problem, so going through split data into train/dev/test sets  training set - the actual dataset used to train the model cross validation or dev set - used to evaluate the model test set - only used once the model is finally trained to get a unbiased estimate of the models performance  depending on the dataset size, use different splits, eg:  100 to 1M ==&amp;gt; 60/20/20 1M to INF ==&amp;gt; 98/1/1 or 99.</description>
+    </item>
+    
+    <item>
+      <title>deeplearning.ai: Neural Networks and Deep Learning</title>
+      <link>http://khalido.com/posts/deeplearning-ai-part-1-of-5/</link>
+      <pubDate>Sat, 07 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://khalido.com/posts/deeplearning-ai-part-1-of-5/</guid>
+      <description>It had been a while since I finished Udacity&amp;rsquo;s Deep Learning course, so as a refresher I signed up for Andrew NG&amp;rsquo;s deeplearning.ai course.
+These are my notes for the first course in the series: Neural Networks and Deep Learning.
+Course Resources
+ Discussion forum YouTube playlist for Course 1 course reviews: 1  Week 1: Introduction A basic NN looks at housing price prediction, can use simple regression</description>
+    </item>
+    
+    <item>
+      <title>fastai Practical Deep Learning For Coders, Part 1, 2018</title>
+      <link>http://khalido.com/posts/fastai-part1-2018/</link>
+      <pubDate>Sat, 05 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://khalido.com/posts/fastai-part1-2018/</guid>
+      <description>This is a great top down introduction to deep learning. Jeremey Howard is a great teacher. This is probably the best AI course on the interwebs. The fast.ai course websites blurb:
+ This 7-week course is designed for anyone with at least a year of coding experience, and some memory of high-school math. You will start with step one—learning how to get a GPU server online suitable for deep learning—and go all the way through to creating state of the art, highly practical, models for computer vision, natural language processing, and recommendation systems.</description>
+    </item>
+    
+    <item>
+      <title>Udacity ND101: Deep Learning Nanodegree</title>
+      <link>http://khalido.com/posts/udacity-nd101/</link>
+      <pubDate>Sun, 20 Aug 2017 01:21:48 +0000</pubDate>
+      
+      <guid>http://khalido.com/posts/udacity-nd101/</guid>
+      <description>My notes &amp;amp; files for Udacity&amp;rsquo;s Deep Learning intro course.
+Before the course starts:  Read Machine learning is fun Watch Andrew NG: Deep Learning in Practice (34 minutes) Go though UD730 deep learning course on Udacity Watch Learn tensorflow 3 hour video http://rodneybrooks.com/patrick-winston-explains-deep-learning/  Python resources The course recommneds knowing basic python from here, but I found the following two resources better:
+ A whirlwind tour of Python Python Data Science Handbook  Math resources Need to know multivariable calculus &amp;amp; linear algebra.</description>
+    </item>
+    
+    <item>
+      <title>MITx 6.00.2X: Intro to Computational Thinking and Data Science</title>
+      <link>http://khalido.com/posts/mit-6.00.2x-intro-computational-thinking-and-data-science/</link>
+      <pubDate>Thu, 20 Aug 2015 01:21:48 +0000</pubDate>
+      
+      <guid>http://khalido.com/posts/mit-6.00.2x-intro-computational-thinking-and-data-science/</guid>
+      <description>I really liked this class - it was a engaging course to do after having done some intro level stuff.
+ 6.00.2x will teach you how to use computation to accomplish a variety of goals and provides you with a brief introduction to a variety of topics in computational problem solving . This course is aimed at students with some prior programming experience in Python and a rudimentary knowledge of computational complexity.</description>
+    </item>
+    
+    <item>
+      <title>Udacity CS101: Intro to CS</title>
+      <link>http://khalido.com/posts/udacity-cs101/</link>
+      <pubDate>Wed, 10 Jul 2013 01:21:48 +0000</pubDate>
+      
+      <guid>http://khalido.com/posts/udacity-cs101/</guid>
+      <description>This was one of Udacity&amp;rsquo;s first computer science MOOC&amp;rsquo;s, and I really liked it. Its a great fast intro to computer science concepts and python.
+In particular, I liked that the class both had a cameo by Google&amp;rsquo;s founder and the final project was to build a simple version of Google&amp;rsquo;s original search engine using the pagerank algorithim.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>books on looking at numbers</title>
+    <link>http://khalido.com/tags/books/</link>
+    <description>Recent content in books on looking at numbers</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Thu, 10 May 2018 01:21:48 +0000</lastBuildDate>
+    
+	<atom:link href="http://khalido.com/tags/books/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Grokking Deep Learning by Andrew Trask</title>
+      <link>http://khalido.com/posts/grokking-deep-learning-book/</link>
+      <pubDate>Thu, 10 May 2018 01:21:48 +0000</pubDate>
+      
+      <guid>http://khalido.com/posts/grokking-deep-learning-book/</guid>
+      <description>Andrew Trask is an AI superstar, having come up with the idea for Generative Adverserial Networks (GANS) - one of the most exicting new AI techniques today - in a bar.
+In this book he comes down to earth and explains neural networks from scratch to mere mortals. The book is still being written, but whats there so far is a really good easy to understand introduction to neural networks.</description>
+    </item>
+    
+  </channel>
+</rss>

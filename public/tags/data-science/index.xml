@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>data science on looking at numbers</title>
+    <link>http://khalido.com/tags/data-science/</link>
+    <description>Recent content in data science on looking at numbers</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sun, 22 Oct 2017 01:21:48 +0000</lastBuildDate>
+    
+	<atom:link href="http://khalido.com/tags/data-science/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Notes for Harvard&#39;s Cs109 data science class</title>
+      <link>http://khalido.com/posts/harvard-cs109-notes/</link>
+      <pubDate>Sun, 22 Oct 2017 01:21:48 +0000</pubDate>
+      
+      <guid>http://khalido.com/posts/harvard-cs109-notes/</guid>
+      <description>These are my notes for Harvard&amp;rsquo;s 2015 CS109 class, which i went through with Sydney Machine Learning&amp;rsquo;s study group from Ausgust to October 2017 at Amazon Web Service&amp;rsquo;s sydney office.
+Why CS109? This class was recommended at Quora and a few other places as being a good resource for practical data science, so here goes. These notes are updated as I work through the course syllabus and the labs and homeworks.</description>
+    </item>
+    
+    <item>
+      <title>MITx 6.00.2X: Intro to Computational Thinking and Data Science</title>
+      <link>http://khalido.com/posts/mit-6.00.2x-intro-computational-thinking-and-data-science/</link>
+      <pubDate>Thu, 20 Aug 2015 01:21:48 +0000</pubDate>
+      
+      <guid>http://khalido.com/posts/mit-6.00.2x-intro-computational-thinking-and-data-science/</guid>
+      <description>I really liked this class - it was a engaging course to do after having done some intro level stuff.
+ 6.00.2x will teach you how to use computation to accomplish a variety of goals and provides you with a brief introduction to a variety of topics in computational problem solving . This course is aimed at students with some prior programming experience in Python and a rudimentary knowledge of computational complexity.</description>
+    </item>
+    
+  </channel>
+</rss>
