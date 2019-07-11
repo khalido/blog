@@ -39,7 +39,7 @@ show()
 
 
 
-![png](panel_101/panel_101_2_0.png)
+![png](panel_101_2_0.png)
 
 
 

@@ -33,7 +33,7 @@ plt.imshow(fill);
 ```
 
 
-![png](flood_fill/flood_fill_2_0.png)
+![png](flood_fill_2_0.png)
 
 
 The below function is a recursive implementation of flood fill - it will flood fill a a single region from 1 val to another:
@@ -86,47 +86,47 @@ for i in range(len(fill)):
 ```
 
 
-![png](flood_fill/flood_fill_6_0.png)
+![png](flood_fill_6_0.png)
 
 
 
-![png](flood_fill/flood_fill_6_1.png)
+![png](flood_fill_6_1.png)
 
 
 
-![png](flood_fill/flood_fill_6_2.png)
+![png](flood_fill_6_2.png)
 
 
 
-![png](flood_fill/flood_fill_6_3.png)
+![png](flood_fill_6_3.png)
 
 
 
-![png](flood_fill/flood_fill_6_4.png)
+![png](flood_fill_6_4.png)
 
 
 
-![png](flood_fill/flood_fill_6_5.png)
+![png](flood_fill_6_5.png)
 
 
 
-![png](flood_fill/flood_fill_6_6.png)
+![png](flood_fill_6_6.png)
 
 
 
-![png](flood_fill/flood_fill_6_7.png)
+![png](flood_fill_6_7.png)
 
 
 
-![png](flood_fill/flood_fill_6_8.png)
+![png](flood_fill_6_8.png)
 
 
 
-![png](flood_fill/flood_fill_6_9.png)
+![png](flood_fill_6_9.png)
 
 
 
-![png](flood_fill/flood_fill_6_10.png)
+![png](flood_fill_6_10.png)
 
 
 

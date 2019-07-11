@@ -171,7 +171,7 @@ fig.set_size_inches(9,9);
 ```
 
 
-![png](monte_carlo_pi/monte_carlo_pi_7_0.png)
+![png](monte_carlo_pi_7_0.png)
 
 
 the ratio of the area of the circle divided by the area of the square gives us pi/4:

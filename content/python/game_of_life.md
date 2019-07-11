@@ -169,7 +169,7 @@ iplot(fig)
 ```
 
 
-![png](game_of_life/game_of_life_8_0.png)
+![png](game_of_life_8_0.png)
 
 
 # Sample code for testing animation

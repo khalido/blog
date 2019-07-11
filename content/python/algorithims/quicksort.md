@@ -184,7 +184,7 @@ plt.legend();
 
 
 
-![png](quicksort/quicksort_13_1.png)
+![png](quicksort_13_1.png)
 
 
 ## use animations to visualize quicksort

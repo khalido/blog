@@ -470,7 +470,7 @@ q & a:
 
 > The greatest benefit of types in large Python codebases is the fact that the input and output structures of a function are obvious from just looking at the signature. In the untyped world the definition for the class you are looking for may be N jumps away, hidden somewhere deep in the codebase, and you don’t have a direct reference to it. In the best possible case grepping for it will yield just a few results and you will be able to spot what you are looking for. In the worst case though, you will have hundreds of hits and you will have to start your application and inspect the type at runtime to figure out what is going on, which make the development cycle slow and tedious.
 
-> Come to this talk if you want to know more about the typing system in Python, how to gradually add it to your codebase and what benefits will your team get in the long run! I will also cover some advanced tools like the runtime type collection system, MonkeyType, and the just open sourced type checker, Pyre![#](https://2018.pycon-au.org/talks/45224-why-you-should-care-about-types-how-python-typing-helped-my-team-scale/)
+> Come to this talk if you want to know more about the typing system in Python, how to gradually add it to your codebase and what benefits will your team get in the long run! I will also cover some advanced tools like the runtime type collection system, MonkeyType, and the just open sourced type checker, Pyre![#]()
 
 {{< youtube h1cD3a7ys8Q >}}
 

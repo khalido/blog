@@ -39,11 +39,11 @@ plt.bar(np.arange(len(data)), bubble_sort(data));
 ```
 
 
-![png](bubble-sort/bubble-sort_3_0.png)
+![png](bubble-sort_3_0.png)
 
 
 
-![png](bubble-sort/bubble-sort_3_1.png)
+![png](bubble-sort_3_1.png)
 
 
 # eyeballing bubble sort
@@ -206,7 +206,7 @@ ani.save("bubblesort_animate.mp4")
 
 
 
-![png](bubble-sort/bubble-sort_9_2.png)
+![png](bubble-sort_9_2.png)
 
 
 
