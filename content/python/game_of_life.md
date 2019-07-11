@@ -141,7 +141,7 @@ for i in range(32):
 ```
 
 
-![png](game_of_life/game_of_life_4_0.png)
+![png](game_of_life_4_0.png)
 
 
 So it seems to be working properly. Now I want to build a interactive version where I can:
