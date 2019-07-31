@@ -1,6 +1,6 @@
 ---
 title: "PyCon Australia 2019"
-date: 2019-08-02
+date: 2019-08-01
 tags:
 - python
 ---
@@ -8,6 +8,17 @@ tags:
 My notes for the [PyConAU 2019 talks](https://2019.pycon-au.org) I went to. This blog is an attempt to try and capture some useful info from the talks.
 
 Future challange: Make a jupyter notebook for each talk to implement some of the learnings or tools or thingamajig learned.
+
+
+## You don't always need NumPy
+
+> The numerical Python ecosystem and communities are mature and powerful, but sometimes we can be too quick to reach for the numerical hammer when simpler options exist. This talk will outline some areas where the numerical stack may not be the best starting point, and survey some alternatives. [#]9https://2019.pycon-au.org/talks/you-dont-always-need-numpy)
+
+- Sam Hames, software dev at QUT’s Digital Observatory.
+-
+
+**takeaway:**
+
 
 
 ## Flying by the seat of our pants - our journey of teaching python using drones
