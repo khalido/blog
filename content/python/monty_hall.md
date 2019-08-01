@@ -1,6 +1,6 @@
 
 --- 
-title: "Game of Life"  
+title: "Monty Hall"  
 date: 2019-07-05
 description: "Monty Hall brain teaser" 
 draft: false 
