@@ -25,34 +25,18 @@ Most of these tips are from the [reddit crostini wiki](https://www.reddit.com/r/
 
 ## Install all the apps
 
-### add backports to apt install recent packages
+### use backports to apt install recent packages
 
-Now, there are many ways to do this, but the easiest and nicest is to sudo apt all-the-things. But, this is Google, so not only do you have to do this insided a container in a virtual machine inside some some weird linux/chrome melting pot, you get old software. so first up, update the container itself:
 
-the default crostini container/vm whatever is running debian stretch, which is nice and stable, but has a lot of old packages in its repo. To keep things simple, just add backports. Backports is a repo which contains newer packages from debian testing and unstable.
+the default crostini container/vm whatever is running debian stretch, which is nice and stable, but has a lot of old packages in its repo.
 
-Update `source.list` by running `sudo vim /etc/apt/sources.list` and add at the bottom:
+To install apps, use the backports repo, which contains newer packages from debian testing and unstable. This is already configured in ChromeOS (at least in 76). Hopefully newer versions of ChromeOS switch to the 2019 release of Debian.
 
-```
-# Backports repository
-deb http://deb.debian.org/debian stretch-backports main contrib non-free
-```
 
 by default apt will pull packages from stretch itself, so to install something from backports:
 
-`sudo apt -t stretch-backports install "package"`
+`sudo apt -t stretch-backports install package_name`
 
-the line `-t stretch-backports` above is telling apt to target stretch-backports,
-
-### updating debian to testing
-
-**hold the upgrade to testing, turns out Google is really aiming at stretch so updating to testing breaks things like the file integration with chromeos and who knows what else.**
-
-change `sources.list` so it reads (comment out any other lines by putting # at the start):
-
-`deb http://deb.debian.org/debian stretch testing contrib non-free`
-
-Update the information from the new repos and then upgrade: `sudo apt update && sudo apt upgrade`
 
 ### vs code
 
@@ -62,6 +46,7 @@ Anaconda can automatically install VS Code, but to [install it directly](https:/
 curl -L https://go.microsoft.com/fwlink/?LinkID=760868 > vscode.deb
 sudo apt install ./vscode.deb
 ```
+
 Useful plugins:
 
 - [Markdown All in One](https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one)
@@ -91,7 +76,8 @@ sudo apt install typora
 
 ## install anaconda for a better python
 
-Only do this if you already know why you are doing this, else you don't need to.
+Note: install miniconda instead to save space if needed.
+
 
 go to the [Anaconda linux download page](https://www.anaconda.com/download/#linux) and copy the url, then download it:
 
@@ -101,26 +87,26 @@ Install by `bash Anaconda3-5.2.0-Linux-x86_64.sh` # change filename to whatever 
 
 ### jupyter lab
 
-Now I use anaconda to run jupyter, so to make that run properly, generate a default config file:
+It now just works in Crostini. Install by
 
-`jupyter notebook --generate-config`
-
-and at the top add:
-
-```
-c.NotebookApp.allow_origin = '*' # allow all origins
-c.NotebookApp.ip = '*' # listen on all IPs
-```
-
-now running `jupyter lab` starts the jupyter server in the current directory and opens up a tab in chromeos.
+`conda install -c conda-forge jupyterlab`
 
 Other useful stuff for Jupyter:
 
 To install [extensions](https://github.com/mauhai/awesome-jupyterlab), first install nodejs:
 
-`conda install -c conda-forge nodejs`
+Step 1: install [nvm](https://github.com/nvm-sh/nvm#install--update-script), a script to install nodejs
 
-useful jupyter extensions:
+`curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash`
+
+step 2: install nodejs itself by:
+
+`nvm install node`
+
+
+useful jupyterlab extensions:
+
+See https://github.com/mauhai/awesome-jupyterlab
 
 - show a [toc](https://github.com/jupyterlab/jupyterlab-toc) from markdown headings: `jupyter labextension install @jupyterlab/toc`
 
@@ -176,13 +162,13 @@ set -g mouse on
 
 rumour has it that crostini can have a heart attack if you change the shell, so stick with bash. Consider [oh-my-bash](https://github.com/ohmybash/oh-my-bash) or [bash-it](https://github.com/ohmybash/oh-my-bash) for hacker level coding.
 
-also install [powerline-fonts](https://github.com/powerline/fonts) and select a powerline font for the terminal. 
+also install [powerline-fonts](https://github.com/powerline/fonts) and select a powerline font for the terminal.
 
 `sudo apt -t stretch-backports install fonts-powerline`
 
-Useful shell tools: 
+Useful shell tools:
 
-[tldr](https://github.com/tldr-pages/tldr-python-client) shows a short and useful help page for commands, e.g type `tldr curl` to get a synopsis of how to use curl. 
+[tldr](https://github.com/tldr-pages/tldr-python-client) shows a short and useful help page for commands, e.g type `tldr curl` to get a synopsis of how to use curl.
 `pip install tldr` on chromeos.
 
 [bat](https://github.com/sharkdp/bat) a replacement for cat, displays files with syntax highlighting in the terminal. Right now as rendering problems in crostini, but hopefully will improve. Install by downloading the .deb and `sudo apt install ./bat_file.deb`.
