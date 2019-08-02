@@ -102,8 +102,11 @@ Highly visibile reactions are great, so try and use that with real projects as w
 
 - Paris Buttfield-Addison, Phd in CS, professional game dev and ml fan
 - Unity isn't open source but is free
+- [Unity Machine Learning Agents Toolkit (ML-Agents)](https://github.com/Unity-Technologies/ml-agents) - use python to connect to unity for using it as a training environment
+- blog post explaining the talk is up at his [website](https://hey.paris)
+- unity can be programmed using blocks, its very friendly, so don't get scared
 
-**takeaway:**
+**takeaway:** Unity is easy to use, try it out with python!
 
 ## Forecasting Australia's 2019 Election with PyMC3
 
