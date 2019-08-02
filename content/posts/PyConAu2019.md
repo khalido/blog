@@ -55,17 +55,32 @@ with open('very_big_file.txt', 'r') as f:
 > A few years ago we found ourselves teaching students everything from Python to Arduino. It was our plan to replace all the other languages with Python as we streamlined our course. Learn why we introduced drones, what we learned not to do and what we were surprised about. [#](https://2019.pycon-au.org/talks/flying-by-the-seat-of-our-pants--our-journey-of-teaching-python-using-drones)
 
 
-- Kylie Mathers
+- Kylie Mathers - teacher at Marymount catholic school in Qld
+- the school used a veritable kitchen sink of languages, wanted to switch to one language, preferrably open source, which was useful after students left school and worked with prototyping electronics (beeps and leds makes kids heads light up)
+- some considerations:
+  - block based programming is too..ugh
+  - Apple swift and playgrounds need ipads, those are expensive and lock you in
+  - they had drones, wanted to use them, and guess what, you have [libs like pyparrot](https://github.com/amymcgovern/pyparrot) to program drones in python
+- drumroll.... they choose python!
+- the talk covered introducing students to the big picture concept of drones, their issues and applications and things to think about
+- so after ages, the students finally went hands on with python and drones
+  - used psuedo code, flowcharts to explain concepts
+  - then real code, including functions like `make_it_rock`, `circle` etc etc
+  - seeing the drone do stuff in real life becuase of their code was very motivating
+- highly visible learning is great.
 
+**takeaway:** theres a lot to research and think about before even starting to code and fly a drone. I guess that applies to programing in general - so much problems in python are best approached after a literature research for best practices.
 
-**takeaway:**
+Highly visibile reactions are great, so try and use that with real projects as well.
 
 ## Using Dash by Plotly for Interactive Visualisation of Crime Data
 
 > Dash is a great Python framework for building data visualisation websites. In this talk I discuss the framework basics, explore a sample site and describe its use for an enterprise application to graph crime statistics. I finish with clear pros and cons of the Dash framework from our perspective. [#](https://2019.pycon-au.org/talks/using-dash-by-plotly-for-interactive-visualisation-of-crime-data)
 
-- Leo Broska
+- [Leo Broska](https://www.linkedin.com/in/leobroska)
 -
+
+*takeaway:**
 
 ## Building, designing, teaching and training simulation environments for Machine Learning
 
