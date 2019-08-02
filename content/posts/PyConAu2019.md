@@ -196,11 +196,32 @@ So look into getting a Nvidia powered computer suitable for using with rapids, t
 > Neurofeedback is a brain-computer interface where a person’s own brain waves are audio/visually presented back in real-time after they’ve been recorded and filtered within a few milliseconds. We present methods to allow people to see their own brainwaves with python. [#](https://2019.pycon-au.org/talks/learn-to-control-your-brain-brain-computer-interfacing-with-python)
 
 - Johan van der Meer, neuroscientist at the QIMR Berghofer Medical Research Institute in Australia. [github](https://github.com/jnvandermeer)
--
+- basics: grab signals from the brainusing EEG, do real time analysis, send a feedback signal
+- brain has many neurons, when a neuron fires a electrical field is generated which is pretty tiny - but when many neurons fire together it makes a big field which you can measure from even outside the brain
+ - signal changes with action - exampls eyes open/close.
+ - eeg resolution is quite poor/limited
+ - EEG signals can have rythyms, so thus you can do frequency analysis
+- [mne](https://martinos.org/mne/stable/index.html) - open source python lib for neurophysical data
+- for better signals - you have to measure from inside the brain - see neuralink.
+- eeg is non-invasive, portable and cheap
+- [labstreaminglayer](https://github.com/sccn/labstreaminglayer) is a good library to stream realtime data from a measuring device.
+- so we have devices, we have libararies to connect to them and python to glue it all up.
+- Decoding all this data: this is where the research is, figuring out what it means and using it do useful things, like control a wheelchair etc.
+- [neurofeedback](https://www.wikiwand.com/en/Neurofeedback) learning: with some mental disorders ppl have irregular brain rythyms. Idea is that regularzing them with "training" will help improve disorders.
+- Encoding: how much data can we transmit?
+- [openbci](https://openbci.com) looks really cool.
+
+**takeaway:** lots of interesting work being done. Interesting thing is that the neural data is pretty straightforward, no wonder teenagers are building brain controlled prosthetic arms these days!
+
+Explore openbci further and hack my own neuro thingamajig.
+
 
 ## Machine Learning and Cyber Security - Detecting malicious URLs in the haystack
 
 > Today, security teams are in an increasingly one-sided battle to defend against a myriad of cyber attacks. Web-based attacks are often devastating, with conventional blacklists and reputation-based defence tactics not able to identify previously unseen malicious URLs. Is AI the solution? [#](https://2019.pycon-au.org/talks/machine-learning-and-cyber-security--detecting-malicious-urls-in-the-haystack)
+
+
+**takeaway:**
 
 
 ## First-timers Session
