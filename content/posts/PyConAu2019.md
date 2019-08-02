@@ -75,20 +75,35 @@ Highly visibile reactions are great, so try and use that with real projects as w
 
 ## Using Dash by Plotly for Interactive Visualisation of Crime Data
 
-> Dash is a great Python framework for building data visualisation websites. In this talk I discuss the framework basics, explore a sample site and describe its use for an enterprise application to graph crime statistics. I finish with clear pros and cons of the Dash framework from our perspective. [#](https://2019.pycon-au.org/talks/using-dash-by-plotly-for-interactive-visualisation-of-crime-data)
+> [Dash](https://plot.ly/dash/) is a great Python framework for building data visualisation websites. In this talk I discuss the framework basics, explore a sample site and describe its use for an enterprise application to graph crime statistics. I finish with clear pros and cons of the Dash framework from our perspective. [#](https://2019.pycon-au.org/talks/using-dash-by-plotly-for-interactive-visualisation-of-crime-data)
 
-- [Leo Broska](https://www.linkedin.com/in/leobroska)
--
+- [Leo Broska](https://www.linkedin.com/in/leobroska) [github](https://github.com/halloleo), software dev at ACIS, works with criminal data
+- with any numerical data, eventually you have to put it into a graph or dashboard
+- Dash is a python framework for building analytical websites, with no javascript required
+- [dash example apps:](https://dash-gallery.plotly.host/Portal/)
+- plotly does all the drawing and charts in dash, and react powers the interactivity layer for dash, flask actually delivers the webapp - every dash site is a flask app
+  - there is not need to call the internal components of dash for simple things
+- Make a simple dash app:
+  - import your data, make a figure object which graphs/maps it using plotly express. use `fig.update_traces` to tweak the fig object.
+  - then make a dash app, give it a layout - this defines what the app is serving, which is typically html or markdown text and the plot objects created earlier
+  - now run the app!
+- Note: use a server like gunicorn for production
+- dash is great but some issues:
+  - slow, rendering is slow, underlying javascript code very big
+  - multi-page sites awkward to code
 
-*takeaway:**
+**takeaway:** Just tried out plotly on my laptop, and it is a bit slow. Use it with caution as needed. It looks great for internal dashboard where you have beefy machines and fast connections to users, for personal use to dump on the internet a dash app is a hefty thing to host.
+
 
 ## Building, designing, teaching and training simulation environments for Machine Learning
 
 > Imagine you’re building a fancy robot-driven warehouse. Your pick, place, and packing robots need to get around quickly, find the right item and put it to the right place without colliding with each other, shelves, or people. But you don’t have any robots yet, and you need to start. Try simulations! [#](https://2019.pycon-au.org/talks/building-designing-teaching-and-training-simulation-environments-for-machine-learning)
 
 
-- Paris Buttfield-Addison
+- Paris Buttfield-Addison, professional game dev and ml fan
 -
+
+**takeaway:**
 
 ## Forecasting Australia's 2019 Election with PyMC3
 
