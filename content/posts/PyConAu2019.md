@@ -112,19 +112,67 @@ Highly visibile reactions are great, so try and use that with real projects as w
 
 > Can we predict the result of an Australian election before it occurs? How certain of the outcome can we be? My talk will use the 2019 Australian federal election as a case study to provide an entry-level introduction to the benefits of probabilistic forecasting and PyMC3. [#](https://2019.pycon-au.org/talks/forecasting-australias-2019-election-with-pymc3)
 
+- Martin Burgess, [github](https://github.com/martintburgess) [buckleysandnone](https://www.buckleysandnone.com)
+- [notebook for talk, includes slides and code](https://github.com/martintburgess/buckleys-pycon2019/blob/public/notebooks/Forecasting%20Australia's%202019%20Election%20with%20PyMC3.ipynb)
+- prob forecasting tries to estimate te relative prob of all possible outcomes e.g weather forecasting
+- the future is uncertain, and prob forecasting gives us an estimate of how likely different outcomes are
+- ppl have different starting assumptions, probabilistic forecasting defines them up front
+- [PyMC3](https://docs.pymc.io)
 
--
-- Martin Burgess
--
+**takeaway**: forecasts with probabilities are much more useful than just a plain number. With the last Australian elections, practically every channel had just the one number for wins - but if they had attaced a likeihood to it and shown the other likely scenarios it would have been a lot more useful.
+
+Apply probabilistic forecasting to a future issue. Read [this book](https://nostarch.com/learnbayes) and [ThinkBayes](https://greenteapress.com/wp/think-bayes/).
+ 
+## cuDF: RAPIDS GPU-Accelerated Dataframe Library
+
+> RAPIDS open-source software enables end-to-end data science and analytics pipelines to run entirely on GPUs. Key to RAPIDS is cuDF, a pandas-like Python data frame library with a high-performance CUDA C++ implementation. cuDF and RAPIDS enable large speedups for end-to-end data science using GPUs. [#](https://2019.pycon-au.org/talks/cudf-rapids-gpu-accelerated-dataframe-library)
+
+- Mark Harris, engr at [rapids](https://rapids.ai).
+- moving and transforming data is slow
+- data processing evolution for query, ETL and ML train steps:
+  - hadoop would read and write data to disk at every step
+  - apache spark kept data in memory all the time
+  - traditional gpu processing would read data into gp, do something then write to cpu. a lot of gpu speed gains were lost in the read write steps
+  - apache arrow provides a common in memory data format so different tools can use the same format and save the data conversion steps
+  - rapids uses arrow to skip many of the data conversion steps, much faster
+- rapids aims to accelerate existing python tools, like the pydata chain
+- the average data scientist spends 90% of their time in ETL
+- enter cdDF: rapids dataframes to save the day by drastically speeding up ETL
+  - runs on libcuDF, a low level CUDA C++ lib which does all the work on the GPU
+  - cuDF provides a pandas like api, creates gpu dataframes from numpy arrays, pandas dataframes or pyarrow tables
+  - bridges python (a dynamic language) with C++ & Cuda (static languages)
+  - gpu accelerated i/o - 10x faster than pandas
+- rapids speeds up workflows on a single pc with one gpu - for bigger data it works with dask for distributed computing
+- cuML algorithms are largely compatible with sklearn, just much faster
+  - 1 v100 gpu is 5-100x faster than 2x20 core cpu.
+  - a regular desktop gpu is plenty fast too for a normal user
+- Rapids works in Google Colab, see [getting started](https://rapids.ai/start.html).
+
+**takeaway:** should drastically speed up many of the bigger datasets I've tried in pandas, where a clean and transform pipeline would take many minutes. cuDF promises to at drastically speed up this process, making it easier to iterate faster.
+
+So look into getting a Nvidia powered computer suitable for using with rapids, this would have drastically sped up some of my machine learning projects.
 
 ## Understanding GPUs
 
 > With torch and tensorflow we have begun to rely on GPUs to speed up computations. Deep Learning or not, GPUs can provide massive computation speed ups but it’s not a panacea as NVIDIA would have you believe. Understanding how GPUs work can tell us where we should and shouldn’t use them. [#](https://2019.pycon-au.org/talks/understanding-gpus)
 
 
-- Varun Nayyar
+- Varun Nayyar, mathematician - [linkedin](https://www.linkedin.com/in/varun-nayyar-94222647/?originalSubdomain=au)
+- what are GPU's good for? graphics can be fundamentally reduced to matrix operations, DL is just matrix multiplication with a non linearity.
+- CUDA: gpu's are made up of streaming multiprocessors (SM's) each with many cuda cores, say 64-128. They run thousands of threads simultanesouly vs 10s for a cpu.
+- real world cuda threads are divided into blocks of 32 threads called a warp, and threads in a warp run at the same time.
+  - a rtx2080ti can run over 4K threads in one go
+- GPU's are generally memory bound, not compute bound.
+- Deep learning: each forward pass is just a matrix multiply, as is backprop
+- Gradient Descent is a sequential algorithim - gpu compute hasn't changed how it works, just makes it faster by 20-30x on a fully connected network.
+- Convolutions are compute bound on a gpu, easy to parralize
+- RNN's are memory bound
+- gpu's work well with GradientBoosting
+- gpu's have variable perf depending on the algo, so its not straigtforward to put algorithms on the gpu. CPU and GPU implementations can differ.
+- gpu sync is slow - stick with single gpu's for personal use, you need a strong engineering team for multi-gpus.
+- local compute is great - pays for itself soon over paying for cloud. don't skimp - go for a rtx2080ti
 
-
+**takeaways:** very impressive talk. Worth rewatching if doing something with GPU's. For my next ML project consider getting my own gpu box running linux and look at libraries like rapids.
 
 
 
