@@ -100,8 +100,8 @@ Highly visibile reactions are great, so try and use that with real projects as w
 > Imagine you’re building a fancy robot-driven warehouse. Your pick, place, and packing robots need to get around quickly, find the right item and put it to the right place without colliding with each other, shelves, or people. But you don’t have any robots yet, and you need to start. Try simulations! [#](https://2019.pycon-au.org/talks/building-designing-teaching-and-training-simulation-environments-for-machine-learning)
 
 
-- Paris Buttfield-Addison, professional game dev and ml fan
--
+- Paris Buttfield-Addison, Phd in CS, professional game dev and ml fan
+- Unity isn't open source but is free
 
 **takeaway:**
 
