@@ -1,6 +1,6 @@
 ---
 title: "PyCon Australia 2019"
-date: 2019-08-01
+date: 2019-08-02
 tags:
 - python
 ---
@@ -15,9 +15,38 @@ Future challange: Make a jupyter notebook for each talk to implement some of the
 > The numerical Python ecosystem and communities are mature and powerful, but sometimes we can be too quick to reach for the numerical hammer when simpler options exist. This talk will outline some areas where the numerical stack may not be the best starting point, and survey some alternatives. [#]9https://2019.pycon-au.org/talks/you-dont-always-need-numpy)
 
 - Sam Hames, software dev at QUT’s Digital Observatory.
--
+- the numerical python stack is very complicated, and its a differnt idiom to the other types of python
+- numpy is basically arrays and vectorized expressions on these arrays - but how to translate - for example using a dict to represent a bag of words `{'the': 21, 'bag': 2}` - its clear, there is a one to one mapping b/w word and its count - but using numpy arrays breaks that, you end up with two arrays like `[21,2]` and `['the', 'bag']`
+- when writing numerical python, remember that the rest of python exists
+- pythons built in data structures- lists, sets, dicts and tuples exist and are very very good - you can use them in many applications instead of numpy!
+  - depending on the task, sometimes you need that numpy speed for certain ops
+- lists - appends are fast, you can have dicts of lists
+- sets - adding, deleting and checking membership are all fast
+- tuples - work very well for things like metadata description, and you can have a set of tuples (you can't have a set of lists)
+- combining python data structures is easier to understand
+- the stdlib has lots of things built in:
+  - collections:
+    - defaultdict can simplify code
+    - Counter - count all the things
+  - heapq
+  - bisect
+- Generators and streaming - you will run out of memory at some point
+  - example `pandas.read_csv` is used a lot but it fits the whole file into memory - instead you can read a file line by line by using
+  -
+  
+```python
+with open('very_big_file.txt', 'r') as f:
+  for line in f:
+    results = (do_something(line) for line in f)
+```
 
-**takeaway:**
+- maybe don't do everything in python, use a database?
+  - sqlite can do a lot of stuff, example compute and store a bag of words
+- there are lots of domain specific databases, both local and hosted, and they can be a great complement to a python stack
+  - this way you only have to worry about a subset of the original python
+- look for task specific libs
+
+**takeaway:** document all the numerical things, and don't be afraid to mix and match. Whats the actual problem you're solving - does it matter if its taking 1ms in numpy vs 5ms in python?
 
 
 
@@ -25,7 +54,6 @@ Future challange: Make a jupyter notebook for each talk to implement some of the
 
 > A few years ago we found ourselves teaching students everything from Python to Arduino. It was our plan to replace all the other languages with Python as we streamlined our course. Learn why we introduced drones, what we learned not to do and what we were surprised about. [#](https://2019.pycon-au.org/talks/flying-by-the-seat-of-our-pants--our-journey-of-teaching-python-using-drones)
 
-{{< youtube EqQj5os3Mfw >}}
 
 - Kylie Mathers
 
@@ -207,3 +235,8 @@ Note: Choose b/w the following two:
 -
 
 ## Sunday Lightning Talks
+
+
+## notes
+
+- Embed youtube vidoes by `{{< youtube EqQj5os3Mfw >}}` or `{{< youtube id="w7Ft2ymGmfc" autoplay="false" >}}`
