@@ -175,20 +175,21 @@ So look into getting a Nvidia powered computer suitable for using with rapids, t
 **takeaways:** very impressive talk. Worth rewatching if doing something with GPU's. For my next ML project consider getting my own gpu box running linux and look at libraries like rapids.
 
 
-
-Note: Choose b/w the following two:
-
-
-## Education Seminar Student Showcase
-
-> Eight short talks from high school students across Australia. They’ll be talking about projects they’ve built with Python using machine learning, robotics, markov models and more! [#](https://2019.pycon-au.org/education-showcase)
-
 ## Not a long time ago, in a galaxy not very far away, an astronomer and a computer scientist walk into a bar...
 
 > Python is one of the most popular programming languages in astronomy. In this talk, I will tell a story about how Python helped me to develop a software tool for galaxy modelling, and tackle the scientific and technical challenges that arise in the Big Data era of astronomy. [#](https://2019.pycon-au.org/talks/not-a-long-time-ago-in-a-galaxy-not-very-far-away-an-astronomer-and-a-computer-scientist-walk-into-a-bar)
 
-- Georgios Bekiaris
--
+- [Georgios Bekiaris](https://www.linkedin.com/in/bekos/), astrocoder, makes software for astronomy
+- wrote gbkfit - tool for galaxy kinematic modelling
+  - initially in c++, rewrote twice, finally rewrote in python
+- galaxy kinematics refers to the motions of stars, clouds of gas
+- doppler effect: approaching: higher freq, receding: lower freq
+- kinematics combines spectroscopy with doppler effects
+- see talk...
+- commonly used libs: [Astropy](https://www.astropy.org), scipy and matplotlib.
+- numpy code ran as fast or faster as c++ on a single cpu. [numba](https://numba.pydata.org) makes it easy to speed up python code by applying a numba decorator to a function. Also supports gpus.
+
+**takeaway:** Astronomers are using python for everything, and python can be fast with the right tools.
 
 ## Learn to control your brain: Brain Computer Interfacing with Python
 
