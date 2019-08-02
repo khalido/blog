@@ -220,8 +220,17 @@ Explore openbci further and hack my own neuro thingamajig.
 
 > Today, security teams are in an increasingly one-sided battle to defend against a myriad of cyber attacks. Web-based attacks are often devastating, with conventional blacklists and reputation-based defence tactics not able to identify previously unseen malicious URLs. Is AI the solution? [#](https://2019.pycon-au.org/talks/machine-learning-and-cyber-security--detecting-malicious-urls-in-the-haystack)
 
+- design thinking: put yourself into the shoes of your user at the start of a project
+  - Know your user, understand their pain points and what they do
+  - Nail the problem
+  - Ideas
+  - Know the threat
+  - python - data, engr features, model/eval
+- did a lot of feature engineering on the urls, things like getting whois data, domain expiry dates, location info, etc etc.
+- they used fast.ai for deep learning, sklearn for randomforests and tensorflow for word embeddings
+- used F1 score to evaluate models
 
-**takeaway:**
+**takeaway:** see the presentation again... it was a good explaination of a end to end process.
 
 
 ## First-timers Session
