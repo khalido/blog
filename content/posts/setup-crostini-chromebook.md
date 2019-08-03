@@ -37,6 +37,25 @@ by default apt will pull packages from stretch itself, so to install something f
 
 `sudo apt -t stretch-backports install package_name`
 
+### flatpak
+
+Even stretch-backports is full of old apps. So for new versions use flatpak.
+
+Install flatpak: `sudo apt install -t stretch-backports flatpak`
+
+Note: If crostini upgrades the base debian it comes with, change this.
+
+
+Add the flatpak repo:
+
+`sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo`
+
+Install apps by:
+
+`sudo flatpak install flathub de.wolfvollprecht.UberWriter`
+
+Note: you need sudo to install and update flatpak apps in crostini.
+
 
 ### vs code
 

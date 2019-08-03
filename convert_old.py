@@ -19,10 +19,6 @@ ipynb_files = [ x for x in all_ipynb_files if ".ipynb_checkpoints" not in x ]
 for notebook in ipynb_files:
     os.system(f'jupyter nbconvert --to markdown {notebook}')
 
-for f in ipynb_files:
-    print(f, f[:-6])
-    print(f"{f[:-6]}.md")
-
 # fix image links in generated markdown files
 # code from https://github.com/chrisalbon/notes/blob/master/make.ipynb
 
@@ -37,6 +33,8 @@ all_md_files = [os.path.join(root, name)
                for root, dirs, files in os.walk(path)
                for name in files
                if name.endswith((".md"))]
+
+#all_md_files = [f"{f[:-6]}.md" for f in ipynb_files]
 
 for file in all_md_files:
     with open(file,'r') as f:

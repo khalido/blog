@@ -289,25 +289,42 @@ Explore openbci further and hack my own neuro thingamajig.
 
 **takeaway:** make things simpler by taking away choices by using automated tools. Test and monitor services.
 
-## Data scientists and Anthropologists - Unlikely BFFs?
-
-> The growing availability of large datasets and powerful analytical tools is creating both methodological and ethical issues for data scientists in the academy and industry alike. Qualitative methods, developed in the social sciences, offer data scientists a new toolbox to apply to these challenges. [#](https://2019.pycon-au.org/talks/data-scientists-and-anthropologists--unlikely-bffs)
-
-- Fiona Tweedie
--
-
 ## Tunnel Snakes Rule! Bringing the many worlds of Python together to monitor Melbourne's biggest infrastructure project.
 
 > Python is being used to provide real-time environmental monitoring on the Melbourne Metro Tunnel project. Come along to see how open source Python tools from the web, IoT, cloud infrastructure and scientific domains are being used together to monitor environmental telemetry on a city-wide scale. [#](https://2019.pycon-au.org/talks/tunnel-snakes-rule-bringing-the-many-worlds-of-python-together-to-monitor-melbournes-biggest-infrastructure-project)
 
-- Evan Brumley, senior dev at WSP Digital
+- [Evan Brumley](https://www.linkedin.com/in/evanbrumley/), engr at [WSP Digital](https://www.wspdigital.com)
+- working on 7 construction sites for Melbourne Metro
+- one construction site next to hospitals, lab etc which can't be disturbed - so they have a bunch of quantative requirements to meet and report on in real time.
+- so, how to keep track of all the requirements?
+- old school approach was to send grad engineers to site, collect readings, analyze in excel and file reports at the end of the month
+- modern approach: get sensors from a Vendor with a Saas platform, give them lots of money, download csvs, analyzie in excel and file reports at the end of the month.
+  - they don't respond to custom reports, don't integrate with other vendors sensors
+- solution: build a new platform which could accept data from any device
+- hint: try not to work with devices directly
+- 150-200 sensors, some sending data at a half second freq
+- validate and store telemetry
+- envirnomental requirements don't map directly to sensor data, so calculations needed to transform them - which are sometimes complex, and have to performed in real time
+- access to data - both internal as well as limited external access
+- alerts and reporting
+- they had 4 months to build this out, fully self contained team of 2-3 devs + 1PM
+- [AWS Kinesis](https://aws.amazon.com/kinesis/) to store streaming data, S3 for resilient storage, then influxdb.
+- api pollers packaged into docker containers and deployed via elastic beanstalk
+  - used [pyftpdlib](https://github.com/giampaolo/pyftpdlib)
+- web app is built on django+celery+react, powered by pandas and the scipy stack
+  - pandas allows them to transform raw telemetrym live, on request - using upto 10K points in a dataframe. Pandas was a huge timesaver.
+
+**takeaway:** dang. that is a lot of stuff.
 
 ## Using python-programmed microcontrollers to build comedy props
 
 > Early-career comedians often have difficulties adding electronic props to their acts, due to the high cost of materials and fabrication skills required. This talk will recreate several props used in comedic performances, showing the code and components used. [#](https://2019.pycon-au.org/talks/using-python-programmed-microcontrollers-to-build-comedy-props)
 
 - Anthony Joseph & Debbie Zukerman
--
+- used adafruit wearable devices, [circuit playground](https://learn.adafruit.com/introducing-circuit-playground/overview), microbit, arduino
+- qlab
+
+**takeaway:** explore micropython and get a device to play with.
 
 ## Python Applications in Infrastructure Planning and Civil Engineering
 
