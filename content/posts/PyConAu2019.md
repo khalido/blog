@@ -9,10 +9,12 @@ My notes for the [PyConAU 2019 talks](https://2019.pycon-au.org) I went to. This
 
 Future challange: Make a jupyter notebook for each talk to implement some of the learnings or tools or thingamajig learned.
 
+The [pyconAU19 videos](https://www.youtube.com/playlist?list=PLs4CJRBY5F1LKqauI3V4E_xflt6Gow611) are up on youtube.
+
 
 ## You don't always need NumPy
 
-> The numerical Python ecosystem and communities are mature and powerful, but sometimes we can be too quick to reach for the numerical hammer when simpler options exist. This talk will outline some areas where the numerical stack may not be the best starting point, and survey some alternatives. [#]9https://2019.pycon-au.org/talks/you-dont-always-need-numpy)
+> The numerical Python ecosystem and communities are mature and powerful, but sometimes we can be too quick to reach for the numerical hammer when simpler options exist. This talk will outline some areas where the numerical stack may not be the best starting point, and survey some alternatives. [#](https://2019.pycon-au.org/talks/you-dont-always-need-numpy)
 
 - Sam Hames, software dev at QUT’s Digital Observatory.
 - the numerical python stack is very complicated, and its a differnt idiom to the other types of python
@@ -232,16 +234,41 @@ Explore openbci further and hack my own neuro thingamajig.
 
 **takeaway:** see the presentation again... it was a good explaination of a end to end process.
 
-
-## First-timers Session
-
-
-
 ## Creating Lasting Change
 
 > The Nature of Organisations, People, and how to Change Them [#](https://2019.pycon-au.org/talks/aurynn)
 
-- Aurynn Shaw [@aurynn](https://twitter.com/aurynn)
+- Aurynn Shaw [@aurynn](https://twitter.com/aurynn), devops at Eiora
+- talk is about introducing change
+- spoke about [Contempt culture](https://www.google.com.au/search?q=contempt+culture) in the tech world
+  - what has pervasive hostility done in tech jobs?
+- all new tech exists in a business context, and biz don't care about technologies. Devs care about tech, not businesses.
+  - biz cares about outcomes - can i deploy it, can i find ppl to work on it and the other things biz needs to care about
+- expressing opinions in contemptuous terms gets you sidelined and not trusted
+  - you diss one tech, like another tech - makes you look biased
+  - we have done this to ourselves.
+- if they think its necessary and we don't or vice versa its not them at fault there is a communications gap.
+- and thus we end up in a process which doesn't believe in engineers.
+  - we should not be speaking only in a language of tech and treat our assumptions as better - we need to speak in the language of biz
+- processes and status quos arise from past biz experiences
+- the cloud is where infrastructure as code become real - 13 yrs ago. Some companies are still having conversations about entering the cloud. Cause they don't care about the tech and ease of the cloud, they care about risks and costs and regulations and so on.. the easy of spinning up services is a small thing.
+ - someone needs to communicate that
+- power dynamics dictate change
+- listening is key to change
+- new processes need to make the lives of others betters and show them how its solving problems (and in the process you get to roll out the shiny new tech you care about)
+- all technology is political - tech encodes the structures of the org which made it
+  - things which make no sense often are because of the initial org constraints, and thats why they don't make sense to a different org with different constraints
+  - understand the political ramifications of tech
+- go and talk to ppl. make conversations safe.
+  - good example of Etsy
+- learn to speak business. Be empathetic to the entire org.
+
+**takeaways:** Its not just them, its us. Solve business problems and communicate how your solution helps. Don't spend too much time on _we should have done it right in the first place._ It just so happens that we adopt new tech as sometimes its better/faster/cheaper than the old.
+  
+## Lessons learned building Python microservices
+
+> I will talk about challenges and wins that have come from introducing Python into a multilingual microservices kubernetes architecture with lots of legacy. [#](https://2019.pycon-au.org/talks/lessons-learned-building-python-microservices)
+
 -
 
 ## Data scientists and Anthropologists - Unlikely BFFs?
@@ -292,8 +319,6 @@ Explore openbci further and hack my own neuro thingamajig.
 
 ## Saturday Lightning Talks
 
-
-# Sunday
 
 ## The real costs of Open Source Sustainability
 
