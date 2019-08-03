@@ -330,20 +330,50 @@ Explore openbci further and hack my own neuro thingamajig.
 
 > Engineers tasked with planning new infrastructure constantly face the problem of having to look through too much information. This talk is about how we wanted to be lazy and wrote a bot to do it for us instead. [#](https://2019.pycon-au.org/talks/python-applications-in-infrastructure-planning-and-civil-engineering)
 
-- Ben Chu, grad engr at WSP
--
+- Ben Chu, grad engr at [WSP](https://www.wsp.com/en-AU), a large engnr firm
+- lots of stuff involved in railway planning
+- EIA used to be done by junior staff, using datasets like noise receivers (hospitals etc), vegetation (what areas will the train cross)
+  - these add up quickly to a lot of stuff
+- so instead they are using jupyter notebook
+  - shapefiles store shapes like the railway line and vegetation and noise senstitive areas
+  - run in [Papermill](https://github.com/nteract/papermill which outputs html, csv and shapefiles
+- need to check DA's along the railway line which might impact on the line - there can be many thousands.
+  - used to be done manually, paid $70 per DA, slow, costly and infrequent updates
+  - they need to know as soon as the DA comes in as it could pose a high risk to the railway design
+- DABot automates this - it merges geocoded national address file and lot shape datasets, filters for lots on the buffer alighnment, which gives a list of addressses which they can use to search for DA's matching those addresses.
+  - majority of council websites are the same, so same scraper works on most of them
+  - NLP pipeline to clean text, then they form a document term matrix, used 200 most imp features
+  - ML: went with XGBoost, got 85% Accuracy with a 95% recall
+    - maximized recall as they didn't want to miss high risk DA's
+- DABot allowed for frequent updates, saved time/money
+- Future: lots of improvements to do, from using word embeddings, deep learning,
+  - PostGIS database
+  - fully automated pipeline so they can send out automated weekly reports
 
-## Thinking about thinking about computers
+**takeaway:** Impressive how a very simple NLP pipeline and application of XGBoost gave them such good usable results. They didn't even use word embeddings! There is a lesson in this. Build simple, improve later.
 
-> Let’s talk about computers: I don’t know how they work, but when I’m writing code I can imagine what it will do. I can think through, at length, what will happen at each step. So what’s the deal with that? I reckon it’s time to think about thinking about computers. [#](https://2019.pycon-au.org/talks/thinking-about-thinking-about-computers)
+## Fantastic Blocks And Where To Hide Them
 
-- Ben Taylor, dev at Grok Learning
+> Ruby has blocks. JavaScript has blocks. Swift has blocks. Python doesn’t have blocks.In this talk, we’ll look at why Python doesn’t have blocks, and recent programming techniques that have developed in languages that do have blocks. Then we’ll look at what we – or Python – can do about it! [#](https://2019.pycon-au.org/talks/fantastic-blocks-and-where-to-hide-them)
+
+- Christopher Neugebauer, [@chrisjrn](https://twitter.com/chrisjrn), snr engr at [AlphaSights](https://www.alphasights.com) and a director of PSF
+- blocks was last discussed in 2005 for Python, and is unlikely to appear
+- using Kotlin at AlphaSights - Kotlin encourages passing blocks of code around
+- Python isn't really for functional programming, instead they have list comprehension
+- Blocks: in python you can have a func (many lines) or a lambda (one line long)
+  - so you always need to define a func and pass that. In other languages you can easily pass a block of code
+- Context Managers: when opening files, you had to manually close them. Easy to miss. Hence context managers.
+  - the python syntax enforced correct behaviour
+
+**takeaway:** things to thing about. Convention matters.
 
 ## Profiling Pathogens with (micro) Python
 
 > We’re building professional medical diagnostics equipment with micropython. This has come with minimal challenges, many positives and a few surprises! [#](https://2019.pycon-au.org/talks/profiling-athogens-with-micro-python)
 
-- Andrew Leech
+- Andrew Leech, [Planet Innovation](https://planetinnovation.com)
+- working with [Lumos](https://lumosdiagnostics.com) to develop point of care diagnositcs tests
+-
 
 ## The Antipodes
 
