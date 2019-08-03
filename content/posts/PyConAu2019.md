@@ -372,14 +372,22 @@ Explore openbci further and hack my own neuro thingamajig.
 > We’re building professional medical diagnostics equipment with micropython. This has come with minimal challenges, many positives and a few surprises! [#](https://2019.pycon-au.org/talks/profiling-athogens-with-micro-python)
 
 - Andrew Leech, [Planet Innovation](https://planetinnovation.com)
-- working with [Lumos](https://lumosdiagnostics.com) to develop point of care diagnositcs tests
--
+- working with [Lumos](https://lumosdiagnostics.com) to develop point of care diagnositcs tests (spinoff of PI)
+- Buid a medical device:
+  - hazard and risk based development: at every stage minimise risks
+- Lumos Camera Reader runs micropython, connects to a phone via bluetooth
+- SOuP: Software of unknown povidence
+  - for medical devices, you need certified code, or blackbox it.
+- use jupytermicropython kernel to run code directly on the board. Makes dev very easy.
+  - use ipywidgets to do live interactions.
+- use test driven development - the same unittest can run on the board, desktop and CI
+- medical devices aren't that different from regular devices, they just need to blackbox all the uncertified bits.
+  
+**takeaway:** use the jupyter kernel for micropython for live dev on a board.
 
 ## The Antipodes
 
-> ?? [#](https://2019.pycon-au.org/talks/brandon)
-
-- [@brandonrhodes](https://twitter.com/brandonrhodes)
+- [@brandonrhodes](https://twitter.com/brandonrhodes), [#](https://2019.pycon-au.org/talks/brandon)
 -
 
 ## Saturday Lightning Talks
