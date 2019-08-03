@@ -1,6 +1,6 @@
 ---
 title: "PyCon Australia 2019"
-date: 2019-08-02
+date: 2019-08-03
 tags:
 - python
 ---
@@ -269,7 +269,25 @@ Explore openbci further and hack my own neuro thingamajig.
 
 > I will talk about challenges and wins that have come from introducing Python into a multilingual microservices kubernetes architecture with lots of legacy. [#](https://2019.pycon-au.org/talks/lessons-learned-building-python-microservices)
 
+- Richard Jones, dev at [reecetech](http://www.reecetech.com.au), a plumbing company
 -
+- trys to make every service look similar, tools to enforce this
+  - cookiecutter
+  - tox
+  - goal is full test coverage, pytest cause its best in class
+  - black to format code
+  - pycharm for all devs so ppl can help other ppl easily without editor shock and for ease of pair programming
+  - [pactman](https://pypi.org/project/pactman/) for contract testing of services
+  - django to deliver the services
+- inconsistencies happen, so you have to check across teams. i.e one team switched tool cause they found it too hard, so now you have inconsistencies across projects
+- resilience: microservices are prone to brief errors or tiny service interruptions. So use http retries for some errors
+- moniter services using [grafana dashboards](https://grafana.com) and [kibana](https://www.elastic.co/products/kibana) for monitering and searching logs
+- get it running right first, then use tools to investigate performance, like [silk](https://github.com/jazzband/django-silk) for dango
+  - reducing number of sql queries was key to speed
+- batch interfaces is good, like allow consumer to get 100 price requests in one go, much faster than 100 different requests
+- caching really helped. `@lru_cache(maxsize=1024)` decorator built into python does the job.
+
+**takeaway:** make things simpler by taking away choices by using automated tools. Test and monitor services.
 
 ## Data scientists and Anthropologists - Unlikely BFFs?
 
