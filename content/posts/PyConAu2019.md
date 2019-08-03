@@ -388,16 +388,37 @@ Explore openbci further and hack my own neuro thingamajig.
 ## The Antipodes
 
 - [@brandonrhodes](https://twitter.com/brandonrhodes), [#](https://2019.pycon-au.org/talks/brandon)
--
+- great spkr, watch [his technical talks](https://rhodesmill.org/brandon/talks/) as well
+- turn _me me me me you_ into _you you you you me_ - works great in life for things from emails to conversations
+
+**takeaway:** watch more talks by great talkers. Put the important stuff first, both in programming and emails.
 
 ## Saturday Lightning Talks
 
+### Sam Bishop: Computational World Building
+
+- using processing.py to build worlds and model weather using isca
+- deep deep rabbit whole of modelling and fitting worlds into the solar system
+
+### @verinoica_hanus data driven look at code comments
+
+- think about inline comments as documentation
+  - autogen docs from inline comments
+- comments can be magic
+
+### logging
+
+- [@datanerdery](https://twitter.com/datanerdery)
+- logging is good! built into the [stdlib](https://docs.python.org/3/howto/logging.html)
+  - multiple levels of details
 
 ## The real costs of Open Source Sustainability
 
 > What if money isn’t the only way to create sustainable free and open source software projects? What if it turns out that sustainability is actually a multi-faceted concept that can’t truly be successful if people focus on only one of its many elements? [#](https://2019.pycon-au.org/talks/vicky)
 
 - VM Brasseu [@vmbrasseur](https://twitter.com/vmbrasseur)
+
+**takeaway:** code of conducts matter, look for, abide by and try to contribute to open source projects which have them.
 
 
 ## Shipping your first Python package and automating future publishing
