@@ -8,7 +8,7 @@ tags:
 
 My notes for the [PyConAU 2019 talks](https://2019.pycon-au.org) I went to. This blog is an attempt to try and capture some useful info from the talks.
 
-Future challange: Make a jupyter notebook for each talk to implement some of the learnings or tools or thingamajig learned.
+Future challenge: Make a jupyter notebook for each talk to implement some of the learnings or tools or thingamajig learned.
 
 The [pyconAU19 videos](https://www.youtube.com/playlist?list=PLs4CJRBY5F1LKqauI3V4E_xflt6Gow611) are up on youtube.
 
@@ -52,7 +52,7 @@ The [pyconAU19 videos](https://www.youtube.com/playlist?list=PLs4CJRBY5F1LKqauI3
 
 > The numerical Python ecosystem and communities are mature and powerful, but sometimes we can be too quick to reach for the numerical hammer when simpler options exist. This talk will outline some areas where the numerical stack may not be the best starting point, and survey some alternatives. [#](https://2019.pycon-au.org/talks/you-dont-always-need-numpy)
 
-- Sam Hames, software dev at QUT’s Digital Observatory.
+- [Sam Hames](https://www.linkedin.com/in/sam-hames-946b9478/), software dev at QUT’s Digital Observatory.
 - the numerical python stack is very complicated, and its a differnt idiom to the other types of python
 - numpy is basically arrays and vectorized expressions on these arrays - but how to translate - for example using a dict to represent a bag of words `{'the': 21, 'bag': 2}` - its clear, there is a one to one mapping b/w word and its count - but using numpy arrays breaks that, you end up with two arrays like `[21,2]` and `['the', 'bag']`
 - when writing numerical python, remember that the rest of python exists
@@ -560,13 +560,13 @@ Then you can make a state machine to watch over all your other state machines!
 
 ### Pre european potatoes
 
-- pototoes were far away from NZ. got there long time ago. 
+- pototoes were far away from NZ. got there long time ago.
 - [growstuff](https://www.growstuff.org) is tinder for potaoes.
 
 ### Quantum Computing
 
 - cool new thing
-- basics of QM: instead of bits, you have qbits which have a vector instead of being a 0 or 1. 
+- basics of QM: instead of bits, you have qbits which have a vector instead of being a 0 or 1.
 - you can [access quantum computers free online](https://www.dwavesys.com/take-leap)
 - see [pennylane](https://pennylane.ai)
 
@@ -579,7 +579,7 @@ Then you can make a state machine to watch over all your other state machines!
 
 ## mega takeaway
 
-Its nice to hear talks in real life instead of on youtube. Focuses the attention. 
+Its nice to hear talks in real life instead of on youtube. Focuses the attention.
 
 Moving forward, my biggest takeaway is to take an idea and just run with it. Many of the speakers had an itch - a home to automate with python, a paper to write or drones to fly and just did it. So take one of my project ideas and just do it, using circleci of course.
 
