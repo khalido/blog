@@ -425,8 +425,30 @@ Explore openbci further and hack my own neuro thingamajig.
 
 > One of the best things about Python is the vast ecosystem of packages available on the Python Package Index. Shipping your first Python package can be intimidating. This talk aims to remove the mystery of Python packaging and enable you to share your code with the Python community. [#](https://2019.pycon-au.org/talks/shipping-your-first-python-package-and-automating-future-publishing)
 
-- Chris Wilcox, dev at Google
--
+- Chris Wilcox, dev at Google [@chriswilcox47](https://twitter.com/chriswilcox47)
+- pypi: python package index makes python great - its easy to install and use packages
+- manual steps: (don't do this)
+  - make a packakge in the format pip expects along with a setup.py
+  - make a venv and do a local install of your package and test it.
+  - upload to testpypi, and install from there
+  - if everything works, upload to pypi
+- use setup.cfg, specify all the metadata there.
+  - bunch of classes in classifiers you can assign your package to
+  - Always add a licence.
+  - you can add `long_description = file:README.md` which can be just the readme in github.
+  - you can define things like packages required
+- authentication: pypi supports auth tokens, can make one per package and assign it permissions like _upload package_
+- to start a new project
+  - pypi has a [sampleproject repo](https://pypi.org/project/sampleproject/)
+  - can use [cookiecutter](https://cookiecutter.readthedocs.io/en/latest/) too, or just build up a good basic setup and just copy paste and change for new projects
+-automation tools:
+  - [tox](https://tox.readthedocs.io/en/latest/) is the most common
+  - [nox](https://nox.thea.codes/en/stable/) is more flexible, configured with python scripts. can build docs as well.
+- really automate stuff with CI - once setup properly publishing a release to the git repo will build, test and deploy:
+  - `circleci/config.yml` to define the build and deploy sequence.
+  - circle ci checkouts out your repo into a docker image, installs the things required, runs tests, builds, and publishes the new version
+
+**takeaway:** publish my first package. use nox and circleci to automate all the things.
 
 ## Insights into Social Media Data using Entropy Theory
 
