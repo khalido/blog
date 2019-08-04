@@ -12,39 +12,39 @@ Future challange: Make a jupyter notebook for each talk to implement some of the
 
 The [pyconAU19 videos](https://www.youtube.com/playlist?list=PLs4CJRBY5F1LKqauI3V4E_xflt6Gow611) are up on youtube.
 
-- [You don't always need NumPy](#you-dont-always-need-numpy)
-- [Flying by the seat of our pants - our journey of teaching python using drones](#flying-by-the-seat-of-our-pants---our-journey-of-teaching-python-using-drones)
+- [You dont always need NumPy](#you-dont-always-need-numpy)
+- [Flying by the seat of our pants: our journey of teaching python using drones](#flying-by-the-seat-of-our-pants-our-journey-of-teaching-python-using-drones)
 - [Using Dash by Plotly for Interactive Visualisation of Crime Data](#using-dash-by-plotly-for-interactive-visualisation-of-crime-data)
 - [Building, designing, teaching and training simulation environments for Machine Learning](#building-designing-teaching-and-training-simulation-environments-for-machine-learning)
-- [Forecasting Australia's 2019 Election with PyMC3](#forecasting-australias-2019-election-with-pymc3)
-- [cuDF: RAPIDS GPU-Accelerated Dataframe Library](#cudf-rapids-gpu-accelerated-dataframe-library)
+- [Forecasting Australias 2019 Election with PyMC3](#forecasting-australias-2019-election-with-pymc3)
+- [cuDF: RAPIDS GPU Accelerated Dataframe Library](#cudf-rapids-gpu-accelerated-dataframe-library)
 - [Understanding GPUs](#understanding-gpus)
 - [Not a long time ago, in a galaxy not very far away, an astronomer and a computer scientist walk into a bar...](#not-a-long-time-ago-in-a-galaxy-not-very-far-away-an-astronomer-and-a-computer-scientist-walk-into-a-bar)
 - [Learn to control your brain: Brain Computer Interfacing with Python](#learn-to-control-your-brain-brain-computer-interfacing-with-python)
-- [Machine Learning and Cyber Security - Detecting malicious URLs in the haystack](#machine-learning-and-cyber-security---detecting-malicious-urls-in-the-haystack)
+- [Machine Learning and Cyber Security: Detecting malicious URLs in the haystack](#machine-learning-and-cyber-security-detecting-malicious-urls-in-the-haystack)
 - [Creating Lasting Change](#creating-lasting-change)
 - [Lessons learned building Python microservices](#lessons-learned-building-python-microservices)
-- [Tunnel Snakes Rule! Bringing the many worlds of Python together to monitor Melbourne's biggest infrastructure project.](#tunnel-snakes-rule-bringing-the-many-worlds-of-python-together-to-monitor-melbournes-biggest-infrastructure-project)
-- [Using python-programmed microcontrollers to build comedy props](#using-python-programmed-microcontrollers-to-build-comedy-props)
+- [Tunnel Snakes Rule! Bringing the many worlds of Python together to monitor Melbournes biggest infrastructure project.](#tunnel-snakes-rule-bringing-the-many-worlds-of-python-together-to-monitor-melbournes-biggest-infrastructure-project)
+- [Using python programmed microcontrollers to build comedy props](#using-python-programmed-microcontrollers-to-build-comedy-props)
 - [Python Applications in Infrastructure Planning and Civil Engineering](#python-applications-in-infrastructure-planning-and-civil-engineering)
 - [Fantastic Blocks And Where To Hide Them](#fantastic-blocks-and-where-to-hide-them)
 - [Profiling Pathogens with (micro) Python](#profiling-pathogens-with-micro-python)
 - [The Antipodes](#the-antipodes)
 - [Saturday Lightning Talks](#saturday-lightning-talks)
   - [Sam Bishop: Computational World Building](#sam-bishop-computational-world-building)
-  - [@verinoica_hanus data driven look at code comments](#verinoicahanus-data-driven-look-at-code-comments)
+  - [data driven look at code comments](#data-driven-look-at-code-comments)
   - [logging](#logging)
 - [The real costs of Open Source Sustainability](#the-real-costs-of-open-source-sustainability)
 - [Shipping your first Python package and automating future publishing](#shipping-your-first-python-package-and-automating-future-publishing)
 - [Insights into Social Media Data using Entropy Theory](#insights-into-social-media-data-using-entropy-theory)
 - [It's dark and my lights aren't working (an asyncio success story)](#its-dark-and-my-lights-arent-working-an-asyncio-success-story)
 - [The universe as balls and springs: molecular dynamics in Python](#the-universe-as-balls-and-springs-molecular-dynamics-in-python)
-- [Instant-feedback, instant-debugging Python coding](#instant-feedback-instant-debugging-python-coding)
+- [Instant feedback, instant-debugging Python coding](#instant-feedback-instant-debugging-python-coding)
 - [Orchestrating complex (not complicated) tasks using AWS serverless and Python](#orchestrating-complex-not-complicated-tasks-using-aws-serverless-and-python)
 - [Sunday Lightning Talks](#sunday-lightning-talks)
 - [notes](#notes)
 
-## You don't always need NumPy
+## You dont always need NumPy
 
 > The numerical Python ecosystem and communities are mature and powerful, but sometimes we can be too quick to reach for the numerical hammer when simpler options exist. This talk will outline some areas where the numerical stack may not be the best starting point, and survey some alternatives. [#](https://2019.pycon-au.org/talks/you-dont-always-need-numpy)
 
@@ -84,7 +84,7 @@ with open('very_big_file.txt', 'r') as f:
 
 
 
-## Flying by the seat of our pants - our journey of teaching python using drones
+## Flying by the seat of our pants: our journey of teaching python using drones
 
 > A few years ago we found ourselves teaching students everything from Python to Arduino. It was our plan to replace all the other languages with Python as we streamlined our course. Learn why we introduced drones, what we learned not to do and what we were surprised about. [#](https://2019.pycon-au.org/talks/flying-by-the-seat-of-our-pants--our-journey-of-teaching-python-using-drones)
 
@@ -142,7 +142,7 @@ Highly visibile reactions are great, so try and use that with real projects as w
 
 **takeaway:** Unity is easy to use, try it out with python!
 
-## Forecasting Australia's 2019 Election with PyMC3
+## Forecasting Australias 2019 Election with PyMC3
 
 > Can we predict the result of an Australian election before it occurs? How certain of the outcome can we be? My talk will use the 2019 Australian federal election as a case study to provide an entry-level introduction to the benefits of probabilistic forecasting and PyMC3. [#](https://2019.pycon-au.org/talks/forecasting-australias-2019-election-with-pymc3)
 
@@ -157,7 +157,7 @@ Highly visibile reactions are great, so try and use that with real projects as w
 
 Apply probabilistic forecasting to a future issue. Read [this book](https://nostarch.com/learnbayes) and [ThinkBayes](https://greenteapress.com/wp/think-bayes/).
  
-## cuDF: RAPIDS GPU-Accelerated Dataframe Library
+## cuDF: RAPIDS GPU Accelerated Dataframe Library
 
 > RAPIDS open-source software enables end-to-end data science and analytics pipelines to run entirely on GPUs. Key to RAPIDS is cuDF, a pandas-like Python data frame library with a high-performance CUDA C++ implementation. cuDF and RAPIDS enable large speedups for end-to-end data science using GPUs. [#](https://2019.pycon-au.org/talks/cudf-rapids-gpu-accelerated-dataframe-library)
 
@@ -250,7 +250,7 @@ So look into getting a Nvidia powered computer suitable for using with rapids, t
 Explore openbci further and hack my own neuro thingamajig.
 
 
-## Machine Learning and Cyber Security - Detecting malicious URLs in the haystack
+## Machine Learning and Cyber Security: Detecting malicious URLs in the haystack
 
 > Today, security teams are in an increasingly one-sided battle to defend against a myriad of cyber attacks. Web-based attacks are often devastating, with conventional blacklists and reputation-based defence tactics not able to identify previously unseen malicious URLs. Is AI the solution? [#](https://2019.pycon-au.org/talks/machine-learning-and-cyber-security--detecting-malicious-urls-in-the-haystack)
 
@@ -321,7 +321,7 @@ Explore openbci further and hack my own neuro thingamajig.
 
 **takeaway:** make things simpler by taking away choices by using automated tools. Test and monitor services.
 
-## Tunnel Snakes Rule! Bringing the many worlds of Python together to monitor Melbourne's biggest infrastructure project.
+## Tunnel Snakes Rule! Bringing the many worlds of Python together to monitor Melbournes biggest infrastructure project.
 
 > Python is being used to provide real-time environmental monitoring on the Melbourne Metro Tunnel project. Come along to see how open source Python tools from the web, IoT, cloud infrastructure and scientific domains are being used together to monitor environmental telemetry on a city-wide scale. [#](https://2019.pycon-au.org/talks/tunnel-snakes-rule-bringing-the-many-worlds-of-python-together-to-monitor-melbournes-biggest-infrastructure-project)
 
@@ -348,7 +348,7 @@ Explore openbci further and hack my own neuro thingamajig.
 
 **takeaway:** dang. that is a lot of stuff.
 
-## Using python-programmed microcontrollers to build comedy props
+## Using python programmed microcontrollers to build comedy props
 
 > Early-career comedians often have difficulties adding electronic props to their acts, due to the high cost of materials and fabrication skills required. This talk will recreate several props used in comedic performances, showing the code and components used. [#](https://2019.pycon-au.org/talks/using-python-programmed-microcontrollers-to-build-comedy-props)
 
@@ -432,8 +432,9 @@ Explore openbci further and hack my own neuro thingamajig.
 - using processing.py to build worlds and model weather using isca
 - deep deep rabbit whole of modelling and fitting worlds into the solar system
 
-### @verinoica_hanus data driven look at code comments
+### data driven look at code comments
 
+- [@veronica_hanus](https://twitter.com/veronica_hanus)
 - think about inline comments as documentation
   - autogen docs from inline comments
 - comments can be magic
@@ -518,7 +519,7 @@ Explore openbci further and hack my own neuro thingamajig.
 
 **takeaway:** molecular dynamics is hard. I liked how they simplified a very complex thing - proteins, viruses - to a simple system which they could model computationaly and hope it approximates the real thing.
 
-## Instant-feedback, instant-debugging Python coding
+## Instant feedback, instant-debugging Python coding
 
 > Building on Bret Victor’s famous ‘Inventing on Principle’ presentation, we look at writing Python where the code is instantly run and every line visualized after every single keystroke. There’s a future beyond the text-editor -> console-run loop and this is a taste of it. [#](https://2019.pycon-au.org/talks/instant-feedback-instant-debugging-python-coding)
 
