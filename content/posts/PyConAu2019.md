@@ -12,6 +12,37 @@ Future challange: Make a jupyter notebook for each talk to implement some of the
 
 The [pyconAU19 videos](https://www.youtube.com/playlist?list=PLs4CJRBY5F1LKqauI3V4E_xflt6Gow611) are up on youtube.
 
+- [You don't always need NumPy](#you-dont-always-need-numpy)
+- [Flying by the seat of our pants - our journey of teaching python using drones](#flying-by-the-seat-of-our-pants---our-journey-of-teaching-python-using-drones)
+- [Using Dash by Plotly for Interactive Visualisation of Crime Data](#using-dash-by-plotly-for-interactive-visualisation-of-crime-data)
+- [Building, designing, teaching and training simulation environments for Machine Learning](#building-designing-teaching-and-training-simulation-environments-for-machine-learning)
+- [Forecasting Australia's 2019 Election with PyMC3](#forecasting-australias-2019-election-with-pymc3)
+- [cuDF: RAPIDS GPU-Accelerated Dataframe Library](#cudf-rapids-gpu-accelerated-dataframe-library)
+- [Understanding GPUs](#understanding-gpus)
+- [Not a long time ago, in a galaxy not very far away, an astronomer and a computer scientist walk into a bar...](#not-a-long-time-ago-in-a-galaxy-not-very-far-away-an-astronomer-and-a-computer-scientist-walk-into-a-bar)
+- [Learn to control your brain: Brain Computer Interfacing with Python](#learn-to-control-your-brain-brain-computer-interfacing-with-python)
+- [Machine Learning and Cyber Security - Detecting malicious URLs in the haystack](#machine-learning-and-cyber-security---detecting-malicious-urls-in-the-haystack)
+- [Creating Lasting Change](#creating-lasting-change)
+- [Lessons learned building Python microservices](#lessons-learned-building-python-microservices)
+- [Tunnel Snakes Rule! Bringing the many worlds of Python together to monitor Melbourne's biggest infrastructure project.](#tunnel-snakes-rule-bringing-the-many-worlds-of-python-together-to-monitor-melbournes-biggest-infrastructure-project)
+- [Using python-programmed microcontrollers to build comedy props](#using-python-programmed-microcontrollers-to-build-comedy-props)
+- [Python Applications in Infrastructure Planning and Civil Engineering](#python-applications-in-infrastructure-planning-and-civil-engineering)
+- [Fantastic Blocks And Where To Hide Them](#fantastic-blocks-and-where-to-hide-them)
+- [Profiling Pathogens with (micro) Python](#profiling-pathogens-with-micro-python)
+- [The Antipodes](#the-antipodes)
+- [Saturday Lightning Talks](#saturday-lightning-talks)
+  - [Sam Bishop: Computational World Building](#sam-bishop-computational-world-building)
+  - [@verinoica_hanus data driven look at code comments](#verinoicahanus-data-driven-look-at-code-comments)
+  - [logging](#logging)
+- [The real costs of Open Source Sustainability](#the-real-costs-of-open-source-sustainability)
+- [Shipping your first Python package and automating future publishing](#shipping-your-first-python-package-and-automating-future-publishing)
+- [Insights into Social Media Data using Entropy Theory](#insights-into-social-media-data-using-entropy-theory)
+- [It's dark and my lights aren't working (an asyncio success story)](#its-dark-and-my-lights-arent-working-an-asyncio-success-story)
+- [The universe as balls and springs: molecular dynamics in Python](#the-universe-as-balls-and-springs-molecular-dynamics-in-python)
+- [Instant-feedback, instant-debugging Python coding](#instant-feedback-instant-debugging-python-coding)
+- [Orchestrating complex (not complicated) tasks using AWS serverless and Python](#orchestrating-complex-not-complicated-tasks-using-aws-serverless-and-python)
+- [Sunday Lightning Talks](#sunday-lightning-talks)
+- [notes](#notes)
 
 ## You don't always need NumPy
 
