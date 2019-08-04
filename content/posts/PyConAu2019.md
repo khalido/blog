@@ -37,12 +37,16 @@ The [pyconAU19 videos](https://www.youtube.com/playlist?list=PLs4CJRBY5F1LKqauI3
 - [The real costs of Open Source Sustainability](#the-real-costs-of-open-source-sustainability)
 - [Shipping your first Python package and automating future publishing](#shipping-your-first-python-package-and-automating-future-publishing)
 - [Insights into Social Media Data using Entropy Theory](#insights-into-social-media-data-using-entropy-theory)
-- [It's dark and my lights aren't working (an asyncio success story)](#its-dark-and-my-lights-arent-working-an-asyncio-success-story)
+- [It's dark and my lights arent working (an asyncio success story)](#its-dark-and-my-lights-arent-working-an-asyncio-success-story)
 - [The universe as balls and springs: molecular dynamics in Python](#the-universe-as-balls-and-springs-molecular-dynamics-in-python)
 - [Instant feedback, instant-debugging Python coding](#instant-feedback-instant-debugging-python-coding)
 - [Orchestrating complex (not complicated) tasks using AWS serverless and Python](#orchestrating-complex-not-complicated-tasks-using-aws-serverless-and-python)
 - [Sunday Lightning Talks](#sunday-lightning-talks)
-- [notes](#notes)
+  - [Pre european potatoes](#pre-european-potatoes)
+  - [Quantum Computing](#quantum-computing)
+  - [Batteries included but leaking](#batteries-included-but-leaking)
+- [mega takeaway](#mega-takeaway)
+- [misc notes](#misc-notes)
 
 ## You dont always need NumPy
 
@@ -493,7 +497,7 @@ Explore openbci further and hack my own neuro thingamajig.
 
 **takeaway:** Look at other fields for ideas on how to tackle problems.
 
-## It's dark and my lights aren't working (an asyncio success story)
+## It's dark and my lights arent working (an asyncio success story)
 
 > I have invested huge amounts of time in achieving a simple goal – making the lighting in my home “smart”. It’s not ground breaking, nor is it practical or cost effective, but it sure was educational, uses a bunch of Python, and the result makes me (and my family) happy. [#](https://2019.pycon-au.org/talks/its-dark-and-my-lights-arent-working-an-asyncio-success-story)
 
@@ -550,11 +554,36 @@ Explore openbci further and hack my own neuro thingamajig.
 
 **takeaway:** instead of making overly complex lambda functions, model the problem as a finite state machine, make simple lambdas as appropriate then make a state machine which embeds some of the logic and calls lambdas.
 
-Then you can make a state machine to watch over all your state machines!
+Then you can make a state machine to watch over all your other state machines!
 
 ## Sunday Lightning Talks
 
+### Pre european potatoes
 
-## notes
+- pototoes were far away from NZ. got there long time ago. 
+- [growstuff](https://www.growstuff.org) is tinder for potaoes.
+
+### Quantum Computing
+
+- cool new thing
+- basics of QM: instead of bits, you have qbits which have a vector instead of being a 0 or 1. 
+- you can [access quantum computers free online](https://www.dwavesys.com/take-leap)
+- see [pennylane](https://pennylane.ai)
+
+### Batteries included but leaking
+
+- talk about fear of removing old and semi dead bits of the stdlib
+- pep594 will break a lot of corporate code which doesn't have replacements - this places the burden of maintainence from the corporations to python
+- some of the libs broken can be easily updated
+- make pythons development easier, kill the nasty old bits
+
+## mega takeaway
+
+Its nice to hear talks in real life instead of on youtube. Focuses the attention. 
+
+Moving forward, my biggest takeaway is to take an idea and just run with it. Many of the speakers had an itch - a home to automate with python, a paper to write or drones to fly and just did it. So take one of my project ideas and just do it, using circleci of course.
+
+## misc notes
 
 - Embed youtube vidoes by `{{< youtube EqQj5os3Mfw >}}` or `{{< youtube id="w7Ft2ymGmfc" autoplay="false" >}}`
+- can't use `'` or `-` in anchor links for some reason. Chrome doesn't jump to anchors! Bad chrome!
