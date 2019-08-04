@@ -3,6 +3,7 @@ title: "PyCon Australia 2019"
 date: 2019-08-03
 tags:
 - python
+- talks
 ---
 
 My notes for the [PyConAU 2019 talks](https://2019.pycon-au.org) I went to. This blog is an attempt to try and capture some useful info from the talks.
@@ -454,38 +455,70 @@ Explore openbci further and hack my own neuro thingamajig.
 
 > Entropy theory is usually thought of as something that applies to matter and energy, but it turns out that we can apply the same techniques of analysis to social media sites. Join me as we study the thermodynamic behaviour of users on Twitter, and learn how to analyse it better. [#](https://2019.pycon-au.org/talks/insights-into-social-media-data-using-entropy-theory)
 
-- Mars Geldard
--
+- Mars Geldard [github](https://github.com/TheMartianLife), honours student at U of Tas
+- awesome talk, see [preso slides here.]([pycon preso](https://github.com/TheMartianLife/PyConAU-2019))
+- Interesting application of entropy theory to social media analysis.
+
+**takeaway:** Look at other fields for ideas on how to tackle problems.
 
 ## It's dark and my lights aren't working (an asyncio success story)
 
 > I have invested huge amounts of time in achieving a simple goal – making the lighting in my home “smart”. It’s not ground breaking, nor is it practical or cost effective, but it sure was educational, uses a bunch of Python, and the result makes me (and my family) happy. [#](https://2019.pycon-au.org/talks/its-dark-and-my-lights-arent-working-an-asyncio-success-story)
 
-- Jim Mussared
--
+- Jim Mussared [@jim_mussared](https://twitter.com/jim_mussared) [github](https://github.com/jimmo)
+- renovated his house in 2015 wanted smart everything
+- used zigbee enabled bulbs
+- digiXBee board runs micropython
 
+**takeaway:** home automation is a deep deep rabbit hole to jump into. This guy should get a Medal for Bravery above and beyond the call of duty from Zigbee and Samsung smartthings.
 
 ## The universe as balls and springs: molecular dynamics in Python
 
 > Surprisingly, we can approximate matter as a bunch of balls on springs and learn things about our bodies and the world. This talk will look at the different stages of molecular dynamics (MD) simulations and how Python is changing everything. [#](https://2019.pycon-au.org/talks/the-universe-as-balls-and-springs-molecular-dynamics-in-python)
 
 - Lily Wang, working on PhD on molecular dynamics at ANU
--
+- define an atom as a ball (radiaus, mass) with everything else as springs then you can use molecular dynamics to model a system of atoms. To study proteins, viruses etc
+- [openmm](http://openmm.org/) lib for molecular simulations, also [MDanalysis](https://www.mdanalysis.org)
+- [plotly](https://plot.ly/python/) for interactive viz for the win!
+- MD in the past: rubber balls stuck together
+- now: simulating viruses with millions of atoms using supercomputers
+  - currently sims top out at millions of atoms, so long way to go to simulate bigger structures
+- [OpenForceField](https://openforcefield.org): open science initiative
+
+**takeaway:** molecular dynamics is hard. I liked how they simplified a very complex thing - proteins, viruses - to a simple system which they could model computationaly and hope it approximates the real thing.
 
 ## Instant-feedback, instant-debugging Python coding
 
 > Building on Bret Victor’s famous ‘Inventing on Principle’ presentation, we look at writing Python where the code is instantly run and every line visualized after every single keystroke. There’s a future beyond the text-editor -> console-run loop and this is a taste of it. [#](https://2019.pycon-au.org/talks/instant-feedback-instant-debugging-python-coding)
 
-- Robert Lechte
--
+- Robert Lechte [@djrobstep](https://twitter.com/djrobstep) [web](https://djrobstep.com)
+- python demo: code on left, instant output on the right
+- things take a while a change. new forms of media like newspapers enabled by the printing press took ages to appear
+- same with computers
+- devs spend too much time on understanding code vs understanding the problem
+- watch:
+  - Gary Bernhart "Whole new world" talk on reinventing the terminal
+  - Bret Victor "Inventing on Principle"
+- segway example showing live reaction of a simulated segway to programming is awesome
 
+**takeaway:** instant feedback is genius. I want a instant feedback python IDE. Actually strip the ide. Just a simple two pane interface, one showing code, other the results. Someone pls build a vscode or jupyter extension for this. I mean ppl are sending keystrokes to cloud AI's to predict smart suggestions, just running the code must be easier than that!
 
-## Volumetric Performance Capture and Playback: A Workflow with Python
+## Orchestrating complex (not complicated) tasks using AWS serverless and Python
 
-> Volumetric capture is a technique used to film in three dimensions for viewing in a virtual space.This talk will explore the different elements of a full volumetric capture stack, from coordinating usb cameras to playback in a 3D game engine and how python can be used to glue it all together. [#](https://2019.pycon-au.org/talks/volumetric-performance-capture-and-playback-a-workflow-with-python)
+> Python and serverless technologies are a great way to quickly scale a project, but what can you do when things get complicated? Here are some patterns to keep you sane. [#](https://2019.pycon-au.org/talks/orchestrating-complex-not-complicated-tasks-using-aws-serverless-and-python)
 
-- Luke Miller
--
+- Michael Kelly, [web](https://ashiny.cloud), [github](https://github.com/galactose) from [versent](https://versent.com.au)
+- lambda functions
+  - adv: cheaper, little config, encourages refactoring, easy learning curve
+  - limitations: runtime limits
+- use [aws step functions](https://aws.amazon.com/step-functions/) to build a state machine to connect different services together, trigger lambads and so on
+  - state machines hold state unlike lambdas
+- see talk for project template example
+- use [black](https://github.com/psf/black) for code linting.
+
+**takeaway:** instead of making overly complex lambda functions, model the problem as a finite state machine, make simple lambdas as appropriate then make a state machine which embeds some of the logic and calls lambdas.
+
+Then you can make a state machine to watch over all your state machines!
 
 ## Sunday Lightning Talks
 
