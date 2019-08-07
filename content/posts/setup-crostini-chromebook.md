@@ -1,6 +1,7 @@
 ---
 title: "Setting up Linux on a Chromebook with Crostini"
 date: 2018-08-24
+lastmod: 2019-08-7
 tags:
 - chromebooks
 ---
