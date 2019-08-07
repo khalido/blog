@@ -17,6 +17,7 @@ Most of these tips are from the [reddit crostini wiki](https://www.reddit.com/r/
   - [markdown app](#markdown-app)
 - [install anaconda for a better python](#install-anaconda-for-a-better-python)
   - [jupyter lab](#jupyter-lab)
+  - [install a R kernel](#install-a-r-kernel)
 - [make the terminal nicer to use](#make-the-terminal-nicer-to-use)
   - [fix window shortcuts](#fix-window-shortcuts)
   - [multiplex all the things](#multiplex-all-the-things)
@@ -128,6 +129,21 @@ See https://github.com/mauhai/awesome-jupyterlab
 
 todo: try out [nteract](https://nteract.io/) - a react based desktop front end for jupyter.
 
+### install a R kernel
+
+I hate doing this, but sometimes you need R. So here goes:
+
+```
+conda create -n R r-essentials r-base
+```
+
+Presto! now R should show up as a kernel in jupyter.
+
+Intall r packages inside the r environment by using the conda r channel - note that many packages seems to be prefaced with `r-`:
+
+```
+conda install -c r r-plotly
+```
 
 ## make the terminal nicer to use
 
