@@ -21,3 +21,6 @@ VS Code has so many extensions and stuff, that this is an evoloving list of usef
 [Markdown All-in-One](https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one)
 
 Adds useful markdown tools like making lists with sublists, adding a table of contents and so on.
+
+## Useful links
+
