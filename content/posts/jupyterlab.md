@@ -35,6 +35,16 @@ step 2: install nodejs itself by:
 
 `nvm install node`
 
+Install all the extensions then build in one go by:
+
+```
+jupyter labextension install @jupyter-widgets/jupyterlab-manager --no-build && \
+jupyter labextension install @jupyterlab/toc --no-build && \
+jupyter lab build --minimize=False
+```
+
+Note: the build flag is because building was taking too long without this.
+
 ## blog with jupyter notebooks
 
 So there are tools like Pelican which are setup directly with jupyter notebooks, but I had already set up a hugo powered blog since its free, easy and just works, so my mini shortcut is to put all my notebooks the hugo content directory and run a little script there which converts the jupyter notebooks to markdown files:
