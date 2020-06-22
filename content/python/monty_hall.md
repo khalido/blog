@@ -1,4 +1,3 @@
-
 --- 
 title: "Monty Hall"  
 date: 2019-07-05
@@ -105,7 +104,7 @@ plt.pie([yes_switch, no_switch], labels=["Switching win %", "Not switching win %
 ```
 
 
-![png](monty_hall_12_0.png)
+![png](monty_hall_files/monty_hall_12_0.png)
 
 
 So our chances of winning essentially double if we switch our guess once a goat door has been opened.
@@ -163,7 +162,7 @@ plt.bar([0,1], [yes_switch_no_reveal, no_switch_no_reveal], tick_label=["Switche
 ```
 
 
-![png](monty_hall_20_0.png)
+![png](monty_hall_files/monty_hall_20_0.png)
 
 
 There is no impact of switching our guess if a goat door hasn't been revealed. Which makes sense to, since whatever door we choose, it has 1/3 probablity of winning. 
