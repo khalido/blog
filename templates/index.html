@@ -1,0 +1,26 @@
+<%inherit file="base.html"/>
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Blog Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <div class="container">
+
+        <p>Loop through the blog posts</p>
+
+        <ul>
+            % for post in df.itertuples():
+                <li>${post.title}</li>
+            % endfor
+        </ul>
+
+    </div>
+
+</body>
+
+</html>
