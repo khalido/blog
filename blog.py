@@ -51,10 +51,10 @@ config.read("config.ini")
 
 # read in all the config stuff actually used from the config file
 # path to where all the files are stored
-path = Path(config["blog"]["content"])
+path_content = Path(config["blog"]["content"])
 
 # this folder contains all the html/css/images to be published
-publish = Path(config["blog"]["publish"])
+path_publish = Path(config["blog"]["publish"])
 
 # baseurl = config["blog"]["baseurl"]
 
