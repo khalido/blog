@@ -10,6 +10,7 @@ This file:
 
 # libs built into python
 import os
+import json
 from pathlib import Path
 from dataclasses import dataclass
 from configparser import ConfigParser
@@ -51,7 +52,7 @@ config.read("config.ini")
 
 # read in all the config stuff actually used from the config file
 # path to where all the files are stored
-path_content = Path(config["blog"]["content"])
+path_md = Path(config["blog"]["posts"])
 
 # this folder contains all the html/css/images to be published
 path_publish = Path(config["blog"]["publish"])
@@ -75,7 +76,7 @@ def get_posts(debug=False):
     """reads from disk and returns a dataframe of all posts"""
 
     # lists of md files and notebooks to convert
-    md_paths = [f for f in path.rglob("*.md")]
+    md_paths = [f for f in path_md.rglob("*.md")]
     # notebook_paths = [f for f in path.rglob("*.ipynb")]
 
     # decide whether to use dataframe or a dict to hold all the posts
@@ -158,6 +159,8 @@ def get_posts(debug=False):
 
     return posts, postsdict, tagsdict
 
+    # misc stuff, fix this later
+
     df = pd.DataFrame(data)  # .set_index("filename")
     print(f"{len(df)} posts converted and saved in dataframe")
 
@@ -167,15 +170,21 @@ def get_posts(debug=False):
     df = df.sort_values(by="date", ascending=False)
     return df
 
+def searchlist(posts):
+    """takes in a list of post objects and returns a json string
+    which can be passed to javascript"""
+    search_list = [{"title": post.title, "tags": post.tags} for post in posts]
+    return json.dumps(search_list)
+
 def write():
     """this writes all the html pages to disk"""
     posts, postsdict, tags = get_posts()
-    
-    # write index page
 
+    # write index page
+    
 
     # write tag pages
     for t in tags.keys():
-        for s in sorted(tags[t], key = lambda x: postsdict[x].date, reverse=True):
+        for s in sorted(tags[t], key=lambda x: postsdict[x].date, reverse=True):
             print(postsdict[s].slug, postsdict[s].date)
         print("---------------")
