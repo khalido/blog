@@ -1,0 +1,23 @@
+<%doc>
+    generates post page 
+</%doc>
+
+<%include file="header.html"/>
+
+<head>
+    <title>${post.title}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    % if post.toc:
+        ${post.toc}
+    % endif
+    
+    <div class="post">  
+        ${post.html}
+    </div>
+
+</body>
+
+<%include file="footer.html"/>
