@@ -1,29 +1,74 @@
 ---
-title: "Setting up my own blog"
-date: 2020-06-14
-lastmod: 2019-08-7
+title: "how the blog was built"
+date: 2020-07-14
 tags:
 - python
-draft: false
 toc: true
 ---
 
-Hereby I talk through writing my own blog engine. There are many excellent ones out there, but to customize any of them takes so much understanding of how they work, the template and theme engines they use, that its easier to just use them exactly as is, or, to customize, to just roll out your own. So here goes...
+Hereby I talk through writing my own blog engine. There are many excellent ones out there, but to customize any of them takes so much understanding of how they work, the template and theme engines they use, that its easier to just use them exactly as is with an existing theme. I wanted my own custom static blog, and a reason to do some python coding, so here goes yet another python blogging script.
 
-The main goal is:
+This post documents the process of building this blog. The main goal is to put markdown and jupyter notebooks in a folder, and build a static site which gets autoupdated on [github pages](https://pages.github.com/) or [netlify]https://www.netlify.com/). Just like [hugo](https://gohugo.io/), [jekyll](https://jekyllrb.com/), [gatsby](https://www.gatsbyjs.org/) and so many others!
 
-- put markdown files in a folder, and build a site. Just like [hugo](https://gohugo.io/), [jekyll](https://jekyllrb.com/), [gatsby](https://www.gatsbyjs.org/) and so many others!
+## the basic blog
 
-## 
+Its straightforward to read a set of markdown posts and convert to python. I am using python's [pathlib] library to read the posts and [python-markdown](https://python-markdown.github.io/) to parse them into html, complete with inline syntax highlighting.
 
-## twitter embed
+### parsing markdown
+
+Python markdown 
+
+- https://python-markdown.github.io/extensions/
+- https://facelessuser.github.io/pymdown-extensions/
+
+
+
+Start a server
+
+```bash
+python -m http.server
+```
+
+
+
+### css
+
+Frameworks I looked at:
+
+- [Pure.css](https://purecss.io/)
+- [milligram](https://milligram.io/)
+- [newcss](https://newcss.net/)
+
+
+
+## Misc stuff
+
+### twitter embed
 
 This should show a twitter tweet embedded inside the page:
 
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Sunsets don&#39;t get much better than this one over <a href="https://twitter.com/GrandTetonNPS?ref_src=twsrc%5Etfw">@GrandTetonNPS</a>. <a href="https://twitter.com/hashtag/nature?src=hash&amp;ref_src=twsrc%5Etfw">#nature</a> <a href="https://twitter.com/hashtag/sunset?src=hash&amp;ref_src=twsrc%5Etfw">#sunset</a> <a href="http://t.co/YuKy2rcjyU">pic.twitter.com/YuKy2rcjyU</a></p>&mdash; US Department of the Interior (@Interior) <a href="https://twitter.com/Interior/status/463440424141459456?ref_src=twsrc%5Etfw">May 5, 2014</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-The code used
+### testing syntax highlight
 
-```html
-<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Sunsets don&#39;t get much better than this one over <a href="https://twitter.com/GrandTetonNPS?ref_src=twsrc%5Etfw">@GrandTetonNPS</a>. <a href="https://twitter.com/hashtag/nature?src=hash&amp;ref_src=twsrc%5Etfw">#nature</a> <a href="https://twitter.com/hashtag/sunset?src=hash&amp;ref_src=twsrc%5Etfw">#sunset</a> <a href="http://t.co/YuKy2rcjyU">pic.twitter.com/YuKy2rcjyU</a></p>&mdash; US Department of the Interior (@Interior) <a href="https://twitter.com/Interior/status/463440424141459456?ref_src=twsrc%5Etfw">May 5, 2014</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+```python
+from mako.template import Template
+from mako.lookup import TemplateLookup
+lookup = TemplateLookup(directories=["templates"])
+
+# make the big picture templates
+for tmpl in ["index.html"]:
+    template = lookup.get_template(tmpl)
+    html = template.render(posts=posts).strip()
+    path = path_publish / tmpl
+    path.write_text(html)
+    print(f"wrote {tmpl} to {path}")
+
+# write all the posts
+template = lookup.get_template("post.html")
+for post in posts:
+    html = template.render(post=post).strip()
+    path = path_publish / f"{post.slug}.html"
+    path.write_text(html)
+    print(f"wrote {post.slug} to {path}")
 ```

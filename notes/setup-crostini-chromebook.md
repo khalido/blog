@@ -12,21 +12,6 @@ ChromeOS supports a built in Linux - running inside a container running insde a 
 
 Most of these tips are from the [reddit crostini wiki](https://www.reddit.com/r/Crostini/wiki/index), I've put all the ones I'm using in one page for a handy reference.
 
-- [Install all the apps](#install-all-the-apps)
-  - [use backports to get recent packages](#use-backports-to-get-recent-packages)
-  - [flatpak](#flatpak)
-  - [vs code](#vs-code)
-  - [markdown app](#markdown-app)
-- [install anaconda for a better python](#install-anaconda-for-a-better-python)
-  - [jupyter lab](#jupyter-lab)
-  - [install a R kernel](#install-a-r-kernel)
-- [make the terminal nicer to use](#make-the-terminal-nicer-to-use)
-  - [fix window shortcuts](#fix-window-shortcuts)
-  - [multiplex all the things](#multiplex-all-the-things)
-  - [jazz up the shell](#jazz-up-the-shell)
-  - [setup vim proper like](#setup-vim-proper-like)
-- [Download all my git repos](#download-all-my-git-repos)
-
 ## Install all the apps
 
 ### use backports to get recent packages
