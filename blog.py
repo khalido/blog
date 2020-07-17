@@ -22,6 +22,8 @@ from typing import List, Optional
 # external libs, try to minimize use
 import yaml
 import pandas as pd  # no real need to use this so rethink later
+from mako.template import Template
+from mako.lookup import TemplateLookup
 
 # from tqdm.auto import tqdm
 from datetime import datetime
@@ -35,6 +37,7 @@ class Post:
 
     title: str
     slug: str
+    link: str
     path: Path
     tags: List[str]
     markdown: str
@@ -71,6 +74,9 @@ extension_configs = {
 
 md = markdown.Markdown(extensions=extensions, extension_configs=extension_configs)
 
+# setup Mako templates
+lookup = TemplateLookup(directories=["templates"])
+
 
 def get_posts(debug=False):
     """reads from disk and returns a dataframe of all posts"""
@@ -90,7 +96,7 @@ def get_posts(debug=False):
 
         # extract front matter b/w "---" lines
         n = all_txt[3:].find("---") + 3
-        fm = yaml.load(all_txt[:n])  # front matter dict
+        fm = yaml.load(all_txt[:n], Loader=yaml.FullLoader)  # front matter dict
         txt = all_txt[n + 3 :].strip()  # text excluding front matter
         if debug:
             print(fm)
@@ -135,9 +141,12 @@ def get_posts(debug=False):
             if fm["toc"] is True:
                 toc = md.toc
 
+        link = f"{tags[0]}/{slug}.html"
+
         pp = Post(
             title=fm["title"],
             slug=slug,
+            link=link,
             path=p,
             tags=tags,
             date=dt,
@@ -170,21 +179,116 @@ def get_posts(debug=False):
     df = df.sort_values(by="date", ascending=False)
     return df
 
-def searchlist(posts):
-    """takes in a list of post objects and returns a json string
-    which can be passed to javascript"""
-    search_list = [{"title": post.title, "tags": post.tags} for post in posts]
-    return json.dumps(search_list)
 
-def write():
-    """this writes all the html pages to disk"""
-    posts, postsdict, tags = get_posts()
+def make_folder(path, debug: bool = False):
+    """makes parent folders if they don't exist for a path"""
 
-    # write index page
+    # assume the last thing is a file if there is a dot in the name
+    if "." in path.name:
+        path = path.parent
+
+    try:
+        path.mkdir(parents=True, exist_ok=False)
+        if debug:
+            print(f"{path} folder made")
+    except FileExistsError:
+        if debug:
+            print(f"{path} folder already exists")
+        pass
+
+
+def search_json(posts, path=path_publish):
+    """makes a json of the posts info to search, returns json string
+    and writes to disk"""
+
+    search_list = [
+        {"title": post.title, "tags": post.tags, "link": post.link} for post in posts
+    ]
+
+    posts_json = json.dumps(search_list)
+    path = path / "posts.json"
+    make_folder(path)
+
+    path.write_text(posts_json)
+    return posts_json
+
+
+def write_posts(posts, tmpl: str = "post.html"):
+    """makes a html page for each post using list of posts passed in
     
+    Args:
+        tmpl: name of templete
+        posts: list of posts
+    """
 
-    # write tag pages
-    for t in tags.keys():
-        for s in sorted(tags[t], key=lambda x: postsdict[x].date, reverse=True):
-            print(postsdict[s].slug, postsdict[s].date)
-        print("---------------")
+    template = lookup.get_template(tmpl)
+
+    print(f"\nWriting post page for {len(posts)} posts.")
+
+    for post in posts:
+        html = template.render(post=post).strip()
+
+        # publish each post inside its first tag folder
+        if post.tags:
+            path = path_publish / post.tags[0]
+        else:
+            path = path_publish
+
+        make_folder(path)  # make folder in case
+
+        path = path / f"{post.slug}.html"
+
+        path.write_text(html)
+        print(f"wrote {post.slug} to {path}")
+
+
+def write_index_page(posts, tmpl: str = "index.html", foldername=None):
+    """makes a html index page in the foldername using list of posts passed in
+    
+    Args:
+        tmpl: name of templete
+        foldername: name of folder to create
+        posts: list of posts
+    """
+
+    template = lookup.get_template(tmpl)
+    path = path_publish
+
+    if foldername:
+        path = path / foldername
+
+    make_folder(path)  # make folder in case it doesn't exist
+
+    # get json for fusejs search object
+    # todo: modify js to read json from disk instead of passing obj
+    postsjson = search_json(posts, path)
+
+    html = template.render(posts=posts, postsjson=postsjson).strip()
+
+    # write to disk
+    path = path / tmpl
+    path.write_text(html)
+    print(f"wrote {tmpl} to {path}")
+
+
+def write_tags(posts, tags):
+    """writes an index.html file for each tag"""
+    print(f"\nWriting an index page for {len(tags)} tags.")
+    for tag in tags.keys():
+        # filter posts
+        tag_posts = [post for post in posts if tag in post.tags]
+        # using the same index page for now
+        write_index_page(foldername=tag, posts=tag_posts)
+
+
+def write_all(posts: list, tags: dict):
+    """this writes all the html pages to disk"""
+    # posts, postsdict, tags = get_posts()
+    write_index_page(posts=posts, foldername="")
+    write_tags(posts=posts, tags=tags)
+    write_posts(posts=posts)
+
+
+if __name__ == "__main__":
+    posts, postsdict, tags = get_posts()
+    write_all(posts, tags)

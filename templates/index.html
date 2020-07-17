@@ -6,14 +6,11 @@
 
 <%include file="header.html"/>
 
-<head>
     <title>Blog Blog</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
     <div class="container">
-
 
         <p>All the blog posts, using fusejs to search post title, content and tags.</p>
 
@@ -22,13 +19,14 @@
         <input type="text" id="postSearch" placeholder="Search posts...">
         <ul id="searchresults">
             % for post in posts:
-                <li><a href="${post.slug}.html">${post.title}</a></li>
+                <li><a href=${post.link}>${post.title}</a></li>
             % endfor
         </ul>    
 
         <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.js"></script>
 
         <script>
+            //const searchList2 = require("posts.json");
             const searchList = ${ postsjson }
             const options = {
                 includeScore: false,

@@ -12,6 +12,11 @@ This post documents the process of building this blog. The main goal is to put m
 
 ## the basic blog
 
+Listing todos...
+
+- [ ] add emoji
+- [ ] add tag pages
+
 Its straightforward to read a set of markdown posts and convert to python. I am using python's [pathlib] library to read the posts and [python-markdown](https://python-markdown.github.io/) to parse them into html, complete with inline syntax highlighting.
 
 ### parsing markdown
@@ -31,6 +36,11 @@ python -m http.server
 
 
 
+### html
+
+- [what to put in the head of a html page](https://github.com/joshbuchea/HEAD)
+- https://htmldom.dev/
+
 ### css
 
 Frameworks I looked at:
@@ -38,10 +48,28 @@ Frameworks I looked at:
 - [Pure.css](https://purecss.io/)
 - [milligram](https://milligram.io/)
 - [newcss](https://newcss.net/)
+- [lit](https://ajusa.github.io/lit/docs/lit.html)
+- [concrete.css](https://concrete.style/) - very minimal
+- https://csslayout.io/ - examples of using css directly
+
+
 
 
 
 ## Misc stuff
+
+### emoji
+
+Some unicode fonts have emojis built in, so ways to enable emoji is:
+
+- use a unicode font and investigate python-markdown emoji parser to deal with them properly
+- use a script to replace `:smile:` with emoji incons - nope, don't want images scattered all over the shop.
+
+Emoji test:
+
+- smiley face test copy pasted from some website: 😅
+- smiley face written using markdown code `:smile:`​ :smile: 
+  - dang, this works in the markdown editor but not in the browser
 
 ### twitter embed
 
