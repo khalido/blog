@@ -10,6 +10,7 @@ This file:
 
 # libs built into python
 import os
+import shutil
 import json
 from pathlib import Path
 from dataclasses import dataclass
@@ -21,6 +22,7 @@ from typing import List, Optional
 
 # external libs, try to minimize use
 import yaml
+import nbformat
 import pandas as pd  # no real need to use this so rethink later
 from mako.template import Template
 from mako.lookup import TemplateLookup
@@ -54,11 +56,16 @@ config = ConfigParser()
 config.read("config.ini")
 
 # read in all the config stuff actually used from the config file
-# path to where all the files are stored
+# paths to content
 path_md = Path(config["blog"]["posts"])
+path_nb = Path(config["blog"]["notebooks"])
 
-# this folder contains all the html/css/images to be published
+# static files like css, js, images etc are here
+path_static = Path(config["blog"]["static"])
+
+# final output folder
 path_publish = Path(config["blog"]["publish"])
+
 
 # baseurl = config["blog"]["baseurl"]
 
@@ -78,11 +85,41 @@ md = markdown.Markdown(extensions=extensions, extension_configs=extension_config
 lookup = TemplateLookup(directories=["templates"])
 
 
+def convert_notebooks_to_md():
+    # emptying tmp so don't end up with old md files here
+    shutil.rmtree("tmp")
+
+    exporter = nbconvert.MarkdownExporter()
+    write_file = nbconvert.writers.FilesWriter(build_directory="tmp")
+
+    nb_paths = [f for f in path_nb.rglob("*.ipynb")]
+
+    for nb_path in nb_paths:
+        print(f"converting {nb_path}")
+        os.system(f"jupyter nbconvert --to markdown {nb_path} --output-dir tmp")
+
+        # with open(nb_path) as f:
+        #     nb_node = nbformat.read(f, as_version=4)
+
+        # (body, resources) = exporter.from_notebook_node(nb_node)
+
+        # write_file.write(
+        #     output=body, resources=resources, notebook_name=nb_path.name[:-6]
+        # )
+        print(f"\nconverted {len(nb_paths)} notebooks to markdown files")
+
+
 def get_posts(debug=False):
     """reads from disk and returns a dataframe of all posts"""
 
+    # convert notebooks to md and save in a tmp folder
+    convert_notebooks_to_md()
+
     # lists of md files and notebooks to convert
-    md_paths = [f for f in path_md.rglob("*.md")]
+    md_paths = [f for f in path_md.rglob("*.md")] + [
+        f for f in Path("tmp").rglob("*.md")
+    ]
+
     # notebook_paths = [f for f in path.rglob("*.ipynb")]
 
     # decide whether to use dataframe or a dict to hold all the posts
@@ -289,6 +326,26 @@ def write_all(posts: list, tags: dict):
     write_posts(posts=posts)
 
 
+def copy_static():
+    """copies over the contents of the static folder to the dist folder"""
+
+    try:
+        shutil.copytree(path_static, path_publish, dirs_exist_ok=True)
+        print(f"copied contents of {path_static} over to {path_publish}")
+    except:
+        print("Failed to copy static files")
+
+    # copy notebook files
+    print(f"TODO: copied notebook files over to {path_publish}")
+
+
 if __name__ == "__main__":
+    # get posts
     posts, postsdict, tags = get_posts()
+    # copy static files over to the publish dir
+    copy_static()
+    # write all the things to the publish dir
     write_all(posts, tags)
+
+    # commit and push publish dir to gh-pages branch
+    print("Website generated, now figure out how to publish it.")
