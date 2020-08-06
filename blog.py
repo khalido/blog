@@ -30,6 +30,7 @@ from mako.lookup import TemplateLookup
 # from tqdm.auto import tqdm
 from datetime import datetime
 import markdown
+import pymdownx.emoji
 import nbconvert
 
 
@@ -38,8 +39,9 @@ class Post:
     """class to store each individual posts data"""
 
     title: str
+    type: str  # type of content post, notebook, link, etc
     slug: str
-    link: str
+    link: str  # relative link to post in form tag/slug.html
     path: Path
     tags: List[str]
     markdown: str
@@ -51,48 +53,57 @@ class Post:
     draft: bool = False
 
 
+##################
 # read config file
+##################
 config = ConfigParser()
 config.read("config.ini")
 
 # read in all the config stuff actually used from the config file
+title: str = config["blog"]["title"]
+header: str = config["blog"]["header"]
+header_text: str = config["blog"]["header_text"]
+baseurl: str = config["blog"]["baseurl"]
+default_post_title: str = config["blog"]["default_post_title"]
+default_post_type: str = config["blog"]["default_post_type"]
+print(title, default_post_title, default_post_type)
+
 # paths to content
-path_md = Path(config["blog"]["posts"])
-path_nb = Path(config["blog"]["notebooks"])
+path_md: Path = Path(config["paths"]["posts"])  # md posts
+path_nb: Path = Path(config["paths"]["notebooks"])  # jupyter notebooks
+path_static: Path = Path(config["paths"]["static"])  # static files
+path_publish: Path = Path(config["paths"]["publish"])  # final output folder
 
-# static files like css, js, images etc are here
-path_static = Path(config["blog"]["static"])
-
-# final output folder
-path_publish = Path(config["blog"]["publish"])
-
-
-# baseurl = config["blog"]["baseurl"]
-
+#############################################
 # configure python markdown parser
-# make enters into line breaks by adding "nl2br"
-extensions = ["extra", "toc", "codehilite"]  # , "smarty"
+#############################################
+# make enters into line breaks by adding "nl2br", add emoji extension
+extensions = ["extra", "toc", "pymdownx.emoji", "codehilite"]  # , "smarty"
 
 # https://help.farbox.com/pygments.html - consider monokai default themes
-# noclasses: True puts all the styling in the html itself. False adds css styles
+# noclasses: True puts all the styling in the html itself. False uses css styles
 extension_configs = {
-    "codehilite": {"noclasses": True, "linenums": False, "pygments_style": "monokai"},
+    "pymdownx.emoji": {"emoji_generator": pymdownx.emoji.to_alt, "alt": "html_entity"},
+    "codehilite": {"noclasses": False, "linenums": False, "pygments_style": "autumn"},
 }
-
 md = markdown.Markdown(extensions=extensions, extension_configs=extension_configs)
 
+######################
 # setup Mako templates
+######################
 lookup = TemplateLookup(directories=["templates"])
 
 
 def convert_notebooks_to_md():
     # emptying tmp so don't end up with old md files here
-    shutil.rmtree("tmp")
+    shutil.rmtree("tmp", ignore_errors=True)
 
     exporter = nbconvert.MarkdownExporter()
     write_file = nbconvert.writers.FilesWriter(build_directory="tmp")
 
-    nb_paths = [f for f in path_nb.rglob("*.ipynb")]
+    nb_paths = [
+        f for f in path_nb.rglob("*.ipynb") if ".ipynb_checkpoints" not in str(f)
+    ]
 
     for nb_path in nb_paths:
         print(f"converting {nb_path}")
@@ -109,6 +120,53 @@ def convert_notebooks_to_md():
         print(f"\nconverted {len(nb_paths)} notebooks to markdown files")
 
 
+def md_to_post(p: Path, post_type=default_post_type, debug=False):
+    """takes in a path to md file  and returns a Post obj
+    """
+
+    all_txt = p.read_text()
+
+    # extract front matter b/w "---" lines
+    n = all_txt[3:].find("---") + 3
+    fm = yaml.load(all_txt[:n], Loader=yaml.FullLoader)  # front matter dict
+    txt = all_txt[n + 3 :].strip()  # text excluding front matter
+    if debug:
+        print(fm)
+
+    title = fm.get("title", default_post_title)
+    _post_type = fm.get("type", post_type)
+    slug = fm.get("slug", p.name.split(".")[0])  # todo: check repeated slugs
+    dt = fm.get("date", datetime.fromtimestamp(p.stat().st_ctime).date())
+    lastmod = fm.get("lastmod", datetime.fromtimestamp(p.stat().st_mtime).date())
+    draft = fm.get("draft", False)
+
+    tags = fm.get("tags", ["untagged"])
+
+    html = md.convert(txt)
+
+    if (toc := fm.get("toc", False)) :
+        toc = md.toc
+
+    link = f"{tags[0]}/{slug}.html"
+
+    post = Post(
+        title=title,
+        type=_post_type,
+        slug=slug,
+        link=link,
+        path=p,
+        tags=tags,
+        date=dt,
+        lastmod=lastmod,
+        markdown=txt,
+        draft=draft,
+        toc=toc,
+        html=html,
+    )
+
+    return post
+
+
 def get_posts(debug=False):
     """reads from disk and returns a dataframe of all posts"""
 
@@ -116,11 +174,12 @@ def get_posts(debug=False):
     convert_notebooks_to_md()
 
     # lists of md files and notebooks to convert
-    md_paths = [f for f in path_md.rglob("*.md")] + [
-        f for f in Path("tmp").rglob("*.md")
-    ]
+    md_paths = [f for f in path_md.rglob("*.md")]
 
-    # notebook_paths = [f for f in path.rglob("*.ipynb")]
+    try:
+        nb_paths = [f for f in Path("tmp").rglob("*.md")]
+    except:
+        print("No md files converted from jupyter notebooks found in tmp dir")
 
     # decide whether to use dataframe or a dict to hold all the posts
     posts = []  # list holding all the posts
@@ -128,76 +187,19 @@ def get_posts(debug=False):
     tagsdict = defaultdict(set)  # holds set of all posts for every tag
 
     for p in md_paths:
+        pp = md_to_post(p)
+        posts.append(pp)
 
-        all_txt = p.read_text()
-
-        # extract front matter b/w "---" lines
-        n = all_txt[3:].find("---") + 3
-        fm = yaml.load(all_txt[:n], Loader=yaml.FullLoader)  # front matter dict
-        txt = all_txt[n + 3 :].strip()  # text excluding front matter
-        if debug:
-            print(fm)
-
-        # using slug as the url and unique id for each post
-        # so consider some logic to make sure slugs aren't repeated
-        if fm.get("slug"):
-            slug = fm["slug"]
-        else:
-            slug = p.name.split(".")[0]
-
-        # add created date
-        if "date" in fm:
-            dt = fm["date"]
-        else:
-            dt = datetime.fromtimestamp(p.stat().st_ctime).date()  # file createtime
-
-        # add last modified data
-        if "lastmod" in fm:
-            lastmod = fm["lastmod"]
-        else:
-            lastmod = datetime.fromtimestamp(p.stat().st_mtime).date()
-
-        if "draft" in fm:
-            draft = fm["draft"]
-        else:
-            draft = False
-
-        # tags
-        if "tags" in fm:
-            tags = fm["tags"]
-            for tag in tags:
-                tagsdict[tag].add(slug)
-        else:
-            tags = ["untagged"]
-            tagsdict["untagged"].add(slug)
-
-        html = md.convert(txt)
-
-        toc = False  # default to not showing toc
-        if "toc" in fm:
-            if fm["toc"] is True:
-                toc = md.toc
-
-        link = f"{tags[0]}/{slug}.html"
-
-        pp = Post(
-            title=fm["title"],
-            slug=slug,
-            link=link,
-            path=p,
-            tags=tags,
-            date=dt,
-            lastmod=lastmod,
-            markdown=txt,
-            draft=draft,
-            toc=toc,
-            html=html,
-        )
-
-        # data.append(post)
+    for p in nb_paths:
+        pp = md_to_post(p, "notebook")
         posts.append(pp)
 
     posts.sort(key=lambda x: x.date, reverse=True)
+
+    # create tagsdict
+    for post in posts:
+        for tag in post.tags:
+            tagsdict[tag].add(post.slug)
 
     # create a dict of posts - to make it easier to lookup a certain post
     for post in posts:
@@ -263,7 +265,9 @@ def write_posts(posts, tmpl: str = "post.html"):
     print(f"\nWriting post page for {len(posts)} posts.")
 
     for post in posts:
-        html = template.render(post=post).strip()
+        html = template.render(
+            post=post, header=header, header_text=header_text
+        ).strip()
 
         # publish each post inside its first tag folder
         if post.tags:
@@ -300,7 +304,13 @@ def write_index_page(posts, tmpl: str = "index.html", foldername=None):
     # todo: modify js to read json from disk instead of passing obj
     postsjson = search_json(posts, path)
 
-    html = template.render(posts=posts, postsjson=postsjson).strip()
+    html = template.render(
+        posts=posts,
+        title=title,
+        postsjson=postsjson,
+        header=header,
+        header_text=header_text,
+    ).strip()
 
     # write to disk
     path = path / tmpl
