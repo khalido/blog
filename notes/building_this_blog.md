@@ -75,6 +75,10 @@ Frameworks I looked at:
 
 
 
+### Github actions
+
+Save a yml file to `.github/workflows` folder and it should run on every push. 
+
 
 
 ## Misc stuff
