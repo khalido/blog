@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>chromebooks on looking at numbers</title>
+    <link>http://khalido.com/tags/chromebooks/</link>
+    <description>Recent content in chromebooks on looking at numbers</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Fri, 24 Aug 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://khalido.com/tags/chromebooks/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Setting up Linux on a Chromebook with Crostini</title>
+      <link>http://khalido.com/posts/setup-crostini-chromebook/</link>
+      <pubDate>Fri, 24 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://khalido.com/posts/setup-crostini-chromebook/</guid>
+      <description>ChromeOS supports a built in Linux - running inside a container running insde a VM. Turn it on by going to settings and pressing the on button for Linux (beta). This gives us a bare bones Linux install running Debian Stretch. So here goes all the things I did to customize it.
+Most of these tips are from the reddit crostini wiki, I&amp;rsquo;ve put all the ones I&amp;rsquo;m using in one page for a handy reference.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on looking at numbers</title>
+    <link>http://khalido.com/posts/</link>
+    <description>Recent content in Posts on looking at numbers</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Fri, 23 Nov 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://khalido.com/posts/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Techfugees Sydney Hackathon 2018</title>
+      <link>http://khalido.com/posts/techfugees_sydney_hackathon_2018/</link>
+      <pubDate>Fri, 23 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://khalido.com/posts/techfugees_sydney_hackathon_2018/</guid>
+      <description>This hackathon is about developing tech solutions to the challanges refugees face.
+ Hackathon Details, twtr, #Hack4Refugees  kickoff  Annie introduced the hackathon as a means to bringing ppl together to solve problems. Tech ppl should and can contribute to issues - this is the fourth techfugee hackathon in Sydney. NGO partners:  SSI is the largest settlement ngo in Australia Startts works on torture and trauma  pick a theme from out of 10, and think about how your product fits needs, who does it help, etc etc.</description>
+    </item>
+    
+    <item>
+      <title>SML 2018-09: Deep Reinforcement Learning</title>
+      <link>http://khalido.com/posts/sml-meetup-2018-09-04/</link>
+      <pubDate>Tue, 04 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://khalido.com/posts/sml-meetup-2018-09-04/</guid>
+      <description>SML&amp;rsquo;s 2018-09 meetup.
+ STEM Careers expo on Thu 6th Sep  the talks:
+Kosuke Fujimoto: How can we innovate our workstyle at construction sites with Image Classification?  Kosuke, Takenaka Corporation is one of the top 5 largest construction companies in Japan. Their site supervisors perform site visits, record the progress of ongoing construction as well as assign appropriate resourcing from their workforce by writing up the report every evening.</description>
+    </item>
+    
+    <item>
+      <title>Using Anaconda</title>
+      <link>http://khalido.com/posts/anaconda/</link>
+      <pubDate>Thu, 30 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://khalido.com/posts/anaconda/</guid>
+      <description>Install Anaconda There seems to be two main ways to handle python packaging, pip with pipenv and conda. I&amp;rsquo;ve gone with conda, though it turns out I often have to use pip inside conda. Anyways, there is a cheatsheet, but here&amp;rsquo;s all I use:
+ download and install anaconda from here. restart terminal and check anaconda is in the path by ECHO $SHELL  If its not in the path then:</description>
+    </item>
+    
+    <item>
+      <title>PyCon Australia 2018</title>
+      <link>http://khalido.com/posts/pyconau2018/</link>
+      <pubDate>Fri, 24 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://khalido.com/posts/pyconau2018/</guid>
+      <description>My notes for the PyConAU 2018 talks I went to.
+ How Python saved a rescue dog - a foster fail story Lighting Macro Photographs with CircuitPython Writing fast and efficient MicroPython Asyncio in MicroPython Demystifying LoRaWAN with PyCom Workplace Environment Sensing with Python Automating Your Home with Python, Raspberry Pi and Homekit Education Seminar Student Showcase Keynote: Annie Parker on Techfugees Describing Descriptors What is the most common street name in Australia?</description>
+    </item>
+    
+    <item>
+      <title>Setting up Linux on a Chromebook with Crostini</title>
+      <link>http://khalido.com/posts/setup-crostini-chromebook/</link>
+      <pubDate>Fri, 24 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://khalido.com/posts/setup-crostini-chromebook/</guid>
+      <description>ChromeOS supports a built in Linux - running inside a container running insde a VM. Turn it on by going to settings and pressing the on button for Linux (beta). This gives us a bare bones Linux install running Debian Stretch. So here goes all the things I did to customize it.
+Most of these tips are from the reddit crostini wiki, I&amp;rsquo;ve put all the ones I&amp;rsquo;m using in one page for a handy reference.</description>
+    </item>
+    
+    <item>
+      <title>deeplearning.ai: Structuring Machine Learning Projects</title>
+      <link>http://khalido.com/posts/deeplearning-ai-part-3-of-5/</link>
+      <pubDate>Tue, 14 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://khalido.com/posts/deeplearning-ai-part-3-of-5/</guid>
+      <description>This course covers how to think about and improve machine learning systems.
+ You will learn how to build a successful machine learning project. If you aspire to be a technical leader in AI, and know how to set direction for your team&amp;rsquo;s work, this course will show you how.
+ Course Resources
+ Course home Discussion forum
+ Week 1: ML Strategy
+ Orthogonalization Setting up your goal  Single number evaluation metric Satisficing and Optimizing metric Train/dev/test distributions Size of the dev and test sets When to change dev/test sets and metrics  Comparing to human-level performance  Why human-level performance?</description>
+    </item>
+    
+    <item>
+      <title>SML 2018-08: Deep Reinforcement Learning</title>
+      <link>http://khalido.com/posts/sml-meetup-2018-08-08/</link>
+      <pubDate>Wed, 08 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://khalido.com/posts/sml-meetup-2018-08-08/</guid>
+      <description>SML&amp;rsquo;s 2018-08 meetup.
+ launching StarAI Deep Reinforcement Learning Course  7 week course to take you from RL near-zero to hero 10-15hrs study a week, meet 6-8pm once a week   the talks:
+Alasdair Hamilton: Reinforcement learning  The future of Artificial Intelligence is, at least partly, rooted in Reinforcement Learning. During our presentation, the team from Remi AI will take attendees on a journey through their experiences in Reinforcement Learning.</description>
+    </item>
+    
+    <item>
+      <title>deeplearning.ai: Improving Deep Neural Networks</title>
+      <link>http://khalido.com/posts/deeplearning-ai-part-2-of-5/</link>
+      <pubDate>Sun, 05 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://khalido.com/posts/deeplearning-ai-part-2-of-5/</guid>
+      <description>Improving Deep Neural Networks: Hyperparameter tuning, Regularization and Optimization
+Course Resources
+ Discussion forum YouTube playlist for Course 1 course reviews: 1  Week 1: Practical aspects of Deep Learning Train / Dev / Test sets
+ training is a highly iterative process as you test ideas and parameters even highly skilled practicioners find it impossible to predict the best parameters for a problem, so going through split data into train/dev/test sets  training set - the actual dataset used to train the model cross validation or dev set - used to evaluate the model test set - only used once the model is finally trained to get a unbiased estimate of the models performance  depending on the dataset size, use different splits, eg:  100 to 1M ==&amp;gt; 60/20/20 1M to INF ==&amp;gt; 98/1/1 or 99.</description>
+    </item>
+    
+    <item>
+      <title>DSS-2018-07: Michael Allwright and Inna Kolyshkina</title>
+      <link>http://khalido.com/posts/dss-meetup-2018-07-31/</link>
+      <pubDate>Tue, 31 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://khalido.com/posts/dss-meetup-2018-07-31/</guid>
+      <description>Data Science Sydney&amp;rsquo;s 2018-07 meetup.
+ data literacy is important for senior execs who data scientists are workng for - there are courses out there for them  Michael Allwright: &amp;ldquo;DATA FOR BAD OR GOOD? THE MINERVA COLLECTIVE&amp;rdquo;  Michael is Co-Founder and CEO of The Minerva Collective, a not for profit which uses data and data sharing for social good, and runs a data analytics consulting company focussed on using data for good.</description>
+    </item>
+    
+    <item>
+      <title>Apache Spark</title>
+      <link>http://khalido.com/posts/apache-spark/</link>
+      <pubDate>Mon, 23 Jul 2018 16:20:39 +1000</pubDate>
+      
+      <guid>http://khalido.com/posts/apache-spark/</guid>
+      <description>Way ack in the old days Google came up with mapreduce to store and crunch data scattered on disks across multiple machines. The world looked at mapreduce and thought it good, and made an open source implementation called Hadoop.
+Ppl wanted more, and faster, and luckily memory prices went down. And thus Apache Spark was born at UC Berkely. Spark stores data across a bunch of machines in memory. This makes it easy and fast to data scientist all the data.</description>
+    </item>
+    
+    <item>
+      <title>Blogs and other resources to follow</title>
+      <link>http://khalido.com/posts/blogs-i-like/</link>
+      <pubDate>Thu, 12 Jul 2018 01:21:48 +0000</pubDate>
+      
+      <guid>http://khalido.com/posts/blogs-i-like/</guid>
+      <description>Blogs on data science, AI, machine learning etc etc. which I liked.
+Chris Albon&amp;rsquo;s notes on data science and ai
+This is amazingly awesome. Essentially he has put online all his programming notes, broken down into bite sized chunks on how to do stuff, all organized neatly and accessibly.
+This is the blog I want to be. He has a somewhat ugly way to transform ipython notebooks into markdown files which hugo processes into html - its way ugly really but I&amp;rsquo;m going to try it out cause jupyter notebooks are awesome.</description>
+    </item>
+    
+    <item>
+      <title>Advent of Code 2016</title>
+      <link>http://khalido.com/posts/adventofcode2016/</link>
+      <pubDate>Tue, 10 Jul 2018 01:21:48 +0000</pubDate>
+      
+      <guid>http://khalido.com/posts/adventofcode2016/</guid>
+      <description>Notes for the Advent of Code 2016 programming challange.
+ Advent of Code is a series of small programming puzzles for a variety of skill levels. They are self-contained and are just as appropriate for an expert who wants to stay sharp as they are for a beginner who is just learning to code. Each puzzle calls upon different skills and has two parts that build on a theme.</description>
+    </item>
+    
+    <item>
+      <title>deeplearning.ai: Neural Networks and Deep Learning</title>
+      <link>http://khalido.com/posts/deeplearning-ai-part-1-of-5/</link>
+      <pubDate>Sat, 07 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://khalido.com/posts/deeplearning-ai-part-1-of-5/</guid>
+      <description>It had been a while since I finished Udacity&amp;rsquo;s Deep Learning course, so as a refresher I signed up for Andrew NG&amp;rsquo;s deeplearning.ai course.
+These are my notes for the first course in the series: Neural Networks and Deep Learning.
+Course Resources
+ Discussion forum YouTube playlist for Course 1 course reviews: 1  Week 1: Introduction A basic NN looks at housing price prediction, can use simple regression</description>
+    </item>
+    
+    <item>
+      <title>Grokking Deep Learning by Andrew Trask</title>
+      <link>http://khalido.com/posts/grokking-deep-learning-book/</link>
+      <pubDate>Thu, 10 May 2018 01:21:48 +0000</pubDate>
+      
+      <guid>http://khalido.com/posts/grokking-deep-learning-book/</guid>
+      <description>Andrew Trask is an AI superstar, having come up with the idea for Generative Adverserial Networks (GANS) - one of the most exicting new AI techniques today - in a bar.
+In this book he comes down to earth and explains neural networks from scratch to mere mortals. The book is still being written, but whats there so far is a really good easy to understand introduction to neural networks.</description>
+    </item>
+    
+    <item>
+      <title>fastai Practical Deep Learning For Coders, Part 1, 2018</title>
+      <link>http://khalido.com/posts/fastai-part1-2018/</link>
+      <pubDate>Sat, 05 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://khalido.com/posts/fastai-part1-2018/</guid>
+      <description>This is a great top down introduction to deep learning. Jeremey Howard is a great teacher. This is probably the best AI course on the interwebs. The fast.ai course websites blurb:
+ This 7-week course is designed for anyone with at least a year of coding experience, and some memory of high-school math. You will start with step one—learning how to get a GPU server online suitable for deep learning—and go all the way through to creating state of the art, highly practical, models for computer vision, natural language processing, and recommendation systems.</description>
+    </item>
+    
+    <item>
+      <title>Notes for Harvard&#39;s Cs109 data science class</title>
+      <link>http://khalido.com/posts/harvard-cs109-notes/</link>
+      <pubDate>Sun, 22 Oct 2017 01:21:48 +0000</pubDate>
+      
+      <guid>http://khalido.com/posts/harvard-cs109-notes/</guid>
+      <description>These are my notes for Harvard&amp;rsquo;s 2015 CS109 class, which i went through with Sydney Machine Learning&amp;rsquo;s study group from Ausgust to October 2017 at Amazon Web Service&amp;rsquo;s sydney office.
+Why CS109? This class was recommended at Quora and a few other places as being a good resource for practical data science, so here goes. These notes are updated as I work through the course syllabus and the labs and homeworks.</description>
+    </item>
+    
+    <item>
+      <title>Udacity ND101: Deep Learning Nanodegree</title>
+      <link>http://khalido.com/posts/udacity-nd101/</link>
+      <pubDate>Sun, 20 Aug 2017 01:21:48 +0000</pubDate>
+      
+      <guid>http://khalido.com/posts/udacity-nd101/</guid>
+      <description>My notes &amp;amp; files for Udacity&amp;rsquo;s Deep Learning intro course.
+Before the course starts:  Read Machine learning is fun Watch Andrew NG: Deep Learning in Practice (34 minutes) Go though UD730 deep learning course on Udacity Watch Learn tensorflow 3 hour video http://rodneybrooks.com/patrick-winston-explains-deep-learning/  Python resources The course recommneds knowing basic python from here, but I found the following two resources better:
+ A whirlwind tour of Python Python Data Science Handbook  Math resources Need to know multivariable calculus &amp;amp; linear algebra.</description>
+    </item>
+    
+    <item>
+      <title>setting up this site</title>
+      <link>http://khalido.com/posts/my-first-post/</link>
+      <pubDate>Tue, 11 Jul 2017 05:23:13 +0000</pubDate>
+      
+      <guid>http://khalido.com/posts/my-first-post/</guid>
+      <description>Starting out a blog to document my learnings in python, data science and AI.
+First up, getting a hugo powered blog using the minimo theme up and running on netlify with continuous deployment every time I push new content to github.</description>
+    </item>
+    
+    <item>
+      <title>MITx 6.00.2X: Intro to Computational Thinking and Data Science</title>
+      <link>http://khalido.com/posts/mit-6.00.2x-intro-computational-thinking-and-data-science/</link>
+      <pubDate>Thu, 20 Aug 2015 01:21:48 +0000</pubDate>
+      
+      <guid>http://khalido.com/posts/mit-6.00.2x-intro-computational-thinking-and-data-science/</guid>
+      <description>I really liked this class - it was a engaging course to do after having done some intro level stuff.
+ 6.00.2x will teach you how to use computation to accomplish a variety of goals and provides you with a brief introduction to a variety of topics in computational problem solving . This course is aimed at students with some prior programming experience in Python and a rudimentary knowledge of computational complexity.</description>
+    </item>
+    
+    <item>
+      <title>Udacity CS101: Intro to CS</title>
+      <link>http://khalido.com/posts/udacity-cs101/</link>
+      <pubDate>Wed, 10 Jul 2013 01:21:48 +0000</pubDate>
+      
+      <guid>http://khalido.com/posts/udacity-cs101/</guid>
+      <description>This was one of Udacity&amp;rsquo;s first computer science MOOC&amp;rsquo;s, and I really liked it. Its a great fast intro to computer science concepts and python.
+In particular, I liked that the class both had a cameo by Google&amp;rsquo;s founder and the final project was to build a simple version of Google&amp;rsquo;s original search engine using the pagerank algorithim.</description>
+    </item>
+    
+  </channel>
+</rss>

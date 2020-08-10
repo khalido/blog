@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>spark on looking at numbers</title>
+    <link>http://khalido.com/tags/spark/</link>
+    <description>Recent content in spark on looking at numbers</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Mon, 23 Jul 2018 16:20:39 +1000</lastBuildDate>
+    
+	<atom:link href="http://khalido.com/tags/spark/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Apache Spark</title>
+      <link>http://khalido.com/posts/apache-spark/</link>
+      <pubDate>Mon, 23 Jul 2018 16:20:39 +1000</pubDate>
+      
+      <guid>http://khalido.com/posts/apache-spark/</guid>
+      <description>Way ack in the old days Google came up with mapreduce to store and crunch data scattered on disks across multiple machines. The world looked at mapreduce and thought it good, and made an open source implementation called Hadoop.
+Ppl wanted more, and faster, and luckily memory prices went down. And thus Apache Spark was born at UC Berkely. Spark stores data across a bunch of machines in memory. This makes it easy and fast to data scientist all the data.</description>
+    </item>
+    
+  </channel>
+</rss>
