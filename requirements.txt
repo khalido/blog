@@ -1,0 +1,4 @@
+Mako
+markdown
+pymdown-extensions
+nbconvert

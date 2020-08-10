@@ -12,12 +12,18 @@ This post documents the process of building this blog. The main goal is to put m
 
 ## the basic blog
 
-Listing todos...
+Its straightforward to read a set of markdown posts and convert to python. I am using python to read the posts with [python-markdown](https://python-markdown.github.io/) to parse them into html, complete with inline syntax highlighting.
 
-- [ ] add emoji
-- [ ] add tag pages
+Key tools used:
 
-Its straightforward to read a set of markdown posts and convert to python. I am using python's [pathlib] library to read the posts and [python-markdown](https://python-markdown.github.io/) to parse them into html, complete with inline syntax highlighting.
+- **write:** markdown docs using any editor and jupyter notebooks having yaml front matter
+- **make the blog:** 
+  - [nbconvert] to parse jupyter to markdown [python markdown] to parse markdown to html
+  - python to read all the markdown files using [python markdown](https://python-markdown.github.io/) and [yaml](https://pyyaml.org/wiki/PyYAMLDocumentation) make html pages for index, tags and posts using [mako](https://www.makotemplates.org/) for python friendly templates
+- **search:** [fusejs](https://fusejs.io/) to make a in browser search engine
+- every time a post is added or updated, the whole site needs to be rebuilt and redeployed. 
+  - **build site:** every time I commit to my blog repo, a github action is triggered which rebuilds the sites and saves the output to a `_site` folder.
+  - **hosting:** the site is hosted on the gh-pages of my blog repository, which github pages auto republishes on every time. I am using a [github action](https://github.com/peaceiris/actions-gh-pages) to deploy output files from the `_site` folder to gh-pages on every commit to the main branch.
 
 ### parsing markdown
 
@@ -36,6 +42,18 @@ python -m http.server
 
 
 
+### code highlight
+
+python markdown has pygments built in, which has a bunch of styles. To generate the css:
+
+```bash
+pygmentize -S default -f html -a .codehilite > codestyles.css
+```
+
+The 
+
+
+
 ### html
 
 - [what to put in the head of a html page](https://github.com/joshbuchea/HEAD)
@@ -45,7 +63,10 @@ python -m http.server
 
 Frameworks I looked at:
 
+- [https://tachyons.io/](https://tachyons.io/) 
+- [https://tailwindcss.com/](https://tailwindcss.com/)
 - [Pure.css](https://purecss.io/)
+- [water.css](https://github.com/kognise/water.css)
 - [milligram](https://milligram.io/)
 - [newcss](https://newcss.net/)
 - [lit](https://ajusa.github.io/lit/docs/lit.html)

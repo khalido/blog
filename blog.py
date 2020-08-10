@@ -23,7 +23,7 @@ from typing import List, Optional
 # external libs, try to minimize use
 import yaml
 import nbformat
-import pandas as pd  # no real need to use this so rethink later
+#import pandas as pd  # no real need to use this so rethink later
 from mako.template import Template
 from mako.lookup import TemplateLookup
 
@@ -337,7 +337,7 @@ def write_all(posts: list, tags: dict):
 
 
 def copy_static():
-    """copies over the contents of the static folder to the dist folder"""
+    """copies over the contents of the static folder to the public folder"""
 
     try:
         shutil.copytree(path_static, path_publish, dirs_exist_ok=True)
