@@ -117,7 +117,8 @@ def convert_notebooks_to_md():
         # write_file.write(
         #     output=body, resources=resources, notebook_name=nb_path.name[:-6]
         # )
-        print(f"\nconverted {len(nb_paths)} notebooks to markdown files")
+    
+    print(f"\nconverted {len(nb_paths)} notebooks to markdown files")
 
 
 def md_to_post(p: Path, post_type=default_post_type, debug=False):
@@ -191,7 +192,7 @@ def get_posts(debug=False):
         posts.append(pp)
 
     for p in nb_paths:
-        pp = md_to_post(p, "notebook")
+        pp = md_to_post(p, post_type="notebook")
         posts.append(pp)
 
     posts.sort(key=lambda x: x.date, reverse=True)
