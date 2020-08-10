@@ -2,22 +2,31 @@
     generates post page 
 </%doc>
 
-<%include file="header.html"/>
+<%include file="header.html" 
+args="title=post.title, header=header, header_text=header_text"/>
 
-<head>
-    <title>${post.title}</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-
-<body>
-    % if post.toc:
+% if post.toc:
+    <details>
+        <summary>Table of contents.</summary>
         ${post.toc}
-    % endif
-    
-    <div class="post">  
-        ${post.html}
-    </div>
+    </details>
+% endif
 
-</body>
+<article>
+    ## title is taken from yaml meta data currently
+    % if post.title:
+        <h1>${post.title}</h1>
+    % endif    
+  
+    ${post.html}
+</article>
+
+<div class="meta">
+    posted <time>${post.date}</time>, updated <time>${post.lastmod}</time><br>
+    tagged: 
+    % for tag in post.tags:
+    <a href="/${tag}">${tag}</a>
+    % endfor
+</div>
 
 <%include file="footer.html"/>

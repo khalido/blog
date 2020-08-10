@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!--temp stylesheet, customize my own one later.
+        https://github.com/kognise/water.css-->
+        
+        
+        <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css">
+
+        <link rel="stylesheet" type="text/css" href="/codestyles.css">
+        
+        
+
+        <title>how the blog was built</title>
+    </head>
+
+    <body>
+ 
+        <header>
+            <a href="/">khalido.org</a> <br>
+            I love me some subheader text.
+            <hr>
+        </header>
+
+    <details>
+        <summary>Table of contents.</summary>
+        <div class="toc">
+<ul>
+<li><a href="#the-basic-blog">the basic blog</a><ul>
+<li><a href="#parsing-markdown">parsing markdown</a></li>
+<li><a href="#code-highlight">code highlight</a></li>
+<li><a href="#html">html</a></li>
+<li><a href="#css">css</a></li>
+</ul>
+</li>
+<li><a href="#misc-stuff">Misc stuff</a><ul>
+<li><a href="#emoji">emoji</a></li>
+<li><a href="#twitter-embed">twitter embed</a></li>
+<li><a href="#testing-syntax-highlight">testing syntax highlight</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+    </details>
+
+<article>
+        <h1>how the blog was built</h1>
+  
+    <p>Hereby I talk through writing my own blog engine. There are many excellent ones out there, but to customize any of them takes so much understanding of how they work, the template and theme engines they use, that its easier to just use them exactly as is with an existing theme. I wanted my own custom static blog, and a reason to do some python coding, so here goes yet another python blogging script.</p>
+<p>This post documents the process of building this blog. The main goal is to put markdown and jupyter notebooks in a folder, and build a static site which gets autoupdated on <a href="https://pages.github.com/">github pages</a> or [netlify]https://www.netlify.com/). Just like <a href="https://gohugo.io/">hugo</a>, <a href="https://jekyllrb.com/">jekyll</a>, <a href="https://www.gatsbyjs.org/">gatsby</a> and so many others!</p>
+<h2 id="the-basic-blog">the basic blog</h2>
+<p>Its straightforward to read a set of markdown posts and convert to python. I am using python to read the posts with <a href="https://python-markdown.github.io/">python-markdown</a> to parse them into html, complete with inline syntax highlighting.</p>
+<h3 id="parsing-markdown">parsing markdown</h3>
+<p>Python markdown </p>
+<ul>
+<li>https://python-markdown.github.io/extensions/</li>
+<li>https://facelessuser.github.io/pymdown-extensions/</li>
+</ul>
+<p>Start a server</p>
+<div class="codehilite"><pre><span></span><code>python -m http.server
+</code></pre></div>
+
+
+<h3 id="code-highlight">code highlight</h3>
+<p>python markdown has pygments built in, which has a bunch of styles. To generate the css:</p>
+<div class="codehilite"><pre><span></span><code>pygmentize -S default -f html -a .codehilite &gt; codestyles.css
+</code></pre></div>
+
+
+<p>The </p>
+<h3 id="html">html</h3>
+<ul>
+<li><a href="https://github.com/joshbuchea/HEAD">what to put in the head of a html page</a></li>
+<li>https://htmldom.dev/</li>
+</ul>
+<h3 id="css">css</h3>
+<p>Frameworks I looked at:</p>
+<ul>
+<li><a href="https://tachyons.io/">https://tachyons.io/</a> </li>
+<li><a href="https://tailwindcss.com/">https://tailwindcss.com/</a></li>
+<li><a href="https://purecss.io/">Pure.css</a></li>
+<li><a href="https://github.com/kognise/water.css">water.css</a></li>
+<li><a href="https://milligram.io/">milligram</a></li>
+<li><a href="https://newcss.net/">newcss</a></li>
+<li><a href="https://ajusa.github.io/lit/docs/lit.html">lit</a></li>
+<li><a href="https://concrete.style/">concrete.css</a> - very minimal</li>
+<li>https://csslayout.io/ - examples of using css directly</li>
+</ul>
+<h2 id="misc-stuff">Misc stuff</h2>
+<h3 id="emoji">emoji</h3>
+<p>Some unicode fonts have emojis built in, so ways to enable emoji is:</p>
+<ul>
+<li>use a unicode font and investigate python-markdown emoji parser to deal with them properly</li>
+<li>use a script to replace <code>:smile:</code> with emoji incons - nope, don't want images scattered all over the shop.</li>
+</ul>
+<p>Emoji test:</p>
+<ul>
+<li>smiley face test copy pasted from some website: 😅</li>
+<li>smiley face written using markdown code <code>:smile:</code>​ &#x1f604; </li>
+<li>dang, this works in the markdown editor but not in the browser</li>
+</ul>
+<h3 id="twitter-embed">twitter embed</h3>
+<p>This should show a twitter tweet embedded inside the page:</p>
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Sunsets don&#39;t get much better than this one over <a href="https://twitter.com/GrandTetonNPS?ref_src=twsrc%5Etfw">@GrandTetonNPS</a>. <a href="https://twitter.com/hashtag/nature?src=hash&amp;ref_src=twsrc%5Etfw">#nature</a> <a href="https://twitter.com/hashtag/sunset?src=hash&amp;ref_src=twsrc%5Etfw">#sunset</a> <a href="http://t.co/YuKy2rcjyU">pic.twitter.com/YuKy2rcjyU</a></p>&mdash; US Department of the Interior (@Interior) <a href="https://twitter.com/Interior/status/463440424141459456?ref_src=twsrc%5Etfw">May 5, 2014</a></blockquote>
+
+<p><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></p>
+<h3 id="testing-syntax-highlight">testing syntax highlight</h3>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">mako.template</span> <span class="kn">import</span> <span class="n">Template</span>
+<span class="kn">from</span> <span class="nn">mako.lookup</span> <span class="kn">import</span> <span class="n">TemplateLookup</span>
+<span class="n">lookup</span> <span class="o">=</span> <span class="n">TemplateLookup</span><span class="p">(</span><span class="n">directories</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;templates&quot;</span><span class="p">])</span>
+
+<span class="c1"># make the big picture templates</span>
+<span class="k">for</span> <span class="n">tmpl</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;index.html&quot;</span><span class="p">]:</span>
+    <span class="n">template</span> <span class="o">=</span> <span class="n">lookup</span><span class="o">.</span><span class="n">get_template</span><span class="p">(</span><span class="n">tmpl</span><span class="p">)</span>
+    <span class="n">html</span> <span class="o">=</span> <span class="n">template</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">posts</span><span class="o">=</span><span class="n">posts</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="n">path_publish</span> <span class="o">/</span> <span class="n">tmpl</span>
+    <span class="n">path</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;wrote </span><span class="si">{</span><span class="n">tmpl</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># write all the posts</span>
+<span class="n">template</span> <span class="o">=</span> <span class="n">lookup</span><span class="o">.</span><span class="n">get_template</span><span class="p">(</span><span class="s2">&quot;post.html&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">post</span> <span class="ow">in</span> <span class="n">posts</span><span class="p">:</span>
+    <span class="n">html</span> <span class="o">=</span> <span class="n">template</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">post</span><span class="o">=</span><span class="n">post</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="n">path_publish</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">post</span><span class="o">.</span><span class="n">slug</span><span class="si">}</span><span class="s2">.html&quot;</span>
+    <span class="n">path</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;wrote </span><span class="si">{</span><span class="n">post</span><span class="o">.</span><span class="n">slug</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+</article>
+
+<div class="meta">
+    posted <time>2020-07-14</time>, updated <time>2020-08-05</time><br>
+    tagged: 
+    <a href="/python">python</a>
+</div>
+
+<hr>
+<footer>
+    This is a footer. One day some footery text will go here. 
+</footer>
+
+
+
+</body>
+
+</html>

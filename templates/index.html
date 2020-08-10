@@ -4,100 +4,89 @@
     todo: add a search box using fuse.js which modifies the post lists.
 </%doc>
 
-<%include file="header.html"/>
+<%include file="header.html"/ args="title=title, header=header, header_text=header_text"/>
 
-    <title>Blog Blog</title>
-</head>
+    <p>All the blog posts, using fusejs to search post title, content and tags.</p>
 
-<body>
-    <div class="container">
+    <p>all the posts should display if js is disabled, and the search box works if js is on.</p>
 
-        <p>All the blog posts, using fusejs to search post title, content and tags.</p>
+    <input type="text" id="postSearch" placeholder="Search posts...">
+    <ul id="searchresults">
+        % for post in posts:
+            <li><a href="/${post.link}">${post.title}</a></li>
+        % endfor
+    </ul>    
 
-        <p>all the posts should display if js is disabled, and the search box works if js is on.</p>
-
-        <input type="text" id="postSearch" placeholder="Search posts...">
-        <ul id="searchresults">
-            % for post in posts:
-                <li><a href=${post.link}>${post.title}</a></li>
-            % endfor
-        </ul>    
-
-        <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.js"></script>
-
-        <script>
-            //const searchList2 = require("posts.json");
-            const searchList = ${ postsjson }
-            const options = {
-                includeScore: false,
-                threshold: 0.3,
-                // Search in `title` and in `tags` array, add posts as well
-                // default weight is 1
-                keys: [{ name: 'title', weight: 2 },
-                    'tags']
-            }
-
-            const fuse = new Fuse(searchList, options)
-            const input = document.getElementById("postSearch")
-
-            input.oninput = (event) => {
-                const results = fuse.search(event.target.value)
-
-                document.getElementById("searchresults").innerHTML = "";
-
-                for (result of results) {
-                    //console.log(result.item.title, result.item.tags)
-                    document.getElementById('searchresults').innerHTML += '<li>' + '<a href ="' + result.item.link + '">' + result.item.title + '</a></li>'
-                }
-
-                // if no input show all the posts
-                if (input.value == "") {
-                    for (result of searchList) {
-                        //console.log(result.item.title, result.item.tags)
-                        document.getElementById('searchresults').innerHTML += '<li>' + '<a href ="' + result.link + '">' + result.title + '</a></li>'
-                    }
-                }
-
-            }
-
-
-
-        </script>
-        
-        <h3>Simple list of posts</h3>
-        <p>All the Blog posts using mako templates. The filter here is a simple javascript one just filtering on the content inside the list.</p>
-
-        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Filter.." title="Type">
-
-        <ul id="myUL">
-            % for post in posts:
-                <li><a href="${post.slug}.html">${post.title}</a></li>
-            % endfor
-        </ul>
-
-
-    </div>
-
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.js"></script>
 
     <script>
-        function myFunction() {
-            var input, filter, ul, li, a, i, txtValue;
-            input = document.getElementById("myInput");
-            filter = input.value.toUpperCase();
-            ul = document.getElementById("myUL");
-            li = ul.getElementsByTagName("li");
-            for (i = 0; i < li.length; i++) {
-                a = li[i].getElementsByTagName("a")[0];
-                txtValue = a.textContent || a.innerText;
-                if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                    li[i].style.display = "";
-                } else {
-                    li[i].style.display = "none";
+        //const searchList2 = require("posts.json");
+        const searchList = ${ postsjson }
+        const options = {
+            includeScore: false,
+            threshold: 0.3,
+            // Search in `title` and in `tags` array, add posts as well
+            // default weight is 1
+            keys: [{ name: 'title', weight: 2 },
+                'tags']
+        }
+
+        const fuse = new Fuse(searchList, options)
+        const input = document.getElementById("postSearch")
+
+        input.oninput = (event) => {
+            const results = fuse.search(event.target.value)
+
+            document.getElementById("searchresults").innerHTML = "";
+
+            for (result of results) {
+                //console.log(result.item.title, result.item.tags)
+                document.getElementById('searchresults').innerHTML += '<li>' + '<a href ="' + result.item.link + '">' + result.item.title + '</a></li>'
+            }
+
+            // if no input show all the posts
+            if (input.value == "") {
+                for (result of searchList) {
+                    //console.log(result.item.title, result.item.tags)
+                    document.getElementById('searchresults').innerHTML += '<li>' + '<a href ="' + result.link + '">' + result.title + '</a></li>'
                 }
             }
-        }
-    </script>
 
-</body>
+        }
+
+    </script>
+    
+    <h3>Simple list of posts</h3>
+    <p>All the Blog posts using mako templates. The filter here is a simple javascript one just filtering on the content inside the list.</p>
+
+    <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Filter.." title="Type">
+
+    <ul id="myUL">
+        % for post in posts:
+            <li><a href="${post.slug}.html">${post.title}</a></li>
+        % endfor
+    </ul>
+
+
+
+<script>
+    function myFunction() {
+        var input, filter, ul, li, a, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        ul = document.getElementById("myUL");
+        li = ul.getElementsByTagName("li");
+        for (i = 0; i < li.length; i++) {
+            a = li[i].getElementsByTagName("a")[0];
+            txtValue = a.textContent || a.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                li[i].style.display = "";
+            } else {
+                li[i].style.display = "none";
+            }
+        }
+    }
+</script>
+
 
 <%include file="footer.html"/>

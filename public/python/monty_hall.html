@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!--temp stylesheet, customize my own one later.
+        https://github.com/kognise/water.css-->
+        
+        
+        <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css">
+
+        <link rel="stylesheet" type="text/css" href="/codestyles.css">
+        
+        
+
+        <title>Monty Hall</title>
+    </head>
+
+    <body>
+ 
+        <header>
+            <a href="/">khalido.org</a> <br>
+            I love me some subheader text.
+            <hr>
+        </header>
+
+
+<article>
+        <h1>Monty Hall</h1>
+  
+    <p>The famous <a href="https://en.wikipedia.org/wiki/Monty_Hall_problem">Monty Hall brain teaser</a>:</p>
+<blockquote>
+<p>Suppose you're on a game show, and you're given the choice of three doors: Behind one door is a car; behind the others, goats. You pick a door, say No. 1, and the host, who knows what's behind the doors, opens another door, say No. 3, which has a goat. He then says to you, "Do you want to pick door No. 2?" Is it to your advantage to switch your choice?</p>
+</blockquote>
+<p>There is a really <a href="http://marilynvossavant.com/game-show-problem/">fun discussion over at Marilyn vos Savant's site</a>.</p>
+<p>Ok, now to setup the problem, along with some kind of visuals and what not.</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># for plots, cause visuals</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span><span class="o">,</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+</code></pre></div>
+
+
+<h1 id="setting-up-a-game">setting up a game</h1>
+<p>There are many ways to do this, but to keep it simple and human comprehensible I'm going to do it one game at a time. </p>
+<p>First up, a helper function which takes the door number guessed and the door opened up the host to reveal a goat, and returns the switched door:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">switch_door</span><span class="p">(</span><span class="n">guess</span><span class="p">,</span> <span class="n">goat_door_opened</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;takes in the guessed door and the goat door opened</span>
+<span class="sd">    and returns the switched door number&quot;&quot;&quot;</span>
+    <span class="n">doors</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+    <span class="n">doors</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">goat_door_opened</span><span class="p">)</span>
+    <span class="n">doors</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">guess</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">doors</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</code></pre></div>
+
+
+<p>Now the actual monty hall function - it takes in a guess and whether you want to switch your guess, and returns True or False depending on whether you win</p>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">monty_hall</span><span class="p">(</span><span class="n">guess</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">switch_guess</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">open_goat_door</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;sets up 3 doors 0-2, one which has a pize, and 2 have goats.</span>
+<span class="sd">    takes in the door number guessed by the player and whether he/she switched door</span>
+<span class="sd">    after one goat door is revealed&quot;&quot;&quot;</span>
+
+    <span class="n">doors</span> <span class="o">=</span> <span class="p">[</span><span class="n">door</span> <span class="k">for</span> <span class="n">door</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)]</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">doors</span><span class="p">)</span>
+    <span class="n">prize_door</span> <span class="o">=</span> <span class="n">doors</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+
+    <span class="n">goat_door_opened</span> <span class="o">=</span> <span class="n">doors</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">goat_door_opened</span> <span class="o">==</span> <span class="n">guess</span><span class="p">:</span>
+        <span class="n">goat_door_opened</span> <span class="o">=</span> <span class="n">doors</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">switch_guess</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">switch_door</span><span class="p">(</span><span class="n">guess</span><span class="p">,</span> <span class="n">goat_door_opened</span><span class="p">)</span> <span class="o">==</span> <span class="n">prize_door</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">guess</span> <span class="o">==</span> <span class="n">prize_door</span>
+</code></pre></div>
+
+
+<p>Now to run through a bunch of monty hall games:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">no_switch</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">([</span><span class="n">monty_hall</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="kc">False</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100000</span><span class="p">)])</span>
+<span class="n">no_switch</span>
+</code></pre></div>
+
+
+<div class="codehilite"><pre><span></span><code><span class="err">0.33434</span>
+</code></pre></div>
+
+
+<p>Not switching doors wins a third of the time, which makes intuitive sense, since we are choosing one door out of three.</p>
+<div class="codehilite"><pre><span></span><code><span class="n">yes_switch</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">([</span><span class="n">monty_hall</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="kc">True</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100000</span><span class="p">)])</span>
+<span class="n">yes_switch</span>
+</code></pre></div>
+
+
+<div class="codehilite"><pre><span></span><code><span class="err">0.6672</span>
+</code></pre></div>
+
+
+<p>This is the suprising result, since switching our guess increases the win rate to two third! To put it more graphically:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">plt</span><span class="o">.</span><span class="n">pie</span><span class="p">([</span><span class="n">yes_switch</span><span class="p">,</span> <span class="n">no_switch</span><span class="p">],</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Switching win %&quot;</span><span class="p">,</span> <span class="s2">&quot;Not switching win %&quot;</span><span class="p">],</span>
+       <span class="n">autopct</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%1.1f%%</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">explode</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">));</span>
+</code></pre></div>
+
+
+<p><img alt="png" src="monty_hall_files/monty_hall_12_0.png" /></p>
+<p>So our chances of winning essentially double if we switch our guess once a goat door has been opened.</p>
+<p>This is a good <a href="https://somethingaweek.wordpress.com/2010/08/19/22-lets-make-a-deal/">monty hall infographic</a>.</p>
+<h1 id="the-no-reveal-month">the no reveal month</h1>
+<p>So what if Monty never opens a goat door, and just gives us a change to switch the guessed door? Does the winning % still change?</p>
+<p>So first we change the switch door function to remove the reveal option:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">switch_door_no_revel</span><span class="p">(</span><span class="n">guess</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;takes in the guessed door</span>
+<span class="sd">    and returns the switched door number&quot;&quot;&quot;</span>
+    <span class="n">doors</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+    <span class="n">doors</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">guess</span><span class="p">)</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">doors</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">doors</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</code></pre></div>
+
+
+<p>Then I removed the revealing the goat door code from the original monty hall function above:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">monty_hall_no_reveal</span><span class="p">(</span><span class="n">guess</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">switch_guess</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;sets up 3 doors 0-2, one which has a pize, and 2 have goats.</span>
+<span class="sd">    takes in the door number guessed by the player and whether he/she switched door</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">doors</span> <span class="o">=</span> <span class="p">[</span><span class="n">door</span> <span class="k">for</span> <span class="n">door</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)]</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">doors</span><span class="p">)</span>
+    <span class="n">prize_door</span> <span class="o">=</span> <span class="n">doors</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">switch_guess</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">switch_door_no_revel</span><span class="p">(</span><span class="n">guess</span><span class="p">)</span> <span class="o">==</span> <span class="n">prize_door</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">guess</span> <span class="o">==</span> <span class="n">prize_door</span>
+</code></pre></div>
+
+
+<p>Now to run some sims:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">no_switch_no_reveal</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">([</span><span class="n">monty_hall_no_reveal</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="kc">False</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100000</span><span class="p">)])</span>
+<span class="n">yes_switch_no_reveal</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">([</span><span class="n">monty_hall_no_reveal</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="kc">True</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100000</span><span class="p">)])</span>
+</code></pre></div>
+
+
+<div class="codehilite"><pre><span></span><code><span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="n">yes_switch_no_reveal</span><span class="p">,</span> <span class="n">no_switch_no_reveal</span><span class="p">],</span> <span class="n">tick_label</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Switched Guess&quot;</span><span class="p">,</span><span class="s2">&quot;Didn&#39;t Switch&quot;</span><span class="p">],</span> 
+        <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span><span class="s2">&quot;red&quot;</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">);</span>
+</code></pre></div>
+
+
+<p><img alt="png" src="monty_hall_files/monty_hall_20_0.png" /></p>
+<p>There is no impact of switching our guess if a goat door hasn't been revealed. Which makes sense to, since whatever door we choose, it has 1/3 probablity of winning.</p>
+</article>
+
+<div class="meta">
+    posted <time>2019-07-05</time>, updated <time>2020-08-07</time><br>
+    tagged: 
+    <a href="/python">python</a>
+</div>
+
+<hr>
+<footer>
+    This is a footer. One day some footery text will go here. 
+</footer>
+
+
+
+</body>
+
+</html>
