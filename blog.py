@@ -23,7 +23,8 @@ from typing import List, Optional
 # external libs, try to minimize use
 import yaml
 import nbformat
-#import pandas as pd  # no real need to use this so rethink later
+
+# import pandas as pd  # no real need to use this so rethink later
 from mako.template import Template
 from mako.lookup import TemplateLookup
 
@@ -117,7 +118,7 @@ def convert_notebooks_to_md():
         # write_file.write(
         #     output=body, resources=resources, notebook_name=nb_path.name[:-6]
         # )
-    
+
     print(f"\nconverted {len(nb_paths)} notebooks to markdown files")
 
 

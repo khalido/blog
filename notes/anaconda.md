@@ -2,6 +2,7 @@
 title: Using Anaconda
 tags:
 - python
+toc: true
 ---
 
 ## Install Anaconda
@@ -57,3 +58,4 @@ Jupyter lab is the new hotness and is ready to rock out of the box with anaconda
 
 `conda install nb_conda`
 
+This should ideally let the conda env with jupyter lab see all the other kernels. 
