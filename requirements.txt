@@ -3,3 +3,4 @@ markdown
 pymdown-extensions
 nbconvert
 pyyaml
+nbdev
