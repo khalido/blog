@@ -22,7 +22,8 @@ from typing import List, Optional
 
 # external libs, try to minimize use
 import yaml
-import nbformat
+
+# import nbformat
 
 # import pandas as pd  # no real need to use this so rethink later
 from mako.template import Template
@@ -50,7 +51,6 @@ class Post:
     date: datetime
     lastmod: datetime
     toc: Optional[str]
-    showtoc: bool = False
     draft: bool = False
 
 
@@ -67,7 +67,6 @@ header_text: str = config["blog"]["header_text"]
 baseurl: str = config["blog"]["baseurl"]
 default_post_title: str = config["blog"]["default_post_title"]
 default_post_type: str = config["blog"]["default_post_type"]
-print(title, default_post_title, default_post_type)
 
 # paths to content
 path_md: Path = Path(config["paths"]["posts"])  # md posts
@@ -84,6 +83,7 @@ extensions = ["extra", "toc", "pymdownx.emoji", "codehilite"]  # , "smarty"
 # https://help.farbox.com/pygments.html - consider monokai default themes
 # noclasses: True puts all the styling in the html itself. False uses css styles
 extension_configs = {
+    "output_format": "html5",
     "pymdownx.emoji": {"emoji_generator": pymdownx.emoji.to_alt, "alt": "html_entity"},
     "codehilite": {"noclasses": False, "linenums": False, "pygments_style": "autumn"},
 }
@@ -106,9 +106,14 @@ def convert_notebooks_to_md():
         f for f in path_nb.rglob("*.ipynb") if ".ipynb_checkpoints" not in str(f)
     ]
 
+    print(f"Converting {len(nb_paths)} notebooks to markdown files.")
+
     for nb_path in nb_paths:
-        print(f"converting {nb_path}")
-        os.system(f"jupyter nbconvert --to markdown {nb_path} --output-dir tmp")
+        print(f"{nb_path}")
+        # os.system(f"jupyter nbconvert --to markdown {nb_path} --output-dir tmp")
+        # make folder for exported files
+        make_folder(Path("tmp") / f"{nb_path.stem}_files")
+        os.system(f"nbdev_nb2md --dest {Path('tmp')} --jekyll=True {nb_path}")
 
         # with open(nb_path) as f:
         #     nb_node = nbformat.read(f, as_version=4)
@@ -119,26 +124,29 @@ def convert_notebooks_to_md():
         #     output=body, resources=resources, notebook_name=nb_path.name[:-6]
         # )
 
-    print(f"\nconverted {len(nb_paths)} notebooks to markdown files")
+    print(f"--------------------------\n")
 
 
 def md_to_post(p: Path, post_type=default_post_type, debug=False):
     """takes in a path to md file  and returns a Post obj
     """
 
-    all_txt = p.read_text()
+    try:
+        all_txt = p.read_text()
+    except:
+        print(f"Failed to read {p}")
 
     # extract front matter b/w "---" lines
     n = all_txt[3:].find("---") + 3
     fm = yaml.load(all_txt[:n], Loader=yaml.FullLoader)  # front matter dict
     txt = all_txt[n + 3 :].strip()  # text excluding front matter
-    if debug:
-        print(fm)
 
     title = fm.get("title", default_post_title)
-    _post_type = fm.get("type", post_type)
+    _post_type = fm.get("type", post_type)  # defaults to post
     slug = fm.get("slug", p.name.split(".")[0])  # todo: check repeated slugs
     dt = fm.get("date", datetime.fromtimestamp(p.stat().st_ctime).date())
+    if debug:
+        print(type(dt), title, dt)
     lastmod = fm.get("lastmod", datetime.fromtimestamp(p.stat().st_mtime).date())
     draft = fm.get("draft", False)
 
@@ -146,7 +154,9 @@ def md_to_post(p: Path, post_type=default_post_type, debug=False):
 
     html = md.convert(txt)
 
-    if (toc := fm.get("toc", False)) :
+    # enable toc for posts if toc: True in front matter
+    # always enable toc for notebooks as toc flag not passing through
+    if (toc := fm.get("toc", False)) or post_type == "notebook":
         toc = md.toc
 
     link = f"{tags[0]}/{slug}.html"
@@ -189,12 +199,20 @@ def get_posts(debug=False):
     tagsdict = defaultdict(set)  # holds set of all posts for every tag
 
     for p in md_paths:
-        pp = md_to_post(p)
+        if debug:
+            print(p)
+        pp = md_to_post(p, debug=debug)
         posts.append(pp)
 
     for p in nb_paths:
-        pp = md_to_post(p, post_type="notebook")
+        pp = md_to_post(p, post_type="notebook", debug=debug)
+        if debug:
+            print(type(pp.date), pp.title, pp.date)
         posts.append(pp)
+
+    if debug:
+        for post in posts:
+            print(type(post.date), post.slug)
 
     posts.sort(key=lambda x: x.date, reverse=True)
 
@@ -240,7 +258,7 @@ def make_folder(path, debug: bool = False):
 
 def search_json(posts, path=path_publish):
     """makes a json of the posts info to search, returns json string
-    and writes to disk"""
+    and writes json file to disk"""
 
     search_list = [
         {"title": post.title, "tags": post.tags, "link": post.link} for post in posts
@@ -264,7 +282,7 @@ def write_posts(posts, tmpl: str = "post.html"):
 
     template = lookup.get_template(tmpl)
 
-    print(f"\nWriting post page for {len(posts)} posts.")
+    print(f"\nWriting html pages for {len(posts)} posts.")
 
     for post in posts:
         html = template.render(
@@ -278,6 +296,11 @@ def write_posts(posts, tmpl: str = "post.html"):
             path = path_publish
 
         make_folder(path)  # make folder in case
+
+        # copy over post_files to the post folder.
+        _path = Path("tmp") / f"{post.slug}_files"
+        if _path.is_dir():
+            shutil.copytree(_path, path / f"{post.slug}_files", dirs_exist_ok=True)
 
         path = path / f"{post.slug}.html"
 
