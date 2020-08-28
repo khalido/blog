@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!--temp stylesheet, customize my own one later.
+        https://github.com/kognise/water.css-->
+        
+        
+        <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css">
+
+        <link rel="stylesheet" type="text/css" href="/codestyles.css">
+        
+        
+
+        <title>KNN algorithim</title>
+    </head>
+
+    <body>
+ 
+        <header>
+            <a href="/">khalido.org</a> <br>
+            I love me some subheader text.
+        </header>
+
+    <details>
+        <summary>Table of contents.</summary>
+        <div class="toc">
+<ul></ul>
+</div>
+
+    </details>
+
+<article>
+        <h1>KNN algorithim</h1>
+  
+    <p>K Nearest Neighbours is a algorithim for finding out the similarity or distance b/w two things, to find out how alike/different they are. </p>
+<p>Say we have a bunch of fruit, KNN will classify them into clusters by using what we know - with fruit this would be shape, size, weight, color, etc.</p>
+<p>Anyways, lets start with the Iris dataset, which has 150 measurements of flowers:
+<div class="codecell" markdown="1">
+<div class="input_area" markdown="1"></p>
+<div class="codehilite"><pre><span></span><code><span class="n">iris</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s2">&quot;iris&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Iris dataset shape: </span><span class="si">{</span><span class="n">iris</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">iris</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div>
+
+
+<p></div>
+<div class="output_area" markdown="1"></p>
+<div class="codehilite"><pre><span></span><code><span class="err">Iris dataset shape: (150, 5)</span>
+</code></pre></div>
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>sepal_length</th>
+      <th>sepal_width</th>
+      <th>petal_length</th>
+      <th>petal_width</th>
+      <th>species</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>5.1</td>
+      <td>3.5</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>setosa</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>4.9</td>
+      <td>3.0</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>setosa</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>4.7</td>
+      <td>3.2</td>
+      <td>1.3</td>
+      <td>0.2</td>
+      <td>setosa</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4.6</td>
+      <td>3.1</td>
+      <td>1.5</td>
+      <td>0.2</td>
+      <td>setosa</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5.0</td>
+      <td>3.6</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>setosa</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+</div>
+
+</div>
+
+<p>Now I'm sampling 5 random flowers from this data set so we can use our fancy new KNN algo to determine what kind of flower they are later on:
+<div class="codecell" markdown="1">
+<div class="input_area" markdown="1"></p>
+<div class="codehilite"><pre><span></span><code><span class="n">test</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">test</span>
+</code></pre></div>
+
+
+<p></div>
+<div class="output_area" markdown="1"></p>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>sepal_length</th>
+      <th>sepal_width</th>
+      <th>petal_length</th>
+      <th>petal_width</th>
+      <th>species</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>101</th>
+      <td>5.8</td>
+      <td>2.7</td>
+      <td>5.1</td>
+      <td>1.9</td>
+      <td>virginica</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5.0</td>
+      <td>3.6</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>setosa</td>
+    </tr>
+    <tr>
+      <th>104</th>
+      <td>6.5</td>
+      <td>3.0</td>
+      <td>5.8</td>
+      <td>2.2</td>
+      <td>virginica</td>
+    </tr>
+    <tr>
+      <th>147</th>
+      <td>6.5</td>
+      <td>3.0</td>
+      <td>5.2</td>
+      <td>2.0</td>
+      <td>virginica</td>
+    </tr>
+    <tr>
+      <th>69</th>
+      <td>5.6</td>
+      <td>2.5</td>
+      <td>3.9</td>
+      <td>1.1</td>
+      <td>versicolor</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+</div>
+
+</div>
+
+<p>And here I am deleting the sampled flowers from the iris dataset to make sure our algo hasn't seem the test flowers:
+<div class="codecell" markdown="1">
+<div class="input_area" markdown="1"></p>
+<div class="codehilite"><pre><span></span><code><span class="n">iris</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">test</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</code></pre></div>
+
+
+<p></div>
+<div class="output_area" markdown="1"></p>
+<div class="codehilite"><pre><span></span><code><span class="err">(145, 5)</span>
+</code></pre></div>
+
+
+</div>
+
+</div>
+
+<p>Now to look at the data visually:
+<div class="codecell" markdown="1">
+<div class="input_area" markdown="1"></p>
+<div class="codehilite"><pre><span></span><code><span class="n">sns</span><span class="o">.</span><span class="n">pairplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">iris</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;species&quot;</span><span class="p">);</span>
+</code></pre></div>
+
+
+<p></div>
+<div class="output_area" markdown="1"></p>
+<p><img alt="svg" src="knn_files/output_7_0.svg" /></p>
+</div>
+
+</div>
+
+<p>It's pretty clear the the species are different, though there is some overlap at the boundaries.</p>
+<p>Looking at petal length variation across species:
+<div class="codecell" markdown="1">
+<div class="input_area" markdown="1"></p>
+<div class="codehilite"><pre><span></span><code><span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;species&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;petal_length&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">iris</span><span class="p">);</span>
+</code></pre></div>
+
+
+<p></div>
+<div class="output_area" markdown="1"></p>
+<p><img alt="svg" src="knn_files/output_9_0.svg" /></p>
+</div>
+
+</div>
+
+<p>Now to actually write the algorithim and figure out what species the flowers in the test data set belong to.</p>
+<p>First, a helper function to calculate the distance b/w points:
+<div class="codecell" markdown="1">
+<div class="input_area" markdown="1"></p>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">distance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;returns distance b/w two points x and y&quot;&quot;&quot;</span>
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+    <span class="n">inner</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
+        <span class="n">inner</span> <span class="o">+=</span> <span class="p">(</span><span class="n">a</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">inner</span><span class="p">)</span>
+
+<span class="n">distance</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">),[</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">])</span>
+</code></pre></div>
+
+
+<p></div>
+<div class="output_area" markdown="1"></p>
+<div class="codehilite"><pre><span></span><code><span class="err">4.0</span>
+</code></pre></div>
+
+
+</div>
+
+</div>
+
+<p>lets look at the values of the first flower in our test data and see if we can figure out what it is by using KNN:
+<div class="codecell" markdown="1">
+<div class="input_area" markdown="1"></p>
+<div class="codehilite"><pre><span></span><code><span class="n">test</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</code></pre></div>
+
+
+<p></div>
+<div class="output_area" markdown="1"></p>
+<div class="codehilite"><pre><span></span><code><span class="err">sepal_length          5.8</span>
+<span class="err">sepal_width           2.7</span>
+<span class="err">petal_length          5.1</span>
+<span class="err">petal_width           1.9</span>
+<span class="err">species         virginica</span>
+<span class="c">Name: 101, dtype: object</span>
+</code></pre></div>
+
+
+</div>
+
+<p></div>
+<div class="codecell" markdown="1">
+<div class="input_area" markdown="1"></p>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">knn</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;takes in an item to check and a dataset, of size 4 features each</span>
+<span class="sd">    returns the first n closest neighbours as a tuple (loc, distance)&quot;&quot;&quot;</span>
+    <span class="n">dist</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+        <span class="n">dist</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">i</span><span class="p">,</span> <span class="n">distance</span><span class="p">(</span><span class="n">row</span><span class="p">[:</span><span class="mi">4</span><span class="p">],</span> <span class="n">item</span><span class="p">)))</span>
+
+    <span class="n">nearest</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">dist</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])[:</span><span class="n">n</span><span class="p">]</span>
+    <span class="n">species</span> <span class="o">=</span> <span class="p">[</span><span class="n">iris</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="s2">&quot;species&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">nearest</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">Counter</span><span class="p">(</span><span class="n">species</span><span class="p">)</span><span class="o">.</span><span class="n">most_common</span><span class="p">()[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">knn</span><span class="p">(</span><span class="n">test</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][:</span><span class="mi">4</span><span class="p">],</span> <span class="n">iris</span><span class="p">)</span>
+</code></pre></div>
+
+
+<p></div>
+<div class="output_area" markdown="1"></p>
+<div class="codehilite"><pre><span></span><code><span class="err">&#39;virginica&#39;</span>
+</code></pre></div>
+
+
+</div>
+
+<p></div>
+<div class="codecell" markdown="1">
+<div class="input_area" markdown="1"></p>
+<div class="codehilite"><pre><span></span><code><span class="n">knn_species</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">test</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="n">knn_species</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">knn</span><span class="p">(</span><span class="n">row</span><span class="p">[:</span><span class="mi">4</span><span class="p">],</span> <span class="n">iris</span><span class="p">))</span>
+<span class="n">knn_species</span>
+</code></pre></div>
+
+
+<p></div>
+<div class="output_area" markdown="1"></p>
+<div class="codehilite"><pre><span></span><code><span class="err">[&#39;virginica&#39;, &#39;setosa&#39;, &#39;virginica&#39;, &#39;virginica&#39;, &#39;versicolor&#39;]</span>
+</code></pre></div>
+
+
+</div>
+
+<p></div>
+<div class="codecell" markdown="1">
+<div class="input_area" markdown="1"></p>
+<div class="codehilite"><pre><span></span><code><span class="n">test</span><span class="p">[</span><span class="s2">&quot;knn&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">knn_species</span>
+<span class="n">test</span>
+</code></pre></div>
+
+
+<p></div>
+<div class="output_area" markdown="1"></p>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>sepal_length</th>
+      <th>sepal_width</th>
+      <th>petal_length</th>
+      <th>petal_width</th>
+      <th>species</th>
+      <th>knn</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>101</th>
+      <td>5.8</td>
+      <td>2.7</td>
+      <td>5.1</td>
+      <td>1.9</td>
+      <td>virginica</td>
+      <td>virginica</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5.0</td>
+      <td>3.6</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>setosa</td>
+      <td>setosa</td>
+    </tr>
+    <tr>
+      <th>104</th>
+      <td>6.5</td>
+      <td>3.0</td>
+      <td>5.8</td>
+      <td>2.2</td>
+      <td>virginica</td>
+      <td>virginica</td>
+    </tr>
+    <tr>
+      <th>147</th>
+      <td>6.5</td>
+      <td>3.0</td>
+      <td>5.2</td>
+      <td>2.0</td>
+      <td>virginica</td>
+      <td>virginica</td>
+    </tr>
+    <tr>
+      <th>69</th>
+      <td>5.6</td>
+      <td>2.5</td>
+      <td>3.9</td>
+      <td>1.1</td>
+      <td>versicolor</td>
+      <td>versicolor</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+</div>
+
+</div>
+
+<p>All right! our KNN algo got all the 5 test species right!</p>
+<p>I wrote this KNN algo a bit specifically targeting the iris dataset, but it can be modified to deal with with many different data sets.</p>
+<p>The iris dataset is very simple, but usually I would normalize the data so all the attributes get a chance to effect the rating.</p>
+</article>
+
+<div class="meta">
+    posted <time>2018-08-10</time>, updated <time>2020-08-28</time><br>
+    tagged: 
+    <a href="/algorithims">algorithims</a>
+</div>
+
+<hr>
+<footer>
+    This is a footer. One day some footery text will go here. 
+</footer>
+
+
+
+</body>
+
+</html>
