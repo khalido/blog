@@ -1,6 +1,6 @@
 ---
 title: "how the blog was built"
-date: 2020-07-14
+date: 2020-09-14
 tags:
 - python
 toc: true
@@ -75,51 +75,23 @@ Frameworks I looked at:
 
 ### Search
 
-This was the important one. First up, I added a simple list of posts and a javascript filter:
+Search. I want search. 
 
-```html
- <h3>Simple list of posts</h3>
-    <p>All the Blog posts using mako templates. The filter here is a simple javascript one just filtering on the content inside the list.</p>
+Considered at
 
-    <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Filter.." title="Type">
+- [fusejs](https://fusejs.io/) - [blog post implementing this in hugo](https://gist.github.com/cmod/5410eae147e4318164258742dd053993#staticjsfastsearchjs)
+- [minisearch](https://lucaong.github.io/minisearch/)
+- consider lunr as well as [lunr.py](https://github.com/yeraydiazdiaz/lunr.py) to pre generate the index.
 
-    <ul id="myUL">
-        % for post in posts:
-            <li><a href="${post.slug}.html">${post.title}</a></li>
-        % endfor
-    </ul>
-
-<script>
-    function myFunction() {
-        var input, filter, ul, li, a, i, txtValue;
-        input = document.getElementById("myInput");
-        filter = input.value.toUpperCase();
-        ul = document.getElementById("myUL");
-        li = ul.getElementsByTagName("li");
-        for (i = 0; i < li.length; i++) {
-            a = li[i].getElementsByTagName("a")[0];
-            txtValue = a.textContent || a.innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                li[i].style.display = "";
-            } else {
-                li[i].style.display = "none";
-            }
-        }
-    }
-</script>
-```
-
-This turned out to be pretty useless, so enter fusejs.
+So step one is to build a search index - which my script does as a json file containing all the post attributes I want searched.
 
 ### Github actions
 
-Github actions add superpowers to a repo - they can be set to be trigured at a time interval or on every code push to a branch. To make a github action: Save a github approved formatted yaml file to `.github/workflows` folder and it should run on every push. For this blog my actions:
+Github actions add superpowers to a repo - they can be set to be triggered at a time interval or on every code push to a branch. To make a github action: Save a github approved formatted yaml file to `.github/workflows` folder and it should run on every push. For this blog my actions:
 
 - copys the contents of the repo to the github runner
-- sets up python 3.8
+- sets up python - [python versions available on github actions](https://raw.githubusercontent.com/actions/python-versions/main/versions-manifest.json)
 - install dependencies as defined in requirements.txt
-
-
 
 
 
