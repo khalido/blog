@@ -105,45 +105,19 @@
 <li>https://csslayout.io/ - examples of using css directly</li>
 </ul>
 <h3 id="search">Search</h3>
-<p>This was the important one. First up, I added a simple list of posts and a javascript filter:</p>
-<div class="codehilite"><pre><span></span><code> <span class="p">&lt;</span><span class="nt">h3</span><span class="p">&gt;</span>Simple list of posts<span class="p">&lt;/</span><span class="nt">h3</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>All the Blog posts using mako templates. The filter here is a simple javascript one just filtering on the content inside the list.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
-
-    <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;myInput&quot;</span> <span class="na">onkeyup</span><span class="o">=</span><span class="s">&quot;myFunction()&quot;</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">&quot;Filter..&quot;</span> <span class="na">title</span><span class="o">=</span><span class="s">&quot;Type&quot;</span><span class="p">&gt;</span>
-
-    <span class="p">&lt;</span><span class="nt">ul</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;myUL&quot;</span><span class="p">&gt;</span>
-        % for post in posts:
-            <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;${post.slug}.html&quot;</span><span class="p">&gt;</span>${post.title}<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
-        % endfor
-    <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
-
-<span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
-    <span class="kd">function</span> <span class="nx">myFunction</span><span class="p">()</span> <span class="p">{</span>
-        <span class="kd">var</span> <span class="nx">input</span><span class="p">,</span> <span class="nx">filter</span><span class="p">,</span> <span class="nx">ul</span><span class="p">,</span> <span class="nx">li</span><span class="p">,</span> <span class="nx">a</span><span class="p">,</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">txtValue</span><span class="p">;</span>
-        <span class="nx">input</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;myInput&quot;</span><span class="p">);</span>
-        <span class="nx">filter</span> <span class="o">=</span> <span class="nx">input</span><span class="p">.</span><span class="nx">value</span><span class="p">.</span><span class="nx">toUpperCase</span><span class="p">();</span>
-        <span class="nx">ul</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;myUL&quot;</span><span class="p">);</span>
-        <span class="nx">li</span> <span class="o">=</span> <span class="nx">ul</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="s2">&quot;li&quot;</span><span class="p">);</span>
-        <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mf">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">li</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-            <span class="nx">a</span> <span class="o">=</span> <span class="nx">li</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">)[</span><span class="mf">0</span><span class="p">];</span>
-            <span class="nx">txtValue</span> <span class="o">=</span> <span class="nx">a</span><span class="p">.</span><span class="nx">textContent</span> <span class="o">||</span> <span class="nx">a</span><span class="p">.</span><span class="nx">innerText</span><span class="p">;</span>
-            <span class="k">if</span> <span class="p">(</span><span class="nx">txtValue</span><span class="p">.</span><span class="nx">toUpperCase</span><span class="p">().</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">filter</span><span class="p">)</span> <span class="o">&gt;</span> <span class="o">-</span><span class="mf">1</span><span class="p">)</span> <span class="p">{</span>
-                <span class="nx">li</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">style</span><span class="p">.</span><span class="nx">display</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
-            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-                <span class="nx">li</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">style</span><span class="p">.</span><span class="nx">display</span> <span class="o">=</span> <span class="s2">&quot;none&quot;</span><span class="p">;</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
-</code></pre></div>
-
-
-<p>This turned out to be pretty useless, so enter fusejs.</p>
+<p>Search. I want search. </p>
+<p>Considered at</p>
+<ul>
+<li><a href="https://fusejs.io/">fusejs</a> - <a href="https://gist.github.com/cmod/5410eae147e4318164258742dd053993#staticjsfastsearchjs">blog post implementing this in hugo</a></li>
+<li><a href="https://lucaong.github.io/minisearch/">minisearch</a></li>
+<li>consider lunr as well as <a href="https://github.com/yeraydiazdiaz/lunr.py">lunr.py</a> to pre generate the index.</li>
+</ul>
+<p>So step one is to build a search index - which my script does as a json file containing all the post attributes I want searched.</p>
 <h3 id="github-actions">Github actions</h3>
-<p>Github actions add superpowers to a repo - they can be set to be trigured at a time interval or on every code push to a branch. To make a github action: Save a github approved formatted yaml file to <code>.github/workflows</code> folder and it should run on every push. For this blog my actions:</p>
+<p>Github actions add superpowers to a repo - they can be set to be triggered at a time interval or on every code push to a branch. To make a github action: Save a github approved formatted yaml file to <code>.github/workflows</code> folder and it should run on every push. For this blog my actions:</p>
 <ul>
 <li>copys the contents of the repo to the github runner</li>
-<li>sets up python 3.8</li>
+<li>sets up python - <a href="https://raw.githubusercontent.com/actions/python-versions/main/versions-manifest.json">python versions available on github actions</a></li>
 <li>install dependencies as defined in requirements.txt</li>
 </ul>
 <h2 id="misc-stuff">Misc stuff</h2>
@@ -188,7 +162,7 @@
 </article>
 
 <div class="meta">
-    posted <time>2020-07-14</time>, updated <time>2020-10-06</time><br>
+    posted <time>2020-09-14</time>, updated <time>2020-10-06</time><br>
     tagged: 
     <a href="/python">python</a>
 </div>
