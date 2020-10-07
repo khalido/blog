@@ -33,7 +33,8 @@ from mako.lookup import TemplateLookup
 from datetime import datetime
 import markdown
 import pymdownx.emoji
-import nbconvert
+
+# import nbconvert
 
 
 @dataclass
@@ -99,8 +100,9 @@ def convert_notebooks_to_md():
     # emptying tmp so don't end up with old md files here
     shutil.rmtree("tmp", ignore_errors=True)
 
-    exporter = nbconvert.MarkdownExporter()
-    write_file = nbconvert.writers.FilesWriter(build_directory="tmp")
+    # am I using nbconvert here?
+    # exporter = nbconvert.MarkdownExporter()
+    # write_file = nbconvert.writers.FilesWriter(build_directory="tmp")
 
     nb_paths = [
         f for f in path_nb.rglob("*.ipynb") if ".ipynb_checkpoints" not in str(f)
