@@ -76,10 +76,9 @@
 <p>Note: you need sudo to install and update flatpak apps in crostini.</p>
 <h3 id="vs-code">vs code</h3>
 <p>Anaconda can automatically install VS Code, but to <a href="https://www.reddit.com/r/Crostini/wiki/howto/install-vscode">install it directly</a>:</p>
-<div class="codehilite"><pre><span></span><code>curl -L https://go.microsoft.com/fwlink/?LinkID<span class="o">=</span><span class="m">760868</span> &gt; vscode.deb
+<div class="bash codehilite"><pre><span></span><code>curl -L https://go.microsoft.com/fwlink/?LinkID<span class="o">=</span><span class="m">760868</span> &gt; vscode.deb
 sudo apt install ./vscode.deb
 </code></pre></div>
-
 
 <p>Useful plugins:</p>
 <ul>
@@ -92,14 +91,13 @@ sudo apt install ./vscode.deb
 <p>Install Caret by downloading the <a href="https://github.com/careteditor/releases-beta/releases">latest beta release .deb</a> and:</p>
 <p><code>sudo apt install ./caret-beta.deb</code></p>
 <p>Install Typora - haven't tested this out, especially adding repo. Apparently you have to <code>sudo apt install software-properties-common</code> first before adding a repo.</p>
-<div class="codehilite"><pre><span></span><code><span class="c1"># add Typora&#39;s repository</span>
+<div class="bash codehilite"><pre><span></span><code><span class="c1"># add Typora&#39;s repository</span>
 sudo add-apt-repository <span class="s1">&#39;deb https://typora.io/linux ./&#39;</span>
 sudo apt update
 
 <span class="c1"># install typora</span>
 sudo apt install typora
 </code></pre></div>
-
 
 <h2 id="install-anaconda-for-a-better-python">install anaconda for a better python</h2>
 <p>Note: install <a href="https://docs.conda.io/en/latest/miniconda.html">miniconda</a> instead to save space if needed.</p>
@@ -126,12 +124,10 @@ sudo apt install typora
 <div class="codehilite"><pre><span></span><code><span class="err">conda create -n R r-essentials r-base</span>
 </code></pre></div>
 
-
 <p>Presto! now R should show up as a kernel in jupyter.</p>
 <p>Intall r packages inside the r environment by using the conda r channel - note that many packages seems to be prefaced with <code>r-</code>:</p>
 <div class="codehilite"><pre><span></span><code><span class="err">conda install -c r r-plotly</span>
 </code></pre></div>
-
 
 <h2 id="make-the-terminal-nicer-to-use">make the terminal nicer to use</h2>
 <p>this is really important, cause if the terminal doesn't look like something out of a movie, are you really doing something?</p>
@@ -146,7 +142,7 @@ sudo apt install typora
 <li>Close window <code>Ctrl+Shift+W</code> - this is actually <code>Ctrl-W</code> normally, but terminal might need that hence shift.</li>
 </ul>
 <p>fix this by pressing <code>ctrl-shift-p</code> inside terminal, then scroll down to keyboard preferences and enter</p>
-<div class="codehilite"><pre><span></span><code><span class="o">{</span>
+<div class="bash codehilite"><pre><span></span><code><span class="o">{</span>
   <span class="s2">&quot;Alt-187&quot;</span>: <span class="s2">&quot;PASS&quot;</span>,
   <span class="s2">&quot;Alt-189&quot;</span>: <span class="s2">&quot;PASS&quot;</span>,
   <span class="s2">&quot;Alt-219&quot;</span>: <span class="s2">&quot;PASS&quot;</span>,
@@ -155,7 +151,6 @@ sudo apt install typora
 <span class="o">}</span>
 </code></pre></div>
 
-
 <p>This has to be done only once, since ChromeOS remembers the terminal settings across devices. So handy after a powerwash.</p>
 <h3 id="multiplex-all-the-things">multiplex all the things</h3>
 <p>If using Tilix, no need to do this, but for the native terminal,  install tmux:</p>
@@ -163,10 +158,9 @@ sudo apt install typora
 <p>the only thing I really do with tmux is to split the terminal horizontally, then splitting one horizontal terminal vertically, for a total of three windows. Now there is a lot more about sessions and whats not, but the bare basics are:</p>
 <p>start tmux by typing <code>tmux</code>, then press <code>ctrl+b</code> to enter command mode. <code>"</code> splits the window horizontally and <code>%</code> splits it vertically. To move around, press <code>ctrl-b arrow-key</code></p>
 <p>For more customizatoin, make a <code>.tmux.conf</code> in the home directory and add:</p>
-<div class="codehilite"><pre><span></span><code><span class="c1"># Enable mouse mode (tmux 2.1 and above)</span>
+<div class="bash codehilite"><pre><span></span><code><span class="c1"># Enable mouse mode (tmux 2.1 and above)</span>
 <span class="nb">set</span> -g mouse on
 </code></pre></div>
-
 
 <h3 id="jazz-up-the-shell">jazz up the shell</h3>
 <p>rumour has it that crostini can have a heart attack if you change the shell, so stick with bash. Consider <a href="https://github.com/ohmybash/oh-my-bash">oh-my-bash</a> or <a href="https://github.com/ohmybash/oh-my-bash">bash-it</a> for hacker level coding.</p>
@@ -182,7 +176,7 @@ sudo apt install typora
 <h3 id="setup-vim-proper-like">setup vim proper like</h3>
 <p>install plugin manager for vim - I went with <a href="https://github.com/junegunn/vim-plug">vim-plug</a>:</p>
 <p>edit <code>~/.vimrc</code> so it has this stuff:</p>
-<div class="codehilite"><pre><span></span><code><span class="s2">&quot; install vim-plug if not installed</span>
+<div class="bash codehilite"><pre><span></span><code><span class="s2">&quot; install vim-plug if not installed</span>
 <span class="s2">if empty(glob(&#39;~/.vim/autoload/plug.vim&#39;))</span>
 <span class="s2">  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs</span>
 <span class="s2">    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim</span>
@@ -210,11 +204,10 @@ sudo apt install typora
 <span class="nb">set</span> linebreak
 </code></pre></div>
 
-
 <p>run <code>:PlugInstall</code> in vim to install plugs (if needed).</p>
 <h2 id="download-all-my-git-repos">Download all my git repos</h2>
 <p>This command will grab json output of the first (or last?) 200 repos in my github and git clone them all one by one into the directory this command was run.</p>
-<div class="codehilite"><pre><span></span><code>curl -s https://api.github.com/users/khalido/repos?per_page<span class="o">=</span><span class="m">200</span> <span class="p">|</span> grep <span class="se">\&quot;</span>clone_url<span class="se">\&quot;</span> <span class="p">|</span> awk <span class="s1">&#39;{print $2}&#39;</span> <span class="p">|</span> sed -e <span class="s1">&#39;s/&quot;//g&#39;</span> -e <span class="s1">&#39;s/,//g&#39;</span> <span class="p">|</span> xargs -n1 git clone
+<div class="bash codehilite"><pre><span></span><code>curl -s https://api.github.com/users/khalido/repos?per_page<span class="o">=</span><span class="m">200</span> <span class="p">|</span> grep <span class="se">\&quot;</span>clone_url<span class="se">\&quot;</span> <span class="p">|</span> awk <span class="s1">&#39;{print $2}&#39;</span> <span class="p">|</span> sed -e <span class="s1">&#39;s/&quot;//g&#39;</span> -e <span class="s1">&#39;s/,//g&#39;</span> <span class="p">|</span> xargs -n1 git clone
 </code></pre></div>
 </article>
 

@@ -75,15 +75,13 @@
 <li>https://facelessuser.github.io/pymdown-extensions/</li>
 </ul>
 <p>Start a server</p>
-<div class="codehilite"><pre><span></span><code>python -m http.server
+<div class="bash codehilite"><pre><span></span><code>python -m http.server
 </code></pre></div>
-
 
 <h3 id="code-highlight">code highlight</h3>
 <p>python markdown has pygments built in, which has a bunch of styles. To generate the css:</p>
-<div class="codehilite"><pre><span></span><code>pygmentize -S default -f html -a .codehilite &gt; codestyles.css
+<div class="bash codehilite"><pre><span></span><code>pygmentize -S default -f html -a .codehilite &gt; codestyles.css
 </code></pre></div>
-
 
 <p>The </p>
 <h3 id="html">html</h3>
@@ -136,10 +134,10 @@
 <h3 id="twitter-embed">twitter embed</h3>
 <p>This should show a twitter tweet embedded inside the page:</p>
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Sunsets don&#39;t get much better than this one over <a href="https://twitter.com/GrandTetonNPS?ref_src=twsrc%5Etfw">@GrandTetonNPS</a>. <a href="https://twitter.com/hashtag/nature?src=hash&amp;ref_src=twsrc%5Etfw">#nature</a> <a href="https://twitter.com/hashtag/sunset?src=hash&amp;ref_src=twsrc%5Etfw">#sunset</a> <a href="http://t.co/YuKy2rcjyU">pic.twitter.com/YuKy2rcjyU</a></p>&mdash; US Department of the Interior (@Interior) <a href="https://twitter.com/Interior/status/463440424141459456?ref_src=twsrc%5Etfw">May 5, 2014</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-<p><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></p>
 <h3 id="testing-syntax-highlight">testing syntax highlight</h3>
-<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">mako.template</span> <span class="kn">import</span> <span class="n">Template</span>
+<div class="python codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">mako.template</span> <span class="kn">import</span> <span class="n">Template</span>
 <span class="kn">from</span> <span class="nn">mako.lookup</span> <span class="kn">import</span> <span class="n">TemplateLookup</span>
 <span class="n">lookup</span> <span class="o">=</span> <span class="n">TemplateLookup</span><span class="p">(</span><span class="n">directories</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;templates&quot;</span><span class="p">])</span>
 
@@ -162,7 +160,7 @@
 </article>
 
 <div class="meta">
-    posted <time>2020-09-14</time>, updated <time>2020-10-06</time><br>
+    posted <time>2020-09-14</time>, updated <time>2020-10-07</time><br>
     tagged: 
     <a href="/python">python</a>
 </div>

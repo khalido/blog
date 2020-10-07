@@ -56,11 +56,10 @@
 <span class="err">jupyter lab build --minimize=False</span>
 </code></pre></div>
 
-
 <p>Note: the build flag is because building was taking too long without this.</p>
 <h2 id="blog-with-jupyter-notebooks">blog with jupyter notebooks</h2>
 <p>So there are tools like Pelican which are setup directly with jupyter notebooks, but I had already set up a hugo powered blog since its free, easy and just works, so my mini shortcut is to put all my notebooks the hugo content directory and run a little script there which converts the jupyter notebooks to markdown files:</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">os</span>
+<div class="python codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">os</span>
 
 <span class="c1"># path to jupyter notebooks </span>
 <span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;content/&#39;</span>
@@ -81,7 +80,6 @@
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Converted </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">ipynb_files</span><span class="p">)</span><span class="si">}</span><span class="s2"> jupter notebooks to markdown.&quot;</span><span class="p">)</span>
 </code></pre></div>
 
-
 <p>The above works just fine, but i had a problem: the web server wasn't displaying images from the jupyter notebook posts.</p>
 <p>One solution is to go through every markdown file and fix the link so it points to the right file, but the easiest solution Google found me was this:</p>
 <p>In the nbconvert config file <code>~/.jupyter/jupyter_nbconvert_config.py</code> put the following line:</p>
@@ -91,7 +89,7 @@
 </article>
 
 <div class="meta">
-    posted <time>2019-08-04</time>, updated <time>2020-10-06</time><br>
+    posted <time>2019-08-04</time>, updated <time>2020-10-07</time><br>
     tagged: 
     <a href="/jupyter">jupyter</a>
 </div>
