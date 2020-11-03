@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!--temp stylesheet, customize my own one later.
+        https://github.com/kognise/water.css-->
+        
+        
+        <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.3/new.min.css">
+
+        <link rel="stylesheet" type="text/css" href="/codestyles.css">
+        
+        
+
+        <title>deeplearning.ai: Structuring Machine Learning Projects</title>
+    </head>
+
+    <body>
+ 
+        <header>
+            <a href="/">khalido.org</a> <br>
+            I love me some subheader text.
+        </header>
+
+<article>
+        <h1>deeplearning.ai: Structuring Machine Learning Projects</h1>
+    
+  
+    <p>This course covers how to think about and improve machine learning systems.</p>
+<blockquote>
+<p>You will learn how to build a successful machine learning project. If you aspire to be a technical leader in AI, and know how to set direction for your team's work, this course will show you how.</p>
+</blockquote>
+<p><strong>Course Resources</strong></p>
+<ul>
+<li><a href="https://www.coursera.org/learn/machine-learning-projects/home/welcome">Course home</a></li>
+<li>
+<p><a href="https://www.coursera.org/learn/machine-learning-projects/discussions">Discussion forum</a></p>
+</li>
+<li>
+<p><a href="#week-1-ml-strategy">Week 1: ML Strategy</a></p>
+<ul>
+<li><a href="#orthogonalization">Orthogonalization</a></li>
+<li><a href="#setting-up-your-goal">Setting up your goal</a><ul>
+<li><a href="#single-number-evaluation-metric">Single number evaluation metric</a></li>
+<li><a href="#satisficing-and-optimizing-metric">Satisficing and Optimizing metric</a></li>
+<li><a href="#traindevtest-distributions">Train/dev/test distributions</a></li>
+<li><a href="#size-of-the-dev-and-test-sets">Size of the dev and test sets</a></li>
+<li><a href="#when-to-change-devtest-sets-and-metrics">When to change dev/test sets and metrics</a></li>
+</ul>
+</li>
+<li><a href="#comparing-to-human-level-performance">Comparing to human-level performance</a><ul>
+<li><a href="#why-human-level-performance">Why human-level performance?</a></li>
+<li><a href="#avoidable-bias">Avoidable bias</a></li>
+<li><a href="#understanding-human-level-performance">Understanding human-level performance</a></li>
+<li><a href="#surpassing-human-level-performance">Surpassing human-level performance</a></li>
+<li><a href="#improving-your-model-performance">Improving your model performance</a></li>
+</ul>
+</li>
+<li><a href="#andrej-karpathy-interview">Andrej Karpathy interview</a></li>
+</ul>
+</li>
+<li><a href="#week-2-more-ml-strategy">Week 2: More ML Strategy</a><ul>
+<li><a href="#error-analysis">Error Analysis</a><ul>
+<li><a href="#carrying-out-error-analysis">Carrying out error analysis</a></li>
+<li><a href="#cleaning-up-incorrectly-labeled-data">Cleaning up incorrectly labeled data</a></li>
+<li><a href="#build-your-first-system-quickly-then-iterate">Build your first system quickly, then iterate</a></li>
+</ul>
+</li>
+<li><a href="#mismatched-training-and-devtest-data">Mismatched training and dev/test data</a><ul>
+<li><a href="#training-and-testing-on-different-distributions">Training and testing on different distributions</a></li>
+<li><a href="#bias-and-variance-with-mismatched-data-distributions">Bias and Variance with mismatched data distributions</a></li>
+<li><a href="#addressing-data-mismatch">Addressing data mismatch</a></li>
+</ul>
+</li>
+<li><a href="#learning-from-multiple-tasks">Learning from multiple tasks</a><ul>
+<li><a href="#transfer-learning">Transfer learning</a></li>
+<li><a href="#multi-task-learning">Multi-task learning</a></li>
+</ul>
+</li>
+<li><a href="#end-to-end-deep-learning">End-to-end deep learning</a><ul>
+<li><a href="#what-is-end-to-end-deep-learning">What is end-to-end deep learning</a></li>
+<li><a href="#whether-to-use-end-to-end-deep-learning">Whether to use end-to-end deep learning</a></li>
+</ul>
+</li>
+<li><a href="#ruslan-salakhutdinov-interview">Ruslan Salakhutdinov interview</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="week-1-ml-strategy">Week 1: ML Strategy</h2>
+<p>There are lots of ways to improve a deep learning system, so its important to sse quick and effective ways to figure out the most promising things to try and and improve.</p>
+<h3 id="orthogonalization">Orthogonalization</h3>
+<ul>
+<li>old school tv's had a number of knobs to tune the picture - all the settings made it very hard to get the picture perfect</li>
+<li>cars have orthogonal controls - a steering and speed which effect two different things making it easier to control. If we have controls which effect the steering and speed at the same time it would make it much harder to get the speed and steering angle we wanted.</li>
+<li>we have a chain of assumptions in ML: fit training set on cost func, fit dev set, fit test set, then perform well in the real world and we want to have different set of knobs to tune each part.</li>
+<li>ideally we have a number of controls which do one task well without effecting other things too much. </li>
+<li>of course, some controls apply across many layers and are still useful, like early stopping</li>
+</ul>
+<h3 id="setting-up-your-goal">Setting up your goal</h3>
+<h4 id="single-number-evaluation-metric">Single number evaluation metric</h4>
+<ul>
+<li>set up a single real number to evaluate performance before starting out on a project</li>
+<li>a well defined dev set and a single metric speeds up the iterative process of developing a good model</li>
+<li>looking at a simple cat classifier:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Classifier</th>
+<th>Precision</th>
+<th>Recall</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td>95%</td>
+<td>90%</td>
+</tr>
+<tr>
+<td>B</td>
+<td>98%</td>
+<td>85%</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Precision</strong>: of the examples our classifier says are cats, what percentage is actually right</li>
+<li><strong>Recall</strong>:  what % of actual cats are correctly classified</li>
+<li>The problem with using precision and recall is it can make it hard to figure out which classifier is better</li>
+<li><a href="https://www.wikiwand.com/en/F1_score">F1 Score</a> is the harmonic average of precision and recall using $F1 = 2 / ((1/P) + (1/R))$ or $2 * (precision * recall) / (precision + recall)$<ul>
+<li>F1 score is usefeul as it balances precision and recall, rather than just taking the simple average, which would favour outliers</li>
+</ul>
+</li>
+<li>to summarize, have a single number metric (this could be an average of several metrics) and a good dev set</li>
+</ul>
+<h4 id="satisficing-and-optimizing-metric">Satisficing and Optimizing metric</h4>
+<ul>
+<li>its not easy to setup a single number - we might narrow things down to a single number, accuracy, but also want to evaluate running time</li>
+<li>solve this by picking one metric to optimize, and satisfy the other metric by picking a threshold, like all running times below 1000ms are good enough.<ul>
+<li>for voice recognition, like on Amazon Alexa, we have metrics for how long humans are ok to wait, so we can just use that number as a threshold</li>
+</ul>
+</li>
+<li>so, we have a make metric to optimize, and any number of other metrics which we satisfy with thresholds. </li>
+</ul>
+<p>#### Train/dev/test distributions</p>
+<ul>
+<li>dev (cross validation set) and test (the final holdout data) sets have to come from the same distribution.</li>
+<li>for example, if we have data from different regions, don't say us/uk/europe is the dev set and asia is the test set - regions will have differences.</li>
+<li>an ML team wasted time optimizing loan approvals on medium income zip codes, but was testing on low income zip codes.</li>
+<li>choose a dev and test set to reflect data you expect to get in the future and consider important to do well on.</li>
+</ul>
+<h4 id="size-of-the-dev-and-test-sets">Size of the dev and test sets</h4>
+<ul>
+<li>old rule of thumb for train/dev/test: 60/20/20 - worked for smaller data.</li>
+<li>but now we have much larger data sets, so for 1M data set, 1% or 10K might be enough for a test set.</li>
+<li>deep learning is data hungry so we want to feed it as much data as possible for training</li>
+<li>the test set helps us evaluate the overall system, so it has to be big enough to give us high confidence.<ul>
+<li>this will vary depending on the data set.</li>
+<li>sometimes we might not need a test set at all.</li>
+</ul>
+</li>
+</ul>
+<h4 id="when-to-change-devtest-sets-and-metrics">When to change dev/test sets and metrics</h4>
+<ul>
+<li>say we've built two cat classifiers, A has 3% error, B has 5% error.</li>
+<li>A is better, but lets through porn images. B stops all the porn images, so even though it has higher error, B is better algorithm.</li>
+<li>so we want to change our metrics here, say adding a weight to penalize porn images</li>
+<li>think of machine learning as having two separate steps:<ul>
+<li>
+<ol>
+<li>figure out the metric</li>
+</ol>
+</li>
+<li>
+<ol>
+<li>worry about how to actually do well on the metric</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>other things happen, like our image classifier performs well on our data set, but users upload bad quality pictures which lower performance, so change metric and/or the dev set to better capture what we need our algorithm to actually do.</li>
+</ul>
+<h3 id="comparing-to-human-level-performance">Comparing to human-level performance</h3>
+<h4 id="why-human-level-performance">Why human-level performance?</h4>
+<ul>
+<li>two main reasons we compare to human level performance:<ul>
+<li>ML is getting better so its become feasible to compare to human level performance in many applications.</li>
+<li>the workflow of designing and building ML systems is much more efficient when comparing to what humans also do.</li>
+</ul>
+</li>
+<li>for many problems, progress is rapid approaching human level performance, and slows down upon reaching it. the hope is that its reaching a theoretical limit, called the Bayes optimal error.</li>
+<li><strong>Bayes optimal error</strong> is the best possible error<ul>
+<li>for tasks humans are good at, there isn't much range b/w human error and the bayes optimal error.</li>
+</ul>
+</li>
+<li>when our ML algo is worse than humans, get humans to:<ul>
+<li>give us more data, like label images, translate text, etc.</li>
+<li>manual analysis errors - why did a human get it right and algo get it wrong?</li>
+<li>better analysis of bias/variance</li>
+</ul>
+</li>
+</ul>
+<h4 id="avoidable-bias">Avoidable bias</h4>
+<ul>
+<li>humans are great at image classification, so looking at two image classification algos:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Bias Example</th>
+<th>Variance Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Humans</td>
+<td>1%</td>
+<td>7.5%</td>
+</tr>
+<tr>
+<td>Training error</td>
+<td>8%</td>
+<td>8%</td>
+</tr>
+<tr>
+<td>Dev Error</td>
+<td>10%</td>
+<td>10%</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>the left example illustrates bias - since humans are doing much better than the algo, we focus on improving training error.</li>
+<li>the right example shows that we are close to human error - so we focus on reducing the variance</li>
+<li>if we are doing better than Bayes error we're overfitting.</li>
+<li>having an estimate of the bayes optimal error helps us to focus on whether to reduce bias or variance.<ul>
+<li>avoidable bias: training error - human level error</li>
+<li>variance: dev error - training error</li>
+</ul>
+</li>
+</ul>
+<h4 id="understanding-human-level-performance">Understanding human-level performance</h4>
+<ul>
+<li>there are multiple levels of human performance - choose what matters and what we want to achieve for our system<ul>
+<li>do we use a typical doctors error level, an experienced doctors, or the lower error level from a team of experienced doctors.</li>
+<li>surpassing an average radiologist might mean our system is good enough to deploy</li>
+</ul>
+</li>
+<li>use human level error as a proxy for Bayes error. </li>
+<li>An error analysis example from medical classification, where say human error ranges from 0.5-1%:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Error</th>
+<th>Bias Example</th>
+<th>Variance Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Human/Bayes</td>
+<td>1%</td>
+<td>1%</td>
+</tr>
+<tr>
+<td>Training</td>
+<td>5%</td>
+<td>1%</td>
+</tr>
+<tr>
+<td>Dev</td>
+<td>6%</td>
+<td>5%</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>the left column we need to concentrate on reducing the training error - the variance, and the human error we pick doesn't matter.</li>
+<li>the right col we need to concentrate on the dev error - i.e the variance, and picking the lower range of human error is more important since we are close to human level performance.</li>
+<li>so we have a more nuanced view of error, and using bayes error instead of zero error leads to better and faster decisions on reducing bias or variance.</li>
+</ul>
+<h4 id="surpassing-human-level-performance">Surpassing human-level performance</h4>
+<ul>
+<li>ml gets harder as we approach/surpass human level performance</li>
+<li>when we've surpassed human level performance, are we overfitting, or is the bayes error lower than human error.</li>
+<li>some applications have surpassed human level: online advertising, product recommendation, loan approval, logistics<ul>
+<li>all these examples are learning from structured data, not natural perception problems which humans are very good at</li>
+<li>teams have access to heaps of data</li>
+</ul>
+</li>
+<li>computers haven gotten to single human level at certain perception tasks, like image recognition, speech.</li>
+</ul>
+<h4 id="improving-your-model-performance">Improving your model performance</h4>
+<ul>
+<li>two fundamental assumptions of supervised learning:<ul>
+<li>we can fit the training set pretty well, or avoid bias</li>
+<li>the training set performance generalizes well to the dev/test set - achieve low variance</li>
+</ul>
+</li>
+<li>to improve a deep learning supervised system</li>
+<li>for improving bias:<ul>
+<li>train bigger model</li>
+<li>train longer or use better optimization algo (RMSprop, Adam, momentum, etc)</li>
+<li>try other model architectures, hyperparameter search</li>
+</ul>
+</li>
+<li>improve variance:<ul>
+<li>more data</li>
+<li>regularization (L2, dropout, data augmentation)</li>
+<li>NN architecture, hyperparameter search</li>
+</ul>
+</li>
+<li></li>
+</ul>
+<h3 id="andrej-karpathy-interview">Andrej Karpathy interview</h3>
+<ul>
+<li>before NN's ml/ai was a lot of graphs, tree pruning, not very satisfying - NN's actually felt like AI vs the old school AI techniques</li>
+<li>before, humans wrote code to do something, with neural networks / machine learning humans write the optimization algo and specify inputs/outputs and the computers write code</li>
+<li>while working on cifar10, had predicted an error rate of 10%, but we're now down to 2-3%.</li>
+<li>built a javascript interface to show himself imagenet images and classify them</li>
+<li>famous for putting his deep learning stanford class online</li>
+<li>understand of deep learning has changed:<ul>
+<li>surprised by how general deep learning is - no one saw how well it would work</li>
+</ul>
+</li>
+<li>amazed at how you can take pre trained networks and apply them to other tasks</li>
+<li>people are crushing tasks one after the other with transfer learning</li>
+<li>surprised that unsupervised learning hasn't worked so well</li>
+<li>has been thinking about the future of AI, thinks will split into two directions:<ul>
+<li>applied AI, where ppl train NN's to do something, generally supervised learning</li>
+<li>artificial general intelligence, working on dynamic systems to do everything a human can</li>
+</ul>
+</li>
+<li>thinks the approach to do one thing at a time, like with current neural nets which recoginze images, or do speech etc, won't lead to AGI, we need a single kind of NN which learns all the tasks a human can do - see <a href="http://karpathy.github.io/2015/11/14/ai/">his short story on how this might look</a>.</li>
+<li>people liked CS213N becuase it didn't abstract away things, it works through the low-level details. Implementing stuff is the best way to learn it.</li>
+</ul>
+<h2 id="week-2-more-ml-strategy">Week 2: More ML Strategy</h2>
+<h3 id="error-analysis">Error Analysis</h3>
+<h4 id="carrying-out-error-analysis">Carrying out error analysis</h4>
+<ul>
+<li>manually examining what your algo is doing gives insight<ul>
+<li>e.g looking at a 100 misclassified dev set examples, see whats the biggest type of error and work on fixing that. i.e we want to work on the errors which make up the bulk of our problem, rather than the lower percentage errors.</li>
+</ul>
+</li>
+<li>error analysis helps us pick useful actions which will have meaningful improvements.</li>
+<li>we can evaluate multiple ideas in parallel - use a spreadsheet to help decide:</li>
+</ul>
+<p><img alt="" src="img/eval-multiple-ideas.png" /></p>
+<ul>
+<li>so summarize errors, find categories, prioritize important ones</li>
+</ul>
+<h4 id="cleaning-up-incorrectly-labeled-data">Cleaning up incorrectly labeled data</h4>
+<ul>
+<li>sometimes its worthwhile to check training sets for mislabelled images<ul>
+<li>deep neural networks are quite robust to random errors in the training set, so few mistakes are ok</li>
+<li>but systematic errors aren't ok, like labelling all white dogs as cats</li>
+</ul>
+</li>
+<li>modify our error spreadsheet above to have a mis-labelled category, we should always go after the biggest cause of error first</li>
+<li>correcting dev/test set examples:<ul>
+<li>apply same process to dev/test so they continue to come from the same distribution</li>
+<li>consider examining examples the algo got right as well as the ones it got wrong</li>
+<li>we might decide to only correct labels in the dev/test sets and not go through the bigger training set, so dev/test data may now come from slightly different distrubutions. This is ok, long as both dev/test have the same distribution, and the train set is a slightly different distribution</li>
+</ul>
+</li>
+</ul>
+<h4 id="build-your-first-system-quickly-then-iterate">Build your first system quickly, then iterate</h4>
+<ul>
+<li>there are many ways to make a speech recognition system more robust. More generally, for any ML project there are 50 different directions to improve a ml system</li>
+<li>quickly set up a dev/test set and metric, build a initial system, then use Bias/Variance analysis and error analysis to prioritize next steps</li>
+<li>a lot of value in the initial ML system is to help us prioritize future efforts. </li>
+</ul>
+<h3 id="mismatched-training-and-devtest-data">Mismatched training and dev/test data</h3>
+<h4 id="training-and-testing-on-different-distributions">Training and testing on different distributions</h4>
+<ul>
+<li>deep learning needs big data, so often teams end up shoving whatever they can find into a training set, so you end up with different distributions b/w train and test/dev sets.</li>
+<li>e.g we can get 200k cat pictures from web pages, which are good quality and in large numbers, and 10k pictures from a mobile app which are crappy.</li>
+<li>so what can we do:<ul>
+<li>combine the datasets and randomly shuffle into a train/dev/test split (205k, 2,500, 2,500), so everything is from the same distribution<ul>
+<li>the problem here is that 2,381 out of 2,500 images in the dev/test set will come from the mobile app</li>
+</ul>
+</li>
+<li>make the training set use all 200k from the web plus 5K from the app, and test/dev set will be 2,500 images each from the app. This sets the target what we want it to be, even though the distributions are no different.</li>
+</ul>
+</li>
+<li>a real example of a speech recognizer for directions - we are only listening for sentences like "find the nearest gas station" but we can train on all kinds of speech data, while the dev/test sets are from our specific area. If our specific application has enough data we can add some of it to the training set as well.</li>
+</ul>
+<h4 id="bias-and-variance-with-mismatched-data-distributions">Bias and Variance with mismatched data distributions</h4>
+<ul>
+<li>the way we analyze bias and variance changes when train dev/test sets are from different distributions</li>
+<li>so we need a training-dev set which has the same distribution as the training set, and isn't used for training. so we would have error analysis like:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Variance Problem</th>
+<th>data mismatch Problem</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Training Error</td>
+<td>1%</td>
+<td>1%</td>
+</tr>
+<tr>
+<td>Training-dev error</td>
+<td>9%</td>
+<td>1.5%</td>
+</tr>
+<tr>
+<td>Dev Error</td>
+<td>10%</td>
+<td>10%</td>
+</tr>
+</tbody>
+</table>
+<h4 id="addressing-data-mismatch">Addressing data mismatch</h4>
+<ul>
+<li>carry out manual error analysis to understand difference b/w training and dev/test sets</li>
+<li>we might find errors like a lot of our dev/test data is nosier than training set</li>
+<li>so then we can collect more training data, or make it similar to dev/test data</li>
+<li>use artificial data synthesis to make the training data more similar to dev set:<ul>
+<li>combine some of the training data with something to make it similar to the test/dev distribution, like recorded background noise, or generate new examples</li>
+</ul>
+</li>
+<li>be careful about simulating data from a small subset of space, like background noise which isn't representative of actual background noise </li>
+<li>we can synthesize data which passes the human test but it could lead to over fitting as our synthetic data might just be making a subset of the dataset.</li>
+</ul>
+<h3 id="learning-from-multiple-tasks">Learning from multiple tasks</h3>
+<h4 id="transfer-learning">Transfer learning</h4>
+<ul>
+<li>apply knowledge from one task to another</li>
+<li>take a image recognizer NN, delete the last layer, create a new layer with random weights and retrain the NN on the new dataset. (called fine tuning)<ul>
+<li>we can train only the last layer, or given enough data we can train the entire network.</li>
+<li>this works as a lot of the low level layers are recognizing structures and features which transfers across to different tasks</li>
+</ul>
+</li>
+<li>transfer learning makes sense when:<ul>
+<li>task A and B have the same input X (image, speech)</li>
+<li>we have a lot of data for task A and less data for task B</li>
+<li>the low level features are similar for both tasks</li>
+</ul>
+</li>
+<li>obviously, having a large dataset for the actual problem is ideal, but often we end up having better/more data for a well known problem, like ImageNet for images, and a lot less for what we want to do (say radiology photos).</li>
+</ul>
+<h4 id="multi-task-learning">Multi-task learning</h4>
+<ul>
+<li>try to have one NN learn multiple tasks - like a simple self driving car has to detect several things: stop signs, pedestrians, cars, traffic lights, etc</li>
+<li>so the NN predicts a output vector where each position indicates whether something is there or not. (one image has multiple labels)</li>
+<li>we could have a NN for each type of object, so when does multi-task learning make sense?<ul>
+<li>low level features are shared across each object.</li>
+<li>the amount of data for each task is similar</li>
+<li>can train a big enough NN to do well on all tasks (can perform better than single NNs)</li>
+</ul>
+</li>
+<li>in practice, multi-task is used a lot less than transfer learning - though is used a lot in computer vision</li>
+</ul>
+<h3 id="end-to-end-deep-learning">End-to-end deep learning</h3>
+<h4 id="what-is-end-to-end-deep-learning">What is end-to-end deep learning</h4>
+<ul>
+<li>there are some learning systems which need multiple stages of processing, like speech recognition and vision - engineers had spent years engineering feature pipelines</li>
+<li>and end to end deep learning neural network replaces all these multiple stages with a single neural network</li>
+<li>but sometimes you don't want to just feed raw data, like with face recognition - it works better if the image is zoomed and cropped to the face - so you have two deep learning stages:<ul>
+<li>figure out where is the face</li>
+<li>now figure out whose face it is</li>
+</ul>
+</li>
+<li>when we have heaps of data, like with translation, end to end works better </li>
+<li>estimating a childs age from a hand xray: there isn't much data so multistep approach works better.</li>
+</ul>
+<h4 id="whether-to-use-end-to-end-deep-learning">Whether to use end-to-end deep learning</h4>
+<ul>
+<li>benefits of end-to-end deep learning:<ul>
+<li>lets the data speak - if we have enough data a large enough NN will figure it out</li>
+<li>less hand designing of components needed</li>
+</ul>
+</li>
+<li>cons<ul>
+<li>may need large amount of data</li>
+<li>may exclude potentially useful hand designed components</li>
+</ul>
+</li>
+<li>learning algos have two main sources of knowledge: the data and human knowledge</li>
+<li>key q: do we have enough data to learn a function of the complexity to map x to y?</li>
+<li>in a self driving car, we have <code>image/radar/lidar -&gt; cars/pedestrians -&gt; route -&gt; steering</code> and currently some of these things are done with non deep learning approaches</li>
+<li>it would be great to input data and get a steering/accel output, but this isn't very promising yet for self driving cars</li>
+</ul>
+<h3 id="ruslan-salakhutdinov-interview">Ruslan Salakhutdinov interview</h3>
+<ul>
+<li>Director of AI research at Apple <a href="https://twitter.com/rsalakhu?lang=en">twitter</a>, <a href="https://www.linkedin.com/in/ruslan-salakhutdinov-53a0b610">linkedin</a></li>
+<li>see his <a href="http://www.cs.cmu.edu/~rsalakhu/jsm2018.html">slides on his talk on the deep learning revolution</a></li>
+<li>boltzmann machines and deep boltzmann machines are very powerful but we haven't figured out how to use them yet</li>
+<li>generative modelling is exciting, expects a lots of progress in the near future</li>
+<li>companies have lots of unlabelled data but we haven't figured out how to use it</li>
+<li>advice for new researchers:<ul>
+<li>try different and new things. with neural networks too many ppl wrote them off as non-convex problems impossible to optimize. </li>
+<li>code backprop yourself once to understand it</li>
+<li>phd vsd industry: more freedom in academia for long term problems, but industry research is very exciting and well funded, impacts millions of users</li>
+</ul>
+</li>
+<li>exciting areas: unsupervised learning, deep reinforcement learning, NLP</li>
+</ul>
+<hr />
+<p>course <a href="https://www.coursera.org/account/accomplishments/certificate/QZESAQHSKF3K">done and dusted</a>:</p>
+<p><img alt="" src="img/deeplearningai-3-of-5-cert.png" /></p>
+</article>
+
+<div class="meta">
+    posted <time>2018-01-01</time>, updated <time>2020-11-03</time><br>
+    tagged: 
+    <a href="/untagged">untagged</a>
+
+    <ul>    
+        <li><a href="https://github.com/khalido/blog/edit/master/notes/deeplearning-ai-part-3-of-5.md">Edit</a></li>
+    </ul>
+
+</div>
+
+<hr>
+<footer>
+    This is a footer. One day some footery text will go here. 
+</footer>
+
+
+
+</body>
+
+</html>

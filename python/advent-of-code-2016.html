@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!--temp stylesheet, customize my own one later.
+        https://github.com/kognise/water.css-->
+        
+        
+        <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.3/new.min.css">
+
+        <link rel="stylesheet" type="text/css" href="/codestyles.css">
+        
+        
+
+        <title>Advent of Code 2016</title>
+    </head>
+
+    <body>
+ 
+        <header>
+            <a href="/">khalido.org</a> <br>
+            I love me some subheader text.
+        </header>
+
+<article>
+        <h1>Advent of Code 2016</h1>
+    
+    <details>
+        <summary>Table of contents.</summary>
+        <div class="toc">
+<ul>
+<li><a href="#general-takeaways-from-2016s-advent-of-code">General takeaways from 2016's advent of code:</a></li>
+<li><a href="#notes-on-each-puzzle">notes on each puzzle:</a></li>
+<li><a href="#day-1-no-time-for-a-taxicab">Day 1: No Time for a Taxicab</a></li>
+<li><a href="#day-2-bathroom-security">Day 2: Bathroom Security</a></li>
+<li><a href="#day-3-squares-with-three-sides">Day 3: Squares With Three Sides</a></li>
+<li><a href="#day-4-security-through-obscurity">Day 4: Security Through Obscurity</a></li>
+<li><a href="#day-5-how-about-a-nice-game-of-chess">Day 5: How About a Nice Game of Chess?</a></li>
+<li><a href="#day-6-signals-and-noise">Day 6: Signals and Noise</a></li>
+</ul>
+</div>
+
+    </details>
+  
+    <p>todo: convert this into a jupyter notebook and repost.</p>
+<p>Notes for the <a href="http://adventofcode.com/2016">Advent of Code 2016</a> programming challange.</p>
+<blockquote>
+<p>Advent of Code is a series of small programming puzzles for a variety of skill levels. They are self-contained and are just as appropriate for an expert who wants to stay sharp as they are for a beginner who is just learning to code. Each puzzle calls upon different skills and has two parts that build on a theme.</p>
+</blockquote>
+<p>I solved each puzzle in a <a href="https://github.com/khalido/adventofcode/tree/master/advent2016">jupyter notebook for each day saved in a github repo</a>. The solutions are all a bit verbose as I'm trying to show all the steps taken to solve the puzzles.</p>
+<h2 id="general-takeaways-from-2016s-advent-of-code">General takeaways from 2016's advent of code:</h2>
+<ul>
+<li>regex's can make hard things easy at the cost of the regex itself being hard. luckily there are lots great regex sites.</li>
+<li>dispatch tables are great</li>
+<li>write little functions. Some of the problems seemed very hard, and I used the famous anti-procrastination advice of just start with the smallest thing you can do and lo and behold in the middle of writing the most basic two line function I would see how to write the next one, and the next, and soon enough the entire bigger problem was done</li>
+<li>little functions really help with being able to read the code and troubleshoot.</li>
+<li>many problems are just graphs, which can be implemented many ways, from using classes to lists to dicts. but its still all graphs.</li>
+<li>python has lots of great tools in libraries like <code>collections</code> which should just be in the language. why do I have to import things like <code>defaultdict</code> which it is so useful that it should be there in the first place</li>
+<li>implementing something myself makes it stick in my brain, vs googling a solution</li>
+<li>if/else in list comprehensions can be great: <code>"".join([c if c != False else "_" for c in password]</code></li>
+<li>the algo matters more than the machine speed. I moved my Day 11 solution to a super beefy high memory machine to brute force the solution - but it was taking the same runtime as on a small 1gb mem shared server. The fault was with the overly slow code, not the machine speed.</li>
+</ul>
+<h2 id="notes-on-each-puzzle">notes on each puzzle:</h2>
+<h2 id="day-1-no-time-for-a-taxicab">Day 1: No Time for a Taxicab</h2>
+<p>path finding</p>
+<p>I found the simple things like turning directions tougher than the bigger problem. So doing it in pieces really helped.</p>
+<h2 id="day-2-bathroom-security">Day 2: Bathroom Security</h2>
+<p>move around a numpad</p>
+<p>This problem had a diamond shaped keypad, so one way to move around the keypad was to have the shape of the keypad and move according, but it was much easier to use a dummy character to represent the off keypad points:</p>
+<div class="codehilite"><pre><span></span><code><span class="na">.......</span>
+<span class="na">...1...</span>
+<span class="na">..234..</span>
+<span class="nf">.56789.</span>
+<span class="na">..ABC..</span>
+<span class="na">...D...</span>
+<span class="na">.......</span>
+</code></pre></div>
+
+<p>Key takeaway: use a char to demarcate edges, and try to write more general code - in this case my part 1 could only deal with a square numpad, but it was just as easy to code it up to deal with a numpad of any shape.</p>
+<h2 id="day-3-squares-with-three-sides">Day 3: Squares With Three Sides</h2>
+<p>simple math and slicing a grid. I used numpy for the win, basically use numpy if there is anything like a grid to deal with.</p>
+<p>This involved using numpy slicing of a grid, which is always a bit tricky:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">transpose</span><span class="p">(</span><span class="n">tri</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;generates all the column wise trianges in a list of triangles&quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">])):</span>          <span class="c1"># the columns, could just use 3 here</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">):</span> <span class="c1"># now going down the entire length of the array</span>
+            <span class="k">yield</span> <span class="n">t</span><span class="p">[</span><span class="n">j</span><span class="p">:</span><span class="n">j</span><span class="o">+</span><span class="mi">3</span><span class="p">,</span><span class="n">i</span><span class="p">]</span>
+
+<span class="nb">sum</span><span class="p">([</span><span class="n">is_tri</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">transpose</span><span class="p">(</span><span class="n">t</span><span class="p">)])</span>
+</code></pre></div>
+
+<h2 id="day-4-security-through-obscurity">Day 4: Security Through Obscurity</h2>
+<p>Nothing interesting here,just following directions, a few notes:</p>
+<ul>
+<li>there are lots of little tricks in these puzzles, like sorting the same list in two different orders</li>
+<li>namedtuples are great, much easier to read than a list</li>
+<li>is there a better way to build a string? Right now I append chars to a list then join them into a string.</li>
+</ul>
+<h2 id="day-5-how-about-a-nice-game-of-chess">Day 5: How About a Nice Game of Chess?</h2>
+<p>find a password. I used hashlib, was an interesting problem since I used <a href="https://docs.python.org/3/library/hashlib.html">hashlib</a> for the first time.</p>
+<p>I liked this bit of code:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">password</span> <span class="o">=</span> <span class="p">[</span><span class="k">False</span> <span class="k">for</span> <span class="n">_</span> <span class="k">in</span> <span class="n">range</span><span class="p">(</span><span class="mi">8</span><span class="p">)]</span>
+
+<span class="n">while</span> <span class="k">False</span> <span class="k">in</span> <span class="n">password</span><span class="p">:</span>
+  <span class="o">#</span> <span class="n">fills</span> <span class="k">in</span> <span class="n">one</span> <span class="n">letter</span> <span class="k">of</span> <span class="n">the</span> <span class="n">password</span>
+</code></pre></div>
+
+<h2 id="day-6-signals-and-noise">Day 6: Signals and Noise</h2>
+<p>Day 7 | move around a numpad | used both numpy and lists. Key takeaway: use a char to demarcate edges
+Day 8 | simple math and slicing a grid | numpy for the win, basically use numpy if there is anything like a grid to deal with.
+Day 9 | ? | use Counter and namedtuples
+Day 10  | parsing instructions | was a challange to fully comprehend the problem, though easy to code.
+Day 11 | building the right kind of graph with breadth first search | solved part 1 using a dumb BFS, but part two the search space is so big that I need to optimize. #TODO
+Day 12 | parse instructions to update registers | sort of like building a vm?
+Day 13 | build a map and find a path | used bfs, easy enough, but need to implement a generic path solver. its got pics too!
+Day 14 | find a password | used hashlib, was an interesting problem
+Day 15 | solve a system | find positions of a moving system at time t. Could have used math instead.
+Day 16 | find a password | used hashlib, was an interesting problem
+Day 17 | Get shortest, than longest path | looked similar to day 13, but different.</p>
+<p>Note: link jupyter notebooks and highlight the interesting part of each days challange.</p>
+</article>
+
+<div class="meta">
+    posted <time>2019-02-02</time>, updated <time>2020-11-03</time><br>
+    tagged: 
+    <a href="/python">python</a>
+
+    <ul>    
+        <li><a href="https://github.com/khalido/blog/edit/master/notes/advent-of-code-2016.md">Edit</a></li>
+    </ul>
+
+</div>
+
+<hr>
+<footer>
+    This is a footer. One day some footery text will go here. 
+</footer>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!--temp stylesheet, customize my own one later.
+        https://github.com/kognise/water.css-->
+        
+        
+        <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.3/new.min.css">
+
+        <link rel="stylesheet" type="text/css" href="/codestyles.css">
+        
+        
+
+        <title>Setup Linux</title>
+    </head>
+
+    <body>
+ 
+        <header>
+            <a href="/">khalido.org</a> <br>
+            I love me some subheader text.
+        </header>
+
+<article>
+        <h1>Setup Linux</h1>
+    
+    <details>
+        <summary>Table of contents.</summary>
+        <div class="toc">
+<ul>
+<li><a href="#evnironment">Evnironment</a></li>
+<li><a href="#apps">Apps</a><ul>
+<li><a href="#vs-code">vs code</a></li>
+<li><a href="#markdown-app">markdown app</a></li>
+<li><a href="#install-anaconda-for-a-better-python">install anaconda for a better python</a></li>
+<li><a href="#nodejs">nodejs</a></li>
+<li><a href="#make-the-terminal-nicer-to-use">make the terminal nicer to use</a><ul>
+<li><a href="#multiplex-all-the-things">multiplex all the things</a></li>
+<li><a href="#jazz-up-the-shell">jazz up the shell</a></li>
+</ul>
+</li>
+<li><a href="#download-all-my-git-repos">Download all my git repos</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+    </details>
+  
+    <h1 id="evnironment">Evnironment</h1>
+<p>todo</p>
+<h1 id="apps">Apps</h1>
+<h2 id="vs-code">vs code</h2>
+<div class="codehilite"><pre><span></span><code>curl -L https://go.microsoft.com/fwlink/?LinkID<span class="o">=</span><span class="m">760868</span> &gt; vscode.deb
+sudo apt install ./vscode.deb
+</code></pre></div>
+
+<p>Useful plugins:</p>
+<ul>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one">Markdown All in One</a></li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=ms-python.python">Python</a></li>
+</ul>
+<h2 id="markdown-app">markdown app</h2>
+<p>Currently I'm using <a href="http://thomaswilburn.net/caret/">Caret</a> - a chromeos text editor app which runs lightening fast.</p>
+<p>vs code can handle markdown nicely, but it be slow. I prefer <a href="https://typora.io/">Typora.io</a> or <a href="http://caret.io/">Caret.io</a> for markdown and vs code is for coding. BUT all these apps are based on electron.</p>
+<p>Install Caret by downloading the <a href="https://github.com/careteditor/releases-beta/releases">latest beta release .deb</a> and:</p>
+<p><code>sudo apt install ./caret-beta.deb</code></p>
+<p>Install Typora - haven't tested this out, especially adding repo. Apparently you have to <code>sudo apt install software-properties-common</code> first before adding a repo.</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># add Typora&#39;s repository</span>
+sudo add-apt-repository <span class="s1">&#39;deb https://typora.io/linux ./&#39;</span>
+sudo apt update
+
+<span class="c1"># install typora</span>
+sudo apt install typora
+</code></pre></div>
+
+<h2 id="install-anaconda-for-a-better-python">install anaconda for a better python</h2>
+<p>See </p>
+<h2 id="nodejs">nodejs</h2>
+<p>Step 1: install <a href="https://github.com/nvm-sh/nvm#install--update-script">nvm</a>, a script to install nodejs</p>
+<p><code>curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash</code></p>
+<p>step 2: install nodejs itself by:</p>
+<p><code>nvm install node</code></p>
+<h2 id="make-the-terminal-nicer-to-use">make the terminal nicer to use</h2>
+<p>this is really important, cause if the terminal doesn't look like something out of a movie, are you really doing something?</p>
+<p>I'm using <a href="https://gnunn1.github.io/tilix-web/">Tilix</a>, install by</p>
+<p><code>sudo apt -t stretch-backports install tilix</code></p>
+<h3 id="multiplex-all-the-things">multiplex all the things</h3>
+<p>If using Tilix, no need to do this, but for the native terminal, install tmux:</p>
+<p><code>sudo apt -t stretch-backports install tmux</code></p>
+<p>the only thing I really do with tmux is to split the terminal horizontally, then splitting one horizontal terminal vertically, for a total of three windows. Now there is a lot more about sessions and whats not, but the bare basics are:</p>
+<p>start tmux by typing <code>tmux</code>, then press <code>ctrl+b</code> to enter command mode. <code>"</code> splits the window horizontally and <code>%</code> splits it vertically. To move around, press <code>ctrl-b arrow-key</code></p>
+<p>For more customizatoin, make a <code>.tmux.conf</code> in the home directory and add:</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Enable mouse mode (tmux 2.1 and above)</span>
+<span class="nb">set</span> -g mouse on
+</code></pre></div>
+
+<h3 id="jazz-up-the-shell">jazz up the shell</h3>
+<p>Consider <a href="https://github.com/ohmybash/oh-my-bash">oh-my-bash</a> or <a href="https://github.com/ohmybash/oh-my-bash">bash-it</a> for hacker level coding.</p>
+<p>also install <a href="https://github.com/powerline/fonts">powerline-fonts</a> and select a powerline font for the terminal.</p>
+<p><code>sudo apt -t stretch-backports install fonts-powerline</code></p>
+<p>Useful shell tools:</p>
+<p><a href="https://tldr.sh">tldr</a> shows a short and useful help page for commands, e.g type <code>tldr curl</code> to get a synopsis of how to use curl.</p>
+<ul>
+<li>Preferred install: <code>npm install -g tldr</code></li>
+<li>If node not installed: <code>pip install tldr</code></li>
+</ul>
+<p><a href="https://github.com/sharkdp/bat">bat</a> a replacement for cat, displays files with syntax highlighting in the terminal. Install by downloading the .deb and <code>sudo apt install ./bat_file.deb</code>.</p>
+<h2 id="download-all-my-git-repos">Download all my git repos</h2>
+<p>This command will grab json output of the first (or last?) 200 repos in my github and git clone them all one by one into the directory this command was run.</p>
+<div class="codehilite"><pre><span></span><code>curl -s https://api.github.com/users/khalido/repos?per_page<span class="o">=</span><span class="m">200</span> <span class="p">|</span> grep <span class="se">\&quot;</span>clone_url<span class="se">\&quot;</span> <span class="p">|</span> awk <span class="s1">&#39;{print $2}&#39;</span> <span class="p">|</span> sed -e <span class="s1">&#39;s/&quot;//g&#39;</span> -e <span class="s1">&#39;s/,//g&#39;</span> <span class="p">|</span> xargs -n1 git clone
+</code></pre></div>
+</article>
+
+<div class="meta">
+    posted <time>2020-11-03</time>, updated <time>2020-11-03</time><br>
+    tagged: 
+    <a href="/untagged">untagged</a>
+
+    <ul>    
+        <li><a href="https://github.com/khalido/blog/edit/master/notes/setup-ubuntu.md">Edit</a></li>
+    </ul>
+
+</div>
+
+<hr>
+<footer>
+    This is a footer. One day some footery text will go here. 
+</footer>
+
+
+
+</body>
+
+</html>

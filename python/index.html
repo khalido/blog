@@ -10,7 +10,7 @@
         
         
         <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.3/new.min.css">
 
         <link rel="stylesheet" type="text/css" href="/codestyles.css">
         
@@ -32,9 +32,12 @@
 
     <input type="text" id="postSearch" placeholder="Search posts...">
     <ul id="searchresults">
-            <li><a href="/python/anaconda.html">Using Anaconda</a></li>
+            <li><a href="/python/PyConAu2018.html">PyCon Australia 2018</a></li>
             <li><a href="/python/building_this_blog.html">how the blog was built</a></li>
             <li><a href="/python/note_in_subfolder.html">Testing note in a subfolder</a></li>
+            <li><a href="/python/anaconda.html">Using Anaconda</a></li>
+            <li><a href="/python/advent-of-code-2016.html">Advent of Code 2016</a></li>
+            <li><a href="/courses/udacity-cs101.html">Udacity CS101: Intro to CS</a></li>
     </ul>    
 
     <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
@@ -42,7 +45,7 @@
     <script>
         // load json from disk instead of passing in python array
 
-        const searchList = [{"title": "Using Anaconda", "tags": ["python"], "link": "python/anaconda.html"}, {"title": "how the blog was built", "tags": ["python"], "link": "python/building_this_blog.html"}, {"title": "Testing note in a subfolder", "tags": ["python"], "link": "python/note_in_subfolder.html"}]
+        const searchList = [{"title": "PyCon Australia 2018", "tags": ["python", "talks"], "link": "python/PyConAu2018.html"}, {"title": "how the blog was built", "tags": ["python"], "link": "python/building_this_blog.html"}, {"title": "Testing note in a subfolder", "tags": ["python"], "link": "python/note_in_subfolder.html"}, {"title": "Using Anaconda", "tags": ["python"], "link": "python/anaconda.html"}, {"title": "Advent of Code 2016", "tags": ["python"], "link": "python/advent-of-code-2016.html"}, {"title": "Udacity CS101: Intro to CS", "tags": ["courses", "python"], "link": "courses/udacity-cs101.html"}]
 
         const options = {
             includeScore: false,

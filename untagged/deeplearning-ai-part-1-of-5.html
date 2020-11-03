@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!--temp stylesheet, customize my own one later.
+        https://github.com/kognise/water.css-->
+        
+        
+        <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.3/new.min.css">
+
+        <link rel="stylesheet" type="text/css" href="/codestyles.css">
+        
+        
+
+        <title>deeplearning.ai: Neural Networks and Deep Learning</title>
+    </head>
+
+    <body>
+ 
+        <header>
+            <a href="/">khalido.org</a> <br>
+            I love me some subheader text.
+        </header>
+
+<article>
+        <h1>deeplearning.ai: Neural Networks and Deep Learning</h1>
+    
+  
+    <p>It had been a while since I finished Udacity's Deep Learning course, so as a refresher I signed up for Andrew NG's <a href="https://www.deeplearning.ai/">deeplearning.ai</a> course.</p>
+<p>These are my notes for the first course in the series: <a href="https://www.coursera.org/learn/neural-networks-deep-learning">Neural Networks and Deep Learning</a>.</p>
+<p><strong>Course Resources</strong></p>
+<ul>
+<li><a href="https://www.coursera.org/learn/neural-networks-deep-learning/discussions">Discussion forum</a></li>
+<li><a href="https://www.youtube.com/playlist?list=PLkDaE6sCZn6Ec-XTbcX1uRg2_u4xOEky0">YouTube playlist for Course 1</a></li>
+<li>course reviews: <a href="https://towardsdatascience.com/review-of-deeplearning-ai-courses-aed1328e4ffe">1</a></li>
+</ul>
+<h2 id="week-1-introduction">Week 1: Introduction</h2>
+<p>A basic NN looks at housing price prediction, can use simple regression</p>
+<ul>
+<li>there are many input variables, like size, bedrooms, zip code, etc so you end up with a more complex regression</li>
+<li>What Neural networks are great at, giving training data of inputs and matching outputs, is figuring out functions which predict the price for us.</li>
+</ul>
+<p>Supervised learning maps <code>Input(x) → Output(y)</code></p>
+<p><img alt="" src="https://d2mxuefqeaa7sj.cloudfront.net/s_CFA8F1100ADFAC4AC884B6482F58197667C5D7E698F7354F2FCD70E34111B14C_1525925978278_file.png" /></p>
+<ul>
+<li>Structured data essentially means when you have a defined input → output model, like with housing data, recommendation engines, etc</li>
+<li>Unstructured data is things like text, audio, video</li>
+<li>Deep learning is taking of because of:</li>
+<li><strong>vast increase in data</strong></li>
+<li>increase in <strong>computing power</strong> - enabled experimentation</li>
+<li>which led to <strong>better algorithms</strong> for NN
+<img alt="" src="https://d2mxuefqeaa7sj.cloudfront.net/s_CFA8F1100ADFAC4AC884B6482F58197667C5D7E698F7354F2FCD70E34111B14C_1525926437957_file.png" /></li>
+</ul>
+<p><strong>Geoffrey Hinton Interview:</strong></p>
+<ul>
+<li>developed <a href="http://neuralnetworksanddeeplearning.com/chap2.html">back-propagation algorithm</a> (as did others)</li>
+<li>using the chain rule to get derivatives, see <a href="https://www.wikiwand.com/en/Backpropagation">wikipedia</a></li>
+<li>today, most excited about <a href="https://www.wikiwand.com/en/Boltzmann_machine">Boltzmann machines</a></li>
+<li>neural nets which can learn internal representations</li>
+<li>restricted Boltzmann machines can do efficient inference</li>
+<li>’93 - variation bayes paper</li>
+<li>currently working on a paper on backprop and gradient</li>
+<li>is backprop a really good algorithim for learning?</li>
+<li>if cells can turn into eyeballs or teeth, than they can implement backprop as well. so, does the brain use it? the brain might have something close to it</li>
+<li>multiple time skills in DL - TK</li>
+<li>really believes in capsules:</li>
+<li>represent multi dimensional activities by a little vector of activities - in each region of a image, (assuming there is only one of each type of feature) a bunch of neurons can represent different aspects of a feature. normally in NN u have a great big layer, this partitions the representation into capsules.</li>
+<li>supervised learning has worked really well, but unsupervised learning is going to be crucial in the future</li>
+<li>today, varitional altering code and GAN’s are huge</li>
+<li>advice for breaking into deep learning:</li>
+<li>read the literature, but don’t read too much</li>
+<li>notice something which doesn’t feel right, then figure out how to do it right</li>
+<li>never stop programming</li>
+<li>read enough so you start developing intuitions then trust them</li>
+<li>research ideas for grad students: find a adviser whose beliefs are similar to yours</li>
+<li>deep learning is not quite a second industrial revolution, buts its close to it. there is a huge change from programming computers to showing them, and they figure it out</li>
+<li>early days of AI ppl were convinced you need symbolic representations of things and logic and that the essence of intelligence was reasoning, but that was a huge mistake</li>
+<li>Now, the view is that a thought is just a great big vector of neural activity. say, words go in, words go out, but whats in b/w doesn’t have to be anything like a string of words. Hinton says its silly to think thoughts have to be in some kind of language.</li>
+</ul>
+<p>Hinton is fascinating and explains things really clearly.</p>
+<hr />
+<h2 id="week-2-basics-of-nn-programming">Week 2: Basics of NN programming</h2>
+<p>First up, we do a binary classification via logistic regression, where we classify an image into <code>1</code> cat or <code>0</code> not cat. Key concepts for this:</p>
+<ul>
+<li>a derivative is just the slope of a line, and on a curve its  different at different points on the curve.</li>
+<li>loss function: this gives us a score for prediction vs actual (on a single sample)</li>
+<li>cost function: gives us the average of errors across all predictions</li>
+<li>gradient descent: move slowly in the direction of the correct result</li>
+<li>computation graph: functions or calculations can be represented as a graph of the actual calcs to be done and added together</li>
+<li>…</li>
+<li>vectorization: running code is fast, and using vectors speeds up code tremendously. Wherever possible avoid for loops.</li>
+</ul>
+<p><strong>Pieter Abbeel Interview:</strong></p>
+<ul>
+<li>his <a href="https://twitter.com/pabbeel">twitter</a></li>
+<li>deep reinforcement learning is taking off because regular reinforcement learning needs a lot of domain expertise, while the deep learning version needs a lot less engineering</li>
+<li>supervised learning is about input output mapping, while deep reinforcement learning is much more about learning the incoming data - the exploration problem, then how do you credit actions which got rewards/failures?</li>
+<li>the big challenge is how to get systems to reason over long time horizons</li>
+<li>safety is a big challenge - how do you learn safety, for example in a self driving car, you need both success and failure to learn.</li>
+<li>make sure you can make the connection from the code/math to what change it can make</li>
+<li>good time to get into AI, Andrej Karpathy’s DL course, UC Berkely has a Deep Reinforcement course online.</li>
+<li>deep reinforcement learning is really powerful and general, the same learning can take in different inputs and learn a task, like teaching a two legged robot to move, then the same algo can take a four legged robot to move even though the inputs (sensors) and outputs (motors) are now different.</li>
+<li>drl algos still start from scratch for tasks</li>
+</ul>
+<h2 id="week-3-code-a-simple-nn">Week 3: Code a simple NN</h2>
+<ul>
+<li>goes over the vector math to compute NN output</li>
+<li>activation functions take in weighted data and apply a non-linear transformation</li>
+<li>sigmoid squeezes output to <code>0 to 1</code>, useful for predicting probablity, not used much anymore</li>
+<li>tanh is like sigmoid but from <code>-1 to 1</code> - superior to sigmoid in almost all applications</li>
+<li>relu function is very popular, anything below zero becomes zero, otherwise the value stats as it is</li>
+<li>leaky relu multiplies negative numbers by a small number, like <code>0.01</code> - this helps to increase the range of the relu output</li>
+<li>more, try different activation functions</li>
+<li>non-linear activation functions are a critical part of a NN since they create new relationships b/w data points, increasing complexity with each layer.</li>
+<li>linear hidden layers are more or less useless since any number of linear hidden layers can be reduced to a single linear layer</li>
+<li>its important to randomly initialise weights as starting with weights set to zero the hidden units will initialise the same way and thus all the hidden units are symmetric and compute the same function.</li>
+<li>Fix this by initialising weights and b to small random numbers like <code>0.01</code>. If weights are large, the slopes of an activation function like tanh or sigmoid are flat for large numbers, so the gradient is small and training is slow.</li>
+</ul>
+<p><strong>Ian Goodfellow interview:</strong></p>
+<ul>
+<li>had been studying generative models for a long time, so GANs rose out of that. At a bar, coded it up at midnight after a party, and it worked on the first try.</li>
+<li>working on making GANs more reliable</li>
+<li>wrote the first modern textbook on deep learning, very popular</li>
+<li>linear algebra and probability are very important to master deep learning</li>
+<li>DL only really got going five years ago</li>
+<li>there’s an amazing amount of AI work to be done</li>
+<li>write good code and put it on github, solve a problem which ppl have</li>
+</ul>
+<h2 id="week-4-code-a-deep-nn">Week 4: Code a deep NN</h2>
+<ul>
+<li>A deep neural network is a neural network with many layers which can learn functions which shallower networks are unable to. Its hard to predict the number of layers for a given problem, so experiment.</li>
+<li>write down all the matrix dimensions of all the layers in your NN - this helps with debugging and understanding how data is being transformed as it passes through the NN</li>
+<li>why do we need deep networks?</li>
+<li>different layers learn different features</li>
+<li>early layers learn simpler features, the deeper layers learn more complex objects and representations</li>
+<li>DNN allow more complex functions to be computed - circuit theory postulates that a small L layer deep NN can compute functions which a shallower network would require exponentially more hidden units to compute</li>
+<li>deep learning makes for great PR</li>
+<li>gradient descent needs forward and backward functions:</li>
+<li>forwards: we compute a prediction, moving through all the layers, and caching the results at each layer</li>
+<li>backwards: now we compute the gradients at each layer, moving backwards</li>
+<li>finally we use these gradients to tweak each layer slightly towards the right direction</li>
+<li>a lot of the complexity in ml comes from the data, not the code</li>
+<li>parameters are the weights and beta</li>
+<li>hyper parameters:</li>
+<li>learning rate</li>
+<li>
+<h1 id="iterations">iterations</h1>
+</li>
+<li>
+<h1 id="hidden-layers-l">hidden layers L</h1>
+</li>
+<li>
+<h1 id="hidden-units-n1-n2">hidden units n1, n2 ….</h1>
+</li>
+<li>choice of activation function</li>
+<li>there are lots of other hyperparameters like momentum, minibatch size, regularization, etc</li>
+<li>there is a lot of experimentation around parameters, try to do this empirically and build intuitions around what works for different kinds of data and NN as parameters work differently for different problems</li>
+<li>don’t compare DL networks to the human brain - while there are simplistic analogies b/w a single neuron and a logistic unit with sigmoid activation - but we don’t know how neurons in a human brain work or how the brain learns</li>
+</ul>
+</article>
+
+<div class="meta">
+    posted <time>2016-01-01</time>, updated <time>2020-11-03</time><br>
+    tagged: 
+    <a href="/untagged">untagged</a>
+
+    <ul>    
+        <li><a href="https://github.com/khalido/blog/edit/master/notes/deeplearning-ai-part-1-of-5.md">Edit</a></li>
+    </ul>
+
+</div>
+
+<hr>
+<footer>
+    This is a footer. One day some footery text will go here. 
+</footer>
+
+
+
+</body>
+
+</html>

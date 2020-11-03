@@ -10,7 +10,7 @@
         
         
         <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.3/new.min.css">
 
         <link rel="stylesheet" type="text/css" href="/codestyles.css">
         
@@ -26,6 +26,9 @@
             I love me some subheader text.
         </header>
 
+<article>
+        <h1>Setting up Linux on a Chromebook with Crostini</h1>
+    
     <details>
         <summary>Table of contents.</summary>
         <div class="toc">
@@ -54,9 +57,6 @@
 </div>
 
     </details>
-
-<article>
-        <h1>Setting up Linux on a Chromebook with Crostini</h1>
   
     <p>ChromeOS supports a built in Linux - running inside a container running insde a VM. Turn it on by going to settings and pressing the on button for Linux (beta). This gives us a bare bones Linux install running Debian Stretch. So here goes all the things I did to customize it.</p>
 <p>Most of these tips are from the <a href="https://www.reddit.com/r/Crostini/wiki/index">reddit crostini wiki</a>, I've put all the ones I'm using in one page for a handy reference.</p>
@@ -76,7 +76,7 @@
 <p>Note: you need sudo to install and update flatpak apps in crostini.</p>
 <h3 id="vs-code">vs code</h3>
 <p>Anaconda can automatically install VS Code, but to <a href="https://www.reddit.com/r/Crostini/wiki/howto/install-vscode">install it directly</a>:</p>
-<div class="bash codehilite"><pre><span></span><code>curl -L https://go.microsoft.com/fwlink/?LinkID<span class="o">=</span><span class="m">760868</span> &gt; vscode.deb
+<div class="codehilite"><pre><span></span><code>curl -L https://go.microsoft.com/fwlink/?LinkID<span class="o">=</span><span class="m">760868</span> &gt; vscode.deb
 sudo apt install ./vscode.deb
 </code></pre></div>
 
@@ -91,7 +91,7 @@ sudo apt install ./vscode.deb
 <p>Install Caret by downloading the <a href="https://github.com/careteditor/releases-beta/releases">latest beta release .deb</a> and:</p>
 <p><code>sudo apt install ./caret-beta.deb</code></p>
 <p>Install Typora - haven't tested this out, especially adding repo. Apparently you have to <code>sudo apt install software-properties-common</code> first before adding a repo.</p>
-<div class="bash codehilite"><pre><span></span><code><span class="c1"># add Typora&#39;s repository</span>
+<div class="codehilite"><pre><span></span><code><span class="c1"># add Typora&#39;s repository</span>
 sudo add-apt-repository <span class="s1">&#39;deb https://typora.io/linux ./&#39;</span>
 sudo apt update
 
@@ -142,7 +142,7 @@ sudo apt install typora
 <li>Close window <code>Ctrl+Shift+W</code> - this is actually <code>Ctrl-W</code> normally, but terminal might need that hence shift.</li>
 </ul>
 <p>fix this by pressing <code>ctrl-shift-p</code> inside terminal, then scroll down to keyboard preferences and enter</p>
-<div class="bash codehilite"><pre><span></span><code><span class="o">{</span>
+<div class="codehilite"><pre><span></span><code><span class="o">{</span>
   <span class="s2">&quot;Alt-187&quot;</span>: <span class="s2">&quot;PASS&quot;</span>,
   <span class="s2">&quot;Alt-189&quot;</span>: <span class="s2">&quot;PASS&quot;</span>,
   <span class="s2">&quot;Alt-219&quot;</span>: <span class="s2">&quot;PASS&quot;</span>,
@@ -158,7 +158,7 @@ sudo apt install typora
 <p>the only thing I really do with tmux is to split the terminal horizontally, then splitting one horizontal terminal vertically, for a total of three windows. Now there is a lot more about sessions and whats not, but the bare basics are:</p>
 <p>start tmux by typing <code>tmux</code>, then press <code>ctrl+b</code> to enter command mode. <code>"</code> splits the window horizontally and <code>%</code> splits it vertically. To move around, press <code>ctrl-b arrow-key</code></p>
 <p>For more customizatoin, make a <code>.tmux.conf</code> in the home directory and add:</p>
-<div class="bash codehilite"><pre><span></span><code><span class="c1"># Enable mouse mode (tmux 2.1 and above)</span>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Enable mouse mode (tmux 2.1 and above)</span>
 <span class="nb">set</span> -g mouse on
 </code></pre></div>
 
@@ -176,7 +176,7 @@ sudo apt install typora
 <h3 id="setup-vim-proper-like">setup vim proper like</h3>
 <p>install plugin manager for vim - I went with <a href="https://github.com/junegunn/vim-plug">vim-plug</a>:</p>
 <p>edit <code>~/.vimrc</code> so it has this stuff:</p>
-<div class="bash codehilite"><pre><span></span><code><span class="s2">&quot; install vim-plug if not installed</span>
+<div class="codehilite"><pre><span></span><code><span class="s2">&quot; install vim-plug if not installed</span>
 <span class="s2">if empty(glob(&#39;~/.vim/autoload/plug.vim&#39;))</span>
 <span class="s2">  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs</span>
 <span class="s2">    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim</span>
@@ -207,7 +207,7 @@ sudo apt install typora
 <p>run <code>:PlugInstall</code> in vim to install plugs (if needed).</p>
 <h2 id="download-all-my-git-repos">Download all my git repos</h2>
 <p>This command will grab json output of the first (or last?) 200 repos in my github and git clone them all one by one into the directory this command was run.</p>
-<div class="bash codehilite"><pre><span></span><code>curl -s https://api.github.com/users/khalido/repos?per_page<span class="o">=</span><span class="m">200</span> <span class="p">|</span> grep <span class="se">\&quot;</span>clone_url<span class="se">\&quot;</span> <span class="p">|</span> awk <span class="s1">&#39;{print $2}&#39;</span> <span class="p">|</span> sed -e <span class="s1">&#39;s/&quot;//g&#39;</span> -e <span class="s1">&#39;s/,//g&#39;</span> <span class="p">|</span> xargs -n1 git clone
+<div class="codehilite"><pre><span></span><code>curl -s https://api.github.com/users/khalido/repos?per_page<span class="o">=</span><span class="m">200</span> <span class="p">|</span> grep <span class="se">\&quot;</span>clone_url<span class="se">\&quot;</span> <span class="p">|</span> awk <span class="s1">&#39;{print $2}&#39;</span> <span class="p">|</span> sed -e <span class="s1">&#39;s/&quot;//g&#39;</span> -e <span class="s1">&#39;s/,//g&#39;</span> <span class="p">|</span> xargs -n1 git clone
 </code></pre></div>
 </article>
 
@@ -215,6 +215,11 @@ sudo apt install typora
     posted <time>2018-08-24</time>, updated <time>2019-08-7</time><br>
     tagged: 
     <a href="/chromebooks">chromebooks</a>
+
+    <ul>    
+        <li><a href="https://github.com/khalido/blog/edit/master/notes/setup-crostini-chromebook.md">Edit</a></li>
+    </ul>
+
 </div>
 
 <hr>

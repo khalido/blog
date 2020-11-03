@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!--temp stylesheet, customize my own one later.
+        https://github.com/kognise/water.css-->
+        
+        
+        <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.3/new.min.css">
+
+        <link rel="stylesheet" type="text/css" href="/codestyles.css">
+        
+        
+
+        <title>PyCon Australia 2018</title>
+    </head>
+
+    <body>
+ 
+        <header>
+            <a href="/">khalido.org</a> <br>
+            I love me some subheader text.
+        </header>
+
+<article>
+        <h1>PyCon Australia 2018</h1>
+    
+    <details>
+        <summary>Table of contents.</summary>
+        <div class="toc">
+<ul>
+<li><a href="#how-python-saved-a-rescue-dog-a-foster-fail-story">How Python saved a rescue dog - a foster fail story</a></li>
+<li><a href="#lighting-macro-photographs-with-circuitpython">Lighting Macro Photographs with CircuitPython</a></li>
+<li><a href="#writing-fast-and-efficient-micropython">Writing fast and efficient MicroPython</a></li>
+<li><a href="#asyncio-in-micropython">Asyncio in MicroPython</a></li>
+<li><a href="#demystifying-lorawan-with-pycom">Demystifying LoRaWAN with PyCom</a></li>
+<li><a href="#workplace-environment-sensing-with-python">Workplace Environment Sensing with Python</a></li>
+<li><a href="#automating-your-home-with-python-raspberry-pi-and-homekit">Automating Your Home with Python, Raspberry Pi and Homekit</a></li>
+<li><a href="#education-seminar-student-showcase">Education Seminar Student Showcase</a></li>
+<li><a href="#keynote-annie-parker-on-techfugees">Keynote: Annie Parker on Techfugees</a></li>
+<li><a href="#describing-descriptors">Describing Descriptors</a></li>
+<li><a href="#what-is-the-most-common-street-name-in-australia">What is the most common street name in Australia?</a></li>
+<li><a href="#why-you-should-care-about-types-how-python-typing-helped-my-team-scale">Why you should care about types: How Python typing helped my team scale</a></li>
+<li><a href="#running-python-web-applications-in-docker">Running Python web applications in Docker</a></li>
+<li><a href="#context-managers-you-can-write-your-own">Context Managers: You Can Write Your Own!</a></li>
+<li><a href="#snakes-in-your-games">Snakes in your Games</a></li>
+<li><a href="#keynote-tom-eastman-on-getting-better">Keynote: Tom Eastman on getting better</a></li>
+<li><a href="#saturday-lightening-talks">Saturday Lightening talks</a></li>
+<li><a href="#tracy-osborn-clueless">Tracy Osborn: Clueless</a></li>
+<li><a href="#guide-to-your-own-artificial-intelligence-application-in-3-easy-steps">Guide to your own artificial intelligence application in 3 easy steps</a></li>
+<li><a href="#hello-to-the-world-in-8-web-frameworks">Hello to the World in 8 Web Frameworks</a></li>
+<li><a href="#functional-programming-demystified">Functional Programming demystified</a></li>
+<li><a href="#you-dont-need-that">You Don't Need That!</a></li>
+<li><a href="#there-is-no-now-and-sensor-datas-the-worst">There is no "now" and sensor data's the worst</a></li>
+<li><a href="#watch-out-for-safety-bandits">Watch out for Safety Bandits!</a></li>
+<li><a href="#sunday-lightening-talks">Sunday Lightening talks</a></li>
+</ul>
+</div>
+
+    </details>
+  
+    <p>My notes for the <a href="https://2018.pycon-au.org/schedule/">PyConAU 2018 talks</a> I went to.</p>
+<h2 id="how-python-saved-a-rescue-dog-a-foster-fail-story">How Python saved a rescue dog - a foster fail story</h2>
+<blockquote>
+<p>This talk will tell the story of a foster fail, how Python helped to save the life of a rescue dog and how the initial medication feeder grew from a single IoT device into a full Internet of Dog (IoD) madness. I will show the design and implementation of the initial Python-based medication feeder, what we have learned from running it over the summer and how it has continued to grow into a multi IoT device, Python-powered, full dog carer solution. There will be microservice architecture drawings, Python code, and, of course, pictures of the dog! <a href="https://2018.pycon-au.org/talks/45067-how-python-saved-a-rescue-dog-a-foster-fail-story/">#</a></p>
+</blockquote>
+<p>{{&lt; youtube EqQj5os3Mfw &gt;}}</p>
+<ul>
+<li>Andreas Moll - <a href="https://twitter.com/SciAndreas">twtr</a> - Works at <a href="https://www.ansto.gov.au/research/facilities/australian-synchrotron/overview">ANSTO</a> on scientific software in Python</li>
+<li>were fostering a dog, Willow - fostering: look after for a limited time and prepare for adoption</li>
+<li>Willow was badly treated by previous owner and needed anti-anxiety medication every 8 hrs</li>
+<li>4 weeks of meds, improved Willow a lot. But then they both went back to work, and nobody had adopted Willow. So they had two issues: monitor Willow and afternoon medication</li>
+<li>monitoring was easy - used a webcam. Considered off the shelf dispensers, but didn’t like</li>
+<li>Onion Omega2+ attached to a servo which dropped the treat+drugs on time</li>
+<li>First drug feeder:</li>
+<li>VM in the cloud - wrote a flask webapp, backed by a <a href="https://redis.io/">Redis</a> database. The webapp sent actions Feed|Home to the VM. The Onion has an endless loop which polls the VM every second asking for an action, and then does it.</li>
+<li>polling is a very simple scheme,  and if anything breaks down, nothing bad happens, but there is a lag b/w button and action, as well as the dependency on the IOT and VM in cloud</li>
+<li>usb audio using alsa libraries which would call the dog</li>
+<li>the IOT was only part of the puzzle - they had to train the dog as well. Ran this setup for a couple of months, worked suprisingly well. Sometimes failed becuase of power outages, so they added a UPS.</li>
+<li>Willow didn’t get adopted - so they adopted her. Now that they were going to have her, they decided to get serious about the IOT</li>
+<li>Split into infrastructure and service</li>
+<li>Device: Raspberry Pi Zero connected to I/O, sensors, a Pi3 running gateway services, docker registery, <a href="https://www.consul.io/">consul</a> server</li>
+<li>Service: Web service exposing a RESTful API running on flask, service discovery using Consul, packaged in a docker container and depolyed using docker-compose</li>
+<li>pi zero is nice and simple, is using one per physical device/sensor</li>
+<li>the gateway service polls the VM for actions, then does a REST call to the relevant PiZero to do the action</li>
+<li>Future: websockets instead of polling, wants things event driven and real time readings for sensors. web interface with react</li>
+</ul>
+<p>Q&amp;A</p>
+<ul>
+<li>Why not docker swarm?</li>
+<li>wanted to use consul</li>
+</ul>
+<p><strong>takeaway:</strong> genius AND way overkill. but infrastructure is hard. consider using orchestration tools.</p>
+<h2 id="lighting-macro-photographs-with-circuitpython">Lighting Macro Photographs with CircuitPython</h2>
+<blockquote>
+<p>LED lighting rigs are expensive. Worse, they have little to no controls aside from on/off. Most are not dimmable and changing colors requires the use of gels. In this talk I will discuss how CircuitPython was used in conjunction with LEDs and microcontrollers to make a custom LED photo lighting rig. <a href="https://2018.pycon-au.org/talks/45177-lighting-macro-photographs-with-circuitpython/">#</a></p>
+</blockquote>
+<p>{{&lt; youtube JAgCZ70Q3sg &gt;}}</p>
+<ul>
+<li>Stacey Morse - <a href="https://twitter.com/geekgirlbeta">geekgirlbeta</a>, <a href="https://geekgirlbeta.wordpress.com/">web</a> is an artist who also does macro photography, web dev in python</li>
+<li>art is awesome, but led lights are very expensive and crap. the intersection b/w art and tech: both are very process drivenl</li>
+<li>had a conversation with a python programmer who suggested python controlled lights could solve her lighting issues - and thus she started to learn how to program in micropython</li>
+<li>macro photography is very technical - there is a lot of math involved, understanding light, lens dynamics, lighting</li>
+<li>lights: on/off, select number of leds, control brightness, colour</li>
+<li>hardware: microcontroller, leds, rotary encoder, buttons, ir remote</li>
+<li>software: <a href="https://learn.adafruit.com/welcome-to-circuitpython">CircuitPython</a> (very beginner friendly), <a href="https://micropython.org/">MicroPython</a></li>
+<li>went with neopixels for the lights - gives true white light as its RGBW</li>
+<li>used Feather M4 Express for the microcontroller</li>
+<li>the <a href="https://github.com/geekgirlbeta/MacroLighting/blob/master/code.py">code</a> is very straightforward</li>
+</ul>
+<p>Q&amp;A:</p>
+<ul>
+<li>hot shoe</li>
+<li>figures she can use the hot shoe in a camera to communicate with the light - so she can write light settings in the exif data</li>
+<li>what can she do with this which she can’t do with a traditional flash kit?</li>
+<li>led’s blink, so u need them in blink in coordination with your camera settings. this allows her to focus on a specific part of an object. traditional flashes are bigger, whole panels of lights</li>
+</ul>
+<p><strong>takeaway:</strong> building a real tangible project is fun. Curcuit Python looks super easy to use.</p>
+<h2 id="writing-fast-and-efficient-micropython">Writing fast and efficient MicroPython</h2>
+<blockquote>
+<p>MicroPython is a reimplementation of Python which is specifically designed to run on computing devices that have very few resources, such as CPU power, RAM and storage. Often when you write scripts in MicroPython you want to make the most of your available resources, and have code run as fast as possible (faster code usually saves power, which is important when running from a battery!) and there are certain ways of writing MicroPython code that are more efficient than others. In this talk I will go over the tricks and techniques for writing fast and efficient Python code in MicroPython. As part of this I will delve into some technical details of how MicroPython works, in order to better understand what it’s doing behind the scenes and how to make the most of it. I will discuss general techniques for making things run faster (some of which would be applicable to normal Python), as well as ways to completely avoid memory allocation, which is important for both efficiency and making code execution deterministic. The talk will include some hardware demos to show off the techniques, including five different ways to blink an LED fast. <a href="https://2018.pycon-au.org/talks/45358-writing-fast-and-efficient-micropython/">#</a></p>
+</blockquote>
+<p>{{&lt; youtube hHec4qL00x0 &gt;}}</p>
+<ul>
+<li><a href="http://dpgeorge.net/">Damien George</a> - creator of <a href="https://twitter.com/micropython">MicroPython</a></li>
+<li>loading local variables is fast, global variables is slow. So try to use local variables.</li>
+<li>its slow to call functions from within a function</li>
+<li>some things allocate memory on the heap, others don't - try not to allocate memory.</li>
+<li>don't allocate memory: All the basic statements like if/else, local variables, int arthimetic, some builtin funcs like any, len, etc</li>
+<li>does allocate memory: importing, defining functions and classes, global variables, data structures</li>
+<li>tips to reduce cpu time:</li>
+<li>use funcs - for example put a loop within a func and call the func</li>
+<li>don't use global, try to use local variables as much as possible</li>
+<li>cache funcs</li>
+<li>cache variables as local</li>
+<li>prefer longer expressions, not split up ones</li>
+<li>use consts <code>from micropython import const</code></li>
+<li>tips to reduce ram usage:</li>
+<li>don't use heap when possible</li>
+<li>use short variable names</li>
+<li>temp buffers</li>
+<li>use XXX_into methods</li>
+<li>don't use 8 or ** args</li>
+<li>use const, minify scripts</li>
+<li>use mpy-cross to produce .mpy - this saves a lof ot time in compiling the script on the device</li>
+<li>ultimate solution is to freeze scripts into the firmware (bytecode gets stored into flash storage, advanced)</li>
+<li>within a func, preload methods <code>on = led.on</code> and then use <code>on()</code>. So when calling a method multiple times this is much faster.</li>
+<li>for small loops, unroll the loop</li>
+<li>viper mode - undocumented, being written, writes registers directly to say turn on/off leds</li>
+<li>can also write inline assembler in python syntax</li>
+<li>pre allocate a buffer and write to it</li>
+</ul>
+<p><strong>takeaway:</strong> micropython can be fast. don't use globals, but everyone knows that already, so instead apply some of the tricks from above, like caching methods, and for micropython don't have too many funcs.</p>
+<h2 id="asyncio-in-micropython">Asyncio in MicroPython</h2>
+<blockquote>
+<p>Asyncio provides a way to achieve concurrency in a relatively simplistic fashion. However, first-time users still struggle with the concepts so let’s sort them out! Then we’ll see why it’s especially useful in an embedded environment.<a href="https://2018.pycon-au.org/talks/45338-asyncio-in-micropython/">#</a></p>
+</blockquote>
+<p>{{&lt; youtube tIgu7q38bUw &gt;}}</p>
+<ul>
+<li><a href="https://twitter.com/matt_trentini">Matt Trentini</a> - a software engineer, has worked with lots of projects with embedded firmware with c compilers, has been looking for better alternatives</li>
+<li>micropython is the way forward for embedded development</li>
+<li>Coroutines - the ability to run things concurrently</li>
+<li>use yield points to relingquish control and an event loop to scedule tasks</li>
+<li>provides cooperative multitasking</li>
+<li>concurrency isn't parallelism</li>
+<li>a lot of async funcs is similar - just needs <code>async def func</code> and <code>await</code> where are are awaiting stuff.</li>
+<li><code>coroutines (tasks) --&gt;&lt;-- event loop --&gt;&lt;--- blocking operations</code> (network access, sleep, database queries)</li>
+<li>what about threads? wasn't this a solved problem? threads provid pre-emptive multi-tasking, but they get complex, are heavy (each thread needs its own stack) and hesienbergs</li>
+<li>Coroutines are better cause:</li>
+<li>minimal overhead, high performance</li>
+<li>locking is less problematic</li>
+<li>more closely reemble synchrous code</li>
+<li>Coroutines in python are biult on generators and use <code>async/await</code> keywords</li>
+<li><a href="https://www.python.org/dev/peps/pep-0492/">PEP 492</a> in Python 3.5 brought async</li>
+<li>Python needed async to stay relevant and competitive with other async languages</li>
+<li>async needs all the funcs to support async code, so hard to use with older synchronus code</li>
+<li>async is in active development</li>
+<li>coroutines in micropython is a subset but for practical use the same</li>
+<li>async in embedded devices is exciting as threading support is limited and many embedded operations are cncurrent by nature</li>
+<li>classic problem in embedded space: Debouce</li>
+<li>need to wait for a button to stop bouncing - since they're typically not digital</li>
+<li>async lets us write a loop which pools the button, and when a button is pressed, it can await the sleep so the controller can do other things instead of just waiting on the button</li>
+<li>there is micropython-async - look up tutorial from Peter Hinch</li>
+<li>uPTV - counts down minutes to next train</li>
+<li>NTP - time support <code>import ntptime</code></li>
+<li>HTTP request - uses a requests library - python has aiohttp, micropython has a very crude version</li>
+<li>LED control</li>
+<li>asyncio to create loop and run it forver - sync time, poll for train, update LED</li>
+<li>LED strip controller</li>
+<li>rotary encoder to set brightness and push on/off</li>
+<li>uses a async fade routine to smoothly fade to brightness</li>
+<li>async means can change the brightness while still fading, so no waiting</li>
+</ul>
+<p>Q&amp;A</p>
+<ul>
+<li>ppl using coroutines for real time?</li>
+<li>in experimental stage - if u request 5ms sleep, it can be less or more depending on what the other coroutines are doing</li>
+<li>how is it implemented?</li>
+<li>in micropython uses queues implemnted in C</li>
+<li>timing and checking length of executable paths</li>
+<li>up to you to define - for example a fade routine might have a 5ms delay b/w levels so <code>await sleep(5ms)</code></li>
+<li>how do you deal with a blocking library?</li>
+<li>put timeouts on things - call a func, if it takes too long to run, interrupt it, or use threads - async can push things into threads</li>
+<li>with asyncio, do you apprach problems differently from threads?</li>
+<li>async feels more natural - you can state what you want to do. With threading you have to think a lot about synchronization and how long things will take.</li>
+</ul>
+<p><strong>takeaway:</strong> get micropython hardware and start coding. Understand async better, it seems pretty straightforward, and on slow hardware a godsend - i.e async sending logs + async doing other stuff makes for easy real time monitering even if the machine is stuck on something..</p>
+<h2 id="demystifying-lorawan-with-pycom">Demystifying LoRaWAN with PyCom</h2>
+<blockquote>
+<p>Connecting IoT devices using low power over wide area wireless (LoRaWAN) makes sense. But how LoRaWAN works, duty cycles, frequency plans, receive windows, etc. doesn’t. <a href="https://2018.pycon-au.org/talks/44704-demystifying-lorawan-with-pycom/">#</a></p>
+<p>This talk will demystify how LoRaWAN works using PyCom devices.</p>
+</blockquote>
+<p>{{&lt; youtube L-fh7PSpPMc &gt;}}</p>
+<ul>
+<li>talk by Brian Danilko of <a href="http://www.likeablesoftware.com/">Likeable Software</a></li>
+<li>LoPy</li>
+<li><a href="https://pycom.io/">Pycom</a> has lots of examples for LoRa and LoRaWAN</li>
+<li>LoRa is the transport layer - patented, developed by Cycleo, Semtech owns it</li>
+<li>uses a Chirp Spread Spectrum (CSS) to transmit info reliably using low power</li>
+<li>uses different power levels, frequencies, bandwidths, spread factors to optimize power use vs time on air vs distance</li>
+<li>LoRoWAN adds the wide area network on top of LoRa</li>
+<li>connects end nodes to the internet through gateways</li>
+<li>encrypts for secure transmission, controls what devices can join the network, confirms and retries (but this doubles power and clogs airways so don't use if not needed)</li>
+<li>you have multiple end nodes talking to one gateway, which connects to the internet via a wired link (can be wireless too)</li>
+<li>can have multiple gateways for backup - so nodes can connect to multiple gateways</li>
+<li>join a LoRaWAN network by OTAA (over the air, same keys embedded in all devices) or ABP (unique keys)</li>
+<li>frequencies for gateways and nodes have to be the same - something to be aware of when setting up devices</li>
+</ul>
+<p><strong>takeaway:</strong> look at LoRo/PyCom if using wireless IOT away from wifi.</p>
+<h2 id="workplace-environment-sensing-with-python">Workplace Environment Sensing with Python</h2>
+<blockquote>
+<p>Have you often wondered where the quietest spot in the office is right now? In this talk, we explain how we built a real-time system that does just that using CircuitPython. <a href="https://2018.pycon-au.org/talks/45376-workplace-environment-sensing-with-python/">#</a></p>
+</blockquote>
+<p>{{&lt; youtube u4rSKNX_spA &gt;}}</p>
+<ul>
+<li>Aiden Ray, works at <a href="http://www.bvn.com.au/">BVN</a></li>
+<li>building awards are handed out before ppl use them - very little feedback from real users</li>
+<li>the web is totally instrumented, you know exactly whats going on</li>
+<li>the physical world is a lot less instrumented</li>
+<li>Amaon Go is sensored everywhere - this is where the world is moving, you get tons of data, can see where to improve</li>
+<li>Circuit Playground Express by Adafruit</li>
+<li>C/C++ vs Python boils down to runtime speed vs development speed</li>
+<li>Circuit Python is Adafruits fork of MicroPython, more beginner focused, doesn't have access to async, so you have a basic event loop</li>
+<li><code>if sys.implementation == 'circuitpython'</code> to check implementation</li>
+</ul>
+<p><strong>takeaway:</strong> pervasive monitoring is creepy but its going to happen. Circuit Python is amazingly easy. Make something with it.</p>
+<h2 id="automating-your-home-with-python-raspberry-pi-and-homekit">Automating Your Home with Python, Raspberry Pi and Homekit</h2>
+<blockquote>
+<p>Home Automation is a fun new field for the modern Pythonista. In this talk I will be walking through how a developer can leverage a python library to use the HomeKit service and automate the devices in their home. I will be covering topics like hardware selection for local and remote access, HomeKit service registration and management and potential security concerns around IoT. <a href="https://2018.pycon-au.org/talks/45170-automating-your-home-with-python-raspberry-pi-and-homekit/">#</a></p>
+</blockquote>
+<p>{{&lt; youtube SiLtPgeTZLA &gt;}}</p>
+<ul>
+<li>Sean Johnson <a href="https://twitter.com/seansonbronson">twtr</a> <a href="https://www.linkedin.com/in/sean-johnson-50030280/">ln</a></li>
+<li>homekit is a software framework for controlling smart hardware, built on Apples HomeKit Accessory Protocol</li>
+<li>there are a few opensource implementations in node and python</li>
+<li>apple predefines hardware configurations, you can't define your own</li>
+<li>Home App allows manual and automated control of devices</li>
+<li>there are many existing hardware, from ikea to phillips</li>
+<li>Raspberry Pi - supports python</li>
+<li>uses <a href="https://github.com/ikalchev/HAP-python">HAP-Python</a>, demo of a controlling an aircon via infrared</li>
+<li>pretty straightforward, except tied to Apple and Siri</li>
+</ul>
+<p>q &amp; a</p>
+<ul>
+<li>IR is unidirectional so what happens if u miss a packet?</li>
+<li>every packet is single state, so contains all the info in one go. So if a packet fails, the next one doesn't rely on it. Also, leep transmitter close to the receiver so the signal is clear.</li>
+</ul>
+<p><strong>takeaway:</strong> No Apple, hence no homekit for me.</p>
+<h2 id="education-seminar-student-showcase">Education Seminar Student Showcase</h2>
+<p>Friday August 24 2018, Education Track, C3.4 &amp; C3.5, 16:00 AEST</p>
+<blockquote>
+<p>Eight short (10 min) talks from high school students across Australia. They’ll be talking about projects they’ve built with Python using machine learning, robotics, natural language processing, and more <a href="https://2018.pycon-au.org/education-showcase">#</a></p>
+</blockquote>
+<p>{{&lt; youtube QNAgPjbn0Ws &gt;}}</p>
+<p><strong>MENACE - building a learning matchbox machine in Python</strong></p>
+<ul>
+<li>machine learning is the use of programming to make a computer learn from data</li>
+<li>inspired by Matt Parker from Standup Math channel on youtube</li>
+<li>problems with indexing errors leading to endless loop</li>
+<li>wants to use pygame or kivy to make a actual game</li>
+</ul>
+<p><strong>takeaway:</strong> awesome.</p>
+<p><strong>Optimising Memory Retention via a Machine Learning based Flashcard System built in Python</strong></p>
+<blockquote>
+<p>This project aims to leverage Python’s machine learning capabilities, combined with psychological theories of learning and forgetting, to construct predictive models of human memory in order to improve upon traditional flashcard systems.</p>
+<p>In this talk, I will share my experience of: (1) utilising Python’s sci-kit-learn package, alongside the Latent Skill Embedding package, to train, evaluate and visualise the performance of various models; (2) implementing the model into a web-based flashcard application built in Flask - a popular Python micro framework; and (3) testing the effectiveness of the system through a classroom experiment on 36 Japanese language students.</p>
+</blockquote>
+<ul>
+<li>http://josephtey.com/</li>
+<li>researched various techniques for the optimal time to review</li>
+<li>experimented on 40 students</li>
+<li>started with R, but how do u deploy with R? so moved on to Python as it can both train a model and an app to serve it with</li>
+</ul>
+<p><strong>takeaway:</strong> build my own flash cards to learn stuff with spaced repetition.</p>
+<p><strong>Text Summariser</strong></p>
+<blockquote>
+<p>The Text Summariser is a program I built for when one is unable or unwilling to summarise information from a large block of text themselves. In my talk, I will discuss how it works, what inspired the project, and how I overcame the (many) challenges of building my program. I will also talk about computational linguistics and Natural Language Processing (NLP), two big components of how the text summariser works. After listening to this talk, you will have learnt some basic Natural Language Processing, and how you can apply it in Python Programs.</p>
+</blockquote>
+<ul>
+<li>sorts words by type - verbs, nouns, etc</li>
+<li>uses markov chains to summarize</li>
+</ul>
+<p><strong>takeaway:</strong> too much cleverness going on to summarize.</p>
+<p><strong>NOR: creating generated worlds on iPad</strong></p>
+<blockquote>
+<p>NOR is a 2d puzzle exploration game for iPad that I made over the course of year 10. It features procedurally generated landscapes that collide with and can be edited by the player. The landscapes are host to procedurally generated bushes, trees and puzzles. My talk will discuss how I reached the point where I could set off on a large scale python coding project, how I built up the game and made the systems work, and how anyone can pick up an iPad and start developing.</p>
+</blockquote>
+<ul>
+<li>learned calculus for the game movements etc</li>
+<li>things are based on each other</li>
+<li>uses monte carlo to generate gaphics, of a random seed, which are dependend on the ground and level number</li>
+<li>used <a href="http://omz-software.com/pythonista/">pythonista</a></li>
+<li>uses momemtum + inertia for players movement</li>
+</ul>
+<p><strong>takeaway:</strong> procedural generation is awesome.</p>
+<p><strong>Rule-Based Machine Translation</strong></p>
+<blockquote>
+<p>The Text Summariser is a program I built for when one is unable or unwilling to summarise information from a large block of text themselves. In my talk, I will discuss how it works, what inspired the project, and how I overcame the (many) challenges of building my program. I will also talk about computational linguistics and Natural Language Processing (NLP), two big components of how the text summariser works. After listening to this talk, you will have learnt some basic Natural Language Processing, and how you can apply it in Python Programs.</p>
+</blockquote>
+<ul>
+<li>uses machine translation to switch from english to latin</li>
+<li>four main ways to translate: rule based, example based, statistical, neural</li>
+<li>Google Translate sucks at Latin translation</li>
+<li>very impressive work</li>
+</ul>
+<p><strong>takeaway:</strong> NLP for the win.</p>
+<p><strong>SVG Graph Calculator</strong></p>
+<blockquote>
+<p>The name of my project is somewhat self-explanatory, it is an SVG Graph calculator. I know right? My talk is going to be about how I decided to do this project, and my struggles and innovations in making this project happen.</p>
+</blockquote>
+<ul>
+<li>turns an equation into a SVG graph</li>
+<li>Why? had to draw graphs for yr9 math class. There are online tools which do this already, but decided it would be fun to do this</li>
+<li>thought of writing it in python turtle, but too slow</li>
+<li>wanted something which worked on web</li>
+<li>had to reverse engineer SVG file</li>
+<li>if looking for inspiration, just copy something</li>
+</ul>
+<p><strong>takeaway:</strong> good basis for building a equation solver.</p>
+<p><strong>Emojifer in @ school</strong></p>
+<blockquote>
+<p>Emojifer is an implementation of a sequence model in Machine Learning. It will analyse the meaning of a sentence and give it the appropriate emoji. Emojifier plays an important role in @ school which is a cloud-based learning management system written in React with Flask served as the server. Come along to this talk, if you want to know what’s under the hood of Emojfier and how I make it happen. Additionally, I’ll talk about some of the problems I’ve encountered so far and how I overcame it. This talk will give you an idea of how to get started in Machine Learning as well as full-stack web development if you’re new to the area.</p>
+</blockquote>
+<ul>
+<li>http://emojifier.surge.sh/#/</li>
+<li>https://github.com/anhphamduy/emojifier_model</li>
+<li>uses RNN and LSTM</li>
+<li>keras and flask</li>
+<li>made his own training data</li>
+<li>lessons: best way to learn is to teach, jump in head first, pair program, stack overflow is awesome</li>
+</ul>
+<p><strong>takeaway:</strong> everyone needs a emojifier.</p>
+<p><strong>PyVlov’s Dog</strong></p>
+<blockquote>
+<p>PyVlov’s Dog is a simulation software created to dynamically train neural networks for the control of basic robots. When we started this project we had a limited understanding of neural networks, so we simplified the problem by visualising it as training a dog.</p>
+<p>We developed this project as a way to streamline the concept of neural networks through this metaphor of training a dog, so as to facilitate its use as an education tool. In this talk we will talk about how we made the software, the difficulties we faced in creating it and the way in which it works. We will also discuss the development of the robot’s hardware and the way in which it is represented within the simulation. Finally, we will cover the way in which we developed the principles of ease of use, and visual clarity within the program, to allow for use by people of all skill sets.</p>
+</blockquote>
+<ul>
+<li>purpose of project was to understand neural networks, and did this through training a dog to do what its told to do (by creating a set of rules)</li>
+<li>sensors are the input to a NN, which gives a output to a motor</li>
+<li>made a simulation to train the NN - user defines a dog and an environment, once happy with the NN, throw it into the actual robot</li>
+<li>uses arduino to control motors, raspberry pi to run NN</li>
+<li>hardware is hard!</li>
+<li>used pymunk to handle the physics of the sim, but is only 2d, so they had to work around that</li>
+<li>needed to use tkinter with pygame</li>
+<li>https://pyvlov.wordpress.com/</li>
+</ul>
+<p><strong>takeaway:</strong> interesting project to follow. The future is training your own robot to do something.</p>
+<p><strong>educational talks wrap up</strong></p>
+<ul>
+<li>high school students are doing amazing stuff</li>
+<li>learnt a lot from throwing themselves in the deep end to do a project.</li>
+<li>python is a fantastic learning language, don't babyfeed students, support them in the deep end</li>
+</ul>
+<hr />
+<p>Saturday talks</p>
+<h2 id="keynote-annie-parker-on-techfugees">Keynote: Annie Parker on Techfugees</h2>
+<blockquote>
+<p><a href="https://twitter.com/annie_parker">Annie</a> is a co-founder of <a href="https://techfugees.com/chapters/australia/">Techfugees Australia</a> - a global movement connecting the technology ecosystem together with newly arrived refugees here in Australia to help them integrate into their new communities. In this talk, Annie will be sharing her experience of how Techfugees works and some of the success stories they’ve had along the way <a href="https://2018.pycon-au.org/talks/annie">#</a></p>
+</blockquote>
+<p>{{&lt; youtube GlMVcZfFFGI &gt;}}</p>
+<ul>
+<li>technology has a huge impact on changing peoples lives</li>
+<li>68.5M displaced ppl around the world, with 25M refugees</li>
+<li>the tech community can help, done 5 hackathons so far</li>
+<li>6th hackathon 24/25th Nov in Blacktown - signup</li>
+<li>looking for ppl who can put togther really early stage stuff and know whats out there to use</li>
+<li>don't need to be deeply skilled</li>
+<li>they've made significant changes  - new companies, connected investors to customers, jobs, community impact, media stories, inspiration</li>
+<li>case studies:</li>
+<li>refugeetalent created at first hackathon in 2015, placed 150 ppl into jobs</li>
+<li>onestep founded at second hackathon, connects refugees</li>
+<li>muralisto - makes community art</li>
+<li>Shaqaeq Rezai <a href="https://www.linkedin.com/in/shaqaeq-rezai/">ln</a>, <a href="https://twitter.com/r_Shaqaeq">twtr</a> - 18yr hazara Afghan refugee, moved to Australia from Iran where she faced a lot of discrimination - attended a hackathon, built an AI to track moods, got scholarship, started <a href="https://www.linkedin.com/company/directa-australia/">Directa Australia</a>. Met the CEO of the Iconic through the startup scene, who is also Aghan.</li>
+<li>wants to help ppl through tech</li>
+<li>most refugees have good knowledge of tech, smart phones</li>
+<li>50% of business in Australia have been started by a refugee or a migrant</li>
+</ul>
+<p><strong>my takeaway:</strong> this is awesome, go to their hackathon in Nov. Don't need ninja skills, a lot is just about knowing what is out there in the tech space which can help.</p>
+<h2 id="describing-descriptors">Describing Descriptors</h2>
+<blockquote>
+<p>Descriptors are a little known feature of Python. They provide a way for a programmer to customize the storage and retrieval of different instance variables. In this talk, you will learn about the descriptor protocol, what it can be used for, and how to implement a descriptor. <a href="https://2018.pycon-au.org/talks/42582-describing-descriptors/">#</a></p>
+</blockquote>
+<p>{{&lt; youtube lmcgtUw5djw &gt;}}</p>
+<ul>
+<li>Matthew Egan <a href="https://mattjegan.com/">web</a> <a href="https://twitter.com/NullMatthew">twtr</a></li>
+<li>why descriptors? often overlooked, used primarily by library developers</li>
+<li>so we have a basic class, Person, which stores info like name, etc</li>
+<li>our dream Person class makes sure names are capitilized properly</li>
+<li><code>__setattr__(self, attr, value)</code> is called inside a class when an attribute is being set, so if Person.name is assigned, it runs through the setattr method which can can modify the variable from <code>name</code> to <code>Name</code></li>
+<li>can use setter methods like <code>@name.setter</code> inside the class, but this only applies to the specific class</li>
+<li>the descriptor protocl allows a more general solution, has four attributes: get, set, deelte, set_name</li>
+<li><code>__get__(self, instance, owner)</code></li>
+<li><code>__set__(self, instance, value)</code></li>
+<li><code>__delete__(self, ??)</code></li>
+<li><code>__set_name__(self, owner, name)</code> - doesn't take instance argument as its only called on class creation</li>
+<li>when you access an attribute in python, it goes through a lookup process, which gets it from a dict, a data descriptor or a non_data descriptor</li>
+<li>non-data descrptors: staticmethod, classmethod, abc.abstractmethod</li>
+<li>if we have a Person class and tons of Person objects, we write just one descriptor which covers all the objects</li>
+<li><code>from weakref import WeakKeyDictionary</code> - when we delete an object which is also in the dict, it automatically removes it from the dictionary</li>
+<li>look up some example descriptors using weakref - he gave an example of using a descriptor to make sure names are capitilized</li>
+<li>descriptors have use cases like:</li>
+<li>replicating customization for multiple attrs without caring about name</li>
+<li>django generic foreign keys</li>
+<li>custom validation e.g only non negative integers for age</li>
+<li>better error msgs - can prepend the name of attribute being set to the error msg so its more descriptive</li>
+<li>talk code: https://github.com/mattjegan/describing-descriptors</li>
+</ul>
+<p>q &amp; a:</p>
+<ul>
+<li>runtime perf</li>
+<li>depends on impementation, external calls</li>
+<li>can you chain descriptors?</li>
+<li>should be possible, but haven't done it.</li>
+<li>how do u replace the descriptor itself?</li>
+<li>delete it off the class itself</li>
+<li>what happens if you pickle an object with a descriptor?</li>
+<li>pickle is unsecure so don't use it</li>
+</ul>
+<p><strong>my takeaway:</strong> descriptors are useful, can apply across classes, so makes for better code</p>
+<h2 id="what-is-the-most-common-street-name-in-australia">What is the most common street name in Australia?</h2>
+<blockquote>
+<p>Finding the most common street name in Australia may sound like a simple thing to do - but it quickly devolves into a scenic tour of all the things that go wrong when doing data analytics. I’ll be giving advice on how to avoid these speed bumps along with how to work with OpenStreetMaps in Python. <a href="https://2018.pycon-au.org/talks/45005-what-is-the-most-common-street-name-in-australia/">#</a></p>
+</blockquote>
+<p>{{&lt; youtube eGgBU2Pl6iA &gt;}}</p>
+<ul>
+<li>Rachel <a href="https://github.com/RachelBunder">git</a>, <a href="https://twitter.com/ADuckIsMyFiend">twtr</a>, <a href="https://www.linkedin.com/in/rachelbunder/">ln</a> works at Solar Analytics</li>
+<li>read an article about most common street names in America, got her interested about Australian streets</li>
+<li>G-NAF is australian geocoded data containing every address/street</li>
+<li>used OSM, since it has every country, instead of G-NAF</li>
+<li>couldn't just export all of Australia data from OSM</li>
+<li>used metro extracts to download geojson, which has now gone offline</li>
+<li>geojson includes a geometery feature e.g roads defined as a series of points (a line!)</li>
+<li>used <a href="http://geopandas.org/">geopandas</a> - works like pandas</li>
+<li>osm has all kinds of road types, so have to think about it, so what exactly is a street? She went with a street is something with a name which a car can drive on</li>
+<li>see her <a href="https://rachelbunder.github.io/Cleaning-OSM/">blogpost on cleaning OSM data</a></li>
+<li>she got victoria rd and pacific highway as most common street names in Sydney, which didn't sound right</li>
+<li>so drew a plot, and found out OSM saw streets as segments, so long streets appeared many times</li>
+<li>shapely is a package which merges line segments together, but didn't do a great job</li>
+<li>so she wrote her own function to knit streets together - get road segments with same name, find ones which are close together, merge</li>
+<li>there is a distance func to find distance b/w geometeries</li>
+<li>had to parse names, as street names have a name and a descriptor, like parade, street, avenue, etc. This was not easy as there are a lot of variations, too many!</li>
+<li>what about Little Street? is that same as Street?</li>
+<li>she wanted to use this for different countries, but each country has different street descriptors, so the Australia model didnt' work for other countries</li>
+<li>used <a href="https://overpass-turbo.eu/">overpass turbo</a> api to get all of Australia's data - but was hitting api limits so had to break Au into a grid and make multiple calls</li>
+<li>most common street names in Australia: Park, Railway, George, Church, Victoria</li>
+<li>learnings:</li>
+<li>start small - Sydney over Australia</li>
+<li>choose something familiar</li>
+<li>check your biases</li>
+<li>constant vigilant - test, draw stuff (she plotted streets on a map)</li>
+<li>know your problem</li>
+</ul>
+<p><strong>my takeaway:</strong> a suprisingly simple question can lead to a whole lot of learning. Answer a few simple q's myself using python.</p>
+<h2 id="why-you-should-care-about-types-how-python-typing-helped-my-team-scale">Why you should care about types: How Python typing helped my team scale</h2>
+<blockquote>
+<p>By now you have probably all heard about Python static typing. But why should you care? Are types in Python even Pythonic? Is Python turning into Java? Type annotations are Pythonic, trust Guido’s word for it, and Python is definitely not turning into Java.</p>
+<p>The greatest benefit of types in large Python codebases is the fact that the input and output structures of a function are obvious from just looking at the signature. In the untyped world the definition for the class you are looking for may be N jumps away, hidden somewhere deep in the codebase, and you don’t have a direct reference to it. In the best possible case grepping for it will yield just a few results and you will be able to spot what you are looking for. In the worst case though, you will have hundreds of hits and you will have to start your application and inspect the type at runtime to figure out what is going on, which make the development cycle slow and tedious.</p>
+<p>Come to this talk if you want to know more about the typing system in Python, how to gradually add it to your codebase and what benefits will your team get in the long run! I will also cover some advanced tools like the runtime type collection system, MonkeyType, and the just open sourced type checker, Pyre<img alt="#" src="" /></p>
+</blockquote>
+<p>{{&lt; youtube h1cD3a7ys8Q &gt;}}</p>
+<ul>
+<li>Luka Sterbic <a href="https://github.com/Sterbic">git</a> - works at Facebook</li>
+<li><a href="https://github.com/Sterbic/PyCon-AU-2018">talk slides and code</a></li>
+<li>why should I care about typing?</li>
+<li>you can call modules from far away, in a large codebase can be many imports away, so its not clear what kind of data object gets returned</li>
+<li>with typed codes, its obvious what the input and output is, and in a modern IDE like PyCharm its just one click away</li>
+<li>for new engineers, typed code makes it much easier to start coding as its both obvoius from the code and there is more context provided by the IDE</li>
+<li>Are Python types Pythonic?</li>
+<li>typing in python is optional and doesn't impact runtime</li>
+<li>zen of python says explicit is better, reduce ambiguity and readability counts - and type hints delivers all this</li>
+<li>Guido said so</li>
+<li>typing 101</li>
+<li>what needs to be annotated - variables going into a function</li>
+<li>covers most: <code>from typing import List, Set, Dict, Tuple</code></li>
+<li>Union <code>from typing import Union, Optional</code> gives a way to return one of a list of objects like <code>Union[User, Page, None]</code> indicates any one of those three objects can be returned<ul>
+<li>can also use Optional to indicate return is optional</li>
+</ul>
+</li>
+<li><code>from typing import Type, TypeVar</code><ul>
+<li><code>TypeVar</code> are placeholders</li>
+</ul>
+</li>
+<li>mypy is the most commonly used type checker</li>
+<li>advanced topics: forward references, TYPE_CHECKING, @overload</li>
+<li>Pyre is facebook's open source type checker, much faster than mypy</li>
+<li>typing in the real world</li>
+<li>new project, just type everything from day 1, use a type checker in CI</li>
+<li>exisiting projects: understand gradual typing. if a function isn't annotated, then if it calls a annotated function then all type errors are ignored. You delay triggering errors until the calling function is also type hinted.<ul>
+<li>type common libraries, like utils.py which is used all over the place</li>
+<li>keep running the type checker</li>
+<li>add type checker into CI</li>
+<li>add types to new code</li>
+</ul>
+</li>
+<li>MonkeyType - created by Instagram<ul>
+<li>collects typing info at runtime and logs them, generates type stubs then applies them</li>
+</ul>
+</li>
+<li>tips and tricks:</li>
+<li>say you have a class, but you want to pass in a superclass - that will fail. use Protocol from typing_extensions</li>
+<li>typeshed</li>
+<li>type: ignore - silence typing error on a statement</li>
+</ul>
+<p><strong>my takeaway:</strong> types are pythonic, more readable, safer. use gradual typing and go all in!</p>
+<h2 id="running-python-web-applications-in-docker">Running Python web applications in Docker</h2>
+<blockquote>
+<p>An introduction on running Python web applications in Docker, covering how to structure your project, running the project in both development and production, testing the project, and compiling static assets for your frontend. <a href="https://2018.pycon-au.org/talks/45205-running-python-web-applications-in-docker/">#</a></p>
+</blockquote>
+<p>{{&lt; youtube 9L6x2j-7eVQ &gt;}}</p>
+<ul>
+<li>Tim Heap <a href="https://twitter.com/tim_heap">@tim_heap</a> <a href="https://github.com/timheap">git</a></li>
+<li>talk <a href="https://github.com/timheap/python-apps-in-docker">code and slides</a></li>
+<li><a href="https://www.docker.com/">Docker</a> is a determinisitic application image, runs in a isolated execution environment, composable containers</li>
+<li>how to structure your python app to make it easy to deploy in docker</li>
+<li>built as normal, with some constraints</li>
+<li>runs as a WSGI app, connects to a web service like apache</li>
+<li>project code all in one top level module, which can have submodules</li>
+<li>a seperate directory for deployment and development</li>
+<li>have one config file in the main project directory with all the base settings the app needs to run, seperate ones for development</li>
+<li>dev just hard code config variables, production pull in from the environment <code>os.environ</code></li>
+<li>Testing</li>
+<li>you might want some other tasks running in a seperate container to the web server</li>
+</ul>
+<p>q &amp; a:</p>
+<ul>
+<li>why seperate config files for dev and prod?</li>
+<li>cause in dev you often need some weird things which you don't need/want for production.</li>
+<li>how do u manage logging in an app?</li>
+<li>configure it the normal way, then pipe it somewhere. its just running python so just do it in the normal way</li>
+<li>why we wouldn't use docker-compose in production</li>
+<li>there isn't a way to gracefully bring it down and back up. In production use something like kubernetes which does all the magic</li>
+<li>process monitoring like supervisord</li>
+<li>say u have a webapp image, a celery image, the supervisord runs those images. you would rarely run supervisord inside a docker container</li>
+</ul>
+<p><strong>my takeaway:</strong> Docker is convuluted. I wish the world would just rather clean up linux so we can go back to running things directly instead of having to faff around with docker containers.</p>
+<h2 id="context-managers-you-can-write-your-own">Context Managers: You Can Write Your Own!</h2>
+<blockquote>
+<p>Did you know context managers go beyond with open('myfile.txt', 'r') as f? In fact, you can even write your own! Context managers are an amazing tool for managing resources safely. They make your code look great, and they’re now easier to write than ever thanks to contextlib! Come get contextual!  <a href="https://2018.pycon-au.org/talks/45062-context-managers-you-can-write-your-own/">#</a></p>
+</blockquote>
+<p>{{&lt; youtube -tpn94V9vK4 &gt;}}</p>
+<ul>
+<li>Dan <a href="https://github.com/banool">git</a> <a href="https://dport.me/">web</a></li>
+<li><a href="https://dport.me/pycon.pdf">talk slides: dport.me/pycon.pdf</a></li>
+<li>context managers manage your context, like the famous <code>with file as :</code></li>
+<li>why use them: you can't forget to close resources and they make code prettier by abstracting</li>
+<li><code>contexlib</code> has all kind of goodies in it, so look it up</li>
+</ul>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">contextlib</span> <span class="kn">import</span> <span class="n">suppress</span>
+
+<span class="k">def</span> <span class="nf">kill_process</span><span class="p">(</span><span class="n">pid</span><span class="p">):</span>
+<span class="k">with</span> <span class="n">suppress</span><span class="p">(</span><span class="ne">ProcessLookupError</span><span class="p">):</span>
+  <span class="n">os</span><span class="o">.</span><span class="n">kill</span><span class="p">(</span><span class="n">pid</span><span class="p">,</span> <span class="n">signal</span><span class="o">.</span><span class="n">SIGKILL</span><span class="p">)</span>
+</code></pre></div>
+
+<ul>
+<li>write your own context managers - see slide deck for examples</li>
+<li>its just a class with a dunder enter and a dunder exit method</li>
+<li>decorator is just a func which takes a func and returns a new func</li>
+<li><code>@decorator</code> on top of a func is just syntactic sugar for <code>decorator(func)</code></li>
+<li>generators return one value at a time until they have nothing else to return</li>
+<li>they maintain state until exhausted</li>
+<li><code>from contextlib import contextmanager</code> decorator builds the enter and exit methods for you - the enter method is everything before yield, the the exit method is evreything after yield</li>
+<li>scope - variables defined inside context managers still exist after its closed</li>
+<li>context managers can deal with exceptions, can use suppress</li>
+</ul>
+<p><strong>my takeaway:</strong> use more decorators and context managers</p>
+<h2 id="snakes-in-your-games">Snakes in your Games</h2>
+<blockquote>
+<p>When thinking about where to start with python and games, the first thing that might come to mind is pygame. However, python has been used in many well known commercial games titles and can be used in many different ways throughout the game development process. This talk will examine a range of game titles, genres and platforms, from AAA to Indie, to show how python is being used in each; discussing the strength and weaknesses of using python, how it has been done, and how it might be in the future.</p>
+</blockquote>
+<p>{{&lt; youtube WbnZqeLL1a8 &gt;}}</p>
+<ul>
+<li><a href="https://twitter.com/ducky_tape">@ducky_tape</a></li>
+<li>lots of python gaming platforms like <a href="https://www.renpy.org/">Ren'Py</a>, PyVida</li>
+<li>open source tools like Gimp have python plugins</li>
+<li>PyAudioGame, Audio Game Kit for Python</li>
+<li>3d engines: <a href="https://www.panda3d.org/">panda3d</a> - but need tools like Maya to make animations - python is very handy for scripting animations</li>
+<li>python is used a lot for automation inside games</li>
+<li>post release: for some big titles python is used to make addons</li>
+</ul>
+<p><strong>my takeaway:</strong> there is a lot of python out there.</p>
+<h2 id="keynote-tom-eastman-on-getting-better">Keynote: Tom Eastman on getting better</h2>
+<blockquote>
+<p>how we learn to get better at our craft, and also how we – all too easily – do the opposite. <a href="https://2018.pycon-au.org/talks/tom">#</a></p>
+</blockquote>
+<p>{{&lt; youtube 9E3qhqWFJ2c &gt;}}</p>
+<ul>
+<li><a href="https://twitter.com/tveastman">twtr</a> <a href="https://eastman.net.nz/">web</a></li>
+<li>been using Python since 2002! Python was hip way back then</li>
+<li>joined a super smart team, felt out of place</li>
+<li>new knowledge deepens your understanding of what you already know</li>
+<li>we are poor judges of whne we're learning well or not</li>
+<li>real learning feels sucky, like when trying to debug broken code with multiple layers of abstraction</li>
+<li>effortful retreival - have to write down stuff in your own words to understand. don't absorb the words, absorb the knowledge</li>
+<li>using is the the only way to make it stick.</li>
+<li>use spaced repitition. flashcards are highly effective.</li>
+<li>buid my own flashdeck</li>
+<li>did a contract job for which had to learn ruby in 4 days. got two big fat books on ruby, used a pomodoro app on phone, and read both books cover to cover.</li>
+<li>restate things in terms you understand</li>
+<li>absorbed more than had expected</li>
+<li>primed by layout of boks, which makes it faster to look up bits as needed</li>
+<li>learning an unfamiliar language made him a better python developer</li>
+<li>sticking to only one language deprives you of experience</li>
+<li>self sabotage - when you think you're smart, you tend to avoid things which make you look not smart. internalized that effort is whats needed when you're not talented.</li>
+<li>Carol Dweck's "fixed vs growth mindset" - are our abilities fixed or can we grow them?</li>
+<li>Growth mindset: we can improve with effort, this is the one we want</li>
+<li>be careful about excuses</li>
+<li>thinking I should have been been good at this by now is deafeatist</li>
+<li>you can have a fixed mindset for ages about many things</li>
+<li>sitting down and working on a thing is an amazingly powerful way to learn that thing</li>
+<li>takeaways:</li>
+<li>effort of learning isn't comfy - if feeling comfortable learning its a warning sign</li>
+<li>don't feel bad about being bad at something</li>
+</ul>
+<p><strong>my takeaway:</strong> think you can do it, and learn by doing. don't get comfy and don't feel bad about sucking at something.</p>
+<h2 id="saturday-lightening-talks">Saturday Lightening talks</h2>
+<p>{{&lt; youtube BmWLhVMWC9I &gt;}}</p>
+<p>Digital Earth Australia</p>
+<ul>
+<li>archive of Australia's space/earth/ocean data</li>
+<li>they try and figure out how to display things to see changes over time, showed impressive animationg of pictures alongside a graph of flow changing over time</li>
+<li>code is all open source: <a href="https://github.com/GeoscienceAustralia">GeoscienceAustralia github</a></li>
+</ul>
+<p>FuPy</p>
+<ul>
+<li><a href="fupy.github.com">web</a></li>
+<li>hardware is hard, FPGA makes hardware into software, making it easier to fix bugs</li>
+<li>FPGA generally don't support python, but along came Migen and Misoc and LiteX which support python by putting a cpu in the FPGA</li>
+<li>FuPy project is to run MicroPython on FPGA</li>
+</ul>
+<p>flip flop operators in Ruby</p>
+<ul>
+<li>@merxplat</li>
+<li>flips b/w two statements</li>
+<li>its from perl, which got it from sed/awk, who got it from electronics</li>
+<li>being removed from ruby, no one uses it</li>
+<li>looks pretty handy and terse to me!</li>
+</ul>
+<p>python in the classroom</p>
+<ul>
+<li>math teacher who now teaches python to kids in a low income area</li>
+<li>coding keeps kids engaged</li>
+<li>they use <a href="https://groklearning.com/">grok learning</a></li>
+</ul>
+<p>DRF Model Pusher</p>
+<ul>
+<li>sends realtime updates using Pusher over websockets</li>
+<li>django stuff</li>
+</ul>
+<p>Watching water from space</p>
+<ul>
+<li><a href="https://twitter.com/claire_science">Claire</a>, climate scientist at Geoscience Australia</li>
+<li>works with agricultural data from space</li>
+<li>when are farm storage dams being filled and emptied</li>
+<li>dams were manually labeleed on satellite photos before</li>
+<li>now algorithim to detect dams, run automatically every time there is new imagery</li>
+<li>they build a flagging system to alert for drainage</li>
+<li>working to improve this and pass it to stake holders</li>
+</ul>
+<p>Captcha Cracker</p>
+<ul>
+<li>yr 12 student</li>
+<li>we have so much info to learn from, but programs have very limited info</li>
+<li>writing a program that uses the SIFT Algorithm to get through a ReCaptcha</li>
+<li><a href="https://captchacracker.wordpress.com/">see their website</a></li>
+</ul>
+<p>Rocketry</p>
+<ul>
+<li>MEMS is making things a lot cheaper</li>
+<li>used MEMS sensors with ESP32 to make lots of telemetry modules</li>
+<li>of course used micropython</li>
+<li>look up MQTT</li>
+<li>the feeling of something actually happening is awesome</li>
+</ul>
+<p>cyrpto money</p>
+<ul>
+<li>bitcoin uses tons of electricity</li>
+<li>theft</li>
+<li>ethereum contracts cause software</li>
+<li>great overview of cycrptocurrencies</li>
+</ul>
+<p>Peter Lovett</p>
+<ul>
+<li>teaches Python</li>
+<li>python is readable, everyone loves it for that</li>
+<li>pep505</li>
+<li>python needs to grow, but we don't want to loose sight of what we have</li>
+</ul>
+<p>Giving thanks</p>
+<ul>
+<li>project to fund the packages you use: <a href="https://github.com/phildini/thanks">phildini/thanks</a></li>
+</ul>
+<hr />
+<h2 id="tracy-osborn-clueless">Tracy Osborn: Clueless</h2>
+<blockquote>
+<p>Tracy Osborn is the author, designer, and self-publisher of three books and the solo founder of a venture-backed startup. Each of these achievements has something in common — being completely clueless about the work and problems involved in each. In this keynote, Tracy will tell stories about how she launched her projects and what she learned (after already being neck-deep.) <a href="https://2018.pycon-au.org/talks/tracy">#</a></p>
+</blockquote>
+<p>{{&lt; youtube fOzJ-OIZRZw &gt;}}</p>
+<ul>
+<li><a href="https://twitter.com/limedaring">twtr</a></li>
+<li>wrote easy/friendnly <a href="https://twitter.com/HelloWebBooks">hello web app books</a></li>
+<li>unusual background to pycon. went through high school building websites.</li>
+<li>quit computer science in college cause bad experience, switched to art</li>
+<li>ended up working as a designer and web developer - design/html/css - scared of javascript</li>
+<li>learnt from cs experience how difficult it is to pick up programming and how important teaching styles are</li>
+<li>see her djangocon 2017 keynote</li>
+<li>wanted to do a startup, didn't want to code but couldn't find a technical cofounder</li>
+<li>husband works in python, introduced her to django. learnt django and launched her first webapp in 6 weeks</li>
+<li>you don't have to make things perfect, or understand how they work under the hood</li>
+<li>lessons learned:</li>
+<li>barring security issues, ugly code can be ok</li>
+<li>learn by doing - picked up programming much faster by having a real project to work on</li>
+<li>startups are stressful but if you like to constantly be learning and doing something different most days they are great</li>
+<li>she didn't like the way django was taught, which is where her book came from</li>
+<li>customizable tutorials, project based - she teaches how to build a web app, not how to code</li>
+<li>wrote book instead of tutorial cause "go big or go home". low royalites with publishers, so used kickstarter to raise 12k to self publish.</li>
+<li>lessons learned:</li>
+<li>keep marketing in mind when building a product</li>
+<li>took way longer then planned - 1yr late. build a big buffer</li>
+<li>keep it simple- instead of markdown etc, used google docs - very useful for edit help, or sending drafts to ppl</li>
+<li>used indesign to lay out the book - used skillshare to pick it up.</li>
+<li>are paperback books worth it?</li>
+<li>easypost - api's for shipping</li>
+</ul>
+<p><strong>my takeaway:</strong> pick a simple project and just do it.</p>
+<h2 id="guide-to-your-own-artificial-intelligence-application-in-3-easy-steps">Guide to your own artificial intelligence application in 3 easy steps</h2>
+<blockquote>
+<p>What do you think of when you hear “artificial intelligence”? Perhaps self-driving cars, autonomous robots and Siri, Alexa or Google Home? But it doesn’t have to be that complex. You can build a powerful image classification model within a topic that inspires and interests you - with 3 easy steps. <a href="https://2018.pycon-au.org/talks/45386-guide-to-your-own-artificial-intelligence-application-in-3-easy-steps/">#</a></p>
+</blockquote>
+<p>{{&lt; youtube ymRr0AkMb5E &gt;}}</p>
+<ul>
+<li>Norah Klintberg Sakal <a href="https://www.linkedin.com/in/norah-klintberg-sakal-5b81322a/">ln</a> - data scientist doing a masters thesis at <a href="https://www.czbiohub.org/">Chan Zuckerberg Biohub</a></li>
+<li><a href="https://github.com/norahsakal/pyconau-2018-shades">talk github, includes code</a></li>
+<li>ususally when u think of AI or DL u think of self driving cars, Alexa, cancer diagnosis</li>
+<li>but we can apply things to day to day problems</li>
+<li>Idea - Data - Training</li>
+<li>wanted to look at makeup tutorials, too many on the internet, so how do you know which one of the 30M videos is relevant ($400B industry)</li>
+<li><strong>Idea:</strong> use deep learning to answer this</li>
+<li><strong>Data:</strong> looked at videos, eye shapes jumped out - there are 4 distinct shapes</li>
+<li>created dataset by looking at celeb images and cropping out eye shapes - 200 training, 100 validation</li>
+<li><strong>Train:</strong> used transfer learning - pretrained weights from Imagenet (architecture VGG16)</li>
+<li>there are a lot of models to choose from, used VGG-16 since its fairly simple to understand and easy to play around with</li>
+<li>locked all the conv layers since they already knew how to understand images</li>
+<li>using keras to grab VGG16 minus the top layer</li>
+<li>got 93% accuracy</li>
+<li><strong>App:</strong> Flask to take photo and predict image</li>
+<li>an important part of learning is to make something end to end. take a simple problem and make a app for it</li>
+</ul>
+<p><strong>takeaway:</strong> this was suprisingly easy for something which sounds so complex. build my own mini app using keras and flask</p>
+<h2 id="hello-to-the-world-in-8-web-frameworks">Hello to the World in 8 Web Frameworks</h2>
+<blockquote>
+<p>We’ll start with the current crop of microframeworks, showing how to achieve the same task in each, before progressing to “Batteries included” and then the more specialised async frameworks. For developers who perhaps have only used a single framework or even none at all, this talk gives them an opportunity to get out and explore the world (of web frameworks) and broaden their horizons, with plenty of Jules Verne inspired fun along the way. <a href="https://2018.pycon-au.org/talks/45282-hello-to-the-world-in-8-web-frameworks-micro-batteries-included-async/">#</a></p>
+</blockquote>
+<p>{{&lt; youtube z9Ek6fefMYk &gt;}}</p>
+<ul>
+<li>Aaron Bassett <a href="https://twitter.com/aaronbassett">twtr</a> dev advocate at Nexmo - an api company for telephony</li>
+<li>task: return a json string</li>
+<li><a href="http://flask.pocoo.org/">Flask</a> - uses functional based views (does support class views too)</li>
+<li><a href="https://cherrypy.org/">cherrypy</a> - uses class based views</li>
+<li><a href="https://falconframework.org/">falcon</a> - api first framework, designed to do json based microservices and be really fast 5x faster than flask, 10x django</li>
+<li><a href="http://www.hug.rest/">hug</a> - make development driven python apis as simple as possible - uses falcon under the hood, just adds a simplified interface to falcon.</li>
+<li>microframeworks make it very easy to do something simple, you also have the freedom to change things or bolt on whatever bits you want.</li>
+<li>but with great power comes great responsibility - you start with great intentions and end up building a monolithic app</li>
+<li>in real world situations your fantastic ORM isn't going to be usable by other ppl or well documented</li>
+<li><a href="https://www.djangoproject.com">Django</a> in the real world, every other project is essentially structured the same. which leads us to django, which is batteries included.</li>
+<li>but its somewhat complex - basic project has a bunch of stuff, and for a basic api you end up with multiple files to deal with</li>
+<li>prefers class based views, though some controversy there</li>
+<li><a href="https://trypyramid.com/">Pyramid</a> - start small - for basic stuff not much code, finish big - includes batteries if needed</li>
+<li><a href="http://www.tornadoweb.org/en/stable/">Tornado</a> - async framework, pretty small code</li>
+<li><a href="https://sanic.readthedocs.io/en/latest/">Sanic</a> - flask like async, but can't recommend it at the moment. prone to crashes and vulnerabilities</li>
+</ul>
+<p><strong>my takeaway:</strong> use any, ignore differences in syntax - whats important is documentation, bug/issue tracker activity, release management, community, and of course the scope of the project and the number of "batteries" you need. Don't end up rebuilding a bastardized undocumented django on top of a microframework, just use django if thats where you're headed.</p>
+<h2 id="functional-programming-demystified">Functional Programming demystified</h2>
+<blockquote>
+<p>Have you ever eavesdropped on FP developers talking about programming and wondered which planet you landed on? I attended LambdaJam 2018 and felt your pain! Let’s demystify Either, Semigroups, Monoids, Functors, Monads, Traversable, Natural transformations etc. by implementing them in Python. <a href="https://2018.pycon-au.org/talks/45075-fp-demystified/">#</a></p>
+</blockquote>
+<p>{{&lt; youtube p9_r36fIrqc &gt;}}</p>
+<ul>
+<li>Eugene Van den Bulke - <a href="https://twitter.com/3KWA">twtr</a></li>
+<li>went to <a href="https://lambdajam.yowconference.com.au/">lambdajam</a></li>
+<li><a href="http://eugeniacheng.com/">Eugenia Cheng</a> - read her books</li>
+<li>Professor Frisby introduces functional programming in javascript - we are going to cover it in python</li>
+<li>Functor: something that can be mapped over.</li>
+<li>Currying: this makes no sense. instead of a func which takes in multiple arguments you have some weird chain of funcs which take in arguments one at a time</li>
+<li>Applicative functors: put a func in a box and apply to objects in other boxes</li>
+<li>Either Left of Right: basically a <a href="https://pypi.org/project/flipfloperator/">flipfloperator</a></li>
+<li>Monoid - ok now things are getting into the deep end</li>
+</ul>
+<p><strong>my takeaway:</strong> functional programming is interesting but deeply unpythonic. don't use unless there is a clear need to.</p>
+<h2 id="you-dont-need-that">You Don't Need That!</h2>
+<blockquote>
+<p>Not every design pattern makes sense in Python. This talk builds up design patterns commonly used in enterprise languages, and shows the features in Python that make these approaches unnecessary. <a href="(https://2018.pycon-au.org/talks/45184-you-dont-need-that/)">#</a></p>
+</blockquote>
+<p>{{&lt; youtube imW-trt0i9I &gt;}}</p>
+<ul>
+<li>Christopher Neugebauer <a href="https://twitter.com/chrisjrn">twtr</a> <a href="https://chris.neugebauer.id.au/">web</a> works at AlpaSigts, Director of PSF</li>
+<li>Deisign Patterns let you express ideas that are hard to express... in a familiar way</li>
+<li>most patterns are object oriented ones from the mid 90's, back when C and Java were the hot languages</li>
+<li>so how would design patterns be done pythonically?</li>
+<li>the simplest design pattern is a Singleton</li>
+<li><strong>Singleton:</strong> a class that can only be constructed once</li>
+<li>can use <code>del</code> to delete class definition after having called it once to make sure it never gets called again</li>
+<li>but why do we want a singleton? what do we want to achieve?</li>
+<li>back in the good old days Java needed singletons for namespaces, but python already has pretty good namespace seperation</li>
+<li>python can achieve this by using modules - so instead of classes we can have modules to hold data. Python makes sure you always get the same object regardless of how many times we import it.</li>
+<li>Modules are objects, so we don't need Singletons</li>
+<li>Dependency infection: provide dependecies to classes as constructor arguments (useful for unit testing)</li>
+<li>Mocks - pretend version of functions, most lanugages have mocking frameworks</li>
+<li>Unit Testing - <code>unittest.mock</code> has a patch function, so we don't need to write our own mock funcs</li>
+<li>Iterators - python provides <code>for</code> loops to consume iterators. But what are we trying to achieve? use <code>yield</code> to write generators for your own iterators</li>
+<li>perform a common operation on a collection - python does this natively with <code>for item in Class</code></li>
+<li>python doesn't need Visitors becuase generators</li>
+<li>there are some design patterns which do make sense in python</li>
+<li><strong>Factories</strong> - used all through the python library</li>
+<li>book on useful patterns in python: <a href="http://python-patterns.guide/">python-patterns.guide</a></li>
+</ul>
+<p><strong>takeaway:</strong> a lot of design patterns exist becuase they were needed in some language or other. (java, shudder). Use python's pythonic features, don't reach for older patterns unless its truly a good idea.</p>
+<h2 id="there-is-no-now-and-sensor-datas-the-worst">There is no "now" and sensor data's the worst</h2>
+<blockquote>
+<p>Audience members will be asked to go to a webpage on their phone that reads accelerometer data and transmits it to the presentation. This data will then be used to highlight the issues of collecting a processing data from distributed sensors - what happens when all the data is not received at once and not perfectly in time? what happens if there is an outage? How do you turn all this noise into something tha t can be managed? <a href="https://2018.pycon-au.org/talks/45064-there-is-no-now-and-sensor-datas-the-worst/">#</a></p>
+</blockquote>
+<p>{{&lt; youtube uv-KQzjA08c &gt;}}</p>
+<ul>
+<li>Mike Leonard <a href="https://twitter.com/mikerleonard">twtr</a> Reposit Power</li>
+<li>presentation demo fail - was hosted on kubernets cluster. Reminder that all this clustering business is hard.</li>
+<li>collecting IOT sensor data is hard - too small a polling interval will ddos your server, but too long means loosing out on realtime data.</li>
+<li>during an outage you want to keep data loss to a minimum - so log data on the device, but when they came back online you don't want to get ddos'd. so each time a device fails to transmit, it doubles the delay, also introduce some randomness so each device is sending data at different times</li>
+<li>realtime is tricky, scale is hard, distributed sensors are the worst</li>
+<li>python backend using Flask, Flask-SocketIO, React &amp; Socket.IO + browser api</li>
+<li>recommends using <a href="https://socket.io/">socket.io</a> over websockets - <a href="https://github.com/miguelgrinberg/python-socketio">python implementation</a></li>
+</ul>
+<p><strong>takeaway:</strong> think orchestration. how many devices, what when how do they log/send data and how to deal with loss/latency.</p>
+<h2 id="watch-out-for-safety-bandits">Watch out for Safety Bandits!</h2>
+<blockquote>
+<p>The presentation itself will go into the details of example security vulnerabilities, explain why it’s important to fix them, and show how integrating these two tools into your process will better protect you and your software. Beginners will get an appreciation for the kinds of security problems that can occur, and an introduction to continuous integration workflows. <a href="https://2018.pycon-au.org/talks/43518-watch-out-for-safety-bandits/">#</a></p>
+</blockquote>
+<p>{{&lt; youtube Wa2pgDihWaw &gt;}}</p>
+<ul>
+<li>Tennessee Leeuwenburg <a href="https://twitter.com/tleeuwenburg">twtr</a> Head of Secure Coding at the Australian Bureau of Meteorology.</li>
+<li>use python tools called <a href="https://pyup.io/safety/">Safety</a> and  <a href="https://github.com/PyCQA/bandit">Bandit</a></li>
+<li>tools like <a href="https://www.cvedetails.com/">CVE</a> track security vulnerabilities - there are heaps all the time in commonly used packages</li>
+<li>Safety tells you all the secure packages you are using using their <a href="https://pyup.io/safety/">cli tool</a> or <a href="https://pyup.io/">hosted service</a></li>
+<li>some security vulnerablities are just "whoops I forgot to..."</li>
+<li>Bandit helps us with these problems - its a security linter which checks for common security issues in your code</li>
+<li>very handy for going through code to find code smells</li>
+<li>can put into code so it runs with CI and raises alerts</li>
+<li>the tools are noisy so you have understand what to pay attention to and what to tune out</li>
+</ul>
+<p><strong>takeaway:</strong> integrate Safety Bandits into CI.</p>
+<h2 id="sunday-lightening-talks">Sunday Lightening talks</h2>
+<p>{{&lt; youtube rNkbmu4e3MA &gt;}}</p>
+<p>chunks() the story of a generator</p>
+<ul>
+<li>break an iterable into chunks of n - lots of implementations from stackoverflow</li>
+<li><code>itertools.islice</code> slices iterators but returns an emptry iterator if gets an empty iterator</li>
+<li>code at <a href="https://gist.github.com/timheap/4e283fea7143e64852dcc09b14a183f7">gist.github.com/timheap</a></li>
+</ul>
+<p>PyCon Anthology</p>
+<ul>
+<li>write a short story, art, poetry, pg-13, deadline Sep 1</li>
+<li><a href="https://github.com/oboechick/pyfanfic">submit through github</a></li>
+</ul>
+<p>Tracking trucks in Africa</p>
+<ul>
+<li><a href="https://www.lorisystems.com/">Lori Systems</a></li>
+<li>tracks trucks, but how to do it best? truckers in Africa don't have reliable phones, handing out phones didn't really work</li>
+<li>Traccar - java based IOT gps tracking system for trucks</li>
+<li>Zappa is an alternative to celery</li>
+</ul>
+<p>Software release reports with Python Sphinx &amp; Jira</p>
+<ul>
+<li>Cochlear, heavily regulated, need a software release report: bugs fixed, improvements, known bugs</li>
+<li>used MS Word, so time to automate. Data in Jira, which has a python interface.</li>
+<li>python script gets info from Jira</li>
+</ul>
+<p>why text encoding</p>
+<ul>
+<li>we need to encode text - so whats text encoding</li>
+</ul>
+<p>phy py physics</p>
+<ul>
+<li>@cormacKikert</li>
+<li>A 3D physics sandbox game built using pygame</li>
+<li>cool demo - [code on github]9https://github.com/cormackikkert/Py-PHY)</li>
+</ul>
+<p>Python Bugs</p>
+<ul>
+<li>first lightening talk</li>
+</ul>
+<p>Bad code</p>
+<ul>
+<li>examples of over engineered code</li>
+</ul>
+<p>Goto</p>
+<ul>
+<li>in yr10! doing a arduino assigment</li>
+<li>missed goto, wrote his own in python</li>
+</ul>
+<p>Flip Flip Face Offerator</p>
+<ul>
+<li>a flipfloperator faceoff</li>
+</ul>
+<p>Micropython.. Jupyter.. Live</p>
+<ul>
+<li>micropython is re-inventing embedded development</li>
+<li>but theres no debugging in micropython</li>
+<li>can talk to micropython from jupyter, use interactive widgets</li>
+<li>look up jupyter-micropyton-remote - very impressive</li>
+</ul>
+<p>Nick - core CPython dev</p>
+<ul>
+<li>talk about Peps which introduced now accepted features</li>
+</ul>
+</article>
+
+<div class="meta">
+    posted <time>2020-11-03</time>, updated <time>2020-11-03</time><br>
+    tagged: 
+    <a href="/python">python</a>
+    <a href="/talks">talks</a>
+
+    <ul>    
+        <li><a href="https://github.com/khalido/blog/edit/master/notes/PyConAu2018.md">Edit</a></li>
+    </ul>
+
+</div>
+
+<hr>
+<footer>
+    This is a footer. One day some footery text will go here. 
+</footer>
+
+
+
+</body>
+
+</html>

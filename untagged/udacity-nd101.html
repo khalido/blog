@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!--temp stylesheet, customize my own one later.
+        https://github.com/kognise/water.css-->
+        
+        
+        <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.3/new.min.css">
+
+        <link rel="stylesheet" type="text/css" href="/codestyles.css">
+        
+        
+
+        <title>Udacity ND101: Deep Learning Nanodegree</title>
+    </head>
+
+    <body>
+ 
+        <header>
+            <a href="/">khalido.org</a> <br>
+            I love me some subheader text.
+        </header>
+
+<article>
+        <h1>Udacity ND101: Deep Learning Nanodegree</h1>
+    
+    <details>
+        <summary>Table of contents.</summary>
+        <div class="toc">
+<ul>
+<li><a href="#before-the-course-starts">Before the course starts:</a><ul>
+<li><a href="#python-resources">Python resources</a></li>
+<li><a href="#math-resources">Math resources</a></li>
+<li><a href="#books-to-read">Books to read</a></li>
+</ul>
+</li>
+<li><a href="#week-1">Week 1</a><ul>
+<li><a href="#fast-style-transfer">fast-style transfer</a></li>
+<li><a href="#deep-traffic-simulator">Deep Traffic simulator</a></li>
+<li><a href="#flappy-bird">Flappy Bird</a></li>
+<li><a href="#sirajs-intro-to-linear-regression">Siraj's intro to linear regression</a></li>
+<li><a href="#moving-on-to-neural-nets">moving on to neural nets</a></li>
+<li><a href="#backpropagation">Backpropagation</a></li>
+<li><a href="#project-1-predictin-bike-sharing-demand-from-historical-data">Project 1: Predictin Bike Sharing demand from historical data</a></li>
+</ul>
+</li>
+<li><a href="#week-2">Week 2</a><ul>
+<li><a href="#model-evaluation-and-validation">Model Evaluation and Validation</a><ul>
+<li><a href="#two-types-of-error">Two types of error</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#week-3">Week 3</a><ul>
+<li><a href="#sentiment-analysis-with-andrew-trask">Sentiment Analysis with Andrew Trask</a></li>
+<li><a href="#intro-to-tflearn">Intro to TFLearn</a></li>
+<li><a href="#rnn">RNN</a></li>
+<li><a href="#using-tflearn-to-do-sentiment-analysis">using tflearn to do sentiment Analysis</a></li>
+</ul>
+</li>
+<li><a href="#week-4">Week 4</a><ul>
+<li><a href="#sirajs-math-for-deep-learning">Siraj's Math for Deep learning</a></li>
+<li><a href="#miniflow">Miniflow</a></li>
+</ul>
+</li>
+<li><a href="#week-5">Week 5</a><ul>
+<li><a href="#intro-to-tensorflow">Intro to Tensorflow</a></li>
+</ul>
+</li>
+<li><a href="#week-6">Week 6</a><ul>
+<li><a href="#preventing-overfitting">Preventing overfitting</a></li>
+<li><a href="#convolution-networks-or-cnn">Convolution Networks, or CNN</a></li>
+<li><a href="#sirajs-image-classification">Siraj's Image Classification</a></li>
+<li><a href="#project-2">Project 2</a></li>
+</ul>
+</li>
+<li><a href="#week-7">Week 7</a><ul>
+<li><a href="#intro-to-recurrent-neural-networks">Intro to Recurrent Neural Networks</a></li>
+<li><a href="#aside">aside</a></li>
+</ul>
+</li>
+<li><a href="#week-8">Week 8</a><ul>
+<li><a href="#embeddings-and-word2vec">Embeddings and Word2vec</a></li>
+</ul>
+</li>
+<li><a href="#week-9">Week 9</a><ul>
+<li><a href="#tensorboard">TensorBoard</a></li>
+</ul>
+</li>
+<li><a href="#week-10">Week 10</a><ul>
+<li><a href="#how-to-make-a-text-summarizer">how to make a text summarizer</a></li>
+<li><a href="#weight-initialization">Weight Initialization</a><ul>
+<li><a href="#weight-initilizaiton-resources">weight initilizaiton resources</a></li>
+</ul>
+</li>
+<li><a href="#sentiment-prediction-rnn">Sentiment Prediction RNN</a></li>
+<li><a href="#project-3-generate-a-tv-script">Project 3 - Generate a TV Script</a></li>
+</ul>
+</li>
+<li><a href="#week-11">Week 11</a><ul>
+<li><a href="#transfer-learning">Transfer Learning</a></li>
+<li><a href="#language-translation">Language Translation</a></li>
+</ul>
+</li>
+<li><a href="#week-12">Week 12</a><ul>
+<li><a href="#sequence-to-sequence">Sequence to Sequence</a></li>
+<li><a href="#how-to-make-a-chatbot">How to make a chatbot</a></li>
+<li><a href="#reinforcement-learning">Reinforcement learning</a></li>
+<li><a href="#project-4-translation">Project 4 - Translation</a></li>
+<li><a href="#gans">GANS</a><ul>
+<li><a href="#batch-normalization">Batch normalization</a></li>
+<li><a href="#face-generation-project">Face generation project</a></li>
+</ul>
+</li>
+<li><a href="#all-done">All done!</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+    </details>
+  
+    <p>My notes &amp; files for <a href="https://www.udacity.com/course/deep-learning-nanodegree-foundation--nd101">Udacity's Deep Learning intro course</a>.</p>
+<h2 id="before-the-course-starts">Before the course starts:</h2>
+<ul>
+<li>Read <a href="https://medium.com/@ageitgey/machine-learning-is-fun-80ea3ec3c471#.t1zhql96j">Machine learning is fun</a></li>
+<li>Watch <a href="https://youtu.be/LFDU2GX4AqM">Andrew NG: Deep Learning in Practice</a> (34 minutes)</li>
+<li>Go though <a href="https://classroom.udacity.com/courses/ud730/">UD730 deep learning course</a> on Udacity</li>
+<li>Watch <a href="https://cloud.google.com/blog/big-data/2017/01/learn-tensorflow-and-deep-learning-without-a-phd">Learn tensorflow 3 hour video</a></li>
+<li>http://rodneybrooks.com/patrick-winston-explains-deep-learning/</li>
+</ul>
+<h3 id="python-resources">Python resources</h3>
+<p>The course recommneds knowing <a href="https://www.udacity.com/course/programming-foundations-with-python--ud036">basic python from here</a>, but I found the following two resources better:</p>
+<ul>
+<li><a href="https://github.com/jakevdp/WhirlwindTourOfPython">A whirlwind tour of Python</a></li>
+<li><a href="https://github.com/jakevdp/PythonDataScienceHandbook">Python Data Science Handbook</a></li>
+</ul>
+<h3 id="math-resources">Math resources</h3>
+<p>Need to know multivariable calculus &amp; linear algebra.</p>
+<ul>
+<li><a href="https://www.khanacademy.org/math/multivariable-calculus">Khan Academy Multivariable calculus</a></li>
+<li><a href="https://www.youtube.com/playlist?list=PLlXfTHzgMRUKXD88IdzS14F4NxAZudSmv">Linear algebra youtube playlist</a> or over at <a href="https://www.lem.ma/web/#/books/VBS92YDYuscc5-lK/landing">lemma</a></li>
+<li><a href="https://www.khanacademy.org/math/multivariable-calculus/multivariable-derivatives/jacobian/v/jacobian-prerequisite-knowledge">Khan Academy's Linear Algebra Intro</a></li>
+</ul>
+<h3 id="books-to-read">Books to read</h3>
+<ul>
+<li><a href="https://www.manning.com/books/grokking-deep-learning">Grokking Deep Learning by Andrew Trask</a>. This provides a very gentle introduction to Deep Learning and covers the intuition more than the theory.</li>
+<li><a href="http://neuralnetworksanddeeplearning.com/">Neural Networks And Deep Learning</a> by Michael Nielsen. This book is more rigorous than Grokking Deep Learning and includes a lot of fun, interactive visualizations to play with.</li>
+<li><a href="http://www.deeplearningbook.org/">The Deep Learning Textbook</a> from Ian Goodfellow, Yoshua Bengio, and Aaron Courville. This online book has lot of material and is the most rigorous of the three books suggested.</li>
+</ul>
+<h1 id="week-1">Week 1</h1>
+<p>The two instructors are [Mat Leonard] &amp; <a href="http://www.sirajraval.com/">Siraj Raval</a>.</p>
+<p>Some of the stuff covered in the first week:</p>
+<ul>
+<li><a href="http://scikit-learn.org/">Scikit-learn</a> - An extremely popular Machine Learning library for python.</li>
+<li><a href="https://en.wikipedia.org/wiki/Perceptron">Perceptrons</a> -The simplest form of a neural network.</li>
+<li><a href="https://en.wikipedia.org/wiki/Gradient_descent">Gradient Descent</a> - A process by which Machine Learning algorithms learn to improve themselves based on the accuracy of their predictions. You'll learn more about this in upcoming lessons.</li>
+<li><a href="http://neuralnetworksanddeeplearning.com/chap2.html">Backpropagation</a> - The process by which neural networks learn how to improve individual parameters. You'll learn all about this in the upcoming lessons.</li>
+<li><a href="http://www.numpy.org/">Numpy</a> - An extremely popular library for scientific computing in python.</li>
+<li><a href="http://tensorflow.org/">Tensorflow</a> - One of the most popular python libraries for creating neural networks. It is maintained by Google.</li>
+</ul>
+<h3 id="fast-style-transfer">fast-style transfer</h3>
+<p>Looking at<a href="https://github.com/lengstrom/fast-style-transfer">an existing style transfer deep learning script</a> to play around with. Hmm.. interesting to see what can be done but HOW is it done is the q?</p>
+<h3 id="deep-traffic-simulator"><a href="http://selfdrivingcars.mit.edu/deeptrafficjs/">Deep Traffic</a> simulator</h3>
+<p>See the <a href="http://selfdrivingcars.mit.edu/deeptraffic/">overview</a> for how to tinker with the inputs to train the simple neural network. Interesting to see how inputs drastically effect the quality of the output.</p>
+<blockquote>
+<p><a href="http://selfdrivingcars.mit.edu/deeptrafficjs/">DeepTraffic</a> is a gamified simulation of typical highway traffic. Your task is to build a neural agent – more specifically design and train a neural network that performs well on high traffic roads. Your neural network gets to control one of the cars (displayed in red) and has to learn how to navigate efficiently to go as fast as possible. The car already comes with a safety system, so you don’t have to worry about the basic task of driving – the net only has to tell the car if it should accelerate/slow down or change lanes, and it will do so if that is possible without crashing into other cars.</p>
+</blockquote>
+<p>This neural net uses <a href="https://en.wikipedia.org/wiki/Reinforcement_learning">reinforcement learning</a></p>
+<h3 id="flappy-bird"><a href="https://github.com/yenchenlin/DeepLearningFlappyBird">Flappy Bird</a></h3>
+<p>This is a deep learning agent which plays flappy bird. Not very useful at this point. Need to know to understand/use/train the flappybird playing agent!</p>
+<p>So come back to this later.</p>
+<h3 id="sirajs-intro-to-linear-regression">Siraj's intro to linear regression</h3>
+<p>he walks through linear regression, using numpy and then by building a gradient descent model.</p>
+<h3 id="moving-on-to-neural-nets">moving on to neural nets</h3>
+<ul>
+<li>a neural network is an algorithm which identifies patterns in data</li>
+<li>Backpropagation trains a neural net by updating weights via gradient descent</li>
+<li>deep learning = many layer neural net + big data + big compute</li>
+</ul>
+<h2 id="backpropagation">Backpropagation</h2>
+<p>This is the key to understanding neural nets, so it's important to understand how Backpropagation works.</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=59Hbtz7XgjM">CS231n Winter 2016 Lecture 4: Backpropagation</a></li>
+</ul>
+<h2 id="project-1-predictin-bike-sharing-demand-from-historical-data">Project 1: Predictin Bike Sharing demand from historical data</h2>
+<p><a href="https://github.com/khalido/nd101-projects/blob/playing-with-numpy/dlnd-your-first-neural-network.ipynb">Final Notebook</a></p>
+<h1 id="week-2">Week 2</h1>
+<h2 id="model-evaluation-and-validation">Model Evaluation and Validation</h2>
+<p>Generalization is better than overfitting.</p>
+<p>R2 score
+- simplest possible model is to take the avg of all values and draw a straight line, then calculate the mean square error
+ - the R2 score is 1 minus the error of our regression model divided by the error of the simplest possible model
+ - if we have a good model, the error will be small compared to the simple model, thus R2 will be close to 1
+ - for a bad model, the ratio of errors will be closer to 1, giving a small R2 values</p>
+<p>from sklearn.metrics import r2_score</p>
+<h3 id="two-types-of-error">Two types of error</h3>
+<ul>
+<li>overfitting</li>
+<li>underfitting</li>
+</ul>
+<h1 id="week-3">Week 3</h1>
+<h2 id="sentiment-analysis-with-andrew-trask">Sentiment Analysis with Andrew Trask</h2>
+<p>This was a good project - built a simple neural network to classify reviews as negative or positive.</p>
+<h2 id="intro-to-tflearn">Intro to TFLearn</h2>
+<p>Sigmoid activation functions have a max derivate of .25, so errors shrink by 75% or more during backprogation. This means the neural network takes a long time to train. Instead of sigmoid, most DL networks use RLU - which is a supersimple function which outputs max(input, 0). For a +ve inut the output equals the input, and for a -ve input the output is 0. Relu nodes can die if there is a large graident through them, so they are best used with a small learning rate.</p>
+<p>For a simple binary classification, the sigmoid function works, but for mulitple outputs, for example reconigizing digits, use the <a href="https://en.wikipedia.org/wiki/Softmax_function">softmax</a> function. A softmax function squashes outputs to be b/w 0 and 1 and divides them such that the total sum of the output equals 1.</p>
+<p>one hot encoding means using a simple vector, like <code>y=[0,0,0,0,1,0,0,0,0,0]</code> to represent 4.</p>
+<p>http://tflearn.org/</p>
+<h2 id="rnn">RNN</h2>
+<p>http://colah.github.io/posts/2015-08-Understanding-LSTMs/
+http://karpathy.github.io/2015/05/21/rnn-effectiveness/</p>
+<h2 id="using-tflearn-to-do-sentiment-analysis">using tflearn to do sentiment Analysis</h2>
+<h1 id="week-4">Week 4</h1>
+<h2 id="sirajs-math-for-deep-learning">Siraj's Math for Deep learning</h2>
+<p>Need to know statistics, linear algebra and calculus.
+C</p>
+<h2 id="miniflow">Miniflow</h2>
+<p>built a simple graph based nn</p>
+<p>an alternative to Amazon's EC2 gpu machines: <a href="https://www.floydhub.com/">floyd</a></p>
+<h1 id="week-5">Week 5</h1>
+<h2 id="intro-to-tensorflow">Intro to <a href="https://www.tensorflow.org/">Tensorflow</a></h2>
+<p>Deep learning is a family of techniques which adapts to all sorts of data and problems. the basic techiniques of DL apply to a bunch of diff fields. Neural Networks have been around for decades but had pretty much disappread from the CS science. They came back in a bigway in the 2010's with advances in speech reconizition, computer vision and machine translation. This was enabled by lots of data and cheap gpus.</p>
+<p>All the hotness is in my <a href="https://github.com/khalido/nd101/blob/master/intro_to_tensorflow.ipynb">intro to tensorflow notebook</a>.</p>
+<h1 id="week-6">Week 6</h1>
+<p>Going deeper into tensorflow!</p>
+<h3 id="preventing-overfitting">Preventing overfitting</h3>
+<p><strong>Early Termination</strong>: stop training soon as you stop improving</p>
+<p><strong>Regulariation</strong> applies constrains - L2 regularization adds another term to the loss which penalizes large weights.</p>
+<p><strong>Dropout</strong> is an important technique - it randomly stops half the signals flowing throgh a layer, and multiplies by 2 the remaining signals. This forces the NN to make redundant representations for everything - so with only partial info it can predict the right answer.
+During testing, you cancel the dropout to maximize the predictive power of the model.</p>
+<p><strong>get rid of unnecessary info</strong> For example, when reconigizing letters, the colors don't matter, so transform R,G,B values into grayscale by (R+G+B)/2.</p>
+<p><strong>weight sharing</strong> say you have two kittens in the same image. so it makes sense to train the same part of the network on each kitten. we do this be weight sharing.</p>
+<p><strong>statistical invariants</strong> things which don't change across time and space, like say the word kitten in a text, it always refers to kittens.</p>
+<h2 id="convolution-networks-or-cnn">Convolution Networks, or CNN</h2>
+<p>A CNN breaks up an image into many pieces and learns to first reconigzie basic shapes, lines, curves, then the more complex objects as combinations of the simpler shapes, then classifies the image by combining the complex objects together. A CNN can have many layers, with each layer capturing a different level of complexity.</p>
+<p>Resources:</p>
+<ul>
+<li>It seems the time is now to read <a href="http://neuralnetworksanddeeplearning.com/">this book on neural networks</a> and go through <a href="http://cs231n.github.io/">cs231</a>.</li>
+<li>This <a href="https://hackernoon.com/learning-ai-if-you-suck-at-math-p5-deep-learning-and-convolutional-neural-nets-in-plain-english-cda79679bbe3#.yop1x41dy">article</a> is a nice simple overview of neural networks and builds a simple covnet network using keras.</li>
+<li><a href="https://adeshpande3.github.io/adeshpande3.github.io/A-Beginner's-Guide-To-Understanding-Convolutional-Neural-Networks/">A beginers guide to understanding n=cnovlutional networks</a></li>
+</ul>
+<h2 id="sirajs-image-classification">Siraj's Image Classification</h2>
+<h2 id="project-2">Project 2</h2>
+<p>Goal is to Classify images from the <a href="https://www.cs.toronto.edu/~kriz/cifar.html">CIFAR dataset</a>.</p>
+<p>A good time to watch this <a href="https://www.youtube.com/watch?v=vq2nnJ4g6N0">video intro to Tensorflow</a>.</p>
+<p>My <a href="https://github.com/khalido/nd101-projects/blob/master/dlnd_image_classification.ipynb">final project notebook</a>.</p>
+<p>Note: I only got 65% accuracy, but that was at 20 epochs. Running it at a hundred or so shuold bump up the accuracy over 70%, but I got tired of waiting for the model to train.</p>
+<h1 id="week-7">Week 7</h1>
+<h2 id="intro-to-recurrent-neural-networks">Intro to Recurrent Neural Networks</h2>
+<p>http://colah.github.io/posts/2015-08-Understanding-LSTMs/</p>
+<h2 id="aside">aside</h2>
+<p><a href="https://www.youtube.com/watch?v=8UQzJaa0HPU&amp;feature=youtu.be">Deep Learning chat</a>
+https://deeplearning4j.org/word2vec</p>
+<h1 id="week-8">Week 8</h1>
+<h2 id="embeddings-and-word2vec">Embeddings and Word2vec</h2>
+<p><a href="https://en.wikipedia.org/wiki/Word2vec">Word2Vec</a></p>
+<p>Notebook: https://github.com/udacity/deep-learning/tree/master/embeddings</p>
+<h1 id="week-9">Week 9</h1>
+<h2 id="tensorboard">TensorBoard</h2>
+<p>This is really useful to see the initial model, and then to see what is happening while it's training.</p>
+<ul>
+<li><a href="https://youtu.be/eBbEDRsCmv4">tensorboard intro</a></li>
+<li><a href="https://www.tensorflow.org/get_started/summaries_and_tensorboard">basic tensorboard intro</a></li>
+</ul>
+<p>Can also be used for <a href="https://github.com/udacity/deep-learning/blob/master/tensorboard/Anna_KaRNNa_Hyperparameters.ipynb">hyperparameter search</a> by selecting diff combinations of parameters, writing them to a logstring and viewing the diff runs in tensorboard all nicely charted out.</p>
+<p>todo: make a simple mnist NN with tensorboard summaries of different parameters. something like:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">for</span> <span class="n">lstm_size</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">128</span><span class="p">,</span><span class="mi">256</span><span class="p">,</span><span class="mi">512</span><span class="p">]:</span>
+    <span class="k">for</span> <span class="n">num_layers</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]:</span>
+        <span class="k">for</span> <span class="n">learning_rate</span> <span class="ow">in</span> <span class="p">[</span><span class="mf">0.002</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">]:</span>
+            <span class="n">log_string</span> <span class="o">=</span> <span class="s1">&#39;logs/4/lr=</span><span class="si">{}</span><span class="s1">,rl=</span><span class="si">{}</span><span class="s1">,ru=</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">learning_rate</span><span class="p">,</span> <span class="n">num_layers</span><span class="p">,</span> <span class="n">lstm_size</span><span class="p">)</span>
+            <span class="n">writer</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">summary</span><span class="o">.</span><span class="n">FileWriter</span><span class="p">(</span><span class="n">log_string</span><span class="p">)</span>
+</code></pre></div>
+
+<h1 id="week-10">Week 10</h1>
+<p>RNN's and language generation</p>
+<h2 id="how-to-make-a-text-summarizer">how to make a text summarizer</h2>
+<p>.....</p>
+<h2 id="weight-initialization">Weight Initialization</h2>
+<p>The initial value of weights is very important to how well a NN trains. If all the weights start of the same, it makes it hard to update the weights since they end up all giving similar outputs, making it hard for the NN to learn.</p>
+<p>Random weights work much better. Tensorflow's <a href="https://www.tensorflow.org/api_docs/python/tf/random_uniform">tf.random_uniform()</a> is a good weight initilization function. Be default, tf.random.uniform picks float values uniformly spread b/w 0 and 1, which is decent, but we can do better.</p>
+<p>Smart people have tested out different initial weights, and it seems using weights distributed around zero with a std dev around 0.1 works well, with tails cut off. Tensorflow has a built in function:</p>
+<p><a href="https://www.tensorflow.org/api_docs/python/tf/truncated_normal">tf.truncated_normal</a> which generates a random normal distribution around zero with values &gt; 2 std devs from the mean repicked. So making 3 weights would look someething like:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">weights</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">truncated_normal</span><span class="p">(</span><span class="n">layer_1_weight_shape</span><span class="p">,</span> <span class="n">stddev</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)),</span>
+    <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">truncated_normal</span><span class="p">(</span><span class="n">layer_2_weight_shape</span><span class="p">,</span> <span class="n">stddev</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)),</span>
+    <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">truncated_normal</span><span class="p">(</span><span class="n">layer_3_weight_shape</span><span class="p">,</span> <span class="n">stddev</span><span class="o">=</span><span class="mf">0.1</span><span class="p">))</span>
+</code></pre></div>
+
+<p>A normal distribution means that the weights will tend to be closer to the mean rather than uniformly distributed.</p>
+<p>todo: run a simple network on MNIST with different weights and see in tensorboard
+todo: find some approchable resources on weights</p>
+<h3 id="weight-initilizaiton-resources">weight initilizaiton resources</h3>
+<ul>
+<li><a href="http://cs231n.github.io/neural-networks-2/#init">cs231n weight initilization</a> - supports the above method of small random weights centered on zero, but warns that smaller numbers aren't always better.</li>
+</ul>
+<h2 id="sentiment-prediction-rnn">Sentiment Prediction RNN</h2>
+<h2 id="project-3-generate-a-tv-script">Project 3 - Generate a TV Script</h2>
+<p>This was an interesting project - to generate new text after training a RNN network on a subset of Simpsons scripts, set in Moe's Cavern.</p>
+<p><a href="https://github.com/khalido/nd101-projects/blob/master/dlnd_tv_script_generation.ipynb">Completed project 3 notebook</a></p>
+<h1 id="week-11">Week 11</h1>
+<h2 id="transfer-learning">Transfer Learning</h2>
+<p>Training nerual networks can take a long time so we can take an exisiting pretrained network and use that to extract features or as the initial network to further build upon. Here, we use <a href="https://arxiv.org/pdf/1409.1556.pdf">VGGNet</a>.</p>
+<p>I'm using a <a href="https://github.com/machrisaa/tensorflow-vgg">pretrained VGG network from here</a>.</p>
+<h2 id="language-translation">Language Translation</h2>
+<h1 id="week-12">Week 12</h1>
+<h2 id="sequence-to-sequence">Sequence to Sequence</h2>
+<p>is a kind of RNN network.</p>
+<p><a href="https://www.tensorflow.org/api_docs/python/tf/contrib/seq2seq">tf.contrib.seq2seq</a></p>
+<p>Useful posts
+- <a href="https://medium.com/towards-data-science/text-summarization-with-amazon-reviews-41801c2210b">Text Summarization with Amazon Reviews</a>
+- <a href="https://www.youtube.com/watch?v=G5RY_SUJih4">Seq2Seq talk</a>
+- <a href="https://www.youtube.com/playlist?list=PL3FW7Lu3i5Jsnh1rnUwq_TcylNr7EkRe6">Stanford lectures on NLP using deep learning</a></p>
+<h2 id="how-to-make-a-chatbot">How to make a chatbot</h2>
+<p>Train a DNN to learn text and answers. Facebook has some <a href="https://research.fb.com/downloads/babi/">datasets to learn on</a>.</p>
+<p>Using Keras it's relative straightforward. See <a href="https://github.com/fchollet/keras/blob/master/examples/babi_rnn.py">this implementation</a>.</p>
+<h2 id="reinforcement-learning">Reinforcement learning</h2>
+<p>Use rewards when things be done right. Here we look at Q-Learning.
+Using negative rewards for bad stuff, and postiive rewards for good stuff, you train an agent to seek out the max reward path, using a q-table which stores rewards for each state and action possible from that state.</p>
+<p><a href="https://gym.openai.com">OpenAI Gym</a> has lots of implementations.</p>
+<p><a href="https://medium.com/@tuzzer/cart-pole-balancing-with-q-learning-b54c6068d947">basic RL</a></p>
+<h2 id="project-4-translation">Project 4 - Translation</h2>
+<p>use a rnn to translate english to french.</p>
+<p>Project is built on TF 1.0, so see <a href="https://github.com/tensorflow/tensorflow/blob/master/RELEASE.md">release notes</a> for later versions as TF changed some RNN bits.</p>
+<p>I had a problem with training times. Even on a GPU it took forever. This is with relatively limited data, with a decently sized data it will take a looong time!</p>
+<p>Questions to ponder:</p>
+<ul>
+<li>should the encoding &amp; decoding embed size be exactly the vocab size?</li>
+</ul>
+<p><strong>Parameters which should give &gt; 90% accuracy:</strong></p>
+<ul>
+<li>epochs = 3</li>
+<li>batch_size = 256</li>
+<li>rnn_size = 128</li>
+<li>num_layers = 2</li>
+<li>encoding_embedding_size = 256</li>
+<li>decoding_embedding_size = 256</li>
+<li>learning_rate = 0.005</li>
+<li>keep_probability = 0.9</li>
+</ul>
+<h2 id="gans">GANS</h2>
+<p>Gans use a differentiable function represented by a NN to transform an output from an input (generally random noise?).</p>
+<p>A second network, called the discriminator, which is just a regular NN classifier which has been trained on real images, gives the generated image a probablity of being real or fake. The discriminator receives a mix of real images and generated images.</p>
+<p>Over time, the generator gets good at generating images which passes the discrimator's test.</p>
+<p>Game theory tells us that the two NN's should come to a equilibrium where neither NN can improve their situation.</p>
+<p>We train both networks alternately - look up best practices.</p>
+<ul>
+<li><a href="https://medium.com/towards-data-science/gan-by-example-using-keras-on-tensorflow-backend-1a6d515a60d0">GAN by Example using Keras</a></li>
+<li><a href="https://medium.com/intuitionmachine/deep-adversarial-learning-is-finally-ready-and-will-radically-change-the-game-f0cfda7b91d3">another blog post</a></li>
+<li><a href="https://arxiv.org/pdf/1406.2661.pdf">Original GAN paper</a></li>
+<li><a href="https://blog.openai.com/generative-models/">OpenAI GAN explainer</a></li>
+<li><a href="https://www.quora.com/topic/Generative-Adversarial-Networks-1">Quora GANs topic</a></li>
+</ul>
+<h3 id="batch-normalization">Batch normalization</h3>
+<p>This greatly aids deep networks to learn faster, as well so stops them flaking out and killing too many neurons.</p>
+<h3 id="face-generation-project">Face generation project</h3>
+<p>A GAN which generates mnist images and faces.
+Relatively straigtforward, but adding in <a href="https://github.com/udacity/deep-learning/blob/master/batch-norm/Batch_Normalization_Lesson.ipynb">batch normalization</a> involves some tensorflow kungfu. Doing this project in TF made me yearn for Keras.</p>
+<p>Specifically, the <a href="https://www.tensorflow.org/api_docs/python/tf/layers/batch_normalization">batch_norm layer in TF</a> isn't magical enough, so we have to wrap the train operations inside tf.control_dependencies block so the batch normalization layers get updated. The below is the code from <a href="https://github.com/udacity/deep-learning/blob/master/dcgan-svhn/DCGAN.ipynb">Udacty</a> but since I added batch norm to both the generator and the discriminator this didn't work for me:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">control_dependencies</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">get_collection</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">GraphKeys</span><span class="o">.</span><span class="n">UPDATE_OPS</span><span class="p">)):</span>
+        <span class="n">d_train_opt</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">AdamOptimizer</span><span class="p">(</span><span class="n">learning_rate</span><span class="p">,</span> <span class="n">beta1</span><span class="o">=</span><span class="n">beta1</span><span class="p">)</span><span class="o">.</span><span class="n">minimize</span><span class="p">(</span><span class="n">d_loss</span><span class="p">,</span> <span class="n">var_list</span><span class="o">=</span><span class="n">d_vars</span><span class="p">)</span>
+        <span class="n">g_train_opt</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">AdamOptimizer</span><span class="p">(</span><span class="n">learning_rate</span><span class="p">,</span> <span class="n">beta1</span><span class="o">=</span><span class="n">beta1</span><span class="p">)</span><span class="o">.</span><span class="n">minimize</span><span class="p">(</span><span class="n">g_loss</span><span class="p">,</span> <span class="n">var_list</span><span class="o">=</span><span class="n">g_vars</span><span class="p">)</span>
+</code></pre></div>
+
+<p>After much googling and help from the forums, this worked:</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># need this to make batch normalization work properly during inference</span>
+    <span class="n">update_ops</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">get_collection</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">GraphKeys</span><span class="o">.</span><span class="n">UPDATE_OPS</span><span class="p">)</span>
+    <span class="n">g_updates</span>  <span class="o">=</span> <span class="p">[</span><span class="n">opt</span> <span class="k">for</span> <span class="n">opt</span> <span class="ow">in</span> <span class="n">update_ops</span> <span class="k">if</span> <span class="n">opt</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;generator&#39;</span><span class="p">)]</span>
+
+    <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">control_dependencies</span><span class="p">(</span><span class="n">g_updates</span><span class="p">):</span>
+        <span class="n">d_train_opt</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">AdamOptimizer</span><span class="p">(</span><span class="n">learning_rate</span><span class="p">,</span> <span class="n">beta1</span><span class="p">)</span><span class="o">.</span><span class="n">minimize</span><span class="p">(</span><span class="n">d_loss</span><span class="p">,</span> <span class="n">var_list</span><span class="o">=</span><span class="n">d_vars</span><span class="p">)</span>
+        <span class="n">g_train_opt</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">AdamOptimizer</span><span class="p">(</span><span class="n">learning_rate</span><span class="p">,</span> <span class="n">beta1</span><span class="p">)</span><span class="o">.</span><span class="n">minimize</span><span class="p">(</span><span class="n">g_loss</span><span class="p">,</span> <span class="n">var_list</span><span class="o">=</span><span class="n">g_vars</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Putting this here becuase there must be better/simpler easier way to do batch_norm without getting into the graph bowels of tensorflow.</p>
+<p>todo: reimplement in Keras</p>
+<p><a href="https://github.com/khalido/nd101-projects/blob/master/dlnd_face_generation.ipynb">Project notebok</a></p>
+<h2 id="all-done">All done!</h2>
+<p>Link to the official <a href="https://confirm.udacity.com/FMMYQCGE">course certificate</a>.</p>
+</article>
+
+<div class="meta">
+    posted <time>2020-11-03</time>, updated <time>2020-11-03</time><br>
+    tagged: 
+    <a href="/untagged">untagged</a>
+
+    <ul>    
+        <li><a href="https://github.com/khalido/blog/edit/master/notes/udacity-nd101.md">Edit</a></li>
+    </ul>
+
+</div>
+
+<hr>
+<footer>
+    This is a footer. One day some footery text will go here. 
+</footer>
+
+
+
+</body>
+
+</html>

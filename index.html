@@ -10,7 +10,7 @@
         
         
         <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.3/new.min.css">
 
         <link rel="stylesheet" type="text/css" href="/codestyles.css">
         
@@ -33,19 +33,41 @@
     <input type="text" id="postSearch" placeholder="Search posts...">
     <ul id="searchresults">
             <li><a href="/books/stats-done-wrong-book.html">Statistics Done Wrong: The Woefully Complete Guide</a></li>
-            <li><a href="/python/anaconda.html">Using Anaconda</a></li>
+            <li><a href="/untagged/setup-ubuntu.html">Setup Linux</a></li>
+            <li><a href="/untagged/udacity-nd101.html">Udacity ND101: Deep Learning Nanodegree</a></li>
+            <li><a href="/untagged/techfugees-sydney-hackathon-2018.html">Techfugees Sydney Hackathon 2018</a></li>
+            <li><a href="/untagged/PyConAu2019.html">PyCon Australia 2019</a></li>
+            <li><a href="/untagged/sml-meetup-2018-09.html">SML 2018-09: Deep Reinforcement Learning</a></li>
+            <li><a href="/python/PyConAu2018.html">PyCon Australia 2018</a></li>
+            <li><a href="/untagged/mitx6002x.html">MITx 6.00.2X: Intro to Computational Thinking and Data Science</a></li>
+            <li><a href="/untagged/sml-meetup.html">SML 2018-08: Deep Reinforcement Learning</a></li>
+            <li><a href="/untagged/apache-spark.html">Apache Spark</a></li>
+            <li><a href="/untagged/ms_openhack_2018.html">Microsoft OpenHack 2018 Sydney</a></li>
+            <li><a href="/untagged/setup-mac.html">MacOS</a></li>
+            <li><a href="/windows/windows.html">Windows 10</a></li>
             <li><a href="/python/building_this_blog.html">how the blog was built</a></li>
             <li><a href="/recipe/urud-dhal.html">Urud Dhal</a></li>
             <li><a href="/recipe/spicychickpeas.html">Spicy Chickpeas</a></li>
+            <li><a href="/recipe/vegan-shami-kebab.html">Vegan Shami kebab</a></li>
             <li><a href="/python/note_in_subfolder.html">Testing note in a subfolder</a></li>
+            <li><a href="/python/anaconda.html">Using Anaconda</a></li>
             <li><a href="/apps/vs_code.html">Visual Studio Code</a></li>
             <li><a href="/recipe/daal.html">Daal (lentils)</a></li>
             <li><a href="/jupyter/jupyterlab.html">Jupyter Lab tips and tricks</a></li>
+            <li><a href="/untagged/blogs-i-like.html">Data Science blogs</a></li>
             <li><a href="/untagged/google-ml-best-practice.html">Googles Best Practices for ML Engineering</a></li>
+            <li><a href="/python/advent-of-code-2016.html">Advent of Code 2016</a></li>
             <li><a href="/chromebooks/setup-crostini-chromebook.html">Setting up Linux on a Chromebook with Crostini</a></li>
             <li><a href="/untagged/grokking-deep-learning-book.html">Grokking Deep Learning by Andrew Trask</a></li>
+            <li><a href="/untagged/dss-meetup.html">DSS-2018-07: Michael Allwright and Inna Kolyshkina</a></li>
+            <li><a href="/untagged/fastai-part1-2018.html">fastai Practical Deep Learning For Coders, Part 1, 2018</a></li>
+            <li><a href="/untagged/deeplearning-ai-part-3-of-5.html">deeplearning.ai: Structuring Machine Learning Projects</a></li>
+            <li><a href="/untagged/my-first-post.html">setting up this site</a></li>
             <li><a href="/untagged/harvard-cs109-notes.html">Notes for Harvard's Cs109 data science class</a></li>
             <li><a href="/untagged/chrome.html">Gooogle Chrome</a></li>
+            <li><a href="/untagged/deeplearning-ai-part-2-of-5.html">deeplearning.ai: Improving Deep Neural Networks</a></li>
+            <li><a href="/untagged/deeplearning-ai-part-1-of-5.html">deeplearning.ai: Neural Networks and Deep Learning</a></li>
+            <li><a href="/courses/udacity-cs101.html">Udacity CS101: Intro to CS</a></li>
     </ul>    
 
     <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
@@ -53,7 +75,7 @@
     <script>
         // load json from disk instead of passing in python array
 
-        const searchList = [{"title": "Statistics Done Wrong: The Woefully Complete Guide", "tags": ["books", "statistics"], "link": "books/stats-done-wrong-book.html"}, {"title": "Using Anaconda", "tags": ["python"], "link": "python/anaconda.html"}, {"title": "how the blog was built", "tags": ["python"], "link": "python/building_this_blog.html"}, {"title": "Urud Dhal", "tags": ["recipe"], "link": "recipe/urud-dhal.html"}, {"title": "Spicy Chickpeas", "tags": ["recipe"], "link": "recipe/spicychickpeas.html"}, {"title": "Testing note in a subfolder", "tags": ["python"], "link": "python/note_in_subfolder.html"}, {"title": "Visual Studio Code", "tags": ["apps"], "link": "apps/vs_code.html"}, {"title": "Daal (lentils)", "tags": ["recipe"], "link": "recipe/daal.html"}, {"title": "Jupyter Lab tips and tricks", "tags": ["jupyter"], "link": "jupyter/jupyterlab.html"}, {"title": "Googles Best Practices for ML Engineering", "tags": ["untagged"], "link": "untagged/google-ml-best-practice.html"}, {"title": "Setting up Linux on a Chromebook with Crostini", "tags": ["chromebooks"], "link": "chromebooks/setup-crostini-chromebook.html"}, {"title": "Grokking Deep Learning by Andrew Trask", "tags": ["untagged"], "link": "untagged/grokking-deep-learning-book.html"}, {"title": "Notes for Harvard's Cs109 data science class", "tags": ["untagged"], "link": "untagged/harvard-cs109-notes.html"}, {"title": "Gooogle Chrome", "tags": ["untagged"], "link": "untagged/chrome.html"}]
+        const searchList = [{"title": "Statistics Done Wrong: The Woefully Complete Guide", "tags": ["books", "statistics"], "link": "books/stats-done-wrong-book.html"}, {"title": "Setup Linux", "tags": ["untagged"], "link": "untagged/setup-ubuntu.html"}, {"title": "Udacity ND101: Deep Learning Nanodegree", "tags": ["untagged"], "link": "untagged/udacity-nd101.html"}, {"title": "Techfugees Sydney Hackathon 2018", "tags": ["untagged"], "link": "untagged/techfugees-sydney-hackathon-2018.html"}, {"title": "PyCon Australia 2019", "tags": ["untagged"], "link": "untagged/PyConAu2019.html"}, {"title": "SML 2018-09: Deep Reinforcement Learning", "tags": ["untagged"], "link": "untagged/sml-meetup-2018-09.html"}, {"title": "PyCon Australia 2018", "tags": ["python", "talks"], "link": "python/PyConAu2018.html"}, {"title": "MITx 6.00.2X: Intro to Computational Thinking and Data Science", "tags": ["untagged"], "link": "untagged/mitx6002x.html"}, {"title": "SML 2018-08: Deep Reinforcement Learning", "tags": ["untagged"], "link": "untagged/sml-meetup.html"}, {"title": "Apache Spark", "tags": ["untagged"], "link": "untagged/apache-spark.html"}, {"title": "Microsoft OpenHack 2018 Sydney", "tags": ["untagged"], "link": "untagged/ms_openhack_2018.html"}, {"title": "MacOS", "tags": ["untagged"], "link": "untagged/setup-mac.html"}, {"title": "Windows 10", "tags": ["windows"], "link": "windows/windows.html"}, {"title": "how the blog was built", "tags": ["python"], "link": "python/building_this_blog.html"}, {"title": "Urud Dhal", "tags": ["recipe"], "link": "recipe/urud-dhal.html"}, {"title": "Spicy Chickpeas", "tags": ["recipe"], "link": "recipe/spicychickpeas.html"}, {"title": "Vegan Shami kebab", "tags": ["recipe"], "link": "recipe/vegan-shami-kebab.html"}, {"title": "Testing note in a subfolder", "tags": ["python"], "link": "python/note_in_subfolder.html"}, {"title": "Using Anaconda", "tags": ["python"], "link": "python/anaconda.html"}, {"title": "Visual Studio Code", "tags": ["apps"], "link": "apps/vs_code.html"}, {"title": "Daal (lentils)", "tags": ["recipe"], "link": "recipe/daal.html"}, {"title": "Jupyter Lab tips and tricks", "tags": ["jupyter"], "link": "jupyter/jupyterlab.html"}, {"title": "Data Science blogs", "tags": ["untagged"], "link": "untagged/blogs-i-like.html"}, {"title": "Googles Best Practices for ML Engineering", "tags": ["untagged"], "link": "untagged/google-ml-best-practice.html"}, {"title": "Advent of Code 2016", "tags": ["python"], "link": "python/advent-of-code-2016.html"}, {"title": "Setting up Linux on a Chromebook with Crostini", "tags": ["chromebooks"], "link": "chromebooks/setup-crostini-chromebook.html"}, {"title": "Grokking Deep Learning by Andrew Trask", "tags": ["untagged"], "link": "untagged/grokking-deep-learning-book.html"}, {"title": "DSS-2018-07: Michael Allwright and Inna Kolyshkina", "tags": ["untagged"], "link": "untagged/dss-meetup.html"}, {"title": "fastai Practical Deep Learning For Coders, Part 1, 2018", "tags": ["untagged"], "link": "untagged/fastai-part1-2018.html"}, {"title": "deeplearning.ai: Structuring Machine Learning Projects", "tags": ["untagged"], "link": "untagged/deeplearning-ai-part-3-of-5.html"}, {"title": "setting up this site", "tags": ["untagged"], "link": "untagged/my-first-post.html"}, {"title": "Notes for Harvard's Cs109 data science class", "tags": ["untagged"], "link": "untagged/harvard-cs109-notes.html"}, {"title": "Gooogle Chrome", "tags": ["untagged"], "link": "untagged/chrome.html"}, {"title": "deeplearning.ai: Improving Deep Neural Networks", "tags": ["untagged"], "link": "untagged/deeplearning-ai-part-2-of-5.html"}, {"title": "deeplearning.ai: Neural Networks and Deep Learning", "tags": ["untagged"], "link": "untagged/deeplearning-ai-part-1-of-5.html"}, {"title": "Udacity CS101: Intro to CS", "tags": ["courses", "python"], "link": "courses/udacity-cs101.html"}]
 
         const options = {
             includeScore: false,
