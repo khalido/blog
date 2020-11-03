@@ -1,0 +1,81 @@
+{
+  "main": {
+    "id": "c82d7a2b16999246",
+    "type": "split",
+    "children": [
+      {
+        "id": "29b8f408f4e823af",
+        "type": "leaf",
+        "active": true,
+        "state": {
+          "type": "markdown",
+          "state": {
+            "file": "jupyterlab.md",
+            "mode": "source"
+          }
+        }
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "9b2b5b8318eda13f",
+    "type": "split",
+    "children": [
+      {
+        "id": "3028665a63613f72",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "8b1c471e436e9006",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {}
+            }
+          },
+          {
+            "id": "5b394039397f430d",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "6a6e3d048be6e3c3",
+    "type": "split",
+    "children": [
+      {
+        "id": "7877b8be17697e7e",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "8b548fec6093bc4c",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "jupyterlab.md"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "lastOpenFiles": [
+    "jupyterlab.md",
+    "building_this_blog.md",
+    "anaconda.md"
+  ]
+}

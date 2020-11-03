@@ -1,35 +1,26 @@
---- 
-title: "Monty Hall"  
+---
+title: Monty Hall
+
 date: 2019-07-05
-description: "Monty Hall brain teaser" 
-draft: false 
-tags:
-- python
+tags: [python]
+summary: "Monty Hall brain teaser"
+description: "Monty Hall brain teaser"
 ---
 
+
 The famous [Monty Hall brain teaser](https://en.wikipedia.org/wiki/Monty_Hall_problem):
-
-> Suppose you're on a game show, and you're given the choice of three doors: Behind one door is a car; behind the others, goats. You pick a door, say No. 1, and the host, who knows what's behind the doors, opens another door, say No. 3, which has a goat. He then says to you, "Do you want to pick door No. 2?" Is it to your advantage to switch your choice?
-
+> Suppose you're on a game show, and you're given the choice of three doors:Behind one door is a car; behind the others, goats. You pick a door, say No. 1, and the host, who knows what's behind the doors, opens another door, say No. 3, which has a goat. He then says to you, "Do you want to pick door No. 2?" Is it to your advantage to switch your choice?
 There is a really [fun discussion over at Marilyn vos Savant's site](http://marilynvossavant.com/game-show-problem/).
 
 Ok, now to setup the problem, along with some kind of visuals and what not.
 
-
-```python
-import random
-import numpy as np
-
-# for plots, cause visuals
-import matplotlib.pyplot as plt, seaborn as sns
-```
-
-# setting up a game
+## setting up a game
 
 There are many ways to do this, but to keep it simple and human comprehensible I'm going to do it one game at a time. 
 
 First up, a helper function which takes the door number guessed and the door opened up the host to reveal a goat, and returns the switched door:
-
+<div class="codecell" markdown="1">
+<div class="input_area" markdown="1">
 
 ```python
 def switch_door(guess, goat_door_opened):
@@ -41,8 +32,13 @@ def switch_door(guess, goat_door_opened):
     return doors[0]
 ```
 
-Now the actual monty hall function - it takes in a guess and whether you want to switch your guess, and returns True or False depending on whether you win
+</div>
 
+</div>
+
+Now the actual monty hall function - it takes in a guess and whether you want to switch your guess, and returns True or False depending on whether you win
+<div class="codecell" markdown="1">
+<div class="input_area" markdown="1">
 
 ```python
 def monty_hall(guess=0, switch_guess=False, open_goat_door=True):
@@ -65,58 +61,94 @@ def monty_hall(guess=0, switch_guess=False, open_goat_door=True):
         return guess == prize_door
 ```
 
-Now to run through a bunch of monty hall games:
+</div>
 
+</div>
+
+Now to run through a bunch of monty hall games:
+<div class="codecell" markdown="1">
+<div class="input_area" markdown="1">
 
 ```python
 no_switch = np.mean([monty_hall(random.randint(0,2), False) for _ in range(100000)])
 no_switch
 ```
 
+</div>
+<div class="output_area" markdown="1">
 
 
 
-    0.33434
+
+    0.33196
 
 
+
+</div>
+
+</div>
 
 Not switching doors wins a third of the time, which makes intuitive sense, since we are choosing one door out of three.
-
+<div class="codecell" markdown="1">
+<div class="input_area" markdown="1">
 
 ```python
 yes_switch = np.mean([monty_hall(random.randint(0,2), True) for _ in range(100000)])
 yes_switch
 ```
 
+</div>
+<div class="output_area" markdown="1">
 
 
 
-    0.6672
+
+    0.66534
 
 
+
+</div>
+
+</div>
 
 This is the suprising result, since switching our guess increases the win rate to two third! To put it more graphically:
-
-
+<div class="codecell" markdown="1">
+<div class="input_area" markdown="1">
+<details class="description">
+    <summary>Code details ...</summary>
+    
 ```python
-plt.pie([yes_switch, no_switch], labels=["Switching win %", "Not switching win %"],
+#collapse-hide
+fig, ax = plt.subplots(figsize=(8,8))
+ax.set_title("Switching", fontsize=16)
+ax.pie([yes_switch, no_switch], labels=["Switching win %", "Not switching win %"],
        autopct='%1.1f%%', explode=(0, 0.05));
 ```
 
+</details>
 
-![png](monty_hall_files/monty_hall_12_0.png)
+</div>
+<div class="output_area" markdown="1">
 
+
+![svg](monty_hall_files/output_10_0.svg)
+
+
+</div>
+
+</div>
 
 So our chances of winning essentially double if we switch our guess once a goat door has been opened.
 
 This is a good [monty hall infographic](https://somethingaweek.wordpress.com/2010/08/19/22-lets-make-a-deal/).
 
-# the no reveal month
+## the no reveal month
 
 So what if Monty never opens a goat door, and just gives us a change to switch the guessed door? Does the winning % still change?
 
 So first we change the switch door function to remove the reveal option:
-
+<div class="codecell" markdown="1">
+<div class="input_area" markdown="1">
 
 ```python
 def switch_door_no_revel(guess):
@@ -128,8 +160,13 @@ def switch_door_no_revel(guess):
     return doors[0]
 ```
 
-Then I removed the revealing the goat door code from the original monty hall function above:
+</div>
 
+</div>
+
+Then I removed the revealing the goat door code from the original monty hall function above:
+<div class="codecell" markdown="1">
+<div class="input_area" markdown="1">
 
 ```python
 def monty_hall_no_reveal(guess=0, switch_guess=False):
@@ -147,22 +184,43 @@ def monty_hall_no_reveal(guess=0, switch_guess=False):
         return guess == prize_door
 ```
 
-Now to run some sims:
+</div>
 
+</div>
+
+Now to run some sims:
+<div class="codecell" markdown="1">
+<div class="input_area" markdown="1">
 
 ```python
 no_switch_no_reveal = np.mean([monty_hall_no_reveal(random.randint(0,2), False) for _ in range(100000)])
 yes_switch_no_reveal = np.mean([monty_hall_no_reveal(random.randint(0,2), True) for _ in range(100000)])
 ```
 
+</div>
+
+</div>
+<div class="codecell" markdown="1">
+<div class="input_area" markdown="1">
 
 ```python
-plt.bar([0,1], [yes_switch_no_reveal, no_switch_no_reveal], tick_label=["Switched Guess","Didn't Switch"], 
-        color=["blue","red"], alpha=0.7);
+plt.bar([0,1], [yes_switch_no_reveal, no_switch_no_reveal], 
+tick_label=["Switched Guess","Didn't Switch"], color=["blue","red"], alpha=0.7)
+print("Switching a door if a goat door hasn't been revealed")
 ```
 
+</div>
+<div class="output_area" markdown="1">
 
-![png](monty_hall_files/monty_hall_20_0.png)
+    Switching a door if a goat door hasn't been revealed
+    
 
+
+![svg](monty_hall_files/output_18_1.svg)
+
+
+</div>
+
+</div>
 
 There is no impact of switching our guess if a goat door hasn't been revealed. Which makes sense to, since whatever door we choose, it has 1/3 probablity of winning. 

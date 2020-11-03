@@ -5,18 +5,18 @@
 <%include file="header.html" 
 args="title=post.title, header=header, header_text=header_text"/>
 
-% if post.toc:
-    <details>
-        <summary>Table of contents.</summary>
-        ${post.toc}
-    </details>
-% endif
-
 <article>
     ## title is taken from yaml meta data currently
     % if post.title:
         <h1>${post.title}</h1>
-    % endif    
+    % endif
+    
+    % if post.toc:
+    <details>
+        <summary>Table of contents.</summary>
+        ${post.toc}
+    </details>
+    % endif
   
     ${post.html}
 </article>
@@ -27,6 +27,23 @@ args="title=post.title, header=header, header_text=header_text"/>
     % for tag in post.tags:
     <a href="/${tag}">${tag}</a>
     % endfor
+
+    ## edit links
+    <ul>    
+    % if post.type == "notebook":
+        <li><a href="https://github.com/khalido/blog/blob/master/notebooks/${post.slug}.ipynb">View on Github</a></li>
+        
+        <li><a href="https://colab.research.google.com/github/khalido/blog/blob/master/notebooks/${post.slug}.ipynb">
+            <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+        </a></li>
+    
+    % elif post.type == "post":
+        <li><a href="https://github.com/khalido/blog/edit/master/notes/${post.slug}.md">Edit</a></li>
+    % else:
+        pass
+    % endif
+    </ul>
+
 </div>
 
 <%include file="footer.html"/>
