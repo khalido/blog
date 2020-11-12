@@ -79,7 +79,7 @@ path_publish: Path = Path(config["paths"]["publish"])  # final output folder
 # configure python markdown parser
 #############################################
 # make enters into line breaks by adding "nl2br", add emoji extension
-extensions = ["extra", "toc", "pymdownx.emoji", "codehilite"]  # , "smarty"
+extensions = ["extra", "toc", "pymdownx.emoji"]  # , "smarty", "codehilite"
 
 # https://help.farbox.com/pygments.html - consider monokai default themes
 # noclasses: True puts all the styling in the html itself. False uses css styles
@@ -185,13 +185,13 @@ def get_posts(debug=False):
     """reads from disk and returns a dataframe of all posts"""
 
     # convert notebooks to md and save in a tmp folder
-    convert_notebooks_to_md()
+    # convert_notebooks_to_md()
 
     # lists of md files and notebooks to convert
     md_paths = [f for f in path_md.rglob("*.md")]
 
     try:
-        nb_paths = [f for f in Path("tmp").rglob("*.md")]
+        nb_paths = [f for f in Path("notebooks/markdown").rglob("*.md")]
     except:
         print("No md files converted from jupyter notebooks found in tmp dir")
 
@@ -300,7 +300,7 @@ def write_posts(posts, tmpl: str = "post.html"):
         make_folder(path)  # make folder in case
 
         # copy over post_files to the post folder.
-        _path = Path("tmp") / f"{post.slug}_files"
+        _path = path_nb / "markdown" / f"{post.slug}_files"
         if _path.is_dir():
             shutil.copytree(_path, path / f"{post.slug}_files", dirs_exist_ok=True)
 
