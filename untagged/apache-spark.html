@@ -39,11 +39,10 @@
 <h2 id="map-all-the-things-to-something-else">map all the things to something else</h2>
 <p><code>map(func)</code> applies the function <code>func</code> to all the things in the RDD and returns a new RDD. so something like <code>data.map(lambda line: line.split('\t'))</code> applies the func passed into map to each object stored in the RDD and returns back a new RDD.</p>
 <p><code>map</code> is often accompanies by <a href="https://spark.apache.org/docs/latest/rdd-programming-guide.html#ReduceByLink">reduceByKey</a> e.g to count stuff:</p>
-<div class="codehilite"><pre><span></span><code><span class="n">lines</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">textFile</span><span class="p">(</span><span class="s2">&quot;data.txt&quot;</span><span class="p">)</span>
-<span class="n">pairs</span> <span class="o">=</span> <span class="n">lines</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
-<span class="n">counts</span> <span class="o">=</span> <span class="n">pairs</span><span class="o">.</span><span class="n">reduceByKey</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span>
-</code></pre></div>
-
+<pre><code class="language-python">lines = sc.textFile(&quot;data.txt&quot;)
+pairs = lines.map(lambda s: (s, 1))
+counts = pairs.reduceByKey(lambda a, b: a + b)
+</code></pre>
 <p>Now, spark deals with transformations only when it has to - so it builds up a pipelines of tasks and runs them when the output of those tasks is called.</p>
 <h2 id="install-spark-on-your-local-machine">install spark on your local machine</h2>
 <p>Use Spark on a local machine is useful for learning purposes - for actual production use I would use <a href="https://aws.amazon.com/emr/">Amazon EMR</a> or <a href="https://cloud.google.com/dataproc/">Google Cloud Dataproc</a>.</p>
@@ -53,7 +52,7 @@
 </article>
 
 <div class="meta">
-    posted <time>2020-11-03</time>, updated <time>2020-11-03</time><br>
+    posted <time>2020-11-12</time>, updated <time>2020-11-12</time><br>
     tagged: 
     <a href="/untagged">untagged</a>
 

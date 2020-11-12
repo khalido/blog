@@ -262,10 +262,9 @@
 <li>q3 is more of the same but with seaborn</li>
 <li>q4 nothing much to see here besides using list comprehensions to make a list of all the .csv files <em>(I'm trying to use python to do all the work instead of my stone age past life of copying and pasting links)</em></li>
 </ul>
-<div class="codehilite"><pre><span></span><code><span class="n">url_str</span> <span class="o">=</span> <span class="s2">&quot;http://elections.huffingtonpost.com/pollster/api/charts/?topic=2014-senate&quot;</span>
-<span class="n">election_urls</span> <span class="o">=</span> <span class="p">[</span><span class="n">election</span><span class="p">[</span><span class="s1">&#39;url&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;.csv&#39;</span> <span class="k">for</span> <span class="n">election</span> <span class="ow">in</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url_str</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()]</span>
-</code></pre></div>
-
+<pre><code class="language-python">url_str = &quot;http://elections.huffingtonpost.com/pollster/api/charts/?topic=2014-senate&quot;
+election_urls = [election['url'] + '.csv' for election in requests.get(url_str).json()]
+</code></pre>
 <h3 id="lab-5-machine-learning">Lab 5: Machine Learning</h3>
 <p><strong>Learning Models</strong> (<a href="https://github.com/khalido/cs109-2015/blob/master/Labs/2015lab5/LearningModels.ipynb">notebook</a>, <a href="https://matterhorn.dce.harvard.edu/engage/player/watch.html?id=e509f996-9633-4b75-a48a-e29246a316db">video</a>)</p>
 <ul>
@@ -300,12 +299,11 @@
 <li>many datatypes, like images, have tons of features, so important to reduce dimensionality.</li>
 <li><a href="http://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html">sklearn PCA</a> returns the principal components in order of how much they explain the data:</li>
 </ul>
-<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">PCA</span>
-<span class="n">pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">60</span><span class="p">)</span> <span class="c1"># PCA with no. of components to return</span>
-<span class="n">X</span> <span class="o">=</span> <span class="n">pca</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">pca</span><span class="o">.</span><span class="n">explained_variance_ratio_</span><span class="p">)</span> <span class="c1"># how much of variance is explained</span>
-</code></pre></div>
-
+<pre><code class="language-python">from sklearn.decomposition import PCA
+pca = PCA(n_components=60) # PCA with no. of components to return
+X = pca.fit_transform(data)
+print(pca.explained_variance_ratio_) # how much of variance is explained
+</code></pre>
 <ul>
 <li>sklearn uses the same interface for all its classifiers, so makes it easy to put a wrapper around gridsearchCV and pass in diff classifiers to compare.</li>
 <li>discriminative classifier - finds the decision boundary b/w classes</li>
@@ -585,7 +583,7 @@
 </article>
 
 <div class="meta">
-    posted <time>2017-04-04</time>, updated <time>2020-11-03</time><br>
+    posted <time>2017-04-04</time>, updated <time>2020-11-12</time><br>
     tagged: 
     <a href="/untagged">untagged</a>
 

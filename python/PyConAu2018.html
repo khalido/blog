@@ -570,13 +570,12 @@
 <li>why use them: you can't forget to close resources and they make code prettier by abstracting</li>
 <li><code>contexlib</code> has all kind of goodies in it, so look it up</li>
 </ul>
-<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">contextlib</span> <span class="kn">import</span> <span class="n">suppress</span>
+<pre><code class="language-python">from contextlib import suppress
 
-<span class="k">def</span> <span class="nf">kill_process</span><span class="p">(</span><span class="n">pid</span><span class="p">):</span>
-<span class="k">with</span> <span class="n">suppress</span><span class="p">(</span><span class="ne">ProcessLookupError</span><span class="p">):</span>
-  <span class="n">os</span><span class="o">.</span><span class="n">kill</span><span class="p">(</span><span class="n">pid</span><span class="p">,</span> <span class="n">signal</span><span class="o">.</span><span class="n">SIGKILL</span><span class="p">)</span>
-</code></pre></div>
-
+def kill_process(pid):
+with suppress(ProcessLookupError):
+  os.kill(pid, signal.SIGKILL)
+</code></pre>
 <ul>
 <li>write your own context managers - see slide deck for examples</li>
 <li>its just a class with a dunder enter and a dunder exit method</li>
@@ -939,7 +938,7 @@
 </article>
 
 <div class="meta">
-    posted <time>2020-11-03</time>, updated <time>2020-11-03</time><br>
+    posted <time>2020-11-12</time>, updated <time>2020-11-12</time><br>
     tagged: 
     <a href="/python">python</a>
     <a href="/talks">talks</a>

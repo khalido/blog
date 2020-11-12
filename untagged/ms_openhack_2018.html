@@ -38,37 +38,36 @@
 <p>The python api is a little bit tricky since every cloud provider has their own vision of how their api's should function, so it takes getting used to a bit, but once thats done its suprisingly easy to upload training images to custom vision, train the model (it automagics whatever its transfer learning from) and then send it images to predict on. Presto, barely a page of code and what used to be rocket science is now being rolled out all the world.</p>
 <p>Also covered preprocessing images using the <a href="https://pillow.readthedocs.io/en/5.2.x/">Pillow image libary</a>. Its slower then opencv and others, but its so much nicer to write.</p>
 <p>Anyways, with all this fancy deep learning in the clouds and using apis and what not, I liked this bit of code which preprocessed all the training images:</p>
-<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">preprocess_all_images_in_dir</span><span class="p">(</span><span class="n">img_dir</span><span class="o">=</span><span class="s2">&quot;gear_images/&quot;</span><span class="p">,</span> 
-                              <span class="n">processed_dir</span><span class="o">=</span><span class="s2">&quot;gear_images_processed/&quot;</span><span class="p">,</span> 
-                              <span class="n">show_images</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;processes all the images in the subdirectories of the passed in img_dir</span>
-<span class="sd">       and saves them in subdirectories of the same name in the processed_dir&quot;&quot;&quot;</span>
+<pre><code class="language-python">def preprocess_all_images_in_dir(img_dir=&quot;gear_images/&quot;, 
+                              processed_dir=&quot;gear_images_processed/&quot;, 
+                              show_images=False):
+    &quot;&quot;&quot;processes all the images in the subdirectories of the passed in img_dir
+       and saves them in subdirectories of the same name in the processed_dir&quot;&quot;&quot;
 
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">processed_dir</span><span class="p">):</span>
-        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">processed_dir</span><span class="p">)</span>
+    if not os.path.exists(processed_dir):
+        os.makedirs(processed_dir)
 
-    <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">img_dir</span><span class="p">):</span>
-        <span class="n">cur_dir</span> <span class="o">=</span> <span class="n">img_dir</span> <span class="o">+</span> <span class="n">d</span>
-        <span class="n">new_dir</span> <span class="o">=</span> <span class="n">processed_dir</span> <span class="o">+</span> <span class="n">d</span>
+    for d in os.listdir(img_dir):
+        cur_dir = img_dir + d
+        new_dir = processed_dir + d
 
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">new_dir</span><span class="p">):</span>
-            <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">new_dir</span><span class="p">)</span>
+        if not os.path.exists(new_dir):
+            os.makedirs(new_dir)
 
-        <span class="k">for</span> <span class="n">img</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">cur_dir</span><span class="p">):</span>
-            <span class="n">im</span> <span class="o">=</span> <span class="n">pre_process_image</span><span class="p">(</span><span class="n">cur_dir</span> <span class="o">+</span><span class="s2">&quot;/&quot;</span><span class="o">+</span> <span class="n">img</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">show_images</span><span class="p">:</span>
-                <span class="n">clear_output</span><span class="p">(</span><span class="n">wait</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-                <span class="n">display</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
-            <span class="n">im</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">new_dir</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">img</span><span class="p">)</span>
+        for img in os.listdir(cur_dir):
+            im = pre_process_image(cur_dir +&quot;/&quot;+ img)
+            if show_images:
+                clear_output(wait=True)
+                display(im)
+            im.save(new_dir + &quot;/&quot; + img)
 
-<span class="n">preprocess_all_images_in_dir</span><span class="p">()</span>
-</code></pre></div>
-
+preprocess_all_images_in_dir()
+</code></pre>
 <p>The hard parts are being all out sourced, like deep learning, so it makes sense that the simple plumbing work is what many coders end up coding. It's amazing how quickly now you can get things done by plumbing bits together. And Ideally, services is where its all at now.</p>
 </article>
 
 <div class="meta">
-    posted <time>2020-11-03</time>, updated <time>2020-11-03</time><br>
+    posted <time>2020-11-12</time>, updated <time>2020-11-12</time><br>
     tagged: 
     <a href="/untagged">untagged</a>
 

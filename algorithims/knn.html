@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!--temp stylesheet, customize my own one later.
+        https://github.com/kognise/water.css-->
+        
+        
+        <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.3/new.min.css">
+
+        <link rel="stylesheet" type="text/css" href="/codestyles.css">
+        
+        
+
+        <title>KNN algorithim</title>
+    </head>
+
+    <body>
+ 
+        <header>
+            <a href="/">khalido.org</a> <br>
+            I love me some subheader text.
+        </header>
+
+<article>
+        <h1>KNN algorithim</h1>
+    
+    <details>
+        <summary>Table of contents.</summary>
+        <div class="toc">
+<ul></ul>
+</div>
+
+    </details>
+  
+    <p>K Nearest Neighbours is a algorithim for finding out the similarity or distance b/w two things, to find out how alike/different they are. </p>
+<p>Say we have a bunch of fruit, KNN will classify them into clusters by using what we know - with fruit this would be shape, size, weight, color, etc.</p>
+<p>Anyways, lets start with the Iris dataset, which has 150 measurements of flowers:</p>
+<div class="codecell">
+<div class="input_area">
+<pre><code class="language-python">iris = sns.load_dataset(&quot;iris&quot;)
+print(f&quot;Iris dataset shape: {iris.shape}&quot;)
+iris.head()
+</code></pre>
+</div>
+<div class="output_area">
+<pre><code>Iris dataset shape: (150, 5)
+</code></pre>
+<div>
+<style scoped="scoped">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>sepal_length</th>
+<th>sepal_width</th>
+<th>petal_length</th>
+<th>petal_width</th>
+<th>species</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>5.1</td>
+<td>3.5</td>
+<td>1.4</td>
+<td>0.2</td>
+<td>setosa</td>
+</tr>
+<tr>
+<th>1</th>
+<td>4.9</td>
+<td>3.0</td>
+<td>1.4</td>
+<td>0.2</td>
+<td>setosa</td>
+</tr>
+<tr>
+<th>2</th>
+<td>4.7</td>
+<td>3.2</td>
+<td>1.3</td>
+<td>0.2</td>
+<td>setosa</td>
+</tr>
+<tr>
+<th>3</th>
+<td>4.6</td>
+<td>3.1</td>
+<td>1.5</td>
+<td>0.2</td>
+<td>setosa</td>
+</tr>
+<tr>
+<th>4</th>
+<td>5.0</td>
+<td>3.6</td>
+<td>1.4</td>
+<td>0.2</td>
+<td>setosa</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p>Now I'm sampling 5 random flowers from this data set so we can use our fancy new KNN algo to determine what kind of flower they are later on:</p>
+<div class="codecell">
+<div class="input_area">
+<pre><code class="language-python">test = iris.sample(n=5)
+test
+</code></pre>
+</div>
+<div class="output_area">
+<div>
+<style scoped="scoped">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>sepal_length</th>
+<th>sepal_width</th>
+<th>petal_length</th>
+<th>petal_width</th>
+<th>species</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>101</th>
+<td>5.8</td>
+<td>2.7</td>
+<td>5.1</td>
+<td>1.9</td>
+<td>virginica</td>
+</tr>
+<tr>
+<th>4</th>
+<td>5.0</td>
+<td>3.6</td>
+<td>1.4</td>
+<td>0.2</td>
+<td>setosa</td>
+</tr>
+<tr>
+<th>104</th>
+<td>6.5</td>
+<td>3.0</td>
+<td>5.8</td>
+<td>2.2</td>
+<td>virginica</td>
+</tr>
+<tr>
+<th>147</th>
+<td>6.5</td>
+<td>3.0</td>
+<td>5.2</td>
+<td>2.0</td>
+<td>virginica</td>
+</tr>
+<tr>
+<th>69</th>
+<td>5.6</td>
+<td>2.5</td>
+<td>3.9</td>
+<td>1.1</td>
+<td>versicolor</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p>And here I am deleting the sampled flowers from the iris dataset to make sure our algo hasn't seem the test flowers:</p>
+<div class="codecell">
+<div class="input_area">
+<pre><code class="language-python">iris.drop(test.index, inplace=True)
+print(iris.shape)
+</code></pre>
+</div>
+<div class="output_area">
+<pre><code>(145, 5)
+</code></pre>
+</div>
+</div>
+<p>Now to look at the data visually:</p>
+<div class="codecell">
+<div class="input_area">
+<pre><code class="language-python">sns.pairplot(data=iris, hue=&quot;species&quot;);
+</code></pre>
+</div>
+<div class="output_area">
+<p><img alt="svg" src="knn_files/output_7_0.svg" /></p>
+</div>
+</div>
+<p>It's pretty clear the the species are different, though there is some overlap at the boundaries.</p>
+<p>Looking at petal length variation across species:</p>
+<div class="codecell">
+<div class="input_area">
+<pre><code class="language-python">sns.boxplot(x=&quot;species&quot;, y=&quot;petal_length&quot;, data=iris);
+</code></pre>
+</div>
+<div class="output_area">
+<p><img alt="svg" src="knn_files/output_9_0.svg" /></p>
+</div>
+</div>
+<p>Now to actually write the algorithim and figure out what species the flowers in the test data set belong to.</p>
+<p>First, a helper function to calculate the distance b/w points:</p>
+<div class="codecell">
+<div class="input_area">
+<pre><code class="language-python">def distance(x, y):
+    &quot;&quot;&quot;returns distance b/w two points x and y&quot;&quot;&quot;
+    assert len(x) == len(y)
+    inner = 0
+    for a, b in zip(x,y):
+        inner += (a - b)**2
+    return np.sqrt(inner)
+
+distance((1,5),[5,5])
+</code></pre>
+</div>
+<div class="output_area">
+<pre><code>4.0
+</code></pre>
+</div>
+</div>
+<p>lets look at the values of the first flower in our test data and see if we can figure out what it is by using KNN:</p>
+<div class="codecell">
+<div class="input_area">
+<pre><code class="language-python">test.iloc[0]
+</code></pre>
+</div>
+<div class="output_area">
+<pre><code>sepal_length          5.8
+sepal_width           2.7
+petal_length          5.1
+petal_width           1.9
+species         virginica
+Name: 101, dtype: object
+</code></pre>
+</div>
+</div>
+<div class="codecell">
+<div class="input_area">
+<pre><code class="language-python">def knn(item, data, n=3):
+    &quot;&quot;&quot;takes in an item to check and a dataset, of size 4 features each
+    returns the first n closest neighbours as a tuple (loc, distance)&quot;&quot;&quot;
+    dist = []
+    for i, row in data.iterrows():
+        dist.append((i, distance(row[:4], item)))
+
+    nearest = sorted(dist, key=lambda x: x[1])[:n]
+    species = [iris.loc[i[0]][&quot;species&quot;] for i in nearest]
+
+    return Counter(species).most_common()[0][0]
+
+knn(test.iloc[0][:4], iris)
+</code></pre>
+</div>
+<div class="output_area">
+<pre><code>'virginica'
+</code></pre>
+</div>
+</div>
+<div class="codecell">
+<div class="input_area">
+<pre><code class="language-python">knn_species = []
+for i, row in test.iterrows():
+    knn_species.append(knn(row[:4], iris))
+knn_species
+</code></pre>
+</div>
+<div class="output_area">
+<pre><code>['virginica', 'setosa', 'virginica', 'virginica', 'versicolor']
+</code></pre>
+</div>
+</div>
+<div class="codecell">
+<div class="input_area">
+<pre><code class="language-python">test[&quot;knn&quot;] = knn_species
+test
+</code></pre>
+</div>
+<div class="output_area">
+<div>
+<style scoped="scoped">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>sepal_length</th>
+<th>sepal_width</th>
+<th>petal_length</th>
+<th>petal_width</th>
+<th>species</th>
+<th>knn</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>101</th>
+<td>5.8</td>
+<td>2.7</td>
+<td>5.1</td>
+<td>1.9</td>
+<td>virginica</td>
+<td>virginica</td>
+</tr>
+<tr>
+<th>4</th>
+<td>5.0</td>
+<td>3.6</td>
+<td>1.4</td>
+<td>0.2</td>
+<td>setosa</td>
+<td>setosa</td>
+</tr>
+<tr>
+<th>104</th>
+<td>6.5</td>
+<td>3.0</td>
+<td>5.8</td>
+<td>2.2</td>
+<td>virginica</td>
+<td>virginica</td>
+</tr>
+<tr>
+<th>147</th>
+<td>6.5</td>
+<td>3.0</td>
+<td>5.2</td>
+<td>2.0</td>
+<td>virginica</td>
+<td>virginica</td>
+</tr>
+<tr>
+<th>69</th>
+<td>5.6</td>
+<td>2.5</td>
+<td>3.9</td>
+<td>1.1</td>
+<td>versicolor</td>
+<td>versicolor</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p>All right! our KNN algo got all the 5 test species right!</p>
+<p>I wrote this KNN algo a bit specifically targeting the iris dataset, but it can be modified to deal with with many different data sets.</p>
+<p>The iris dataset is very simple, but usually I would normalize the data so all the attributes get a chance to effect the rating.</p>
+</article>
+
+<div class="meta">
+    posted <time>2018-08-10</time>, updated <time>2020-11-12</time><br>
+    tagged: 
+    <a href="/algorithims">algorithims</a>
+
+    <ul>    
+        <li><a href="https://github.com/khalido/blog/blob/master/notebooks/knn.ipynb">View on Github</a></li>
+        
+        <li><a href="https://colab.research.google.com/github/khalido/blog/blob/master/notebooks/knn.ipynb">
+            <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+        </a></li>
+    
+    </ul>
+
+</div>
+
+<hr>
+<footer>
+    This is a footer. One day some footery text will go here. 
+</footer>
+
+
+
+</body>
+
+</html>

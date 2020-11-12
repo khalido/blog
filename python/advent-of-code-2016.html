@@ -71,28 +71,26 @@
 <h2 id="day-2-bathroom-security">Day 2: Bathroom Security</h2>
 <p>move around a numpad</p>
 <p>This problem had a diamond shaped keypad, so one way to move around the keypad was to have the shape of the keypad and move according, but it was much easier to use a dummy character to represent the off keypad points:</p>
-<div class="codehilite"><pre><span></span><code><span class="na">.......</span>
-<span class="na">...1...</span>
-<span class="na">..234..</span>
-<span class="nf">.56789.</span>
-<span class="na">..ABC..</span>
-<span class="na">...D...</span>
-<span class="na">.......</span>
-</code></pre></div>
-
+<pre><code>.......
+...1...
+..234..
+.56789.
+..ABC..
+...D...
+.......
+</code></pre>
 <p>Key takeaway: use a char to demarcate edges, and try to write more general code - in this case my part 1 could only deal with a square numpad, but it was just as easy to code it up to deal with a numpad of any shape.</p>
 <h2 id="day-3-squares-with-three-sides">Day 3: Squares With Three Sides</h2>
 <p>simple math and slicing a grid. I used numpy for the win, basically use numpy if there is anything like a grid to deal with.</p>
 <p>This involved using numpy slicing of a grid, which is always a bit tricky:</p>
-<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">transpose</span><span class="p">(</span><span class="n">tri</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;generates all the column wise trianges in a list of triangles&quot;&quot;&quot;</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">])):</span>          <span class="c1"># the columns, could just use 3 here</span>
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">):</span> <span class="c1"># now going down the entire length of the array</span>
-            <span class="k">yield</span> <span class="n">t</span><span class="p">[</span><span class="n">j</span><span class="p">:</span><span class="n">j</span><span class="o">+</span><span class="mi">3</span><span class="p">,</span><span class="n">i</span><span class="p">]</span>
+<pre><code class="language-python">def transpose(tri):
+    &quot;&quot;&quot;generates all the column wise trianges in a list of triangles&quot;&quot;&quot;
+    for i in range(len(t[0])):          # the columns, could just use 3 here
+        for j in range(0, len(t)-2, 3): # now going down the entire length of the array
+            yield t[j:j+3,i]
 
-<span class="nb">sum</span><span class="p">([</span><span class="n">is_tri</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">transpose</span><span class="p">(</span><span class="n">t</span><span class="p">)])</span>
-</code></pre></div>
-
+sum([is_tri(i) for i in transpose(t)])
+</code></pre>
 <h2 id="day-4-security-through-obscurity">Day 4: Security Through Obscurity</h2>
 <p>Nothing interesting here,just following directions, a few notes:</p>
 <ul>
@@ -103,12 +101,11 @@
 <h2 id="day-5-how-about-a-nice-game-of-chess">Day 5: How About a Nice Game of Chess?</h2>
 <p>find a password. I used hashlib, was an interesting problem since I used <a href="https://docs.python.org/3/library/hashlib.html">hashlib</a> for the first time.</p>
 <p>I liked this bit of code:</p>
-<div class="codehilite"><pre><span></span><code><span class="n">password</span> <span class="o">=</span> <span class="p">[</span><span class="k">False</span> <span class="k">for</span> <span class="n">_</span> <span class="k">in</span> <span class="n">range</span><span class="p">(</span><span class="mi">8</span><span class="p">)]</span>
+<pre><code>password = [False for _ in range(8)]
 
-<span class="n">while</span> <span class="k">False</span> <span class="k">in</span> <span class="n">password</span><span class="p">:</span>
-  <span class="o">#</span> <span class="n">fills</span> <span class="k">in</span> <span class="n">one</span> <span class="n">letter</span> <span class="k">of</span> <span class="n">the</span> <span class="n">password</span>
-</code></pre></div>
-
+while False in password:
+  # fills in one letter of the password
+</code></pre>
 <h2 id="day-6-signals-and-noise">Day 6: Signals and Noise</h2>
 <p>Day 7 | move around a numpad | used both numpy and lists. Key takeaway: use a char to demarcate edges
 Day 8 | simple math and slicing a grid | numpy for the win, basically use numpy if there is anything like a grid to deal with.
@@ -125,7 +122,7 @@ Day 17 | Get shortest, than longest path | looked similar to day 13, but differe
 </article>
 
 <div class="meta">
-    posted <time>2019-02-02</time>, updated <time>2020-11-03</time><br>
+    posted <time>2019-02-02</time>, updated <time>2020-11-12</time><br>
     tagged: 
     <a href="/python">python</a>
 

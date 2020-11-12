@@ -270,13 +270,12 @@ https://deeplearning4j.org/word2vec</p>
 </ul>
 <p>Can also be used for <a href="https://github.com/udacity/deep-learning/blob/master/tensorboard/Anna_KaRNNa_Hyperparameters.ipynb">hyperparameter search</a> by selecting diff combinations of parameters, writing them to a logstring and viewing the diff runs in tensorboard all nicely charted out.</p>
 <p>todo: make a simple mnist NN with tensorboard summaries of different parameters. something like:</p>
-<div class="codehilite"><pre><span></span><code><span class="k">for</span> <span class="n">lstm_size</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">128</span><span class="p">,</span><span class="mi">256</span><span class="p">,</span><span class="mi">512</span><span class="p">]:</span>
-    <span class="k">for</span> <span class="n">num_layers</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]:</span>
-        <span class="k">for</span> <span class="n">learning_rate</span> <span class="ow">in</span> <span class="p">[</span><span class="mf">0.002</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">]:</span>
-            <span class="n">log_string</span> <span class="o">=</span> <span class="s1">&#39;logs/4/lr=</span><span class="si">{}</span><span class="s1">,rl=</span><span class="si">{}</span><span class="s1">,ru=</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">learning_rate</span><span class="p">,</span> <span class="n">num_layers</span><span class="p">,</span> <span class="n">lstm_size</span><span class="p">)</span>
-            <span class="n">writer</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">summary</span><span class="o">.</span><span class="n">FileWriter</span><span class="p">(</span><span class="n">log_string</span><span class="p">)</span>
-</code></pre></div>
-
+<pre><code class="language-python">for lstm_size in [128,256,512]:
+    for num_layers in [1, 2]:
+        for learning_rate in [0.002, 0.001]:
+            log_string = 'logs/4/lr={},rl={},ru={}'.format(learning_rate, num_layers, lstm_size)
+            writer = tf.summary.FileWriter(log_string)
+</code></pre>
 <h1 id="week-10">Week 10</h1>
 <p>RNN's and language generation</p>
 <h2 id="how-to-make-a-text-summarizer">how to make a text summarizer</h2>
@@ -286,12 +285,11 @@ https://deeplearning4j.org/word2vec</p>
 <p>Random weights work much better. Tensorflow's <a href="https://www.tensorflow.org/api_docs/python/tf/random_uniform">tf.random_uniform()</a> is a good weight initilization function. Be default, tf.random.uniform picks float values uniformly spread b/w 0 and 1, which is decent, but we can do better.</p>
 <p>Smart people have tested out different initial weights, and it seems using weights distributed around zero with a std dev around 0.1 works well, with tails cut off. Tensorflow has a built in function:</p>
 <p><a href="https://www.tensorflow.org/api_docs/python/tf/truncated_normal">tf.truncated_normal</a> which generates a random normal distribution around zero with values &gt; 2 std devs from the mean repicked. So making 3 weights would look someething like:</p>
-<div class="codehilite"><pre><span></span><code><span class="n">weights</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">truncated_normal</span><span class="p">(</span><span class="n">layer_1_weight_shape</span><span class="p">,</span> <span class="n">stddev</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)),</span>
-    <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">truncated_normal</span><span class="p">(</span><span class="n">layer_2_weight_shape</span><span class="p">,</span> <span class="n">stddev</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)),</span>
-    <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">truncated_normal</span><span class="p">(</span><span class="n">layer_3_weight_shape</span><span class="p">,</span> <span class="n">stddev</span><span class="o">=</span><span class="mf">0.1</span><span class="p">))</span>
-</code></pre></div>
-
+<pre><code class="language-python">weights = [
+    tf.Variable(tf.truncated_normal(layer_1_weight_shape, stddev=0.1)),
+    tf.Variable(tf.truncated_normal(layer_2_weight_shape, stddev=0.1)),
+    tf.Variable(tf.truncated_normal(layer_3_weight_shape, stddev=0.1))
+</code></pre>
 <p>A normal distribution means that the weights will tend to be closer to the mean rather than uniformly distributed.</p>
 <p>todo: run a simple network on MNIST with different weights and see in tensorboard
 todo: find some approchable resources on weights</p>
@@ -362,21 +360,19 @@ Using negative rewards for bad stuff, and postiive rewards for good stuff, you t
 <p>A GAN which generates mnist images and faces.
 Relatively straigtforward, but adding in <a href="https://github.com/udacity/deep-learning/blob/master/batch-norm/Batch_Normalization_Lesson.ipynb">batch normalization</a> involves some tensorflow kungfu. Doing this project in TF made me yearn for Keras.</p>
 <p>Specifically, the <a href="https://www.tensorflow.org/api_docs/python/tf/layers/batch_normalization">batch_norm layer in TF</a> isn't magical enough, so we have to wrap the train operations inside tf.control_dependencies block so the batch normalization layers get updated. The below is the code from <a href="https://github.com/udacity/deep-learning/blob/master/dcgan-svhn/DCGAN.ipynb">Udacty</a> but since I added batch norm to both the generator and the discriminator this didn't work for me:</p>
-<div class="codehilite"><pre><span></span><code><span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">control_dependencies</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">get_collection</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">GraphKeys</span><span class="o">.</span><span class="n">UPDATE_OPS</span><span class="p">)):</span>
-        <span class="n">d_train_opt</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">AdamOptimizer</span><span class="p">(</span><span class="n">learning_rate</span><span class="p">,</span> <span class="n">beta1</span><span class="o">=</span><span class="n">beta1</span><span class="p">)</span><span class="o">.</span><span class="n">minimize</span><span class="p">(</span><span class="n">d_loss</span><span class="p">,</span> <span class="n">var_list</span><span class="o">=</span><span class="n">d_vars</span><span class="p">)</span>
-        <span class="n">g_train_opt</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">AdamOptimizer</span><span class="p">(</span><span class="n">learning_rate</span><span class="p">,</span> <span class="n">beta1</span><span class="o">=</span><span class="n">beta1</span><span class="p">)</span><span class="o">.</span><span class="n">minimize</span><span class="p">(</span><span class="n">g_loss</span><span class="p">,</span> <span class="n">var_list</span><span class="o">=</span><span class="n">g_vars</span><span class="p">)</span>
-</code></pre></div>
-
+<pre><code class="language-python">with tf.control_dependencies(tf.get_collection(tf.GraphKeys.UPDATE_OPS)):
+        d_train_opt = tf.train.AdamOptimizer(learning_rate, beta1=beta1).minimize(d_loss, var_list=d_vars)
+        g_train_opt = tf.train.AdamOptimizer(learning_rate, beta1=beta1).minimize(g_loss, var_list=g_vars)
+</code></pre>
 <p>After much googling and help from the forums, this worked:</p>
-<div class="codehilite"><pre><span></span><code><span class="c1"># need this to make batch normalization work properly during inference</span>
-    <span class="n">update_ops</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">get_collection</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">GraphKeys</span><span class="o">.</span><span class="n">UPDATE_OPS</span><span class="p">)</span>
-    <span class="n">g_updates</span>  <span class="o">=</span> <span class="p">[</span><span class="n">opt</span> <span class="k">for</span> <span class="n">opt</span> <span class="ow">in</span> <span class="n">update_ops</span> <span class="k">if</span> <span class="n">opt</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;generator&#39;</span><span class="p">)]</span>
+<pre><code class="language-python"># need this to make batch normalization work properly during inference
+    update_ops = tf.get_collection(tf.GraphKeys.UPDATE_OPS)
+    g_updates  = [opt for opt in update_ops if opt.name.startswith('generator')]
 
-    <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">control_dependencies</span><span class="p">(</span><span class="n">g_updates</span><span class="p">):</span>
-        <span class="n">d_train_opt</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">AdamOptimizer</span><span class="p">(</span><span class="n">learning_rate</span><span class="p">,</span> <span class="n">beta1</span><span class="p">)</span><span class="o">.</span><span class="n">minimize</span><span class="p">(</span><span class="n">d_loss</span><span class="p">,</span> <span class="n">var_list</span><span class="o">=</span><span class="n">d_vars</span><span class="p">)</span>
-        <span class="n">g_train_opt</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">AdamOptimizer</span><span class="p">(</span><span class="n">learning_rate</span><span class="p">,</span> <span class="n">beta1</span><span class="p">)</span><span class="o">.</span><span class="n">minimize</span><span class="p">(</span><span class="n">g_loss</span><span class="p">,</span> <span class="n">var_list</span><span class="o">=</span><span class="n">g_vars</span><span class="p">)</span>
-</code></pre></div>
-
+    with tf.control_dependencies(g_updates):
+        d_train_opt = tf.train.AdamOptimizer(learning_rate, beta1).minimize(d_loss, var_list=d_vars)
+        g_train_opt = tf.train.AdamOptimizer(learning_rate, beta1).minimize(g_loss, var_list=g_vars)
+</code></pre>
 <p>Putting this here becuase there must be better/simpler easier way to do batch_norm without getting into the graph bowels of tensorflow.</p>
 <p>todo: reimplement in Keras</p>
 <p><a href="https://github.com/khalido/nd101-projects/blob/master/dlnd_face_generation.ipynb">Project notebok</a></p>
@@ -385,7 +381,7 @@ Relatively straigtforward, but adding in <a href="https://github.com/udacity/dee
 </article>
 
 <div class="meta">
-    posted <time>2020-11-03</time>, updated <time>2020-11-03</time><br>
+    posted <time>2020-11-12</time>, updated <time>2020-11-12</time><br>
     tagged: 
     <a href="/untagged">untagged</a>
 
