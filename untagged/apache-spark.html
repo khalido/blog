@@ -23,13 +23,26 @@
  
         <header>
             <a href="/">khalido.org</a> <br>
-            I love me some subheader text.
+            some subheader text.
         </header>
 
 <article>
         <h1>Apache Spark</h1>
+
+    <div class="meta">
+        posted <time>2020-11-30</time>, updated <time>2020-11-30</time><br>
+        tagged: 
+        <a href="/untagged">untagged</a>
+        
+        <p>
+            <a href="https://github.com/khalido/blog/blob/master/posts/apache-spark.md">github</a>
+        </p>
     
-  
+    </div>
+    
+    
+    <hr>
+    
     <p>Way back in the good old days Google came up with mapreduce to store and crunch data scattered on disks across multiple machines. The world looked at mapreduce and thought it good, and made an open source implementation called Hadoop.</p>
 <p>Ppl wanted more, and faster, and luckily memory prices went down. And thus Apache Spark was born at UC Berkely. Spark stores data across a bunch of machines in memory. This makes it easy and fast to data scientist all the data.</p>
 <h2 id="rdd">RDD</h2>
@@ -51,16 +64,6 @@ counts = pairs.reduceByKey(lambda a, b: a + b)
 <p>Note: use <code>-v</code> to mount the current directory in the docker container.</p>
 </article>
 
-<div class="meta">
-    posted <time>2020-11-12</time>, updated <time>2020-11-12</time><br>
-    tagged: 
-    <a href="/untagged">untagged</a>
-
-    <ul>    
-        <li><a href="https://github.com/khalido/blog/edit/master/notes/apache-spark.md">Edit</a></li>
-    </ul>
-
-</div>
 
 <hr>
 <footer>

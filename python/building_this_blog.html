@@ -23,18 +23,30 @@
  
         <header>
             <a href="/">khalido.org</a> <br>
-            I love me some subheader text.
+            some subheader text.
         </header>
 
 <article>
         <h1>how the blog was built</h1>
+
+    <div class="meta">
+        posted <time>2020-11-11</time>, updated <time>2020-11-30</time><br>
+        tagged: 
+        <a href="/python">python</a>
+        
+        <p>
+            <a href="https://github.com/khalido/blog/blob/master/posts/building_this_blog.md">github</a>
+        </p>
     
-    <details>
+    </div>
+    
+    <details open>
         <summary>Table of contents.</summary>
         <div class="toc">
 <ul>
 <li><a href="#the-basic-blog">the basic blog</a><ul>
 <li><a href="#parsing-markdown">parsing markdown</a></li>
+<li><a href="#notebooks-to-markdown">notebooks to markdown</a></li>
 <li><a href="#code-highlight">code highlight</a></li>
 <li><a href="#html">html</a></li>
 <li><a href="#css">css</a></li>
@@ -52,17 +64,21 @@
 </div>
 
     </details>
-  
-    <p>Hereby I talk through writing my own blog engine. There are many excellent ones out there, but to customize any of them takes so much understanding of how they work, the template and theme engines they use, that its easier to just use them exactly as is with an existing theme. I wanted my own custom static blog, and a reason to do some python coding, so here goes yet another python blogging script.</p>
-<p>This post documents the process of building this blog. The main goal is to put markdown and jupyter notebooks in a folder, and build a static site which gets autoupdated on <a href="https://pages.github.com/">github pages</a> or [netlify]https://www.netlify.com/). Just like <a href="https://gohugo.io/">hugo</a>, <a href="https://jekyllrb.com/">jekyll</a>, <a href="https://www.gatsbyjs.org/">gatsby</a> and so many others!</p>
+    
+    <hr>
+    
+    <p>Hereby I talk through writing my own blog engine. There are many excellent ones out there, but to customise any of them takes so much understanding of how they work, the template and theme engines they use, that its easier to just use them exactly as is with an existing theme. </p>
+<p>I wanted my own custom static blog, which played well with jupyter notebooks and markdown files, as well as a reason to do some python coding, so here goes yet another python blogging engine.</p>
+<p>This post documents the process of building this blog. The main goal is to put markdown and jupyter notebooks in a folder, and build a static site which gets autoupdated on <a href="https://pages.github.com/">github pages</a> or <a href="https://www.netlify.com/">netlify</a>. Just like <a href="https://gohugo.io/">hugo</a>, <a href="https://jekyllrb.com/">jekyll</a>, <a href="https://www.gatsbyjs.org/">gatsby</a> and so many others!</p>
 <h2 id="the-basic-blog">the basic blog</h2>
 <p>Its straightforward to read a set of markdown posts and convert to python. I am using python to read the posts with <a href="https://python-markdown.github.io/">python-markdown</a> to parse them into html, complete with inline syntax highlighting.</p>
 <p>Key tools used:</p>
 <ul>
 <li><strong>write:</strong> markdown docs using any editor and jupyter notebooks having yaml front matter</li>
 <li><strong>make the blog:</strong> </li>
-<li>[nbconvert] to parse jupyter to markdown [python markdown] to parse markdown to html</li>
-<li>python to read all the markdown files using <a href="https://python-markdown.github.io/">python markdown</a> and <a href="https://pyyaml.org/wiki/PyYAMLDocumentation">yaml</a> make html pages for index, tags and posts using <a href="https://www.makotemplates.org/">mako</a> for python friendly templates</li>
+<li><a href="https://github.com/fastai/nbdev">nbdev</a> to parse jupyter to markdown [python markdown] to parse markdown to html</li>
+<li>python to read all the markdown files using <a href="https://python-markdown.github.io/">python markdown</a> and <a href="https://pyyaml.org/wiki/PyYAMLDocumentation">yaml</a>. </li>
+<li>finally, writing html pages for index, tags and posts using <a href="https://www.makotemplates.org/">mako</a> for python friendly templates.</li>
 <li><strong>search:</strong> <a href="https://fusejs.io/">fusejs</a> to make a in browser search engine</li>
 <li>every time a post is added or updated, the whole site needs to be rebuilt and redeployed. </li>
 <li><strong>build site:</strong> every time I commit to my blog repo, a github action is triggered which rebuilds the sites and saves the output to a <code>_site</code> folder.</li>
@@ -77,11 +93,16 @@
 <p>Start a server</p>
 <pre><code class="language-bash">python -m http.server
 </code></pre>
+<h3 id="notebooks-to-markdown">notebooks to markdown</h3>
+<p>I started with nbdev to convert notebooks to markdown, but it slowed down rebuilding the blog a lot, and its pretty complex. So in the end I've stuck with nbconvert. Some useful tips:</p>
+<ul>
+<li><a href="https://stackoverflow.com/questions/64127278/what-is-the-proper-way-to-specify-a-custom-template-path-for-jupyter-nbconvert-v">specify templates</a></li>
+</ul>
 <h3 id="code-highlight">code highlight</h3>
 <p>python markdown has pygments built in, which has a bunch of styles. To generate the css:</p>
 <pre><code class="language-bash">pygmentize -S default -f html -a .codehilite &gt; codestyles.css
 </code></pre>
-<p>The </p>
+<p>But on second thought decided to can this and go with something else. </p>
 <h3 id="html">html</h3>
 <ul>
 <li><a href="https://github.com/joshbuchea/HEAD">what to put in the head of a html page</a></li>
@@ -91,11 +112,11 @@
 <p>Frameworks I looked at:</p>
 <ul>
 <li><a href="https://tachyons.io/">https://tachyons.io/</a> </li>
-<li><a href="https://tailwindcss.com/">https://tailwindcss.com/</a></li>
+<li><a href="https://tailwindcss.com/">https://tailwindcss</a> - at first sight it looked horrible, with style mixed in with html, but once I thought about it some more, its beautiful. Everything is there visible in the one file and I hate css files anyways. So leaning towards using this, the only downside being is that you need npm to generate the final production tailwind css file. More to follow once I actually implement it...</li>
 <li><a href="https://purecss.io/">Pure.css</a></li>
 <li><a href="https://github.com/kognise/water.css">water.css</a></li>
 <li><a href="https://milligram.io/">milligram</a></li>
-<li><a href="https://newcss.net/">newcss</a></li>
+<li><a href="https://newcss.net/">newcss</a> - awesome, simple, super easy to use - basically just write html and it it makes it look nice and clean. Best for simple things like this blog. Only reason to switch to a more complex css file is cause even simple posts like this need small text and slide-outs for post meta-data like tags and date info etc.</li>
 <li><a href="https://ajusa.github.io/lit/docs/lit.html">lit</a></li>
 <li><a href="https://concrete.style/">concrete.css</a> - very minimal</li>
 <li>https://csslayout.io/ - examples of using css directly</li>
@@ -104,9 +125,9 @@
 <p>Search. I want search. </p>
 <p>Considered at</p>
 <ul>
-<li><a href="https://fusejs.io/">fusejs</a> - <a href="https://gist.github.com/cmod/5410eae147e4318164258742dd053993#staticjsfastsearchjs">blog post implementing this in hugo</a></li>
+<li><a href="https://fusejs.io/">fusejs</a> - <a href="https://gist.github.com/cmod/5410eae147e4318164258742dd053993#staticjsfastsearchjs">blog post implementing this in hugo</a> - used this first. It works and is pretty straightforward but has no python integration and I would like better examples as a js newbie.</li>
 <li><a href="https://lucaong.github.io/minisearch/">minisearch</a></li>
-<li>consider lunr as well as <a href="https://github.com/yeraydiazdiaz/lunr.py">lunr.py</a> to pre generate the index.</li>
+<li>consider <a href="https://lunrjs.com/">lunr.js</a> as well as <a href="https://github.com/yeraydiazdiaz/lunr.py">lunr.py</a> to pre generate the index.</li>
 </ul>
 <p>So step one is to build a search index - which my script does as a json file containing all the post attributes I want searched.</p>
 <h3 id="github-actions">Github actions</h3>
@@ -157,16 +178,6 @@ for post in posts:
 </code></pre>
 </article>
 
-<div class="meta">
-    posted <time>2020-09-14</time>, updated <time>2020-11-12</time><br>
-    tagged: 
-    <a href="/python">python</a>
-
-    <ul>    
-        <li><a href="https://github.com/khalido/blog/edit/master/notes/building_this_blog.md">Edit</a></li>
-    </ul>
-
-</div>
 
 <hr>
 <footer>

@@ -23,34 +23,29 @@
  
         <header>
             <a href="/">khalido.org</a> <br>
-            I love me some subheader text.
+            some subheader text.
         </header>
 
-    <p>Here lies a bunch of text, sorted into tagged posts.</p>
 
-    <p>The search bar does a fuzzy match on the content of the posts and filters the list.</p>
+    <p>The search bar searches only the posts for that particular index page.</p>
 
     <input type="text" id="postSearch" placeholder="Search posts...">
     <ul id="searchresults">
             <li><a href="/python/PyConAu2018.html">PyCon Australia 2018</a></li>
-            <li><a href="/python/convert2md.html">Jupyter notebooks to markdown</a></li>
-            <li><a href="/python/us_elections_2020.html">US Elections 2020</a></li>
             <li><a href="/python/building_this_blog.html">how the blog was built</a></li>
-            <li><a href="/python/Advent-of-Code-2015.html">Advent of Code 2015</a></li>
-            <li><a href="/python/blogging_with_jupyter_notebooks.html">Blogging with Jupyter notebooks</a></li>
             <li><a href="/python/note_in_subfolder.html">Testing note in a subfolder</a></li>
             <li><a href="/python/anaconda.html">Using Anaconda</a></li>
-            <li><a href="/python/monty_hall.html">Monty Hall</a></li>
             <li><a href="/python/advent-of-code-2016.html">Advent of Code 2016</a></li>
             <li><a href="/courses/udacity-cs101.html">Udacity CS101: Intro to CS</a></li>
-    </ul>    
+    </ul>
+    
 
     <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
 
     <script>
         // load json from disk instead of passing in python array
 
-        const searchList = [{"title": "PyCon Australia 2018", "tags": ["python", "talks"], "link": "python/PyConAu2018.html"}, {"title": "Jupyter notebooks to markdown", "tags": ["python"], "link": "python/convert2md.html"}, {"title": "US Elections 2020", "tags": ["python"], "link": "python/us_elections_2020.html"}, {"title": "how the blog was built", "tags": ["python"], "link": "python/building_this_blog.html"}, {"title": "Advent of Code 2015", "tags": ["python"], "link": "python/Advent-of-Code-2015.html"}, {"title": "Blogging with Jupyter notebooks", "tags": ["python"], "link": "python/blogging_with_jupyter_notebooks.html"}, {"title": "Testing note in a subfolder", "tags": ["python"], "link": "python/note_in_subfolder.html"}, {"title": "Using Anaconda", "tags": ["python"], "link": "python/anaconda.html"}, {"title": "Monty Hall", "tags": ["python"], "link": "python/monty_hall.html"}, {"title": "Advent of Code 2016", "tags": ["python"], "link": "python/advent-of-code-2016.html"}, {"title": "Udacity CS101: Intro to CS", "tags": ["courses", "python"], "link": "courses/udacity-cs101.html"}]
+        const searchList = [{"title": "PyCon Australia 2018", "tags": ["python", "talks"], "link": "python/PyConAu2018.html"}, {"title": "how the blog was built", "tags": ["python"], "link": "python/building_this_blog.html"}, {"title": "Testing note in a subfolder", "tags": ["python"], "link": "python/note_in_subfolder.html"}, {"title": "Using Anaconda", "tags": ["python"], "link": "python/anaconda.html"}, {"title": "Advent of Code 2016", "tags": ["python"], "link": "python/advent-of-code-2016.html"}, {"title": "Udacity CS101: Intro to CS", "tags": ["courses", "python"], "link": "courses/udacity-cs101.html"}]
 
         const options = {
             includeScore: false,
