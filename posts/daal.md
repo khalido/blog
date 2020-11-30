@@ -2,7 +2,7 @@
 title: Daal (lentils)
 date: 2019-08-04
 tags:
-- recipe
+- recipes
 ---
 
 A simple daal recipe.
@@ -11,41 +11,38 @@ A simple daal recipe.
 
 ## Ingredients
 
-- 2 cups dhaal
-- 2 tomatoes
+- 2 cups mixed dhal - 1 cup mung and 1 cup masoor
+- 2 tomatoes chopped
+- 1 onion, chopped fine
 - a decent amount of cumin seeds (more than a tsp, less than a tbsp)
 - lots of garlic (3-5 cloves), or 2 tsp crushed garlic
+- a bit of ginger paste
 - two fresh chillis (omit if kids)
-- 1 cup frozen peas or some other veggie
-- a bunch of coriander
+- 1 cup frozen peas, defrost for a minute in boiling water and drain
+- coriander, chopped
 
 ## Spice
 
 - 1 tsp chilli (use 1/2 tsp if kids)
 - 2 tsp salt (1 tsp per cup of daal)
 - pinch of tumeric/haldi
-- 1/2 tsp garam masala
+- 1/4 tsp garam masala
 
 ## Directions
 
 - rinse lentils a few times, then soak for at least 30 minutes
 - put lentils on low heat
-- dice garlic and chuck into the dhal
-- dice tomatoes and add to daal
-- ditto all the spice and salt
+- add onions, tomatoes, garlic and ginger and then all the spices and salt. mix well.
 - slice a chilli down the middle and toss it into the dhal
+- turn the heat up until close to boiling, then put it on low heat to cook.
 
-so now you have the dhal boiling away, which takes a while. Turn the heat up somewhat until the dhal comes to a boil and then put it down to low again.
-
-## Daal topping 
+## bhaagar 
 
 Start this when the dhal seems to be about 10 minutes from being cooked:
 
 - Take a non stick saucepan, and a liberal amount of oil, the base should be coated.
 - thrown in cumin seeds into hot oil 
-- 60 seconds later thrown in the garlic and rest of the chilli 
-- soon after chuck in the peas/brocolli
-- optional: once the veggies are a bit fried or if it looks like they are sticking to the pan, throw a some diced tomatoe
+- after 2-3 minutes add the peas, salt 
 
 Add this to the daal once it’s almost fully cooked, stir and leave for a few minutes.
 

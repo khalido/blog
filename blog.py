@@ -157,8 +157,7 @@ def md_to_post(p: Path, post_type=default_post_type, debug=False):
     html = md.convert(txt)
 
     # enable toc for posts if toc: True in front matter
-    # always enable toc for notebooks as toc flag not passing through
-    if (toc := fm.get("toc", False)) or post_type == "notebook":
+    if (toc := fm.get("toc", False)) :
         toc = md.toc
 
     link = f"{tags[0]}/{slug}.html"
@@ -310,7 +309,7 @@ def write_posts(posts, tmpl: str = "post.html"):
         print(f"wrote {post.slug} to {path}")
 
 
-def write_index_page(posts, tmpl: str = "index.html", foldername=None):
+def write_index_page(posts, tags=None, tmpl: str = "index.html", foldername=None):
     """makes a html index page in the foldername using list of posts passed in
     
     Args:
@@ -333,6 +332,7 @@ def write_index_page(posts, tmpl: str = "index.html", foldername=None):
 
     html = template.render(
         posts=posts,
+        tags=tags,
         title=title,
         postsjson=postsjson,
         header=header,
@@ -358,7 +358,7 @@ def write_tags(posts, tags):
 def write_all(posts: list, tags: dict):
     """this writes all the html pages to disk"""
     # posts, postsdict, tags = get_posts()
-    write_index_page(posts=posts, foldername="")
+    write_index_page(posts=posts, tags=tags, foldername="")
     write_tags(posts=posts, tags=tags)
     write_posts(posts=posts)
 

@@ -1,14 +1,16 @@
 ---
 title: "how the blog was built"
-date: 2020-09-14
+date: 2020-11-11
 tags:
 - python
 toc: true
 ---
 
-Hereby I talk through writing my own blog engine. There are many excellent ones out there, but to customize any of them takes so much understanding of how they work, the template and theme engines they use, that its easier to just use them exactly as is with an existing theme. I wanted my own custom static blog, and a reason to do some python coding, so here goes yet another python blogging script.
+Hereby I talk through writing my own blog engine. There are many excellent ones out there, but to customise any of them takes so much understanding of how they work, the template and theme engines they use, that its easier to just use them exactly as is with an existing theme. 
 
-This post documents the process of building this blog. The main goal is to put markdown and jupyter notebooks in a folder, and build a static site which gets autoupdated on [github pages](https://pages.github.com/) or [netlify]https://www.netlify.com/). Just like [hugo](https://gohugo.io/), [jekyll](https://jekyllrb.com/), [gatsby](https://www.gatsbyjs.org/) and so many others!
+I wanted my own custom static blog, which played well with jupyter notebooks and markdown files, as well as a reason to do some python coding, so here goes yet another python blogging engine.
+
+This post documents the process of building this blog. The main goal is to put markdown and jupyter notebooks in a folder, and build a static site which gets autoupdated on [github pages](https://pages.github.com/) or [netlify](https://www.netlify.com/). Just like [hugo](https://gohugo.io/), [jekyll](https://jekyllrb.com/), [gatsby](https://www.gatsbyjs.org/) and so many others!
 
 ## the basic blog
 
@@ -18,8 +20,9 @@ Key tools used:
 
 - **write:** markdown docs using any editor and jupyter notebooks having yaml front matter
 - **make the blog:** 
-  - [nbconvert] to parse jupyter to markdown [python markdown] to parse markdown to html
-  - python to read all the markdown files using [python markdown](https://python-markdown.github.io/) and [yaml](https://pyyaml.org/wiki/PyYAMLDocumentation) make html pages for index, tags and posts using [mako](https://www.makotemplates.org/) for python friendly templates
+  - [nbdev](https://github.com/fastai/nbdev) to parse jupyter to markdown [python markdown] to parse markdown to html
+  - python to read all the markdown files using [python markdown](https://python-markdown.github.io/) and [yaml](https://pyyaml.org/wiki/PyYAMLDocumentation). 
+  - finally, writing html pages for index, tags and posts using [mako](https://www.makotemplates.org/) for python friendly templates.
 - **search:** [fusejs](https://fusejs.io/) to make a in browser search engine
 - every time a post is added or updated, the whole site needs to be rebuilt and redeployed. 
   - **build site:** every time I commit to my blog repo, a github action is triggered which rebuilds the sites and saves the output to a `_site` folder.
@@ -42,6 +45,13 @@ python -m http.server
 
 
 
+### notebooks to markdown
+
+I started with nbdev to convert notebooks to markdown, but it slowed down rebuilding the blog a lot, and its pretty complex. So in the end I've stuck with nbconvert. Some useful tips:
+
+- [specify templates](https://stackoverflow.com/questions/64127278/what-is-the-proper-way-to-specify-a-custom-template-path-for-jupyter-nbconvert-v)
+
+
 ### code highlight
 
 python markdown has pygments built in, which has a bunch of styles. To generate the css:
@@ -50,8 +60,7 @@ python markdown has pygments built in, which has a bunch of styles. To generate 
 pygmentize -S default -f html -a .codehilite > codestyles.css
 ```
 
-The 
-
+But on second thought decided to can this and go with something else. 
 
 
 ### html
@@ -64,11 +73,11 @@ The
 Frameworks I looked at:
 
 - [https://tachyons.io/](https://tachyons.io/) 
-- [https://tailwindcss.com/](https://tailwindcss.com/)
+- [https://tailwindcss](https://tailwindcss.com/) - at first sight it looked horrible, with style mixed in with html, but once I thought about it some more, its beautiful. Everything is there visible in the one file and I hate css files anyways. So leaning towards using this, the only downside being is that you need npm to generate the final production tailwind css file. More to follow once I actually implement it...
 - [Pure.css](https://purecss.io/)
 - [water.css](https://github.com/kognise/water.css)
 - [milligram](https://milligram.io/)
-- [newcss](https://newcss.net/)
+- [newcss](https://newcss.net/) - awesome, simple, super easy to use - basically just write html and it it makes it look nice and clean. Best for simple things like this blog. Only reason to switch to a more complex css file is cause even simple posts like this need small text and slide-outs for post meta-data like tags and date info etc.
 - [lit](https://ajusa.github.io/lit/docs/lit.html)
 - [concrete.css](https://concrete.style/) - very minimal
 - https://csslayout.io/ - examples of using css directly
@@ -79,9 +88,9 @@ Search. I want search.
 
 Considered at
 
-- [fusejs](https://fusejs.io/) - [blog post implementing this in hugo](https://gist.github.com/cmod/5410eae147e4318164258742dd053993#staticjsfastsearchjs)
+- [fusejs](https://fusejs.io/) - [blog post implementing this in hugo](https://gist.github.com/cmod/5410eae147e4318164258742dd053993#staticjsfastsearchjs) - used this first. It works and is pretty straightforward but has no python integration and I would like better examples as a js newbie.
 - [minisearch](https://lucaong.github.io/minisearch/)
-- consider lunr as well as [lunr.py](https://github.com/yeraydiazdiaz/lunr.py) to pre generate the index.
+- consider [lunr.js](https://lunrjs.com/) as well as [lunr.py](https://github.com/yeraydiazdiaz/lunr.py) to pre generate the index.
 
 So step one is to build a search index - which my script does as a json file containing all the post attributes I want searched.
 

@@ -2,7 +2,7 @@
 title: Spicy Chickpeas
 date: 2020-09-04
 tags:
-- recipe
+- recipes
 ---
 
 ## Spices (put aside in small bowl)

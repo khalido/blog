@@ -6,16 +6,23 @@
 
 <%include file="header.html"/ args="title=title, header=header, header_text=header_text"/>
 
-    <p>Here lies a bunch of text, sorted into tagged posts.</p>
+    % if tags:
+        <p>tags: 
+            % for tag in sorted(tags.keys()):
+                <a href="/${tag}">${tag}</a> 
+            % endfor
+        </p>
+    % endif
 
-    <p>The search bar does a fuzzy match on the content of the posts and filters the list.</p>
+    <p>The search bar searches only the posts for that particular index page.</p>
 
     <input type="text" id="postSearch" placeholder="Search posts...">
     <ul id="searchresults">
         % for post in posts:
             <li><a href="/${post.link}">${post.title}</a></li>
         % endfor
-    </ul>    
+    </ul>
+    
 
     <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
 

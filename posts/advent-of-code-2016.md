@@ -4,7 +4,8 @@ description: Notes on some of the AOC16 puzzles
 date: 2019-02-02
 toc: true
 layout: post
-tags: [python]
+tags: 
+- python
 ---
 
 todo: convert this into a jupyter notebook and repost.

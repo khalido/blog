@@ -1,18 +1,15 @@
 ---
-title: floodfill algorithim
-
+title: Floodfill algorithim
 date: 2018-08-10
-tags: [algorithims]
-summary: "a simple floodfill algo implementation"
-description: "a simple floodfill algo implementation"
+toc: false
+tags: 
+- algorithims
 ---
-
 
 Flood Fill is a way to to visit every point in a bounded region. This makes it useful for many purposes. In this notebook I implement the "bucket fill" flood fill algo.
 
 First up generating a grid to flood fill:
-<div class="codecell" markdown="1">
-<div class="input_area" markdown="1">
+
 
 ```python
 import numpy as np
@@ -23,9 +20,6 @@ import matplotlib.pyplot as plt
 fill = np.random.randint(0, 2, size=(128,128), dtype="int")
 fill
 ```
-
-</div>
-<div class="output_area" markdown="1">
 
 
 
@@ -40,30 +34,19 @@ fill
 
 
 
-</div>
-
-</div>
-<div class="codecell" markdown="1">
-<div class="input_area" markdown="1">
 
 ```python
 plt.imshow(fill);
 ```
 
-</div>
-<div class="output_area" markdown="1">
 
+    
+![png](flood_fill_files/flood_fill_3_0.png)
+    
 
-![png](flood_fill_files/output_2_0.png)
-
-
-</div>
-
-</div>
 
 The below function is a recursive implementation of flood fill - it will flood fill a a single region from 1 val to another:
-<div class="codecell" markdown="1">
-<div class="input_area" markdown="1">
+
 
 ```python
 def flood_fill(x, y, old, new):
@@ -90,13 +73,8 @@ def flood_fill(x, y, old, new):
         flood_fill(x, y+1, old, new)
 ```
 
-</div>
-
-</div>
-
 Here, I flood fill the `fill`, converting all the `1`'s to `8`'s.
-<div class="codecell" markdown="1">
-<div class="input_area" markdown="1">
+
 
 ```python
 region_count = 0
@@ -116,53 +94,68 @@ for i in range(len(fill)):
                 plt.show()
 ```
 
-</div>
-<div class="output_area" markdown="1">
 
-
-![png](flood_fill_files/output_6_0.png)
-
-
-
-![png](flood_fill_files/output_6_1.png)
+    
+![png](flood_fill_files/flood_fill_7_0.png)
+    
 
 
 
-![png](flood_fill_files/output_6_2.png)
+    
+![png](flood_fill_files/flood_fill_7_1.png)
+    
 
 
 
-![png](flood_fill_files/output_6_3.png)
+    
+![png](flood_fill_files/flood_fill_7_2.png)
+    
 
 
 
-![png](flood_fill_files/output_6_4.png)
+    
+![png](flood_fill_files/flood_fill_7_3.png)
+    
 
 
 
-![png](flood_fill_files/output_6_5.png)
+    
+![png](flood_fill_files/flood_fill_7_4.png)
+    
 
 
 
-![png](flood_fill_files/output_6_6.png)
+    
+![png](flood_fill_files/flood_fill_7_5.png)
+    
 
 
 
-![png](flood_fill_files/output_6_7.png)
+    
+![png](flood_fill_files/flood_fill_7_6.png)
+    
 
 
 
-![png](flood_fill_files/output_6_8.png)
+    
+![png](flood_fill_files/flood_fill_7_7.png)
+    
 
 
 
-![png](flood_fill_files/output_6_9.png)
+    
+![png](flood_fill_files/flood_fill_7_8.png)
+    
 
 
 
-![png](flood_fill_files/output_6_10.png)
+    
+![png](flood_fill_files/flood_fill_7_9.png)
+    
 
 
-</div>
 
-</div>
+    
+![png](flood_fill_files/flood_fill_7_10.png)
+    
+
