@@ -3,9 +3,8 @@ title: "deeplearning.ai: Structuring Machine Learning Projects"
 date: 2018-01-01
 description: notes for part 3 of the deeplearning.ai course
 image: /images/deeplearningai-3-of-5-cert.png
-category: [courses, deep learning]
-layout: post
-toc: false
+tags:
+- courses
 ---
 
 This course covers how to think about and improve machine learning systems.

@@ -2,9 +2,9 @@
 title: "Notes for Harvard's Cs109 data science class"
 date: 2017-04-04
 description: Notes as I worked through CS109.
-layout: post
-toc: true
-categories: [python, data science]
+tags:
+- python
+- data science
 ---
 
 These are my notes for [Harvard's 2015 CS109 class](http://cs109.github.io/2015/), which i went through with Sydney Machine Learning's [study group](https://sydneymachinelearningblog.wordpress.com/cs-109-study-group/) from Ausgust to October 2017 at Amazon Web Service's sydney office.

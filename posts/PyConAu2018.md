@@ -1,9 +1,9 @@
 ---
 title: "PyCon Australia 2018"
 description: Notes for PyconAU 2018.
-layout: post
-toc: true
-tags: [python, talks]
+date: 2018-09-20
+tags:
+- python
 ---
 
 My notes for the [PyConAU 2018 talks](https://2018.pycon-au.org/schedule/) I went to.

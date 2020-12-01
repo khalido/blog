@@ -1,36 +1,23 @@
 ---
 title: "Setting up Linux on a Chromebook with Crostini"
 date: 2018-08-24
-lastmod: 2019-08-7
+lastmod: 2020-01-07
 tags:
 - chromebooks
-draft: false
-toc: true
+- linux
 ---
 
-ChromeOS supports a built in Linux - running inside a container running insde a VM. Turn it on by going to settings and pressing the on button for Linux (beta). This gives us a bare bones Linux install running Debian Stretch. So here goes all the things I did to customize it.
+ChromeOS supports a built in Linux - running inside a container running insde a VM. Turn it on by going to settings and pressing the on button for Linux (beta). This gives us a bare bones Linux install running Debian 10 (formerly known as buster). So here goes all the things I did to customize it.
 
 Most of these tips are from the [reddit crostini wiki](https://www.reddit.com/r/Crostini/wiki/index), I've put all the ones I'm using in one page for a handy reference.
 
 ## Install all the apps
 
-### use backports to get recent packages
-
-
-the default crostini container/vm whatever is running debian stretch, which is nice and stable, but has a lot of old packages in its repo.
-
-To install apps, use the backports repo, which contains newer packages from debian testing and unstable. This is already configured in ChromeOS (at least in 76). Hopefully newer versions of ChromeOS switch to the 2019 release of Debian.
-
-
-by default apt will pull old packages from stretch, so to install something from backports:
-
-`sudo apt -t stretch-backports install package_name`
-
 ### flatpak
 
-Even stretch-backports is full of not new enough apps. So for really new versions use flatpak.
+the debian repos often have older packages, so for really new versions use flatpak.
 
-Install flatpak: `sudo apt install -t stretch-backports flatpak`
+Install flatpak: `sudo apt install flatpak`
 
 
 Add the flatpak repo:
@@ -85,9 +72,9 @@ Note: install [miniconda](https://docs.conda.io/en/latest/miniconda.html) instea
 
 go to the [Anaconda linux download page](https://www.anaconda.com/download/#linux) and copy the url, then download it:
 
-`curl -O https://repo.anaconda.com/archive/Anaconda3-2019.07-Linux-x86_64.sh` # (update url)
+`curl -O https://repo.anaconda.com/archive/Anaconda3-2020.11-Linux-x86_64.sh` - check for update url [here](https://www.anaconda.com/products/individual#linux).
 
-Install by `bash Anaconda3-2019.07-Linux-x86_64.sh` - change filename to whatever the downloaded file name is.
+Install by `bash Anaconda3-2020.11-Linux-x86_64.sh` - change filename to whatever the downloaded file name is.
 
 ### jupyter lab
 
@@ -101,7 +88,7 @@ To install [extensions](https://github.com/mauhai/awesome-jupyterlab), first ins
 
 Step 1: install [nvm](https://github.com/nvm-sh/nvm#install--update-script), a script to install nodejs
 
-`curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash`
+`curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash`
 
 step 2: install nodejs itself by:
 
@@ -118,7 +105,7 @@ todo: try out [nteract](https://nteract.io/) - a react based desktop front end f
 
 ### install a R kernel
 
-I hate doing this, but sometimes you need R. So here goes:
+Sometimes you need R. So here goes:
 
 ```
 conda create -n R r-essentials r-base
@@ -138,7 +125,9 @@ this is really important, cause if the terminal doesn't look like something out 
 
 I'm using [Tilix](https://gnunn1.github.io/tilix-web/), install by
 
-`sudo apt -t stretch-backports install tilix`
+`sudo apt install tilix`
+
+though as of ChromeOS 77 the built in terminal is pretty good, so no need for this.
 
 ### fix window shortcuts
 
@@ -167,7 +156,7 @@ This has to be done only once, since ChromeOS remembers the terminal settings ac
 
 If using Tilix, no need to do this, but for the native terminal,  install tmux:
 
-`sudo apt -t stretch-backports install tmux`
+`sudo apt install tmux`
 
 the only thing I really do with tmux is to split the terminal horizontally, then splitting one horizontal terminal vertically, for a total of three windows. Now there is a lot more about sessions and whats not, but the bare basics are:
 
@@ -187,7 +176,7 @@ rumour has it that crostini can have a heart attack if you change the shell, so 
 
 also install [powerline-fonts](https://github.com/powerline/fonts) and select a powerline font for the terminal.
 
-`sudo apt -t stretch-backports install fonts-powerline`
+`sudo apt install fonts-powerline`
 
 Useful shell tools:
 

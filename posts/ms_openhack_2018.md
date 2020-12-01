@@ -1,11 +1,11 @@
 ---
 title: "Microsoft OpenHack 2018 Sydney"
-description: incomplete notes from openhack
-hide: true
-description: "notes taken during/after this meetup"
-category: [meetup, data science]
-layout: post
+description: "incomplete notes from openhack"
+date: 2018-06-14
 toc: false
+tags:
+- data science
+- meetup
 ---
 
 My first ever hackathon! Or so it was called. Notes:

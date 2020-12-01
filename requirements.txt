@@ -1,6 +1,6 @@
 Mako
 markdown
 pymdown-extensions
-#nbconvert
+nbconvert
 pyyaml
 #nbdev

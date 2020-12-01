@@ -1,10 +1,9 @@
 ---
 title: "MacOS"
 description: "setup notes for osx"
-category: [mac]
-layout: post
-toc: true
-hide: true
+date: 2020-01-20
+tags:
+- mac
 ---
 
 # Install the latest macOS

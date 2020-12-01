@@ -1,9 +1,10 @@
 ---
 title: "MITx 6.00.2X: Intro to Computational Thinking and Data Science"
 description: "a great intro course to python"
-category: [courses, python]
-layout: post
-toc: false
+date: 2018-09-20
+tags:
+- courses
+- python
 ---
 
 I really liked this class - it was a engaging course to do after having done some intro level stuff.

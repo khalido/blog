@@ -1,6 +1,7 @@
-# ignore public folder as i don't want to sync this to github
+# ignore these folders as i don't want to sync this to github
 public/
 tmp/
+nb2md/
 
 # misc stuff
 .vscode

@@ -2,10 +2,8 @@
 title: "Gooogle Chrome"
 date: 2017-03-09
 description: "make chrome work better"
-category: [apps]
-layout: post
-toc: true
-hide: true
+tags:
+- apps
 ---
 
 Notes on making Google chrome work for me. Needs updating for 2020.

@@ -19,11 +19,10 @@ import re
 from collections import defaultdict
 from dataclasses import dataclass
 from typing import List, Optional
+import argparse
 
 # external libs, try to minimize use
 import yaml
-
-# import nbformat
 
 # import pandas as pd  # no real need to use this so rethink later
 from mako.template import Template
@@ -35,6 +34,7 @@ import markdown
 import pymdownx.emoji
 
 # import nbconvert
+# import nbformat
 
 
 @dataclass
@@ -79,7 +79,13 @@ path_publish: Path = Path(config["paths"]["publish"])  # final output folder
 # configure python markdown parser
 #############################################
 # make enters into line breaks by adding "nl2br", add emoji extension
-extensions = ["extra", "toc", "pymdownx.emoji"]  # , "smarty", "codehilite"
+extensions = [
+    "extra",
+    "toc",
+    "pymdownx.emoji",
+    # "codehilite", # https://python-markdown.github.io/extensions/code_hilite/
+    # "smarty"
+]
 
 # https://help.farbox.com/pygments.html - consider monokai default themes
 # noclasses: True puts all the styling in the html itself. False uses css styles
@@ -98,7 +104,7 @@ lookup = TemplateLookup(directories=["templates"])
 
 def convert_notebooks_to_md():
     # emptying tmp so don't end up with old md files here
-    shutil.rmtree("tmp", ignore_errors=True)
+    shutil.rmtree("nb2md", ignore_errors=True)
 
     # am I using nbconvert here?
     # exporter = nbconvert.MarkdownExporter()
@@ -111,11 +117,16 @@ def convert_notebooks_to_md():
     print(f"Converting {len(nb_paths)} notebooks to markdown files.")
 
     for nb_path in nb_paths:
-        print(f"{nb_path}")
+        try:
+            os.system(f"jupyter nbconvert --to markdown {nb_path} --output-dir nb2md")
+        except:
+            print(f"failed to convert {nb_path}")
+        print(f"converted {nb_path}")
+
         # os.system(f"jupyter nbconvert --to markdown {nb_path} --output-dir tmp")
         # make folder for exported files
-        make_folder(Path("tmp") / f"{nb_path.stem}_files")
-        os.system(f"nbdev_nb2md --dest {Path('tmp')} --jekyll=True {nb_path}")
+        # make_folder(Path("tmp") / f"{nb_path.stem}_files")
+        # os.system(f"nbdev_nb2md --dest {Path('tmp')} --jekyll=True {nb_path}")
 
         # with open(nb_path) as f:
         #     nb_node = nbformat.read(f, as_version=4)
@@ -184,13 +195,13 @@ def get_posts(debug=False):
     """reads from disk and returns a dataframe of all posts"""
 
     # convert notebooks to md and save in a tmp folder
-    # convert_notebooks_to_md()
+    convert_notebooks_to_md()
 
     # lists of md files and notebooks to convert
     md_paths = [f for f in path_md.rglob("*.md")]
 
     try:
-        nb_paths = [f for f in Path("notebooks/markdown").rglob("*.md")]
+        nb_paths = [f for f in Path("nb2md").rglob("*.md")]
     except:
         print("No md files converted from jupyter notebooks found in tmp dir")
 
@@ -376,7 +387,34 @@ def copy_static():
     print(f"TODO: copied notebook files over to {path_publish}")
 
 
+def start_server(directory="public", PORT=8000):
+    """runs basic python server"""
+    import http.server
+    import socketserver
+    import functools
+
+    # Handler = http.server.SimpleHTTPRequestHandler
+    Handler = functools.partial(
+        http.server.SimpleHTTPRequestHandler, directory=directory
+    )
+
+    with socketserver.TCPServer(("", PORT), Handler) as httpd:
+        print("serving at port", PORT)
+        httpd.serve_forever()
+
+
+# setup cli options
+parser = argparse.ArgumentParser(
+    description="build html site from posts and notebooks, and optionally, serve website."
+)
+parser.add_argument(
+    "-s", "--serve", action="store_true", help="start local website server"
+)
+
+
 if __name__ == "__main__":
+    args = parser.parse_args()
+
     # get posts
     posts, postsdict, tags = get_posts()
     # copy static files over to the publish dir
@@ -384,5 +422,8 @@ if __name__ == "__main__":
     # write all the things to the publish dir
     write_all(posts, tags)
 
-    # commit and push publish dir to gh-pages branch
-    print("Website generated, now figure out how to publish it.")
+    print("Website generated.")
+
+    if args.serve:
+        print(f"Starting server in dir {path_publish}")
+        start_server()

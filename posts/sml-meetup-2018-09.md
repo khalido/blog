@@ -1,9 +1,10 @@
 ---
 title: "SML 2018-09: Deep Reinforcement Learning"
 description: "notes from the meetup"
-category: [meetup, data science]
-layout: post
-toc: true
+date: 2018-09-20
+tags:
+- meetup
+- data science
 ---
 
 SML's [2018-09 meetup](https://www.meetup.com/Sydney-Machine-Learning/events/253797245/).

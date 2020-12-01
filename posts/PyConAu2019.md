@@ -1,9 +1,9 @@
 ---
 title: "PyCon Australia 2019"
 description: Notes for PyconAU 2019.
-layout: post
-toc: false
-categories: [python]
+date: 2019-09-20
+tags:
+- python
 ---
 
 _update this post to fix youtube video links_

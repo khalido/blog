@@ -1,6 +1,7 @@
 ---
 title: "Statistics Done Wrong: The Woefully Complete Guide"
 image: /image/stats-done-wrong-book.png
+date: 2019-05-05
 tags:
 - books
 - statistics

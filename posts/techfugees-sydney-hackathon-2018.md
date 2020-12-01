@@ -1,9 +1,9 @@
 ---
 title: "Techfugees Sydney Hackathon 2018"
 description: "hackathon notes"
-category: [meetup]
-layout: post
-toc: true
+date: 2018-07-20
+tags:
+- meetup
 ---
 
 This hackathon is about developing tech solutions to the challanges refugees face.

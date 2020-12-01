@@ -2,10 +2,8 @@
 title: "deeplearning.ai: Neural Networks and Deep Learning"
 date: 2016-01-01
 image: /images/deeplearningai-1-of-5-cert.png
-description: collection of tips for visual studio code
-category: [python, courses, deep learning]
-layout: post
-toc: false
+tags:
+- courses
 ---
 
 It had been a while since I finished Udacity's Deep Learning course, so as a refresher I signed up for Andrew NG's [deeplearning.ai](https://www.deeplearning.ai/) course.

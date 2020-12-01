@@ -3,9 +3,8 @@ title: "deeplearning.ai: Improving Deep Neural Networks"
 date: 2017-01-01
 description: my notes on part 2 of the deeplearning.ai course
 image: /imgages/deeplearningai-2-of-5-cert.png
-category: [courses, deep learning]
-layout: post
-toc: false
+tags:
+- courses
 ---
 
 [Improving Deep Neural Networks: Hyperparameter tuning, Regularization and Optimization](https://www.coursera.org/learn/deep-neural-network/home/welcome)
