@@ -16,6 +16,10 @@
         
         
 
+        <link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.4.0/styles/default.min.css">
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.4.0/highlight.min.js"></script>
+
         <title>Setting up Linux on a Chromebook with Crostini</title>
     </head>
 
@@ -30,9 +34,10 @@
         <h1>Setting up Linux on a Chromebook with Crostini</h1>
 
     <div class="meta">
-        posted <time>2018-08-24</time>, updated <time>2019-08-7</time><br>
+        posted <time>2018-08-24</time>, updated <time>2020-01-07</time><br>
         tagged: 
         <a href="/chromebooks">chromebooks</a>
+        <a href="/linux">linux</a>
         
         <p>
             <a href="https://github.com/khalido/blog/blob/master/posts/setup-crostini-chromebook.md">github</a>
@@ -40,48 +45,15 @@
     
     </div>
     
-    <details open>
-        <summary>Table of contents.</summary>
-        <div class="toc">
-<ul>
-<li><a href="#install-all-the-apps">Install all the apps</a><ul>
-<li><a href="#use-backports-to-get-recent-packages">use backports to get recent packages</a></li>
-<li><a href="#flatpak">flatpak</a></li>
-<li><a href="#vs-code">vs code</a></li>
-<li><a href="#markdown-app">markdown app</a></li>
-</ul>
-</li>
-<li><a href="#install-anaconda-for-a-better-python">install anaconda for a better python</a><ul>
-<li><a href="#jupyter-lab">jupyter lab</a></li>
-<li><a href="#install-a-r-kernel">install a R kernel</a></li>
-</ul>
-</li>
-<li><a href="#make-the-terminal-nicer-to-use">make the terminal nicer to use</a><ul>
-<li><a href="#fix-window-shortcuts">fix window shortcuts</a></li>
-<li><a href="#multiplex-all-the-things">multiplex all the things</a></li>
-<li><a href="#jazz-up-the-shell">jazz up the shell</a></li>
-<li><a href="#setup-vim-proper-like">setup vim proper like</a></li>
-</ul>
-</li>
-<li><a href="#download-all-my-git-repos">Download all my git repos</a></li>
-</ul>
-</div>
-
-    </details>
     
     <hr>
     
-    <p>ChromeOS supports a built in Linux - running inside a container running insde a VM. Turn it on by going to settings and pressing the on button for Linux (beta). This gives us a bare bones Linux install running Debian Stretch. So here goes all the things I did to customize it.</p>
+    <p>ChromeOS supports a built in Linux - running inside a container running insde a VM. Turn it on by going to settings and pressing the on button for Linux (beta). This gives us a bare bones Linux install running Debian 10 (formerly known as buster). So here goes all the things I did to customize it.</p>
 <p>Most of these tips are from the <a href="https://www.reddit.com/r/Crostini/wiki/index">reddit crostini wiki</a>, I've put all the ones I'm using in one page for a handy reference.</p>
 <h2 id="install-all-the-apps">Install all the apps</h2>
-<h3 id="use-backports-to-get-recent-packages">use backports to get recent packages</h3>
-<p>the default crostini container/vm whatever is running debian stretch, which is nice and stable, but has a lot of old packages in its repo.</p>
-<p>To install apps, use the backports repo, which contains newer packages from debian testing and unstable. This is already configured in ChromeOS (at least in 76). Hopefully newer versions of ChromeOS switch to the 2019 release of Debian.</p>
-<p>by default apt will pull old packages from stretch, so to install something from backports:</p>
-<p><code>sudo apt -t stretch-backports install package_name</code></p>
 <h3 id="flatpak">flatpak</h3>
-<p>Even stretch-backports is full of not new enough apps. So for really new versions use flatpak.</p>
-<p>Install flatpak: <code>sudo apt install -t stretch-backports flatpak</code></p>
+<p>the debian repos often have older packages, so for really new versions use flatpak.</p>
+<p>Install flatpak: <code>sudo apt install flatpak</code></p>
 <p>Add the flatpak repo:</p>
 <p><code>sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo</code></p>
 <p>Install apps by going to the app page on flathub and copying the install line at the bottom - for example to install <a href="https://flathub.org/apps/details/de.wolfvollprecht.UberWriter">Uberwriter</a> its:</p>
@@ -113,15 +85,15 @@ sudo apt install typora
 <h2 id="install-anaconda-for-a-better-python">install anaconda for a better python</h2>
 <p>Note: install <a href="https://docs.conda.io/en/latest/miniconda.html">miniconda</a> instead to save space if needed.</p>
 <p>go to the <a href="https://www.anaconda.com/download/#linux">Anaconda linux download page</a> and copy the url, then download it:</p>
-<p><code>curl -O https://repo.anaconda.com/archive/Anaconda3-2019.07-Linux-x86_64.sh</code> # (update url)</p>
-<p>Install by <code>bash Anaconda3-2019.07-Linux-x86_64.sh</code> - change filename to whatever the downloaded file name is.</p>
+<p><code>curl -O https://repo.anaconda.com/archive/Anaconda3-2020.11-Linux-x86_64.sh</code> - check for update url <a href="https://www.anaconda.com/products/individual#linux">here</a>.</p>
+<p>Install by <code>bash Anaconda3-2020.11-Linux-x86_64.sh</code> - change filename to whatever the downloaded file name is.</p>
 <h3 id="jupyter-lab">jupyter lab</h3>
 <p>Works out of the box with Anaconda. If using miniconda, install by</p>
 <p><code>conda install -c conda-forge jupyterlab</code></p>
 <p>Other useful stuff for Jupyter:</p>
 <p>To install <a href="https://github.com/mauhai/awesome-jupyterlab">extensions</a>, first install nodejs:</p>
 <p>Step 1: install <a href="https://github.com/nvm-sh/nvm#install--update-script">nvm</a>, a script to install nodejs</p>
-<p><code>curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash</code></p>
+<p><code>curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash</code></p>
 <p>step 2: install nodejs itself by:</p>
 <p><code>nvm install node</code></p>
 <p>Some seful jupyterlab extensions:</p>
@@ -131,7 +103,7 @@ sudo apt install typora
 </ul>
 <p>todo: try out <a href="https://nteract.io/">nteract</a> - a react based desktop front end for jupyter.</p>
 <h3 id="install-a-r-kernel">install a R kernel</h3>
-<p>I hate doing this, but sometimes you need R. So here goes:</p>
+<p>Sometimes you need R. So here goes:</p>
 <pre><code>conda create -n R r-essentials r-base
 </code></pre>
 <p>Presto! now R should show up as a kernel in jupyter.</p>
@@ -141,7 +113,8 @@ sudo apt install typora
 <h2 id="make-the-terminal-nicer-to-use">make the terminal nicer to use</h2>
 <p>this is really important, cause if the terminal doesn't look like something out of a movie, are you really doing something?</p>
 <p>I'm using <a href="https://gnunn1.github.io/tilix-web/">Tilix</a>, install by</p>
-<p><code>sudo apt -t stretch-backports install tilix</code></p>
+<p><code>sudo apt install tilix</code></p>
+<p>though as of ChromeOS 77 the built in terminal is pretty good, so no need for this.</p>
 <h3 id="fix-window-shortcuts">fix window shortcuts</h3>
 <p>First up, the native terminal gobbles up some of my fav chromeos shortcuts, namely:</p>
 <ul>
@@ -162,7 +135,7 @@ sudo apt install typora
 <p>This has to be done only once, since ChromeOS remembers the terminal settings across devices. So handy after a powerwash.</p>
 <h3 id="multiplex-all-the-things">multiplex all the things</h3>
 <p>If using Tilix, no need to do this, but for the native terminal,  install tmux:</p>
-<p><code>sudo apt -t stretch-backports install tmux</code></p>
+<p><code>sudo apt install tmux</code></p>
 <p>the only thing I really do with tmux is to split the terminal horizontally, then splitting one horizontal terminal vertically, for a total of three windows. Now there is a lot more about sessions and whats not, but the bare basics are:</p>
 <p>start tmux by typing <code>tmux</code>, then press <code>ctrl+b</code> to enter command mode. <code>"</code> splits the window horizontally and <code>%</code> splits it vertically. To move around, press <code>ctrl-b arrow-key</code></p>
 <p>For more customizatoin, make a <code>.tmux.conf</code> in the home directory and add:</p>
@@ -172,7 +145,7 @@ set -g mouse on
 <h3 id="jazz-up-the-shell">jazz up the shell</h3>
 <p>rumour has it that crostini can have a heart attack if you change the shell, so stick with bash. Consider <a href="https://github.com/ohmybash/oh-my-bash">oh-my-bash</a> or <a href="https://github.com/ohmybash/oh-my-bash">bash-it</a> for hacker level coding.</p>
 <p>also install <a href="https://github.com/powerline/fonts">powerline-fonts</a> and select a powerline font for the terminal.</p>
-<p><code>sudo apt -t stretch-backports install fonts-powerline</code></p>
+<p><code>sudo apt install fonts-powerline</code></p>
 <p>Useful shell tools:</p>
 <p><a href="https://tldr.sh">tldr</a> shows a short and useful help page for commands, e.g type <code>tldr curl</code> to get a synopsis of how to use curl.</p>
 <ul>
@@ -217,6 +190,8 @@ set linebreak
 <pre><code class="language-bash">curl -s https://api.github.com/users/khalido/repos?per_page=200 | grep \&quot;clone_url\&quot; | awk '{print $2}' | sed -e 's/&quot;//g' -e 's/,//g' | xargs -n1 git clone
 </code></pre>
 </article>
+
+<script>hljs.initHighlightingOnLoad();</script>
 
 
 <hr>

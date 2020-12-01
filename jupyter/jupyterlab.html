@@ -16,6 +16,10 @@
         
         
 
+        <link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.4.0/styles/default.min.css">
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.4.0/highlight.min.js"></script>
+
         <title>Jupyter Lab tips and tricks</title>
     </head>
 
@@ -30,7 +34,7 @@
         <h1>Jupyter Lab tips and tricks</h1>
 
     <div class="meta">
-        posted <time>2019-08-04</time>, updated <time>2020-11-30</time><br>
+        posted <time>2019-08-04</time>, updated <time>2020-12-01</time><br>
         tagged: 
         <a href="/jupyter">jupyter</a>
         
@@ -98,6 +102,8 @@ print(f&quot;Converted {len(ipynb_files)} jupter notebooks to markdown.&quot;)
 <p>This saves the output file in a folder which is the same as the notebook name - I've found that way then the netlify webserver just serves up the image files without having to rewrite the image path inside the markdown file.</p>
 <p><em>Note: this post is a work in progress...</em></p>
 </article>
+
+<script>hljs.initHighlightingOnLoad();</script>
 
 
 <hr>

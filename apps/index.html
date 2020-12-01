@@ -16,6 +16,10 @@
         
         
 
+        <link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.4.0/styles/default.min.css">
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.4.0/highlight.min.js"></script>
+
         <title>"This is a blog"</title>
     </head>
 
@@ -32,6 +36,7 @@
     <input type="text" id="postSearch" placeholder="Search posts...">
     <ul id="searchresults">
             <li><a href="/apps/vs_code.html">Visual Studio Code</a></li>
+            <li><a href="/apps/chrome.html">Gooogle Chrome</a></li>
     </ul>
     
 
@@ -40,7 +45,7 @@
     <script>
         // load json from disk instead of passing in python array
 
-        const searchList = [{"title": "Visual Studio Code", "tags": ["apps"], "link": "apps/vs_code.html"}]
+        const searchList = [{"title": "Visual Studio Code", "tags": ["apps"], "link": "apps/vs_code.html"}, {"title": "Gooogle Chrome", "tags": ["apps"], "link": "apps/chrome.html"}]
 
         const options = {
             includeScore: false,

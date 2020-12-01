@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!--temp stylesheet, customize my own one later.
+        https://github.com/kognise/water.css-->
+        
+        
+        <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.3/new.min.css">
+
+        <link rel="stylesheet" type="text/css" href="/codestyles.css">
+        
+        
+
+        <link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.4.0/styles/default.min.css">
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.4.0/highlight.min.js"></script>
+
+        <title>MacOS</title>
+    </head>
+
+    <body>
+ 
+        <header>
+            <a href="/">khalido.org</a> <br>
+            some subheader text.
+        </header>
+
+<article>
+        <h1>MacOS</h1>
+
+    <div class="meta">
+        posted <time>2020-01-20</time>, updated <time>2020-12-01</time><br>
+        tagged: 
+        <a href="/mac">mac</a>
+        
+        <p>
+            <a href="https://github.com/khalido/blog/blob/master/posts/setup-mac.md">github</a>
+        </p>
+    
+    </div>
+    
+    
+    <hr>
+    
+    <h1 id="install-the-latest-macos">Install the latest macOS</h1>
+<p>If starting with a old mac, I recommend doing a factory reset and installing the latest macos.</p>
+<p>Power on the mac and keep holding down <code>Option/Alt + Command + R</code> until a spinning globe appears. This boots you into recovery mode and offers to reinstall the latest version of OSX, which for me is <a href="https://www.apple.com/au/macos/catalina/">10.15: Catalina</a>.</p>
+<p>I had to format the disk before installing as the installer wasn't recognizing it. The eraser defaulted to the old MAC disk format, change that to <code>AFPS</code> with scheme <code>GUID Partition Map</code>. I'm used to case insensitive systems on linux, but on MacOS some apps don't like that, so regular AFPS seems to be the best option. </p>
+<p>Also see:</p>
+<ul>
+<li><a href="https://support.apple.com/en-au/HT204904">Apple reset page</a> and <a href="https://support.apple.com/en-au/HT201314">recovery page</a>.</li>
+</ul>
+<h1 id="interface-tweaks">Interface tweaks</h1>
+<h2 id="manual-tweaks">manual tweaks</h2>
+<ul>
+<li>autohide the dock: Its just a waste of space. No one should be looking or clicking on the dock anyways.</li>
+<li>Don't press, tap! System Preferences &gt; Trackpad &gt; Tap to click</li>
+<li><a href="https://support.apple.com/en-za/HT204609">three finger drag</a> is awesome. 
+Accessibility -&gt; Mouse &amp; Trackpad -&gt; Options -&gt; Enable dragging (choose 3 finger drag) </li>
+</ul>
+<h2 id="finder">Finder</h2>
+<p>New finder window open in home dir.</p>
+<h1 id="app-setup">App setup</h1>
+<h2 id="homebrew-aka-easy-install-apps">homebrew aka easy install apps</h2>
+<p><a href="https://brew.sh/">homebrew</a> installs all the packages.</p>
+<p>Install it by pasting this in a terminal: </p>
+<ul>
+<li><code>sudo xcode-select --install</code> - this installs the xcode cli </li>
+<li><code>/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"</code> downloads and installs brew.</li>
+</ul>
+<p>Most cli tools are installed by: <code>brew install wget</code> and gui apps by: <code>brew cask install firefox</code>.</p>
+<p>Other useful commands:</p>
+<ul>
+<li><code>brew update</code> updates brew itself and all the packages it can install</li>
+<li><code>brew upgrade</code> upgrades all packages installed by homebrew</li>
+</ul>
+<h2 id="cli-apps">cli apps</h2>
+<ul>
+<li><a href="">neofetch</a> displays nifty info about your system in the terminal. Don't install this using brew as that installs way too much stuff.</li>
+</ul>
+<pre><code>brew install curl 
+</code></pre>
+<h2 id="essential-apps">essential apps</h2>
+<ul>
+<li><a href="https://github.com/rxhanson/Rectangle">Rectangle</a> window manager, cause life is too short to use a mouse to resize windows.</li>
+<li>[itsycal] adds a small dropdown calendar to the menubar</li>
+<li><a href="https://karabiner-elements.pqrs.org/">Karabiner Elements</a> to modify keyboard shortcuts, in particular make the capslock key into a super key which can launch alred.</li>
+<li><a href="">Alfred</a> is a super duper launcher for macos. I remap capslock to launching it. </li>
+<li><a href="">Visual Studio code</a> is my cross-platform editor of choice. its awesome.</li>
+<li><a href="">slack</a> gotta talk to all the work colleages</li>
+<li><a href="">spotify</a> gotten listen to music</li>
+<li><a href="https://zoom.us/">zoom</a> - video chat service of choice in 2020, even for companies paying tons of money to other companies for video calls!  </li>
+</ul>
+<p>This installs them all in one fell swoop.</p>
+<pre><code>brew cask install \
+    rectangle \
+    itsycal \
+    karabiner-elements \
+    alfred \
+    google-chrome \
+    visual-studio-code \
+    slack \
+    spotify \
+    zoomus
+</code></pre>
+<h2 id="a-better-app-launcher">A better app launcher</h2>
+<p><a href="https://www.alfredapp.com/">Alred</a> replaces spotlight.</p>
+<h1 id="dev-setup">Dev setup</h1>
+<p>Install a nicer terminal: <code>brew cask install iterm2</code> cause why not.</p>
+<p>update git cause the macos version is old: <code>brew install git</code> and do the basic git setup:</p>
+<pre><code>git config --global user.name &quot;khalido&quot;
+git config --global user.email &quot;myname@gmail.com&quot;
+git config --global color.ui auto
+</code></pre>
+<p>Install neofetch cause its looks nice to see your system stats in a terminal: <code>brew install neofetch</code></p>
+<h1 id="links">links</h1>
+<ul>
+<li><a href="https://github.com/nicolashery/mac-dev-setup">setup mac for dev</a></li>
+<li><a href="https://mac.iamdeveloper.com/posts/my-mac-setup-2m05/">another setup</a></li>
+</ul>
+</article>
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<hr>
+<footer>
+    This is a footer. One day some footery text will go here. 
+</footer>
+
+
+
+</body>
+
+</html>

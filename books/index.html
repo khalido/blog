@@ -16,6 +16,10 @@
         
         
 
+        <link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.4.0/styles/default.min.css">
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.4.0/highlight.min.js"></script>
+
         <title>"This is a blog"</title>
     </head>
 
@@ -32,6 +36,7 @@
     <input type="text" id="postSearch" placeholder="Search posts...">
     <ul id="searchresults">
             <li><a href="/books/stats-done-wrong-book.html">Statistics Done Wrong: The Woefully Complete Guide</a></li>
+            <li><a href="/books/grokking-deep-learning-book.html">Grokking Deep Learning by Andrew Trask</a></li>
     </ul>
     
 
@@ -40,7 +45,7 @@
     <script>
         // load json from disk instead of passing in python array
 
-        const searchList = [{"title": "Statistics Done Wrong: The Woefully Complete Guide", "tags": ["books", "statistics"], "link": "books/stats-done-wrong-book.html"}]
+        const searchList = [{"title": "Statistics Done Wrong: The Woefully Complete Guide", "tags": ["books", "statistics"], "link": "books/stats-done-wrong-book.html"}, {"title": "Grokking Deep Learning by Andrew Trask", "tags": ["books"], "link": "books/grokking-deep-learning-book.html"}]
 
         const options = {
             includeScore: false,

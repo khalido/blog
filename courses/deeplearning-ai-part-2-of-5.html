@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!--temp stylesheet, customize my own one later.
+        https://github.com/kognise/water.css-->
+        
+        
+        <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.3/new.min.css">
+
+        <link rel="stylesheet" type="text/css" href="/codestyles.css">
+        
+        
+
+        <link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.4.0/styles/default.min.css">
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.4.0/highlight.min.js"></script>
+
+        <title>deeplearning.ai: Improving Deep Neural Networks</title>
+    </head>
+
+    <body>
+ 
+        <header>
+            <a href="/">khalido.org</a> <br>
+            some subheader text.
+        </header>
+
+<article>
+        <h1>deeplearning.ai: Improving Deep Neural Networks</h1>
+
+    <div class="meta">
+        posted <time>2017-01-01</time>, updated <time>2020-12-01</time><br>
+        tagged: 
+        <a href="/courses">courses</a>
+        
+        <p>
+            <a href="https://github.com/khalido/blog/blob/master/posts/deeplearning-ai-part-2-of-5.md">github</a>
+        </p>
+    
+    </div>
+    
+    
+    <hr>
+    
+    <p><a href="https://www.coursera.org/learn/deep-neural-network/home/welcome">Improving Deep Neural Networks: Hyperparameter tuning, Regularization and Optimization</a></p>
+<p><strong>Course Resources</strong></p>
+<ul>
+<li><a href="https://www.coursera.org/learn/deep-neural-network/discussions">Discussion forum</a></li>
+<li><a href="https://www.youtube.com/watch?v=1waHlpKiNyY&amp;list=PLkDaE6sCZn6Hn0vK8co82zjQtt3T2Nkqc">YouTube playlist for Course 1</a></li>
+<li>course reviews: <a href="https://towardsdatascience.com/review-of-deeplearning-ai-courses-aed1328e4ffe">1</a></li>
+</ul>
+<h2 id="week-1-practical-aspects-of-deep-learning">Week 1: Practical aspects of Deep Learning</h2>
+<p>Train / Dev / Test sets</p>
+<ul>
+<li>training is a highly iterative process as you test ideas and parameters</li>
+<li>even highly skilled practicioners find it impossible to predict the best parameters for a problem, so going through</li>
+<li>split data into train/dev/test sets</li>
+<li>training set - the actual dataset used to train the model</li>
+<li>cross validation or dev set - used to evaluate the model</li>
+<li>test set - only used once the model is finally trained to get a unbiased estimate of the models performance</li>
+<li>depending on the dataset size, use different splits, eg:</li>
+<li>100 to 1M ==&gt; 60/20/20</li>
+<li>1M to INF ==&gt; 98/1/1 or 99.5/0.25/0.25</li>
+<li>you can mismatch train/test distribution, so make sure they come from the same distribution</li>
+</ul>
+<p>Bias / Variance</p>
+<p><img alt="" src="/img/bias-variance.png" /></p>
+<ul>
+<li>high bias - model is under fitting, or not even fitting the training set</li>
+<li>high variance - model is over fitting the training and dev set</li>
+<li>you can have both high bias AND high variance</li>
+<li>balance the bias and variance, and also consider the underlying problems tractibility, as are we aiming for 99% accuracy or 70%? Compare with other models and human performance to get a sense of a baseline error</li>
+</ul>
+<p>Basic recipe for machine learning</p>
+<ul>
+<li>for high bias errors: bigger NN,more layers, different model, try different activations</li>
+<li>high variance: more data, regularize appropirately, try a different model</li>
+<li>training a bigger NN almost never hurts</li>
+</ul>
+<p>Regularization</p>
+<p><img alt="" src="https://upload.wikimedia.org/wikipedia/commons/b/b8/Sparsityl1.png?1531465205841" /></p>
+<ul>
+<li>vectors often have many dimensions, so model sizes get BIG. regulariation helps to select features and reduce dimensions, as well as reduce overfitting</li>
+<li>L1 regularization (or Lasso) adds a penalty equal to the sum of absoulte coefficients</li>
+<li>L2 regularization (or Ridge) adds a penalty equal to the sum of squared coefficients</li>
+</ul>
+<blockquote>
+<p>L2-regularization relies on the assumption that a model with small weights is simpler than a model with large weights. Thus, by penalizing the square values of the weights in the cost function you drive all the weights to smaller values. It becomes too costly for the cost to have large weights! This leads to a smoother model in which the output changes more slowly as the input changes.</p>
+</blockquote>
+<ul>
+<li>as a rule of thumb, L2 almost always works better than L1 .</li>
+</ul>
+<p>Dropout regularization</p>
+<ul>
+<li>for each iteration, use a probablity to determine whether to "drop" a neuron. So each iteration through the NN drops a different, random set of neurons.</li>
+<li>each layer in the NN can have a different dropout probability, the downside is that we have more hyperparameters to tweak</li>
+<li>in computer vision, we almost always use dropout becuase we are almost always overfitting in vision problems</li>
+<li>a downside of dropout is that the cost function is no longer well defined, so turn off dropout to see that the loss is dropping, which implies that our model is working, then turn on dropout for better training</li>
+<li>remove dropout at test time</li>
+<li>dropout intuitions:</li>
+<li>can't rely on on any given neuron, so have to spread out weights</li>
+<li>can work similar to L2 regularization</li>
+<li>helps prevent overfitting</li>
+</ul>
+<p>Data augmentation</p>
+<ul>
+<li>inexpensive way to get more data - e.g with images flip, distory, crop, rotate etc to get more images</li>
+<li>
+<h2 id="this-helps-as-a-regularization-technique">this helps as a regularization technique</h2>
+</li>
+</ul>
+<p>Early stopping</p>
+<ul>
+<li>stop training the NN when the dev set and training set error start diverging - get the huperparameters from the lowest dev and training set cost.</li>
+<li>this prevents the NN from overfitting on the training set but stops gradient descent early</li>
+<li>Andrew NG generally prefers using L2 regularization instead of early stopping as that</li>
+</ul>
+<p>Deep NN suffer from vanishing and exploding gradients</p>
+<ul>
+<li>this happens when gradients become very small or big</li>
+<li>in a deep NN if activations are linear, than the activations and derivates will increase exponentially with layers</li>
+</ul>
+<p>Weight Initialization for Deep Networks</p>
+<ul>
+<li>this is a paritial solution to vanishing/exploding gradients</li>
+<li>initialize the weights with a variance equal to 1/n - where n is the number of input features - sure weights are not too small or not to large</li>
+</ul>
+<p>Numerical approximation of gradients</p>
+<p>Gradient Checking</p>
+<h2 id="-check-our-gradient-computation-functions-this-helps-debug-backprop">- check our gradient computation functions - this helps debug backprop</h2>
+<h2 id="week-2optimizatoni-algorithims">Week 2:Optimizatoni algorithims</h2>
+<p>Mini-batch gradient descent</p>
+<ul>
+<li>training big data is slow - breaking it up into smaller batches speeds things up</li>
+<li>vectorization allows us to put our entire data set of m examples into a huge matrix and process it all in one go</li>
+<li>but this way we have to process the entire set before our gradient descent can make a small step in the right direction</li>
+<li>training on mini batches allows gradient descent to work much faster, as in one iteration over the dataset we would have taken m / batch_size gradient descent steps</li>
+<li>makes the leaning more 'noisy' since each mini-batch is new data (compared to going over the entire dataset)</li>
+<li>a typical mini-batch size is 64, 128, 256, 512</li>
+<li>should be a power of 2 as thats how computer memory is setup</li>
+<li>
+<h2 id="make-sure-the-batch-fits-inside-cpugpu-memory">make sure the batch fits inside cpu/gpu memory</h2>
+</li>
+</ul>
+<p>Exponentially weighted averages</p>
+<ul>
+<li>also called exponentially weighted moving averages in statistics</li>
+<li>this decreases the weight of older data exponentially, enhancing the effect of more recent numbers which makes it easy to spot new trends. Of course the parameters can be tweaked, like changing beta depending on how many data points to average<code>(1 / (1 - beta))</code>.</li>
+<li>key component of several optimization algos</li>
+</ul>
+<p><code>V(t) = beta * v(t-1) + (1-beta) * theta(t)</code></p>
+<p>bias correction in exponentially weighted averages:</p>
+<ul>
+<li>the moving avg in the beginning is low since there isn't past data to refer from and it starts from zero.</li>
+<li>so add a bias term, dividing the above equation by <code>(1 - beta^t)</code>:</li>
+</ul>
+<p><code>v(t) = (beta * v(t-1) + (1-beta) * theta(t)) / (1 - beta^t)</code></p>
+<p>Gradient descent with momentum</p>
+<ul>
+<li>modify gradient descent so on each iteration compute the exponential weighted averages of the gradients and update weights</li>
+<li>this takes us faster to the min point, and dampens out oscillations</li>
+<li>most common value of beta is <code>0.9</code>. generally we don't bother with bias correction since we do so many iterations</li>
+<li><a href="https://towardsdatascience.com/stochastic-gradient-descent-with-momentum-a84097641a5d">this explains why momentum works</a>:</li>
+</ul>
+<blockquote>
+<p>With Stochastic Gradient Descent we don’t compute the exact derivate of our loss function. Instead, we’re estimating it on a small batch. Which means we’re not always going in the optimal direction, because our derivatives are ‘noisy’. Just like in my graphs above. So, exponentially weighed averages can provide us a better estimate which is closer to the actual derivate than our noisy calculations.</p>
+</blockquote>
+<ul>
+<li>also see <a href="http://cs231n.github.io/neural-networks-3/#sgd">Nesterov Momentum</a></li>
+</ul>
+<p>RMSprop or Root mean square prop</p>
+<ul>
+<li>we want learning to go fast horizontally and slower vertically - so we divide updates in the vertical direction by a large number and updates in the horizontal direction by a much smaller number</li>
+<li>this dampens oscillations, so we can use a faster learning rate</li>
+<li>first proposed in Hinton's coursera course</li>
+</ul>
+<p>Adam optimization algorithim</p>
+<ul>
+<li>mashes together momemtum and RMSprop, works very well</li>
+<li>parameters:</li>
+<li>learning rate alpha</li>
+<li>beta1: moving avg or momemtum parameter, same as 0.9 above</li>
+<li>beta2: RMSprop, <code>0.999</code> works well</li>
+<li>epsilon <code>10^8</code> - less important, can leave it at default</li>
+<li>generally leave values at default, just try out different learning rates</li>
+</ul>
+<p>Learning rate decay</p>
+<ul>
+<li>slowly decrease learning rate over epochs</li>
+<li>this makes intuitive sense as in the beginning bigger steps are ok and as the NN starts converging, we need smaller steps</li>
+<li>other methods: exponential decay, discrete steps, etc</li>
+<li>manual decay - watch the model as it trains, pause and manually change the learning rate - works if running a small number of models which take a long time to train</li>
+<li>this is lower down on the list of things to try when tuning</li>
+</ul>
+<p>The problem of local optima</p>
+<ul>
+<li>people used to worry a lot about NN getting in local optima, but in multi-dimensional space most points of zero gradient are saddle points so its very unlikely to get stuck in a local optima</li>
+<li>a lot of our intuitions about low dimensional spaces don't transfer over the high dimensional space practically all NN's use - i.e if we have 20K parameters, the NN is operating in a 20K dimensional space</li>
+<li>but plateaus can slow down learning, so techniques like momentum, Adam help here</li>
+</ul>
+<h2 id="week-3-hyperparameter-tuning-batch-normalization-and-programming-frameworks">Week 3: Hyperparameter tuning, Batch Normalization and Programming Frameworks</h2>
+<h3 id="hyperparameter-tuning">Hyperparameter tuning</h3>
+<p>The Tuning Process</p>
+<ul>
+<li>there are tons of hyperparameters to tune, but some are more important than others</li>
+<li><strong>alpha</strong> or the learning rate is the most important parameter most the time</li>
+<li>then the second  most important:</li>
+<li><strong>momentum</strong> (0.9 being a good default,</li>
+<li><strong>mini-batch size</strong></li>
+<li><strong>hidden units</strong></li>
+<li>third in important:</li>
+<li>num of layers
+  -learning rate decay</li>
+<li>when using Adam, you pretty much never have to tune beta1, beta2 and epsilon</li>
+<li>of course, this depends on the NN, dataset etc</li>
+<li>don't use a grid of one val vs the other - this works when you have a small number of hyperparameters, but in Deep Learning choose hyperparameter combinations at random</li>
+<li>use coarse to fine sampling - find the range where a parameter is working, then do finer grained sampling to get the best val</li>
+</ul>
+<p>Using an appropriate scale to pick hyperparameters</p>
+<ul>
+<li>pick the appropriate scale for hyperparameters, generally better to use log scale rather than linear</li>
+</ul>
+<p>Hyperparameters tuning in practice: Pandas vs. Caviar</p>
+<ul>
+<li>intuitions about hyperparameters often don't transfer to other domains e.g logistcs, nlpo, vision, speech will all have different best parameters</li>
+<li>two major ways to find the best parameters:</li>
+<li><strong>babysit one model</strong> - as its training, tweak the parameters and see how its doing on metrics. This is helpful when we don't have enough computation capcity (panda approach)</li>
+<li><strong>train many models in parallel</strong> - run many models in parallel, with different parameters (caviar approach)</li>
+</ul>
+<h3 id="batch-norm">Batch Norm</h3>
+<p>Normalizing activations in a network</p>
+<ul>
+<li>instead of just normalizing the inputs to a NN, we also normalize the outputs of each layer of a NN - this is called batch norm.</li>
+<li>using the standard <code>(intermediate val - mean) / (std dev + epsilon)</code>. Epsilon is needed for numerical stability if variance is zero</li>
+<li>batch norm sets the hidden layer to have mean 0 and variance 1, but sometimes we might want it to have a different distribution, so we can add a parameter beta to the hidden units to change the shape of the distribution. (like we might want a larger variance to take advantage of the nonlinearity of the sigmoid function).</li>
+<li>batch norm makes the NN more robust and speeds up learning</li>
+<li>while batch norm can be applied before or after the activation function, in practice it is generally applied before the activation funciton.</li>
+</ul>
+<p>Fitting Batch Normalization into a neural network</p>
+<ul>
+<li>Deep learning frameworks have batch norm built in, like <a href="https://www.tensorflow.org/api_docs/python/tf/nn/batch_normalization">tensorflow</a>, <a href="https://keras.io/layers/normalization/">keras</a> etc.</li>
+<li>implementing this ourself is straightforward, as we add in a norm step just before applying the activation function at each layer in the NN.</li>
+<li>In each mini-batch, for each hidden layer compute the mean and the variance in that mini-batch, normalize, then apply the activation function as before.</li>
+</ul>
+<p>Why does Batch normalization work?</p>
+<p>Three main reaons:</p>
+<ul>
+<li>1: normalizing input features speeds up learning, so one intuition is that this is doing a similar thing for each hidden layer</li>
+<li>2: makes weights in deeper layers more robust to changes in weights in earlier layers</li>
+<li>for example, we train a network on black cats, and we try to classify a coloured cat. Every input is shifted, but the decision boundaries haven't changed. This has a fancy name, coviariate shift.</li>
+<li>allows each layer to learn more independently</li>
+<li>3: regularization of hidden units</li>
+<li>adds some noise to each mini-batch, as each one is regularized on its own mean/variance, which has a slight regularization effect (bigger batches reduce noise/regularization)</li>
+<li>but don't rely on batch norm for regularization, as its just a unintended side effect, use other techniques like L2 or dropout</li>
+</ul>
+<p>Batch normalization at test time</p>
+<ul>
+<li>we often predict one example at a time at test time, so the idea of a mean/variance doesn't apply - we no longer have a mini-batch to process</li>
+<li>we calculate the exponentially weighted average across all the mini-batches and use that to get a mean/variance to apply at test time on the one test example</li>
+</ul>
+<h3 id="multi-class-classification">Multi-class Classification</h3>
+<p>Softmax regresssion</p>
+<ul>
+<li>is generalization of logistic regression which can predict multiple classes rather than just a binary.</li>
+</ul>
+<p>Training a Softmax classifier</p>
+<ul>
+<li>a hard max would look at a vector and put 1 for the max and zero for everything else</li>
+<li>soft max takes in a vector and puts in a probability for each value such that they all sum up to 1</li>
+<li>loss function is trying to make the probablity of the "right" class as high as possible</li>
+</ul>
+<h3 id="intro-to-programming-frameworks">Intro to programming frameworks</h3>
+<p>Deep learning frameworks</p>
+<ul>
+<li>implementing a basic NN libary is a great learning framework</li>
+<li>as we implemnt complex/large models its not practical implement everything from scratch - there are many good frameworks to choose from</li>
+<li>the DL frameworks not only speed up coding but implement many optimizations</li>
+<li>choose one by looking at programning ease, running speed and how open it is</li>
+<li>my own research has led my to tensorflow/keras or pytorch</li>
+</ul>
+<p><a href="https://www.tensorflow.org/">Tensorflow</a></p>
+<ul>
+<li>covers the very basics of tensorflow, though the <a href="https://www.tensorflow.org/tutorials/">tensorflow guide is better</a>.</li>
+<li>we implement forward prop, tf automatically does the backprop</li>
+<li>a tf program looks like:</li>
+<li>make tensors</li>
+<li>write operations to those tensors</li>
+<li>initialize tensors</li>
+<li>create and run a Session</li>
+<li>tf.placeholder is a variable to which we assign a value later</li>
+</ul>
+<h3 id="yuanqing-lin-interview"><a href="https://twitter.com/yuanqinglin">Yuanqing Lin</a> interview</h3>
+<ul>
+<li>heads China's National Deep Learning Research Lab</li>
+<li>building a really large deep learning platform</li>
+</ul>
+</article>
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<hr>
+<footer>
+    This is a footer. One day some footery text will go here. 
+</footer>
+
+
+
+</body>
+
+</html>

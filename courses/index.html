@@ -16,6 +16,10 @@
         
         
 
+        <link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.4.0/styles/default.min.css">
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.4.0/highlight.min.js"></script>
+
         <title>"This is a blog"</title>
     </head>
 
@@ -31,6 +35,11 @@
 
     <input type="text" id="postSearch" placeholder="Search posts...">
     <ul id="searchresults">
+            <li><a href="/courses/mitx6002x.html">MITx 6.00.2X: Intro to Computational Thinking and Data Science</a></li>
+            <li><a href="/courses/fastai-part1-2018.html">fastai Practical Deep Learning For Coders, Part 1, 2018</a></li>
+            <li><a href="/courses/deeplearning-ai-part-3-of-5.html">deeplearning.ai: Structuring Machine Learning Projects</a></li>
+            <li><a href="/courses/deeplearning-ai-part-2-of-5.html">deeplearning.ai: Improving Deep Neural Networks</a></li>
+            <li><a href="/courses/deeplearning-ai-part-1-of-5.html">deeplearning.ai: Neural Networks and Deep Learning</a></li>
             <li><a href="/courses/udacity-cs101.html">Udacity CS101: Intro to CS</a></li>
     </ul>
     
@@ -40,7 +49,7 @@
     <script>
         // load json from disk instead of passing in python array
 
-        const searchList = [{"title": "Udacity CS101: Intro to CS", "tags": ["courses", "python"], "link": "courses/udacity-cs101.html"}]
+        const searchList = [{"title": "MITx 6.00.2X: Intro to Computational Thinking and Data Science", "tags": ["courses", "python"], "link": "courses/mitx6002x.html"}, {"title": "fastai Practical Deep Learning For Coders, Part 1, 2018", "tags": ["courses", "deep learning"], "link": "courses/fastai-part1-2018.html"}, {"title": "deeplearning.ai: Structuring Machine Learning Projects", "tags": ["courses"], "link": "courses/deeplearning-ai-part-3-of-5.html"}, {"title": "deeplearning.ai: Improving Deep Neural Networks", "tags": ["courses"], "link": "courses/deeplearning-ai-part-2-of-5.html"}, {"title": "deeplearning.ai: Neural Networks and Deep Learning", "tags": ["courses"], "link": "courses/deeplearning-ai-part-1-of-5.html"}, {"title": "Udacity CS101: Intro to CS", "tags": ["courses", "python"], "link": "courses/udacity-cs101.html"}]
 
         const options = {
             includeScore: false,

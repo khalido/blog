@@ -16,6 +16,10 @@
         
         
 
+        <link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.4.0/styles/default.min.css">
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.4.0/highlight.min.js"></script>
+
         <title>Apache Spark</title>
     </head>
 
@@ -30,7 +34,7 @@
         <h1>Apache Spark</h1>
 
     <div class="meta">
-        posted <time>2020-11-30</time>, updated <time>2020-11-30</time><br>
+        posted <time>2020-12-01</time>, updated <time>2020-12-01</time><br>
         tagged: 
         <a href="/untagged">untagged</a>
         
@@ -63,6 +67,8 @@ counts = pairs.reduceByKey(lambda a, b: a + b)
 <p><code>docker run -d -P --name notebook jupyter/pyspark-notebook</code></p>
 <p>Note: use <code>-v</code> to mount the current directory in the docker container.</p>
 </article>
+
+<script>hljs.initHighlightingOnLoad();</script>
 
 
 <hr>

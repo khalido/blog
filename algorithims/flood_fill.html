@@ -16,6 +16,10 @@
         
         
 
+        <link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.4.0/styles/default.min.css">
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.4.0/highlight.min.js"></script>
+
         <title>Floodfill algorithim</title>
     </head>
 
@@ -30,7 +34,7 @@
         <h1>Floodfill algorithim</h1>
 
     <div class="meta">
-        posted <time>2018-08-10</time>, updated <time>2020-11-30</time><br>
+        posted <time>2018-08-10</time>, updated <time>2020-12-01</time><br>
         tagged: 
         <a href="/algorithims">algorithims</a>
         
@@ -50,24 +54,22 @@
     <p>Flood Fill is a way to to visit every point in a bounded region. This makes it useful for many purposes. In this notebook I implement the "bucket fill" flood fill algo.</p>
 <p>First up generating a grid to flood fill:</p>
 <pre><code class="language-python">import numpy as np
-
-%matplotlib inline
 import matplotlib.pyplot as plt
 
 fill = np.random.randint(0, 2, size=(128,128), dtype=&quot;int&quot;)
 fill
 </code></pre>
-<pre><code>array([[0, 1, 1, ..., 1, 0, 0],
-       [1, 0, 1, ..., 1, 1, 0],
-       [0, 0, 1, ..., 0, 0, 0],
-       ..., 
-       [1, 1, 1, ..., 0, 0, 1],
-       [1, 0, 0, ..., 0, 1, 0],
-       [1, 0, 0, ..., 0, 0, 0]])
+<pre><code>array([[0, 0, 1, ..., 0, 1, 0],
+       [0, 0, 0, ..., 1, 1, 1],
+       [0, 0, 0, ..., 0, 0, 1],
+       ...,
+       [0, 0, 0, ..., 1, 0, 1],
+       [1, 0, 0, ..., 1, 1, 0],
+       [0, 1, 1, ..., 1, 0, 0]])
 </code></pre>
 <pre><code class="language-python">plt.imshow(fill);
 </code></pre>
-<p><img alt="png" src="flood_fill_files/flood_fill_3_0.png" /></p>
+<p><img alt="svg" src="flood_fill_files/flood_fill_2_0.svg" /></p>
 <p>The below function is a recursive implementation of flood fill - it will flood fill a a single region from 1 val to another:</p>
 <pre><code class="language-python">def flood_fill(x, y, old, new):
     &quot;&quot;&quot;takes in a x,y position from where to flood fill, the old val to change from and the new val
@@ -109,18 +111,20 @@ for i in range(len(fill)):
                 plt.title(&quot;Flood Fill by region&quot;)
                 plt.show()
 </code></pre>
-<p><img alt="png" src="flood_fill_files/flood_fill_7_0.png" /></p>
-<p><img alt="png" src="flood_fill_files/flood_fill_7_1.png" /></p>
-<p><img alt="png" src="flood_fill_files/flood_fill_7_2.png" /></p>
-<p><img alt="png" src="flood_fill_files/flood_fill_7_3.png" /></p>
-<p><img alt="png" src="flood_fill_files/flood_fill_7_4.png" /></p>
-<p><img alt="png" src="flood_fill_files/flood_fill_7_5.png" /></p>
-<p><img alt="png" src="flood_fill_files/flood_fill_7_6.png" /></p>
-<p><img alt="png" src="flood_fill_files/flood_fill_7_7.png" /></p>
-<p><img alt="png" src="flood_fill_files/flood_fill_7_8.png" /></p>
-<p><img alt="png" src="flood_fill_files/flood_fill_7_9.png" /></p>
-<p><img alt="png" src="flood_fill_files/flood_fill_7_10.png" /></p>
+<p><img alt="png" src="flood_fill_files/flood_fill_6_0.png" /></p>
+<p><img alt="png" src="flood_fill_files/flood_fill_6_1.png" /></p>
+<p><img alt="png" src="flood_fill_files/flood_fill_6_2.png" /></p>
+<p><img alt="png" src="flood_fill_files/flood_fill_6_3.png" /></p>
+<p><img alt="png" src="flood_fill_files/flood_fill_6_4.png" /></p>
+<p><img alt="png" src="flood_fill_files/flood_fill_6_5.png" /></p>
+<p><img alt="png" src="flood_fill_files/flood_fill_6_6.png" /></p>
+<p><img alt="png" src="flood_fill_files/flood_fill_6_7.png" /></p>
+<p><img alt="png" src="flood_fill_files/flood_fill_6_8.png" /></p>
+<p><img alt="png" src="flood_fill_files/flood_fill_6_9.png" /></p>
+<p><img alt="png" src="flood_fill_files/flood_fill_6_10.png" /></p>
 </article>
+
+<script>hljs.initHighlightingOnLoad();</script>
 
 
 <hr>
