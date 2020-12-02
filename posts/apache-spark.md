@@ -2,7 +2,7 @@
 title: "Apache Spark"
 description: started some notes on Spark, but didn't get very far...
 category: [data science]
-layout: post
+date: 2016-01-01
 toc: false
 ---
 

@@ -1,6 +1,7 @@
 ---
 title: "Udacity ND101: Deep Learning Nanodegree"
 image: /images/udacity-nd101-cert.png
+date: 2017-08-15
 description: "notes from the course"
 category: [courses, deep learning]
 layout: post
