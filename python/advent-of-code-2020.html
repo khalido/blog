@@ -48,10 +48,21 @@
     
     </div>
     
+    <details open>
+        <summary>Table of contents.</summary>
+        <div class="toc">
+<ul>
+<li><a href="#day-1-report-repair">Day 1: Report Repair</a></li>
+<li><a href="#day-2-password-policy">Day 2: Password policy</a></li>
+<li><a href="#day-3">Day 3</a></li>
+</ul>
+</div>
+
+    </details>
     
     <hr>
     
-    <p>The following is a write up of how to solve and things I learved while doing so, thus some of the code is spelled out and slow! So look at the <a href="https://www.reddit.com/r/adventofcode/">AOC reddit site</a> for ninja level solutions.</p>
+    <p>The following is a write up of how to solve and the stuff I learved while doing so, thus some of the code is spelled out and slow! So look at the <a href="https://www.reddit.com/r/adventofcode/">AOC reddit site</a> for ninja level solutions.</p>
 <p>I am trying to</p>
 <ul>
 <li>code in a readable fashion, avoiding shortcuts (easier said then done!)</li>
@@ -100,8 +111,7 @@ def get_input(day:int=1, splitlines=True):
     except: # else load from github repo
         print(f&quot;Failed to load {year}/{day}.txt from disk&quot;)
 
-    if splitlines:
-        data = data.splitlines()
+    if splitlines: data = data.splitlines()
 
     return data 
 
@@ -125,19 +135,19 @@ def parse_1(inp):
 def solve_1(inp, numbers=2):
     # get the first nums which add up to 2020
     nums = [i for i in itertools.combinations(parse_1(inp), numbers) if sum(i)==2020][0]
-    return math.prod(nums)
+    ans = math.prod(nums)
+    return ans
 
 assert solve_1(test1) == 514579
-solve_1(inp1)
+printmd(f&quot;Day 1A: **{solve_1(inp1)}**&quot;)
 </code></pre>
-<pre><code>878724
-</code></pre>
+<p>Day 1A: <strong>878724</strong></p>
 <p><strong>Part 2:</strong> Now we want to find the three numbers which sum to 2020 and return the multiple.</p>
 <p>Since I made a general func to solve for 1, this is just rerunning the above with numbers set to 3.</p>
 <pre><code class="language-python">assert solve_1(test1, 3) == 241861950
-printmd(str(solve_1(inp1, 3)))
+printmd(f&quot;Day 1B: **{solve_1(inp1, 3)}**&quot;)
 </code></pre>
-<p>201251610</p>
+<p>Day 1B: <strong>201251610</strong></p>
 <h2 id="day-2-password-policy">Day 2: Password policy</h2>
 <p><a href="https://adventofcode.com/2020/day/2">#</a>. We have a list of passwords in the form: <code>password policy: password</code>, where the first two numbers give a range of acceptable repeats for a character. Each policy has <code>"lo", "hi", "letter", "password"</code> which can be saved directly as a namedtuple.</p>
 <pre><code class="language-python">test2 = &quot;&quot;&quot;1-3 a: abcde
@@ -175,11 +185,10 @@ parse_2(test2) # eyeballing to see it works:
     return total
 
 assert solve_2() == 2
-solve_2(inp2)
+printmd(f&quot;Day 2A: **{solve_2(inp2)}**&quot;)
 
 </code></pre>
-<pre><code>424
-</code></pre>
+<p>Day 2A: <strong>424</strong></p>
 <p><strong>Part 2:</strong> Now the two nums in the beginning are positions, starting from 1. (no zero index). Only one of those positions can have the given letter. </p>
 <pre><code class="language-python">def solve_2b(inp=test2):
     total = 0
@@ -191,10 +200,9 @@ solve_2(inp2)
     return total
 
 assert solve_2b() == 1
-solve_2b(inp2)
+printmd(f&quot;Day 2B: **{solve_2b(inp2)}**&quot;)
 </code></pre>
-<pre><code>747
-</code></pre>
+<p>Day 2B: <strong>747</strong></p>
 <h2 id="day-3">Day 3</h2>
 </article>
 
