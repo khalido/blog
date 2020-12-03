@@ -12,7 +12,7 @@ I wanted my own custom static blog, which played well with jupyter notebooks and
 
 This post documents the process of building this blog. The main goal is to put markdown and jupyter notebooks in a folder, and build a static site which gets autoupdated on [github pages](https://pages.github.com/) or [netlify](https://www.netlify.com/). Just like [hugo](https://gohugo.io/), [jekyll](https://jekyllrb.com/), [gatsby](https://www.gatsbyjs.org/) and so many others!
 
-## the basic blog
+## blog engine
 
 Its straightforward to read a set of markdown posts and convert to python. I am using python to read the posts with [python-markdown](https://python-markdown.github.io/) to parse them into html, complete with inline syntax highlighting.
 
@@ -20,13 +20,17 @@ Key tools used:
 
 - **write:** markdown docs using any editor and jupyter notebooks having yaml front matter
 - **make the blog:** 
-  - [nbdev](https://github.com/fastai/nbdev) to parse jupyter to markdown [python markdown] to parse markdown to html
+  -  [nbconvert](https://nbconvert.readthedocs.io/en/latest/)  to parse jupyter to markdown.
+    - tried [nbdev](https://github.com/fastai/nbdev) but had too many problems, though it has a lot more blog friendly features.
   - python to read all the markdown files using [python markdown](https://python-markdown.github.io/) and [yaml](https://pyyaml.org/wiki/PyYAMLDocumentation). 
   - finally, writing html pages for index, tags and posts using [mako](https://www.makotemplates.org/) for python friendly templates.
 - **search:** [fusejs](https://fusejs.io/) to make a in browser search engine
 - every time a post is added or updated, the whole site needs to be rebuilt and redeployed. 
-  - **build site:** every time I commit to my blog repo, a github action is triggered which rebuilds the sites and saves the output to a `_site` folder.
-  - **hosting:** the site is hosted on the gh-pages of my blog repository, which github pages auto republishes on every time. I am using a [github action](https://github.com/peaceiris/actions-gh-pages) to deploy output files from the `_site` folder to gh-pages on every commit to the main branch.
+  - **build site:** every time I commit to my blog repo, a github action is triggered which rebuilds the sites and saves the output to a `public` folder.
+  - **hosting:** the site is hosted on the gh-pages of my blog repository, which github pages auto republishes. I am using a [github action](https://github.com/peaceiris/actions-gh-pages) to deploy output files from the `public` folder to gh-pages on every commit to the main branch.
+- **local sever**: running the script with `--serve` flag starts a local python server.
+
+Below are notes for the specifics used.
 
 ### parsing markdown
 
@@ -35,15 +39,11 @@ Python markdown
 - https://python-markdown.github.io/extensions/
 - https://facelessuser.github.io/pymdown-extensions/
 
-
-
-Start a server
+Start a server from cli:
 
 ```bash
 python -m http.server
 ```
-
-
 
 ### notebooks to markdown
 
@@ -60,10 +60,13 @@ python markdown has pygments built in, which has a bunch of styles. To generate 
 pygmentize -S default -f html -a .codehilite > codestyles.css
 ```
 
-But on second thought decided to can this and go with something else. 
+But on second thought decided to can this and go with [highlightjs](https://highlightjs.org/) for now as it speeds up builds and keeps the html clean (at the cost of loading more javascript). 
 
+One thing to investigate is how to make the output cells of jupyter notebooks blend into the main website. This seems to require some css trickery.
 
 ### html
+
+I'm no longer familiar with html, even though I build my first weblog on geocities way back in 1997/8. So we have now reached html5.
 
 - [what to put in the head of a html page](https://github.com/joshbuchea/HEAD)
 - https://htmldom.dev/

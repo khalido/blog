@@ -8,11 +8,13 @@ title: "how the blog was built"
 date: 2020-07-14
 tags:
 - python
-- colophon
+toc: true
 ---
 ```
 
 The title becomes the h1 heading for the post.
+
+Mardown files are processed from the `posts` directory, and jupyter notebooks from the `notebooks` directory. This makes it easy to treat them differently. 
 
 ### todo
 
