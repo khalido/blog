@@ -34,7 +34,7 @@
         <h1>how the blog was built</h1>
 
     <div class="meta">
-        posted <time>2020-11-11</time>, updated <time>2020-12-02</time><br>
+        posted <time>2020-11-11</time>, updated <time>2020-12-03</time><br>
         tagged: 
         <a href="/python">python</a>
         
@@ -48,7 +48,7 @@
         <summary>Table of contents.</summary>
         <div class="toc">
 <ul>
-<li><a href="#the-basic-blog">the basic blog</a><ul>
+<li><a href="#blog-engine">blog engine</a><ul>
 <li><a href="#parsing-markdown">parsing markdown</a></li>
 <li><a href="#notebooks-to-markdown">notebooks to markdown</a></li>
 <li><a href="#code-highlight">code highlight</a></li>
@@ -74,27 +74,32 @@
     <p>Hereby I talk through writing my own blog engine. There are many excellent ones out there, but to customise any of them takes so much understanding of how they work, the template and theme engines they use, that its easier to just use them exactly as is with an existing theme. </p>
 <p>I wanted my own custom static blog, which played well with jupyter notebooks and markdown files, as well as a reason to do some python coding, so here goes yet another python blogging engine.</p>
 <p>This post documents the process of building this blog. The main goal is to put markdown and jupyter notebooks in a folder, and build a static site which gets autoupdated on <a href="https://pages.github.com/">github pages</a> or <a href="https://www.netlify.com/">netlify</a>. Just like <a href="https://gohugo.io/">hugo</a>, <a href="https://jekyllrb.com/">jekyll</a>, <a href="https://www.gatsbyjs.org/">gatsby</a> and so many others!</p>
-<h2 id="the-basic-blog">the basic blog</h2>
+<h2 id="blog-engine">blog engine</h2>
 <p>Its straightforward to read a set of markdown posts and convert to python. I am using python to read the posts with <a href="https://python-markdown.github.io/">python-markdown</a> to parse them into html, complete with inline syntax highlighting.</p>
 <p>Key tools used:</p>
 <ul>
 <li><strong>write:</strong> markdown docs using any editor and jupyter notebooks having yaml front matter</li>
 <li><strong>make the blog:</strong> </li>
-<li><a href="https://github.com/fastai/nbdev">nbdev</a> to parse jupyter to markdown [python markdown] to parse markdown to html</li>
+<li><a href="https://nbconvert.readthedocs.io/en/latest/">nbconvert</a>  to parse jupyter to markdown.<ul>
+<li>tried <a href="https://github.com/fastai/nbdev">nbdev</a> but had too many problems, though it has a lot more blog friendly features.</li>
+</ul>
+</li>
 <li>python to read all the markdown files using <a href="https://python-markdown.github.io/">python markdown</a> and <a href="https://pyyaml.org/wiki/PyYAMLDocumentation">yaml</a>. </li>
 <li>finally, writing html pages for index, tags and posts using <a href="https://www.makotemplates.org/">mako</a> for python friendly templates.</li>
 <li><strong>search:</strong> <a href="https://fusejs.io/">fusejs</a> to make a in browser search engine</li>
 <li>every time a post is added or updated, the whole site needs to be rebuilt and redeployed. </li>
-<li><strong>build site:</strong> every time I commit to my blog repo, a github action is triggered which rebuilds the sites and saves the output to a <code>_site</code> folder.</li>
-<li><strong>hosting:</strong> the site is hosted on the gh-pages of my blog repository, which github pages auto republishes on every time. I am using a <a href="https://github.com/peaceiris/actions-gh-pages">github action</a> to deploy output files from the <code>_site</code> folder to gh-pages on every commit to the main branch.</li>
+<li><strong>build site:</strong> every time I commit to my blog repo, a github action is triggered which rebuilds the sites and saves the output to a <code>public</code> folder.</li>
+<li><strong>hosting:</strong> the site is hosted on the gh-pages of my blog repository, which github pages auto republishes. I am using a <a href="https://github.com/peaceiris/actions-gh-pages">github action</a> to deploy output files from the <code>public</code> folder to gh-pages on every commit to the main branch.</li>
+<li><strong>local sever</strong>: running the script with <code>--serve</code> flag starts a local python server.</li>
 </ul>
+<p>Below are notes for the specifics used.</p>
 <h3 id="parsing-markdown">parsing markdown</h3>
 <p>Python markdown </p>
 <ul>
 <li>https://python-markdown.github.io/extensions/</li>
 <li>https://facelessuser.github.io/pymdown-extensions/</li>
 </ul>
-<p>Start a server</p>
+<p>Start a server from cli:</p>
 <pre><code class="language-bash">python -m http.server
 </code></pre>
 <h3 id="notebooks-to-markdown">notebooks to markdown</h3>
@@ -106,8 +111,10 @@
 <p>python markdown has pygments built in, which has a bunch of styles. To generate the css:</p>
 <pre><code class="language-bash">pygmentize -S default -f html -a .codehilite &gt; codestyles.css
 </code></pre>
-<p>But on second thought decided to can this and go with something else. </p>
+<p>But on second thought decided to can this and go with <a href="https://highlightjs.org/">highlightjs</a> for now as it speeds up builds and keeps the html clean (at the cost of loading more javascript). </p>
+<p>One thing to investigate is how to make the output cells of jupyter notebooks blend into the main website. This seems to require some css trickery.</p>
 <h3 id="html">html</h3>
+<p>I'm no longer familiar with html, even though I build my first weblog on geocities way back in 1997/8. So we have now reached html5.</p>
 <ul>
 <li><a href="https://github.com/joshbuchea/HEAD">what to put in the head of a html page</a></li>
 <li>https://htmldom.dev/</li>

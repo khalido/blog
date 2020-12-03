@@ -54,7 +54,7 @@
 <ul>
 <li><a href="#day-1-report-repair">Day 1: Report Repair</a></li>
 <li><a href="#day-2-password-policy">Day 2: Password policy</a></li>
-<li><a href="#day-3">Day 3</a></li>
+<li><a href="#day-3-toboggan-trajectory">Day 3: Toboggan Trajectory</a></li>
 </ul>
 </div>
 
@@ -118,6 +118,24 @@ def get_input(day:int=1, splitlines=True):
 def printmd(txt=&quot;## testing&quot;):
     display(Markdown(txt))
 </code></pre>
+<p>Some generic plotting tools:</p>
+<pre><code class="language-python">def plot_grid(grid, positions):
+    &quot;&quot;&quot;plots a text grid and highlights positions passed in&quot;&quot;&quot;
+    binary_grid = [[c==&quot;#&quot; for c in row] for row in [row for row in grid]]
+    fig = plt.figure(figsize=(6,6))
+    plt.imshow(binary_grid, alpha=0.3)
+    plt.axis('off')
+
+    # plot position marker
+    yy, xx = zip(*positions)
+    plt.scatter(xx, yy, marker=&quot;x&quot;, s=500, alpha=0.8)
+
+    # anootate positions
+    for x, y in zip(xx,yy):
+        plt.annotate(f&quot;({x},{y})&quot;, (x-0.25,y))
+
+    plt.show()
+</code></pre>
 <h2 id="day-1-report-repair">Day 1: Report Repair</h2>
 <p><a href="https://adventofcode.com/2020/day/1">#</a> We have a list of numbers and need to find the two numbers that add up to 2020, and multiple them to get the answer.</p>
 <pre><code class="language-python">test1 = &quot;&quot;&quot;1721
@@ -142,6 +160,26 @@ assert solve_1(test1) == 514579
 printmd(f&quot;Day 1A: **{solve_1(inp1)}**&quot;)
 </code></pre>
 <p>Day 1A: <strong>878724</strong></p>
+<p>Now, whats a AOC challange if you don't eyeball it:</p>
+<pre><code class="language-python"># the points to scatter
+nums = [i for i in itertools.combinations(parse_1(inp1), 2)]
+x, y = zip(*nums)
+
+# the winning point
+X, Y = [i for i in nums if sum(i)==2020][0]
+
+# the bingo line
+lx = list(range(250,2020))
+ly = list(range(2020-250, 0,-1))
+
+fig = plt.figure(figsize=(10,6))
+plt.title(&quot;Number pairs&quot;)
+plt.scatter(x, y, alpha=0.4, s=3)
+plt.scatter(X, Y, color=&quot;red&quot;, s=140, alpha=0.5)
+plt.plot(lx, ly, lw=5, alpha=0.2, color=&quot;green&quot;);
+</code></pre>
+<p><img alt="svg" src="advent-of-code-2020_files/advent-of-code-2020_10_0.svg" /></p>
+<p>That is a lot of points, might be handy to stop it once it finds the right one. So switch from a list comprehension to a for loop which stops once the numbers summing to 2020 are found.</p>
 <p><strong>Part 2:</strong> Now we want to find the three numbers which sum to 2020 and return the multiple.</p>
 <p>Since I made a general func to solve for 1, this is just rerunning the above with numbers set to 3.</p>
 <pre><code class="language-python">assert solve_1(test1, 3) == 241861950
@@ -175,7 +213,7 @@ parse_2(test2) # eyeballing to see it works:
  Policy(lo=1, hi=3, letter='b', password='cdefg'),
  Policy(lo=2, hi=9, letter='c', password='ccccccccc')]
 </code></pre>
-<p>To solve this is straightforward, we just make sure the count of the given char is within the acceptable range, which python makes easy by being able to do <code>lo &lt; num &lt; hi</code>.</p>
+<p>To solve this is straightforward, we just make sure the count of the given char is within the acceptable range, which python makes easy by being able to easily check a number is within a range: <code>lo &lt;= num &lt;= hi</code>.</p>
 <pre><code class="language-python">def solve_2(inp=test2):
     total = 0
     for pol in parse_2(inp):
@@ -189,7 +227,9 @@ printmd(f&quot;Day 2A: **{solve_2(inp2)}**&quot;)
 
 </code></pre>
 <p>Day 2A: <strong>424</strong></p>
-<p><strong>Part 2:</strong> Now the two nums in the beginning are positions, starting from 1. (no zero index). Only one of those positions can have the given letter. </p>
+<p>Sadly, its not so easy to eyeball this, though a realworld solution bould be a cli script listing all the pw with the <a href="https://github.com/willmcgugan/rich">rich lib</a> to highlight bad passwords and where they fail the policy.</p>
+<p><strong>Part 2:</strong> Now the two nums in the beginning are positions, starting from 1. (no zero index). Only one of those positions can have the given letter.</p>
+<p>This is simple than part 1, just needs some uderstanding of logical operators:</p>
 <pre><code class="language-python">def solve_2b(inp=test2):
     total = 0
     for pol in parse_2(inp):
@@ -203,7 +243,65 @@ assert solve_2b() == 1
 printmd(f&quot;Day 2B: **{solve_2b(inp2)}**&quot;)
 </code></pre>
 <p>Day 2B: <strong>747</strong></p>
-<h2 id="day-3">Day 3</h2>
+<h2 id="day-3-toboggan-trajectory">Day 3: Toboggan Trajectory</h2>
+<p><a href="https://adventofcode.com/2020/day/3">#</a>. We have a grid with open squares <code>.</code> and trees <code>#</code>, which repeat infinitely on the right.</p>
+<p>We start at the top left and have to reach the bottom. We can move right 3, down 1 only. Following this trajectory, who many trees do we encounter?</p>
+<pre><code class="language-python">test3 = &quot;&quot;&quot;..##.......
+#...#...#..
+.#....#..#.
+..#.#...#.#
+.#...##..#.
+..#.##.....
+.#.#.#....#
+.#........#
+#.##...#...
+#...##....#
+.#..#...#.#&quot;&quot;&quot;.splitlines()
+
+inp3 = get_input(3)
+</code></pre>
+<pre><code class="language-python">def solve_3(grid=test3, slope=(3,1), start_pos=(0,0)):
+    &quot;&quot;&quot;returns a number of trees encountered on a given slope/grid/start_pos&quot;&quot;&quot;
+    x,y = start_pos
+    X,Y = slope
+
+    # get positions our tobaggan travels through
+    positions = []
+    for i in range(len(grid)-1):
+        x += X
+        y += Y
+        if y &lt;= len(grid):
+            positions.append((x,y))
+
+    # count trees
+    trees = 0
+    l = len(grid[0])
+    for x, y in positions:
+        if grid[y][x%l] == &quot;#&quot;:
+            trees += 1
+
+    return trees
+
+assert solve_3(test3) == 7
+printmd(f&quot;Day 3A: {solve_3(inp3)}&quot;)
+</code></pre>
+<p>Day 3A: 272</p>
+<p><strong>Part 2:</strong> We have a number of different slopes to check the trees encountered.</p>
+<pre><code class="language-python">slopes = [(1, 1), (3,1), (5,1), (7,1), (1,2)]
+
+def solve_3b(inp=test3):
+    num_trees = []
+
+    for slope in slopes:
+        trees = get_trees(inp, slope=slope)
+        num_trees.append(trees)
+
+    return math.prod(num_trees)
+
+assert solve_3b() == 336
+printmd(f&quot;Day 3B: {solve_3b(inp3)}&quot;)
+</code></pre>
+<p>Day 3B: 3898725600</p>
 </article>
 
 <script>hljs.initHighlightingOnLoad();</script>
