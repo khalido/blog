@@ -5,6 +5,8 @@ tags:
 - recipes
 ---
 
+Recipe from Lahore. Needs some more tips from the original cook.
+
 ## Ingredients
 
 - 250 grams urud dhal (white color) - mash ki dhal
@@ -34,6 +36,4 @@ tags:
 8. check if dhal is soft enough to eat, then serve (boil a bit more if too much water)
 9. serve with a pinch of garam masala and coriander
 
-## the story
-
-Recipe from Lahore. Needs some more tips from the original cook.
+Note: check qt of dhal. 250gms seems a bit low.

@@ -72,6 +72,7 @@ default_post_type: str = config["blog"]["default_post_type"]
 # paths to content
 path_md: Path = Path(config["paths"]["posts"])  # md posts
 path_nb: Path = Path(config["paths"]["notebooks"])  # jupyter notebooks
+path_nb2md = path_nb / config["paths"]["nb2md"]  # markdown version of notebooks
 path_static: Path = Path(config["paths"]["static"])  # static files
 path_publish: Path = Path(config["paths"]["publish"])  # final output folder
 
@@ -118,7 +119,9 @@ def convert_notebooks_to_md():
 
     for nb_path in nb_paths:
         try:
-            os.system(f"jupyter nbconvert --to markdown {nb_path} --output-dir nb2md")
+            os.system(
+                f"jupyter nbconvert --to markdown {nb_path} --output-dir {path_nb2md}"
+            )
         except:
             print(f"failed to convert {nb_path}")
         print(f"converted {nb_path}")
@@ -191,17 +194,18 @@ def md_to_post(p: Path, post_type=default_post_type, debug=False):
     return post
 
 
-def get_posts(debug=False):
+def get_posts(debug=False, build_notebooks=True):
     """reads from disk and returns a dataframe of all posts"""
 
     # convert notebooks to md and save in a tmp folder
-    convert_notebooks_to_md()
+    if build_notebooks:
+        convert_notebooks_to_md()
 
     # lists of md files and notebooks to convert
     md_paths = [f for f in path_md.rglob("*.md")]
 
     try:
-        nb_paths = [f for f in Path("nb2md").rglob("*.md")]
+        nb_paths = [f for f in path_nb2md.rglob("*.md")]
     except:
         print("No md files converted from jupyter notebooks found in tmp dir")
 
@@ -310,7 +314,7 @@ def write_posts(posts, tmpl: str = "post.html"):
         make_folder(path)  # make folder in case
 
         # copy over post_files to the post folder.
-        _path = path_nb / "markdown" / f"{post.slug}_files"
+        _path = path_nb2md / f"{post.slug}_files"
         if _path.is_dir():
             shutil.copytree(_path, path / f"{post.slug}_files", dirs_exist_ok=True)
 
@@ -387,13 +391,14 @@ def copy_static():
     print(f"TODO: copied notebook files over to {path_publish}")
 
 
-def start_server(directory="public", PORT=8000):
-    """runs basic python server"""
+def start_server(directory="public", PORT=8001):
+    """runs basic python server, serving up the public dir"""
     import http.server
     import socketserver
     import functools
 
-    # Handler = http.server.SimpleHTTPRequestHandler
+    # using functools.partial to pass in the dir to the http server
+    # otherwise it doesn't take in the dir argument
     Handler = functools.partial(
         http.server.SimpleHTTPRequestHandler, directory=directory
     )
@@ -403,20 +408,32 @@ def start_server(directory="public", PORT=8000):
         httpd.serve_forever()
 
 
-# setup cli options
-parser = argparse.ArgumentParser(
-    description="build html site from posts and notebooks, and optionally, serve website."
-)
-parser.add_argument(
-    "-s", "--serve", action="store_true", help="start local website server"
-)
+def get_parser():
+    """sets up and returns cli parser"""
+
+    # setup cli options
+    parser = argparse.ArgumentParser(
+        description="build html site from posts and notebooks, and optionally, serve website."
+    )
+    parser.add_argument(
+        "-s", "--serve", action="store_true", help="start local website server"
+    )
+    parser.add_argument(
+        "-c", "--cache", action="store_false", help="don't build jupyter notebooks"
+    )
+    return parser
 
 
 if __name__ == "__main__":
-    args = parser.parse_args()
+    args = get_parser().parse_args()
+
+    if args.cache:
+        print("using previously converted markdown files for notebooks.")
+        build_notebooks = False
+        # pass this to use the notebook markdown folder
 
     # get posts
-    posts, postsdict, tags = get_posts()
+    posts, postsdict, tags = get_posts(build_notebooks=args.cache)
     # copy static files over to the publish dir
     copy_static()
     # write all the things to the publish dir

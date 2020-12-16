@@ -9,10 +9,12 @@ Makes kebabs for frying or grilling. Goes well in burgers.
 
 ## Ingredients
 
-- 1.5 can chickpeas, drained, well-rinsed and mashed (or use 1 chickpea, 1/2 can black beans)
+- 1 can chickpeas, drained, well-rinsed and mashed
+- 1 can black beans, drained, well-rinsed and mashed
 - 1 red onion, finely diced
-- 1 small zucchini, grated (around 1-1.5 cups grated)
-- small beetroot, grated
+- 1 zucchini, grated (around 1-1.5 cups grated)
+- 1 beetroot, grated
+- 2-3 brussel sprouts, finely chopped (optional)
 - 1 bunch finely chopped coriander
 - 2 spicy chillis finely chopped 
 - 3 tbsp red wine vinegar
