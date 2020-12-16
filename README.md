@@ -38,3 +38,4 @@ At some point I probably need a pages directory too. At which point I might as w
 
 - [ ] convert notebooks to markdown manually, since those are only updated infrequently. Should save a lot of time in the github build action.
 - [ ] store post images in the posts folder itself? Have a think. Whats the easiest way to insert images in a markdown post?
+- [ ] Fix the lastmod issue, since github clones over the folder the file datestamp becomes the clone time instead of the last time the file was changed.
