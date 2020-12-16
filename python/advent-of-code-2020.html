@@ -55,6 +55,8 @@
 <li><a href="#day-1-report-repair">Day 1: Report Repair</a></li>
 <li><a href="#day-2-password-policy">Day 2: Password policy</a></li>
 <li><a href="#day-3-toboggan-trajectory">Day 3: Toboggan Trajectory</a></li>
+<li><a href="#day-4-passport-processing">Day 4: Passport Processing</a></li>
+<li><a href="#day-5-binary-boarding">Day 5: Binary Boarding</a></li>
 </ul>
 </div>
 
@@ -63,6 +65,7 @@
     <hr>
     
     <p>The following is a write up of how to solve and the stuff I learved while doing so, thus some of the code is spelled out and slow! So look at the <a href="https://www.reddit.com/r/adventofcode/">AOC reddit site</a> for ninja level solutions.</p>
+<p>The first pass at a solution is <a href="https://github.com/khalido/adventofcode/tree/master/advent2020">on my adventofcode repo</a> and this here post will contain a cleaned up version.</p>
 <p>I am trying to</p>
 <ul>
 <li>code in a readable fashion, avoiding shortcuts (easier said then done!)</li>
@@ -302,6 +305,277 @@ assert solve_3b() == 336
 printmd(f&quot;Day 3B: {solve_3b(inp3)}&quot;)
 </code></pre>
 <p>Day 3B: 3898725600</p>
+<h2 id="day-4-passport-processing">Day 4: Passport Processing</h2>
+<p><a href="https://adventofcode.com/2020/day/4">#</a>. We have password data in the form:</p>
+<table>
+<thead>
+<tr>
+<th>code</th>
+<th>name</th>
+<th>comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>byr</td>
+<td>(Birth Year)</td>
+<td></td>
+</tr>
+<tr>
+<td>iyr</td>
+<td>(Issue Year)</td>
+<td></td>
+</tr>
+<tr>
+<td>eyr</td>
+<td>(Expiration Year)</td>
+<td></td>
+</tr>
+<tr>
+<td>hgt</td>
+<td>(Height)</td>
+<td></td>
+</tr>
+<tr>
+<td>hcl</td>
+<td>(Hair Color)</td>
+<td></td>
+</tr>
+<tr>
+<td>ecl</td>
+<td>(Eye Color)</td>
+<td></td>
+</tr>
+<tr>
+<td>pid</td>
+<td>(Passport ID)</td>
+<td></td>
+</tr>
+<tr>
+<td>cid</td>
+<td>(Country ID)</td>
+<td>ignored</td>
+</tr>
+</tbody>
+</table>
+<p>For part 1, only the <strong>cid</strong> field can be missing, the other seven have to be present for the data to be valid.</p>
+<p>This is interesting becuase we basically have to write a data parser. So once again I'll use a named tuple, though a data class might be better as that has built in validation features.</p>
+<p>Note: this one is too versbose, make the solution nicer!</p>
+<pre><code class="language-python">test4 = &quot;&quot;&quot;ecl:gry pid:860033327 eyr:2020 hcl:#fffffd
+byr:1937 iyr:2017 cid:147 hgt:183cm
+
+iyr:2013 ecl:amb cid:350 eyr:2023 pid:028048884
+hcl:#cfa07d byr:1929
+
+hcl:#ae17e1 iyr:2013
+eyr:2024
+ecl:brn pid:760753108 byr:1931
+hgt:179cm
+
+hcl:#cfa07d eyr:2025 pid:166559648
+iyr:2011 ecl:brn hgt:59in&quot;&quot;&quot;
+
+inp4 = get_input(4, splitlines=False)
+</code></pre>
+<pre><code class="language-python">passport_fields = [&quot;byr&quot;, &quot;iyr&quot;, &quot;eyr&quot;, &quot;hgt&quot;, &quot;hcl&quot;, &quot;ecl&quot;, &quot;pid&quot;, &quot;cid&quot;]
+# the defaults apply from the left
+Passport = namedtuple(&quot;Passport&quot;, passport_fields, defaults=[&quot;&quot;])
+</code></pre>
+<pre><code class="language-python">inp = inp4
+passports = []
+
+for line in inp.split(&quot;\n\n&quot;):
+    data = [&quot;&quot; for i in range(8)]
+    line = line.replace(&quot;\n&quot;, &quot; &quot;).split(&quot; &quot;)
+
+    for field in line:
+        key, val = field.split(&quot;:&quot;)
+
+        idx = passport_fields.index(key)
+        data[idx] = val
+
+    p = Passport(*data)
+    passports.append(p)
+
+passports[:3]
+</code></pre>
+<pre><code>[Passport(byr='2027', iyr='1928', eyr='2039', hgt='190', hcl='a5ac0f', ecl='#25f8d2', pid='476113241', cid='150'),
+ Passport(byr='1929', iyr='2013', eyr='2026', hgt='168cm', hcl='#fffffd', ecl='hzl', pid='920076943', cid='169'),
+ Passport(byr='1948', iyr='2011', eyr='2023', hgt='156cm', hcl='#6b5442', ecl='brn', pid='328412891', cid='')]
+</code></pre>
+<p>So now to check that the first seven fields are present. First to double check that an empty string evaluates to false then to check which ones are valid:</p>
+<pre><code class="language-python">assert all([&quot;test&quot;, &quot;&quot;]) is False
+sum([all(p[:7])for p in passports])
+</code></pre>
+<pre><code>190
+</code></pre>
+<p><strong>Part 2:</strong></p>
+<p>Now we need to validate data ranges - the table from above becomes:. </p>
+<table>
+<thead>
+<tr>
+<th>code</th>
+<th>name</th>
+<th>range</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>byr</td>
+<td>(Birth Year)</td>
+<td>4 digits, 1920-2020</td>
+</tr>
+<tr>
+<td>iyr</td>
+<td>(Issue Year)</td>
+<td>4 digits, 2010-2020</td>
+</tr>
+<tr>
+<td>eyr</td>
+<td>(Expiration Year)</td>
+<td>4 digits, 2020-2030</td>
+</tr>
+<tr>
+<td>hgt</td>
+<td>(Height)</td>
+<td>num, cm 150-193, in 59-63</td>
+</tr>
+<tr>
+<td>hcl</td>
+<td>(Hair Color)</td>
+<td># followed by six chars 0-9 or a-f</td>
+</tr>
+<tr>
+<td>ecl</td>
+<td>(Eye Color)</td>
+<td>one of amb blu brn gry grn hzl oth</td>
+</tr>
+<tr>
+<td>pid</td>
+<td>(Passport ID)</td>
+<td>nine digit num including leading zeros</td>
+</tr>
+<tr>
+<td>cid</td>
+<td>(Country ID)</td>
+<td>ignored</td>
+</tr>
+</tbody>
+</table>
+<p>We already have a list of passports so I'll reuse that.</p>
+<p>First up writing some helper functions to validate specific passport fields:</p>
+<pre><code class="language-python">def valid_height(txt):
+    num, system = txt[:-2], txt[-2:]
+    try:
+        num = float(num)
+    except:
+        return False
+    if system == &quot;cm&quot;:
+        return 150 &lt;= num &lt;= 193
+    elif system == &quot;in&quot;:
+        return 59 &lt;= num &lt;= 76
+    else:
+        return False
+
+valid_height(p.hgt)
+</code></pre>
+<pre><code>False
+</code></pre>
+<pre><code class="language-python">def valid_range(txt, lo=1920, hi=2002, num_digits=4):
+    if len(txt) != num_digits:
+        return False
+    return lo &lt;= int(txt) &lt;= hi
+
+valid_range(p.byr)
+</code></pre>
+<pre><code>True
+</code></pre>
+<pre><code class="language-python">valid_eyes = &quot;amb blu brn gry grn hzl oth&quot;.split(&quot; &quot;)
+valid_eyes
+</code></pre>
+<pre><code>['amb', 'blu', 'brn', 'gry', 'grn', 'hzl', 'oth']
+</code></pre>
+<pre><code class="language-python">def valid_hair(txt):
+    if re.match(r&quot;^#[0-9a-f]{6}$&quot;, txt):
+        return True
+    else:
+        return False
+
+valid_hair(&quot;#abc123&quot;)
+</code></pre>
+<pre><code>True
+</code></pre>
+<pre><code class="language-python">def valid_passport(p):
+    return (valid_range(p.byr) &amp;
+            valid_range(p.iyr, 2010, 2020) &amp; 
+            valid_range(p.eyr, 2020, 2030) &amp; 
+            valid_height(p.hgt) &amp;
+            valid_hair(p.hcl) &amp;
+            (p.ecl in valid_eyes) &amp;
+            bool(re.match(&quot;^\d{9}$&quot;,p.pid))
+    )
+
+sum([valid_passport(p) for p in passports])
+</code></pre>
+<pre><code>121
+</code></pre>
+<h2 id="day-5-binary-boarding">Day 5: Binary Boarding</h2>
+<p><a href="https://adventofcode.com/2020/day/5">#</a> We need to parse a string representation in the form <code>FBFBBFFRLR</code> of a boarding pass to figure out its actual seat number.</p>
+<p>The first 7 chars are <code>F</code> of <code>B</code> and binary partition the <strong>128</strong> rows on a plane, numbered <code>0-127</code> and the last chars <code>R</code> or <code>L</code> partition the <strong>8</strong> columns.</p>
+<pre><code class="language-python">test5 = [&quot;FBFBBFFRLR&quot;, &quot;BFFFBBFRRR&quot;, &quot;FFFBBBFRRR&quot;, &quot;BBFFBBFRLL&quot;]
+inp5 = get_input(5, splitlines=True)
+</code></pre>
+<pre><code class="language-python">def get_row(inp, lo=0, hi=127, verbose=False):
+
+    for char in inp[:7]:
+        if char == &quot;F&quot;:
+            hi = -1 + (lo + hi+1) // 2
+        elif char == &quot;B&quot;:
+            lo = (lo+1 + hi) // 2
+        if verbose: print(char, (lo, hi))
+
+    return lo if char == &quot;F&quot; else hi
+
+def get_col(inp, lo=0, hi=7, verbose=False):
+
+    for char in inp[-3:]:
+        if char == &quot;L&quot;:
+            hi = -1 + (lo + hi+1) // 2
+        elif char == &quot;R&quot;:
+            lo = (lo+1 + hi) // 2
+        if verbose: print(char, (lo, hi))
+
+    return lo if char == &quot;L&quot; else hi
+
+def get_seat_id(inp):
+    row = get_row(inp)
+    col = get_col(inp)
+    return row * 8 + col
+
+for inp in test5:
+    print(get_seat_id(inp)) # 357, 567, 119, 820
+</code></pre>
+<pre><code>357
+567
+119
+820
+</code></pre>
+<pre><code class="language-python">max([get_seat_id(inp) for inp in inp5]) 
+</code></pre>
+<pre><code>922
+</code></pre>
+<p><strong>Part 2:</strong> </p>
+<p>The flight is full besides your seat, but some of the very front and back seats don't exist.</p>
+<p>Seats with IDs +1 and -1 from mine should be in the list. So this just means finding the seat id just above and below:</p>
+<pre><code class="language-python">seats = sorted([get_seat_id(inp) for inp in inp5])
+
+for i, n in enumerate(seats[:-1]):
+    if seats[i+1] - n == 2:
+        print(n+1)
+</code></pre>
+<pre><code>747
+</code></pre>
+<p>to be continued....</p>
 </article>
 
 <script>hljs.initHighlightingOnLoad();</script>
