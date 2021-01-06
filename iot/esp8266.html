@@ -34,7 +34,7 @@
         <h1>esp8266</h1>
 
     <div class="meta">
-        posted <time>2021-01-02</time>, updated <time>2021-01-02</time><br>
+        posted <time>2021-01-02</time>, updated <time>2021-01-06</time><br>
         tagged: 
         <a href="/iot">iot</a>
         
@@ -51,8 +51,8 @@
 <p>So, this is a log of my journey from never using an IOT device to making it blink lights or something.</p>
 <h2 id="initial-steps">Initial steps</h2>
 <p>First up, I plugged in the board to the pc... and nothing happened, besides the a blue led coming on. </p>
-<p><code>lsusb</code> listed a bunch of devices, out of which my IOT board seems to be: <code>Bus 001 Device 014: ID 1a86:7523 QinHeng Electronics CH340 serial converter</code>. I figured this out by running lsusb with it plugged and unplugged. All this tells me is that my board is using the CH340 chip to provide usb connectivity.</p>
-<p>First up, I need to know what port the device is, so running <code>sudo dmesg</code> has this at the end: <code>usb 1-1: ch341-uart converter now attached to ttyUSB1</code>. </p>
+<p><code>lsusb</code> listed a bunch of devices, out of which my IOT board seems to be: <code>Bus 001 Device 012: ID 1a86:7523 QinHeng Electronics CH340 serial converter</code>. I figured this out by running lsusb with it plugged and unplugged. All this tells me is that my board is using the CH340 chip to provide usb connectivity.</p>
+<p>First up, I need to know what port the device is, so running <code>sudo dmesg</code> has this at the end: <code>usb 1-1: ch341-uart converter now attached to ttyUSB0</code>. </p>
 <p>Another useful tool is using <code>usb-devices | less</code> to list all the usb devices, and using vim commands to search.</p>
 <p>Ok so far I can see that there is a board connected. </p>
 <p>So I need <a href="https://github.com/espressif/esptool">esptool</a>:</p>
@@ -60,11 +60,100 @@
 conda install -c conda-forge esptool 
 </code></pre>
 <p>My user couldn't access the usb port to actually use esptool, so I had to: </p>
-<pre><code>sudo usermod -a -G tty ko
+<pre><code class="language-bash">sudo usermod -a -G tty ko
 sudo usermod -a -G dialout ko
 
 </code></pre>
-<p>to add me to the tty permissions group, then log back in.</p>
+<p>to add me to the tty permissions group, then logout and log back in.</p>
+<p>Running <code>esptool.py --port /dev/ttyUSB0 chip_id</code> tells me:</p>
+<pre><code>esptool.py v3.0
+Serial port /dev/ttyUSB0
+Connecting....
+Detecting chip type... ESP8266
+Chip is ESP8266EX
+Features: WiFi
+Crystal is 26MHz
+...
+</code></pre>
+<p><strong>Micropython or Circuitpython?</strong></p>
+<p>Micropython came first, and at some point adafruit forked it to make circuitpython. The three main chipsets micropython seems to be using is esp8266 and its succesor esp32, and whatever pyboard itself uses. Circuitpython seems to support a lot more boards. </p>
+<p>One big different is that circuitpython supports fstrings! I like fstrings! But overall the choice comes down to what board - the esp ones are cheap and support micropython, the adafruit and competition are expensive and support both.</p>
+<h3 id="installing-micropython">Installing micropython</h3>
+<p>So this has a <code>ESP8266EX</code> chip. So I headed over to the <a href="http://micropython.org/download/esp8266/">micropython esp8266 page</a> and grabed the latest stable firmware, 2M of more of flash build, which seems to be the only one. As of 1.13, micropython only supports boards with 2M of flash. </p>
+<p>First up, I erased the flash: <code>esptool.py --port /dev/ttyUSB0 erase_flash</code>, cause why not.</p>
+<p>then installed micropython by:</p>
+<p><code>esptool.py --port /dev/ttyUSB0 --baud 460800 write_flash --flash_size=detect 0 esp8266-20200911-v1.13.bin</code></p>
+<p>Eureka! It detected 4MB of flash and succesfully installed. Now to test if it works by logging into the board: <code>picocom /dev/ttyUSB0 -b115200</code>. This gives a simple REPL interface. I </p>
+<pre><code>import machine as m
+pin = m.Pin(2, m.Pin.OUT)
+pin.on()
+pin.off()
+</code></pre>
+<p>On and off are reversed, but this works to turn on and off the led. </p>
+<p>The above works, but when I changed the pin number to 3 to see what happens, the repl froze and I had to power cycle the board and reconnect.</p>
+<h2 id="setting-up-a-dev-env">Setting up a dev env</h2>
+<h3 id="vs-code-failed">vs code (failed)</h3>
+<p>Now using a cli REPL is a but too old school, so of course there is a <a href="https://docs.pycom.io/pymakr/installation/vscode.html">plugin</a> for VS Code. This needs nodejs (why!) so first <a href="https://github.com/nvm-sh/nvm#installing-and-updating">install node using nvm</a>, then the extension:</p>
+<p>Ctrl-P and <code>ext install pycom.Pymakr</code> to install pymakr.</p>
+<p>Note: Investigate https://github.com/BradenM/micropy-cli</p>
+<p>So pymakr refuses to connect to the board even though it should, since the board itself is connecting and working just fine. Instead of wasting time with the pymakr extension which seems to have a lot of pending issues I switched to mu-editor. </p>
+<h3 id="mu-editor">Mu-editor</h3>
+<p>Only mu 1.1 which is still in alpha release supports esp boards so installed that by:</p>
+<pre><code>conda create -n mu python=3.7 pip # mu refuses to install on 3.8 or above
+conda activate mu
+conda install -c conda-forge esptool
+git clone https://github.com/mu-editor/mu.git
+cd mu
+pip install -e &quot;.[dev]&quot;
+</code></pre>
+<p>Note: I installed mu in its own env as it uses a bunch of old packages.</p>
+<p>Running <code>mu-editor</code> launches, it found the esp board right away with no config needed and it just works! with autocompleting ide and the repl at the bottom. So I dropped VS Code as its way overkill for the simple code needed for these devices and went with mu.</p>
+<p>Testing it blinks:</p>
+<pre><code class="language-python">import machine as m
+import time
+
+# set up output led
+pin = m.Pin(2, m.Pin.OUT)
+
+for _ in range(5):
+    time.sleep(0.1)
+    pin.on()
+    time.sleep(0.2)
+    pin.off()
+
+print(&quot;The light should have blinked a few times!&quot;)
+</code></pre>
+<p>Mu soft-reboots the board, then executes the file on it. The repl has autocomplete, which is handy, but no syntax highlighting.</p>
+<h3 id="copying-files-to-the-board">Copying files to the board</h3>
+<p>Micropython executes <code>boot.py</code> on startup, then runs <code>main.py</code> if found. So my code should go inside a main.py file. Mu should be able to see and write to the board, but its grayed out. </p>
+<h2 id="board-setup">Board setup</h2>
+<h3 id="wifi">Wifi</h3>
+<p>Testing that it connects to the wifi:</p>
+<pre><code class="language-python">def do_connect(ssid=&quot;SaviYasiZia&quot;, password=&quot;0466983358&quot;, wait=5):
+    &quot;connects to the network and returns sta_if&quot;
+    import network
+    sta_if = network.WLAN(network.STA_IF)
+
+    if not sta_if.isconnected():
+        print('connecting to network...')
+        sta_if.active(True)
+        sta_if.connect(ssid, password)
+
+        # while loop to wait until it connects with a timeout
+        timeout = time.time() + wait   # wait seconds from now
+        while not sta_if.isconnected():
+            if time.time() &lt; timeout:
+                pass
+            else:
+                print(&quot;Timed out...&quot;)
+                break
+
+    print('network config:', sta_if.ifconfig())
+    return sta_if
+
+wifi = do_connect() # use wifi.isconnected() as needed
+</code></pre>
+<p>Running this is hit and miss, sometimes it connects, other times it doesn't. I'm returning the sta_if object so I can check later on if the board is connected when doing internet things.</p>
 </article>
 
 <script>hljs.initHighlightingOnLoad();</script>
