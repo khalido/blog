@@ -20,7 +20,7 @@
       href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.4.0/styles/default.min.css">
         <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.4.0/highlight.min.js"></script>
 
-        <title>esp8266</title>
+        <title>starting out with micropython on a esp8266</title>
     </head>
 
     <body>
@@ -31,10 +31,10 @@
         </header>
 
 <article>
-        <h1>esp8266</h1>
+        <h1>starting out with micropython on a esp8266</h1>
 
     <div class="meta">
-        posted <time>2021-01-02</time>, updated <time>2021-01-06</time><br>
+        posted <time>2021-01-08</time>, updated <time>2021-01-10</time><br>
         tagged: 
         <a href="/iot">iot</a>
         
@@ -44,6 +44,30 @@
     
     </div>
     
+    <details open>
+        <summary>Table of contents.</summary>
+        <div class="toc">
+<ul>
+<li><a href="#initial-steps">Initial steps</a><ul>
+<li><a href="#installing-micropython">Installing micropython</a></li>
+</ul>
+</li>
+<li><a href="#setting-up-a-dev-env">Setting up a dev env</a><ul>
+<li><a href="#vs-code-failed">vs code (failed)</a></li>
+<li><a href="#mu-editor">Mu-editor</a></li>
+<li><a href="#copying-files-to-the-board">Copying files to the board</a></li>
+</ul>
+</li>
+<li><a href="#board-setup">Board setup</a><ul>
+<li><a href="#wifi">Wifi</a></li>
+</ul>
+</li>
+<li><a href="#do-something">Do something</a></li>
+<li><a href="#resources">Resources</a></li>
+</ul>
+</div>
+
+    </details>
     
     <hr>
     
@@ -56,15 +80,15 @@
 <p>Another useful tool is using <code>usb-devices | less</code> to list all the usb devices, and using vim commands to search.</p>
 <p>Ok so far I can see that there is a board connected. </p>
 <p>So I need <a href="https://github.com/espressif/esptool">esptool</a>:</p>
-<pre><code class="language-bash">conda create -n iot
-conda install -c conda-forge esptool 
+<pre><code class="language-bash">conda create -n iot # using a new environment
+conda install -c conda-forge esptool # esptool for flashing esp boards
 </code></pre>
-<p>My user couldn't access the usb port to actually use esptool, so I had to: </p>
+<p>My user couldn't access the usb port to actually use esptool, so I had to give my user these permissions: </p>
 <pre><code class="language-bash">sudo usermod -a -G tty ko
 sudo usermod -a -G dialout ko
 
 </code></pre>
-<p>to add me to the tty permissions group, then logout and log back in.</p>
+<p>, then logout and log back in.</p>
 <p>Running <code>esptool.py --port /dev/ttyUSB0 chip_id</code> tells me:</p>
 <pre><code>esptool.py v3.0
 Serial port /dev/ttyUSB0
@@ -76,21 +100,20 @@ Crystal is 26MHz
 ...
 </code></pre>
 <p><strong>Micropython or Circuitpython?</strong></p>
-<p>Micropython came first, and at some point adafruit forked it to make circuitpython. The three main chipsets micropython seems to be using is esp8266 and its succesor esp32, and whatever pyboard itself uses. Circuitpython seems to support a lot more boards. </p>
+<p>Micropython came first, and at some point adafruit forked it to make circuitpython. The three main chipsets micropython seems to be using is esp8266 and its succesor esp32, and whatever pyboard itself uses. Circuitpython seems to support a lot more boards, but they all seem to be a lot more expensive than the esp ones. </p>
 <p>One big different is that circuitpython supports fstrings! I like fstrings! But overall the choice comes down to what board - the esp ones are cheap and support micropython, the adafruit and competition are expensive and support both.</p>
 <h3 id="installing-micropython">Installing micropython</h3>
 <p>So this has a <code>ESP8266EX</code> chip. So I headed over to the <a href="http://micropython.org/download/esp8266/">micropython esp8266 page</a> and grabed the latest stable firmware, 2M of more of flash build, which seems to be the only one. As of 1.13, micropython only supports boards with 2M of flash. </p>
 <p>First up, I erased the flash: <code>esptool.py --port /dev/ttyUSB0 erase_flash</code>, cause why not.</p>
 <p>then installed micropython by:</p>
 <p><code>esptool.py --port /dev/ttyUSB0 --baud 460800 write_flash --flash_size=detect 0 esp8266-20200911-v1.13.bin</code></p>
-<p>Eureka! It detected 4MB of flash and succesfully installed. Now to test if it works by logging into the board: <code>picocom /dev/ttyUSB0 -b115200</code>. This gives a simple REPL interface. I </p>
-<pre><code>import machine as m
-pin = m.Pin(2, m.Pin.OUT)
+<p>Eureka! It detected 4MB of flash and succesfully installed. Now to test if it works by logging into the board: <code>picocom /dev/ttyUSB0 -b115200</code>. This gives a simple REPL interface. I tested if the board works by:</p>
+<pre><code class="language-python">import machine as m
+pin = m.Pin(2, m.Pin.OUT) # I read somewhere that pin 2 is an output led
 pin.on()
 pin.off()
 </code></pre>
-<p>On and off are reversed, but this works to turn on and off the led. </p>
-<p>The above works, but when I changed the pin number to 3 to see what happens, the repl froze and I had to power cycle the board and reconnect.</p>
+<p>On and off are reversed, but this works to turn on and off the led. When I changed the pin number to 3 to see what happens, the repl froze and I had to power cycle the board and reconnect.</p>
 <h2 id="setting-up-a-dev-env">Setting up a dev env</h2>
 <h3 id="vs-code-failed">vs code (failed)</h3>
 <p>Now using a cli REPL is a but too old school, so of course there is a <a href="https://docs.pycom.io/pymakr/installation/vscode.html">plugin</a> for VS Code. This needs nodejs (why!) so first <a href="https://github.com/nvm-sh/nvm#installing-and-updating">install node using nvm</a>, then the extension:</p>
@@ -98,10 +121,11 @@ pin.off()
 <p>Note: Investigate https://github.com/BradenM/micropy-cli</p>
 <p>So pymakr refuses to connect to the board even though it should, since the board itself is connecting and working just fine. Instead of wasting time with the pymakr extension which seems to have a lot of pending issues I switched to mu-editor. </p>
 <h3 id="mu-editor">Mu-editor</h3>
-<p>Only mu 1.1 which is still in alpha release supports esp boards so installed that by:</p>
-<pre><code>conda create -n mu python=3.7 pip # mu refuses to install on 3.8 or above
+<p>Only mu 1.1 which is still in alpha release supports esp boards so installed that in a new env by:</p>
+<pre><code class="language-bash">conda create -n mu python=3.7 pip # mu refuses to install on 3.8 or above
 conda activate mu
 conda install -c conda-forge esptool
+# installing mu
 git clone https://github.com/mu-editor/mu.git
 cd mu
 pip install -e &quot;.[dev]&quot;
@@ -126,10 +150,11 @@ print(&quot;The light should have blinked a few times!&quot;)
 <p>Mu soft-reboots the board, then executes the file on it. The repl has autocomplete, which is handy, but no syntax highlighting.</p>
 <h3 id="copying-files-to-the-board">Copying files to the board</h3>
 <p>Micropython executes <code>boot.py</code> on startup, then runs <code>main.py</code> if found. So my code should go inside a main.py file. Mu should be able to see and write to the board, but its grayed out. </p>
+<p>todo: find a easy solution to write files to the board.</p>
 <h2 id="board-setup">Board setup</h2>
 <h3 id="wifi">Wifi</h3>
-<p>Testing that it connects to the wifi:</p>
-<pre><code class="language-python">def do_connect(ssid=&quot;SaviYasiZia&quot;, password=&quot;0466983358&quot;, wait=5):
+<p>To connect to wifi:</p>
+<pre><code class="language-python">def do_connect(ssid=&quot;****&quot;, password=&quot;***&quot;, wait=5):
     &quot;connects to the network and returns sta_if&quot;
     import network
     sta_if = network.WLAN(network.STA_IF)
@@ -154,6 +179,29 @@ print(&quot;The light should have blinked a few times!&quot;)
 wifi = do_connect() # use wifi.isconnected() as needed
 </code></pre>
 <p>Running this is hit and miss, sometimes it connects, other times it doesn't. I'm returning the sta_if object so I can check later on if the board is connected when doing internet things.</p>
+<h2 id="do-something">Do something</h2>
+<p>The board by itself is pretty useless. I can make it blink a light, but it has no built in sensors or outputs (besides one led). So first up I need to get some things to connect it to.</p>
+<p>Project ideas:</p>
+<ul>
+<li>funky clock - needs display and some time transitions</li>
+<li>door bell - needs camera and a button.<ul>
+<li>should be cheaper than buying a ring, and as a bonus can use wifi to send a pic on button press.</li>
+<li>could also parse video feed and save pics of movements</li>
+</ul>
+</li>
+<li>weather display - with wind speed, water temp, tide etc</li>
+<li>robot - a few sensors, motors<ul>
+<li>(is an esp board powerful enough to parse simple video or do i need a pi)</li>
+</ul>
+</li>
+<li>pixel art, needs some kind of funky led lights to put somewhere</li>
+<li>music player</li>
+</ul>
+<h2 id="resources">Resources</h2>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=35mXD40SvXM">PyCon 2019 keynote: Using MP to control LEDs</a></li>
+<li><a href="https://awesomeopensource.com/project/mcauser/awesome-micropython">Awesome Micropython</a></li>
+</ul>
 </article>
 
 <script>hljs.initHighlightingOnLoad();</script>
