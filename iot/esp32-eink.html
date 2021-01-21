@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!--temp stylesheet, customize my own one later.
+        https://github.com/kognise/water.css-->
+        
+        
+        <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.3/new.min.css">
+
+        <link rel="stylesheet" type="text/css" href="/codestyles.css">
+        
+        
+
+        <link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.4.0/styles/default.min.css">
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.4.0/highlight.min.js"></script>
+
+        <title>Lilygo ttgo t5</title>
+    </head>
+
+    <body>
+ 
+        <header>
+            <a href="/">"khalido.org"</a> <br>
+            "some subheader text."
+        </header>
+
+<article>
+        <h1>Lilygo ttgo t5</h1>
+
+    <div class="meta">
+        posted <time>2021-01-18</time>, updated <time>2021-01-21</time><br>
+        tagged: 
+        <a href="/iot">iot</a>
+        
+        <p>
+            <a href="https://github.com/khalido/blog/blob/master/posts/esp32-eink.md">github</a>
+        </p>
+    
+    </div>
+    
+    <details open>
+        <summary>Table of contents.</summary>
+        <div class="toc">
+<ul>
+<li><a href="#the-board">the board</a></li>
+<li><a href="#the-display">the display</a></li>
+<li><a href="#resources">resources</a><ul>
+<li><a href="#copying-files-to-the-board">Copying files to the board</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+    </details>
+    
+    <hr>
+    
+    <h2 id="the-board">the board</h2>
+<p>TTGO T5 V2.3 Wireless WiFi Basic Wireless Module ESP-32 esp32 2.13 Inch ePaper Display Development board.</p>
+<p>SKU: H239, <a href="https://github.com/Xinyuan-LilyGO/LilyGo-T5-ink-series">github</a></p>
+<p><code>esptool.py --port /dev/ttyUSB1 chip_id</code> tells us:</p>
+<pre><code>Chip is ESP32-D0WDQ6 (revision 1)
+Features: WiFi, BT, Dual Core, 240MHz
+</code></pre>
+<p>I downloaded the latest stable generic <a href="http://micropython.org/download/esp32/">micropython ESP-IDF v4.x firmware</a>. Flash it by: (assuming board is on ttyUSB1)</p>
+<pre><code class="language-bash">esptool.py --chip esp32 --port /dev/ttyUSB1 erase_flash
+esptool.py --chip esp32 --port /dev/ttyUSB1 --baud 460800 write_flash -z 0x1000 esp32-idf4-20200902-v1.13.bin
+</code></pre>
+<p>So now micropython is running on the board. </p>
+<h2 id="the-display">the display</h2>
+<p>This board comes with a 2.13 inch eink display.</p>
+<p>todo: make it work!</p>
+<h2 id="resources">resources</h2>
+<ul>
+<li>https://www.re-innovation.co.uk/docs/ttgo-e-paper-display/</li>
+<li>https://github.com/lewisxhe/TTGO-EPaper-Series</li>
+</ul>
+<h3 id="copying-files-to-the-board">Copying files to the board</h3>
+<p>Micropython executes <code>boot.py</code> on startup, then runs <code>main.py</code> if found. So my code should go inside a main.py file. Mu should be able to see and write to the board, but its grayed out. </p>
+<p>todo: find a easy solution to write files to the board.</p>
+</article>
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<hr>
+<footer>
+    This is a footer. One day some footery text will go here. 
+</footer>
+
+
+
+</body>
+
+</html>
