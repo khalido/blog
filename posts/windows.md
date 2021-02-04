@@ -9,7 +9,12 @@ tags:
 
 Windows 10 gets slow and crufty over time. So once every few years, its good to start afresh. 
 
-todo: how to factory reset windows 10
+[Reset](https://support.microsoft.com/en-us/surface/restore-or-reset-surface-for-windows-10-e1fd649a-6396-a7de-2e87-7ba3b45e0fb1) by:
+
+- `Start -> Settings -> Update & Security -> Recovery -> Reset this PC`
+
+OR, if windows is pretty borked, restart the surface and hold the `shift` key down. This should boot into a screen with a: `Troubleshoot -> Reset this PC`.
+
 
 
 ## Setup

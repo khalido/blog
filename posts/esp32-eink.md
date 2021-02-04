@@ -42,9 +42,6 @@ todo: make it work!
 - https://github.com/lewisxhe/TTGO-EPaper-Series
 
 
-
-### Copying files to the board
-
 Micropython executes `boot.py` on startup, then runs `main.py` if found. So my code should go inside a main.py file. Mu should be able to see and write to the board, but its grayed out. 
 
 todo: find a easy solution to write files to the board.
