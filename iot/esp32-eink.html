@@ -34,7 +34,7 @@
         <h1>Lilygo ttgo t5</h1>
 
     <div class="meta">
-        posted <time>2021-01-18</time>, updated <time>2021-01-21</time><br>
+        posted <time>2021-01-18</time>, updated <time>2021-02-04</time><br>
         tagged: 
         <a href="/iot">iot</a>
         
@@ -50,10 +50,7 @@
 <ul>
 <li><a href="#the-board">the board</a></li>
 <li><a href="#the-display">the display</a></li>
-<li><a href="#resources">resources</a><ul>
-<li><a href="#copying-files-to-the-board">Copying files to the board</a></li>
-</ul>
-</li>
+<li><a href="#resources">resources</a></li>
 </ul>
 </div>
 
@@ -81,7 +78,6 @@ esptool.py --chip esp32 --port /dev/ttyUSB1 --baud 460800 write_flash -z 0x1000 
 <li>https://www.re-innovation.co.uk/docs/ttgo-e-paper-display/</li>
 <li>https://github.com/lewisxhe/TTGO-EPaper-Series</li>
 </ul>
-<h3 id="copying-files-to-the-board">Copying files to the board</h3>
 <p>Micropython executes <code>boot.py</code> on startup, then runs <code>main.py</code> if found. So my code should go inside a main.py file. Mu should be able to see and write to the board, but its grayed out. </p>
 <p>todo: find a easy solution to write files to the board.</p>
 </article>
