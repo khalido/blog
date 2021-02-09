@@ -34,7 +34,7 @@
         <h1>Windows 10</h1>
 
     <div class="meta">
-        posted <time>2020-10-28</time>, updated <time>2021-02-04</time><br>
+        posted <time>2020-10-28</time>, updated <time>2021-02-09</time><br>
         tagged: 
         <a href="/windows">windows</a>
         
@@ -62,6 +62,15 @@ scoop bucket add extras
 <ul>
 <li><a href="https://rufus.ie/">Rufus</a> for making bootable disks. <a href="https://www.balena.io/etcher/">etcher</a> is a decent alternative, but not as reliable.</li>
 </ul>
+<h2 id="wsl-2">wsl 2</h2>
+<p>Follow <a href="https://docs.microsoft.com/en-us/windows/wsl/install-win10">the real wsl instructions</a>, my clif notes are:</p>
+<p>Run powershell as admin and do:</p>
+<p>Activate wsl by <code>dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart</code></p>
+<p>Enable "virtual machine platform", something which should have already been enabled by the command above.</p>
+<p><code>Enable-WindowsOptionalFeature -Online -FeatureName VirtualMachinePlatform -NoRestart</code></p>
+<p>Restart the pc now and set wsl2 as the default wsl: <code>wsl --set-default-version 2</code></p>
+<p>Now install the latest <a href="https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi">linux kernel update package</a>.</p>
+<p>Now install debian from the windows store.</p>
 </article>
 
 <script>hljs.initHighlightingOnLoad();</script>
