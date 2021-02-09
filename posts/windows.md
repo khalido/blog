@@ -27,3 +27,21 @@ scoop bucket add extras
 ```
 
 - [Rufus](https://rufus.ie/) for making bootable disks. [etcher](https://www.balena.io/etcher/) is a decent alternative, but not as reliable.
+
+## wsl 2
+
+Follow [the real wsl instructions](https://docs.microsoft.com/en-us/windows/wsl/install-win10), my clif notes are:
+
+Run powershell as admin and do:
+
+Activate wsl by `dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart`
+
+Enable "virtual machine platform", something which should have already been enabled by the command above.
+
+`Enable-WindowsOptionalFeature -Online -FeatureName VirtualMachinePlatform -NoRestart`
+
+Restart the pc now and set wsl2 as the default wsl: `wsl --set-default-version 2`
+
+Now install the latest [linux kernel update package](https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi).
+
+Now install debian from the windows store.
