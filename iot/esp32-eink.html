@@ -34,7 +34,7 @@
         <h1>Lilygo ttgo t5</h1>
 
     <div class="meta">
-        posted <time>2021-01-18</time>, updated <time>2021-02-09</time><br>
+        posted <time>2021-01-18</time>, updated <time>2021-03-31</time><br>
         tagged: 
         <a href="/iot">iot</a>
         
@@ -49,6 +49,7 @@
         <div class="toc">
 <ul>
 <li><a href="#the-board">the board</a></li>
+<li><a href="#copy-files">Copy files</a></li>
 <li><a href="#the-display">the display</a></li>
 <li><a href="#resources">resources</a></li>
 </ul>
@@ -60,7 +61,12 @@
     
     <h2 id="the-board">the board</h2>
 <p>TTGO T5 V2.3 Wireless WiFi Basic Wireless Module ESP-32 esp32 2.13 Inch ePaper Display Development board.</p>
-<p>SKU: H239, <a href="https://github.com/Xinyuan-LilyGO/LilyGo-T5-ink-series">github</a></p>
+<ul>
+<li>SKU: H239, <a href="https://github.com/Xinyuan-LilyGO/LilyGo-T5-ink-series">github</a></li>
+<li>Model DEPG0213BN</li>
+<li>ESP32-D0WDQ6 (revision 1)</li>
+<li>WiFi, BT, Dual Core, 240MHz, Crystal is 40MHz</li>
+</ul>
 <p><code>esptool.py --port /dev/ttyUSB1 chip_id</code> tells us:</p>
 <pre><code>Chip is ESP32-D0WDQ6 (revision 1)
 Features: WiFi, BT, Dual Core, 240MHz
@@ -70,6 +76,19 @@ Features: WiFi, BT, Dual Core, 240MHz
 esptool.py --chip esp32 --port /dev/ttyUSB1 --baud 460800 write_flash -z 0x1000 esp32-idf4-20200902-v1.13.bin
 </code></pre>
 <p>So now micropython is running on the board. </p>
+<p>An easier way to do the above is to use Mu, which has a flasher built it.</p>
+<h2 id="copy-files">Copy files</h2>
+<p>Mu-editor has a built in file manager but it wasn't working on my board, so I went with <a href="https://github.com/scientifichackers/ampy">ampy</a>.</p>
+<p>Install that by: <code>pip install adafruit-ampy</code> then find the port the board is using.</p>
+<p>On a mac this lists all the serial ports in use:
+<code>ls -l /dev/tty.*</code></p>
+<p>On my machine I got <code>/dev/tty.usbserial-1420</code>, so ampy basics is:</p>
+<ul>
+<li>list files: <code>ampy --port /dev/cu.usbserial-1420 ls</code></li>
+<li>put a file on the board: <code>ampy --port /dev/cu.usbserial-1420 put config.py</code></li>
+<li>get a file: <code>ampy --port /dev/cu.usbserial-1420 get config.py</code></li>
+<li>delete: <code>ampy --port /dev/cu.usbserial-1420 rm config.py</code></li>
+</ul>
 <h2 id="the-display">the display</h2>
 <p>This board comes with a 2.13 inch eink display.</p>
 <p>todo: make it work!</p>
@@ -77,6 +96,9 @@ esptool.py --chip esp32 --port /dev/ttyUSB1 --baud 460800 write_flash -z 0x1000 
 <ul>
 <li>https://www.re-innovation.co.uk/docs/ttgo-e-paper-display/</li>
 <li>https://github.com/lewisxhe/TTGO-EPaper-Series</li>
+<li>https://github.com/peterhinch/micropython-nano-gui</li>
+<li>https://github.com/Xinyuan-LilyGO/LilyGo-eink-v2.3-micropython</li>
+<li>https://github.com/vroland/epdiy - drivers for eink screens</li>
 </ul>
 <p>Micropython executes <code>boot.py</code> on startup, then runs <code>main.py</code> if found. So my code should go inside a main.py file. Mu should be able to see and write to the board, but its grayed out. </p>
 <p>todo: find a easy solution to write files to the board.</p>

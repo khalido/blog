@@ -34,7 +34,7 @@
         <h1>starting out with micropython on a esp8266</h1>
 
     <div class="meta">
-        posted <time>2021-01-08</time>, updated <time>2021-02-09</time><br>
+        posted <time>2021-01-08</time>, updated <time>2021-03-31</time><br>
         tagged: 
         <a href="/iot">iot</a>
         
@@ -73,6 +73,7 @@
     
     <p>I've been wanting to try out a IOT board to do something for a while, and somebody lent me a mystery ESP8266 based board.</p>
 <p>So, this is a log of my journey from never using an IOT device to making it blink lights or something.</p>
+<p>Note: most of the below is unneeded with Mu 1.1, it autofinds the board, flashes it and makes it easy to run code on the board itself.</p>
 <h2 id="initial-steps">Initial steps</h2>
 <p>First up, I plugged in the board to the pc... and nothing happened, besides the a blue led coming on. </p>
 <p><code>lsusb</code> listed a bunch of devices, out of which my IOT board seems to be: <code>Bus 001 Device 012: ID 1a86:7523 QinHeng Electronics CH340 serial converter</code>. I figured this out by running lsusb with it plugged and unplugged. All this tells me is that my board is using the CH340 chip to provide usb connectivity.</p>
@@ -149,8 +150,18 @@ print(&quot;The light should have blinked a few times!&quot;)
 </code></pre>
 <p>Mu soft-reboots the board, then executes the file on it. The repl has autocomplete, which is handy, but no syntax highlighting.</p>
 <h3 id="copying-files-to-the-board">Copying files to the board</h3>
-<p>Micropython executes <code>boot.py</code> on startup, then runs <code>main.py</code> if found. So my code should go inside a main.py file. Mu should be able to see and write to the board, but its grayed out. </p>
-<p>todo: find a easy solution to write files to the board.</p>
+<p>Micropython executes <code>boot.py</code> on startup, then runs <code>main.py</code> if found. So my code should go inside a main.py file. </p>
+<p>Mu-editor has a built in file manager but it wasn't working on my board, so I went with <a href="https://github.com/scientifichackers/ampy">ampy</a>.</p>
+<p>Install that by: <code>pip install adafruit-ampy</code> then find the port the board is using.</p>
+<p>On a mac this lists all the serial ports in use:
+<code>ls -l /dev/tty.*</code></p>
+<p>On my machine I got <code>/dev/tty.usbserial-1420</code>, so ampy basics is:</p>
+<ul>
+<li>list files: <code>ampy --port /dev/cu.usbserial-1420 ls</code></li>
+<li>put a file on the board: <code>ampy --port /dev/cu.usbserial-1420 put config.py</code></li>
+<li>get a file: <code>ampy --port /dev/cu.usbserial-1420 get config.py</code></li>
+<li>delete: <code>ampy --port /dev/cu.usbserial-1420 rm config.py</code></li>
+</ul>
 <h2 id="board-setup">Board setup</h2>
 <h3 id="wifi">Wifi</h3>
 <p>To connect to wifi:</p>

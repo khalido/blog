@@ -34,7 +34,7 @@
         <h1>Using Anaconda</h1>
 
     <div class="meta">
-        posted <time>2020-01-02</time>, updated <time>2021-02-09</time><br>
+        posted <time>2021-01-02</time>, updated <time>2021-03-31</time><br>
         tagged: 
         <a href="/python">python</a>
         
@@ -74,10 +74,10 @@
 <p>And python + jupyter lab + a bunch of other packages should be up and running!</p>
 <h2 id="using-environments">Using environments</h2>
 <p>Protip: install pip inside a conda enviroment if planning to ever use pip install. Otherwise pip installs inside an environment use the main pip and that is NOT GOOD. </p>
-<p>So here we create a new environment which will use Python 3.7x and pip.</p>
-<p><code>conda create -n python37 python=3.7 pip</code></p>
+<p>So here we create a new environment which will use Python 3.9x and pip.</p>
+<p><code>conda create -n py39 python=3.9 pip</code></p>
 <p>Use this environment:</p>
-<p><code>conda activate python37</code></p>
+<p><code>conda activate py39</code></p>
 <p>And a few basic commands:</p>
 <ul>
 <li><code>conda list</code> - shows all packages installed in the active env</li>
@@ -85,16 +85,18 @@
 <p>Shows all conda envs:</p>
 <p><code>conda env list</code></p>
 <p>Delete an environment:</p>
-<p><code>conda env remove -n python37 --all</code></p>
+<p><code>conda env remove -n py39 --all</code></p>
 <h3 id="write-the-packages-in-use-to-disk">Write the packages in use to disk:</h3>
 <p>This will include both the conda and pip installed packeges in an environment, long as pip was installed inside the environment.</p>
-<p><code>conda list --explicit &gt; python37.txt</code></p>
+<p><code>conda list --explicit &gt; py39.txt</code></p>
 <p>Now if I git clone this repo somewhere else, I can recreate the environment by:</p>
-<p><code>conda env create --file python37.txt</code></p>
+<p><code>conda env create --file py39.txt</code></p>
 <h2 id="jupyter-lab">Jupyter lab</h2>
 <p>Jupyter lab is the new hotness and is ready to rock out of the box with anaconda. to make it easy to select from all the environments installed, in the main anaconda env (i.e not inside an env) run:</p>
 <p><code>conda install nb_conda</code></p>
-<p>This should ideally let the conda env with jupyter lab see all the other kernels.</p>
+<p>This should ideally let the conda env with jupyter lab see all the other kernels. </p>
+<p>Anaconda itself has an older version of jupyter lab, so lately I have take to installing it the updated version directly in a conda env:</p>
+<p><code>conda install -c conda-forge jupyterlab</code></p>
 </article>
 
 <script>hljs.initHighlightingOnLoad();</script>
