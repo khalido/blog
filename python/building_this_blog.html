@@ -34,7 +34,7 @@
         <h1>how the blog was built</h1>
 
     <div class="meta">
-        posted <time>2020-11-11</time>, updated <time>2021-03-31</time><br>
+        posted <time>2020-11-11</time>, updated <time>2021-05-24</time><br>
         tagged: 
         <a href="/python">python</a>
         
@@ -71,14 +71,18 @@
     
     <hr>
     
-    <p>Hereby I talk through writing my own blog engine. There are many excellent ones out there, but to customise any of them takes so much understanding of how they work, the template and theme engines they use, that its easier to just use them exactly as is with an existing theme. </p>
+    <p>There are many excellent blog engines out there, but to customise any of them takes so much understanding of how they work, the template and theme engines they use, that its easier to just use them exactly as is with an existing theme. </p>
 <p>I wanted my own custom static blog, which played well with jupyter notebooks and markdown files, as well as a reason to do some python coding, so here goes yet another python blogging engine.</p>
 <p>This post documents the process of building this blog. The main goal is to put markdown and jupyter notebooks in a folder, and build a static site which gets autoupdated on <a href="https://pages.github.com/">github pages</a> or <a href="https://www.netlify.com/">netlify</a>. Just like <a href="https://gohugo.io/">hugo</a>, <a href="https://jekyllrb.com/">jekyll</a>, <a href="https://www.gatsbyjs.org/">gatsby</a> and so many others!</p>
 <h2 id="blog-engine">blog engine</h2>
 <p>Its straightforward to read a set of markdown posts and convert to python. I am using python to read the posts with <a href="https://python-markdown.github.io/">python-markdown</a> to parse them into html, complete with inline syntax highlighting.</p>
 <p>Key tools used:</p>
 <ul>
-<li><strong>write:</strong> markdown docs using any editor and jupyter notebooks having yaml front matter</li>
+<li><em>write:</em>* markdown docs using any editor and jupyter notebooks having yaml front matter.<ul>
+<li><a href="https://obsidian.md/">obsidian</a> to edit markdown</li>
+<li><a href="https://code.visualstudio.com/docs/python/jupyter-support">vs code</a> for jupyter notebooks. Jupyter lab is ok in a pinch but it causes me more problems than not. My fav cloud alternative is <a href="https://deepnote.com/">Deepnote</a>.</li>
+</ul>
+</li>
 <li><strong>make the blog:</strong> </li>
 <li><a href="https://nbconvert.readthedocs.io/en/latest/">nbconvert</a>  to parse jupyter to markdown.<ul>
 <li>tried <a href="https://github.com/fastai/nbdev">nbdev</a> but had too many problems, though it has a lot more blog friendly features.</li>
@@ -107,6 +111,11 @@
 <ul>
 <li><a href="https://stackoverflow.com/questions/64127278/what-is-the-proper-way-to-specify-a-custom-template-path-for-jupyter-nbconvert-v">specify templates</a></li>
 </ul>
+<p>I need to customize nbconvert so it implements some of the features from <a href="https://github.com/fastai/fastpages">fastpages</a>, namely:</p>
+<ul>
+<li>renders output differently</li>
+<li>collapses code cells if #hide is at the top</li>
+</ul>
 <h3 id="code-highlight">code highlight</h3>
 <p>python markdown has pygments built in, which has a bunch of styles. To generate the css:</p>
 <pre><code class="language-bash">pygmentize -S default -f html -a .codehilite &gt; codestyles.css
@@ -120,7 +129,7 @@
 <li>https://htmldom.dev/</li>
 </ul>
 <h3 id="css">css</h3>
-<p>Frameworks I looked at:</p>
+<p>CSS is hard. So I want a simple to use framework, ended up looking at:</p>
 <ul>
 <li><a href="https://tachyons.io/">https://tachyons.io/</a> </li>
 <li><a href="https://tailwindcss.com/">https://tailwindcss</a> - at first sight it looked horrible, with style mixed in with html, but once I thought about it some more, its beautiful. Everything is there visible in the one file and I hate css files anyways. So leaning towards using this, the only downside being is that you need npm to generate the final production tailwind css file. More to follow once I actually implement it...</li>
@@ -132,13 +141,16 @@
 <li><a href="https://concrete.style/">concrete.css</a> - very minimal</li>
 <li>https://csslayout.io/ - examples of using css directly</li>
 </ul>
+<p>todo: decide on one. </p>
 <h3 id="search">Search</h3>
-<p>Search. I want search. </p>
-<p>Considered at</p>
+<p>Search. I want search.  This is pretty straightforward, we need a list of content and some javascript to do the searching.</p>
+<p>To just search post titles is pretty easy, from direct js to algolias <a href="https://github.com/algolia/autocomplete">autocomplete library</a>.</p>
+<p>Ideally I want to search across all the content is well, which takes some thinking as the output of jupyter notebooks can be huge, with all kinds of js embedded.</p>
+<p>Some things to look at:</p>
 <ul>
 <li><a href="https://fusejs.io/">fusejs</a> - <a href="https://gist.github.com/cmod/5410eae147e4318164258742dd053993#staticjsfastsearchjs">blog post implementing this in hugo</a> - used this first. It works and is pretty straightforward but has no python integration and I would like better examples as a js newbie.</li>
 <li><a href="https://lucaong.github.io/minisearch/">minisearch</a></li>
-<li>consider <a href="https://lunrjs.com/">lunr.js</a> as well as <a href="https://github.com/yeraydiazdiaz/lunr.py">lunr.py</a> to pre generate the index.</li>
+<li><a href="https://lunrjs.com/">lunr.js</a> as well as <a href="https://github.com/yeraydiazdiaz/lunr.py">lunr.py</a> to pre generate the index.</li>
 </ul>
 <p>So step one is to build a search index - which my script does as a json file containing all the post attributes I want searched.</p>
 <h3 id="github-actions">Github actions</h3>
