@@ -6,7 +6,7 @@ tags:
 toc: true
 ---
 
-Hereby I talk through writing my own blog engine. There are many excellent ones out there, but to customise any of them takes so much understanding of how they work, the template and theme engines they use, that its easier to just use them exactly as is with an existing theme. 
+There are many excellent blog engines out there, but to customise any of them takes so much understanding of how they work, the template and theme engines they use, that its easier to just use them exactly as is with an existing theme. 
 
 I wanted my own custom static blog, which played well with jupyter notebooks and markdown files, as well as a reason to do some python coding, so here goes yet another python blogging engine.
 
@@ -18,7 +18,9 @@ Its straightforward to read a set of markdown posts and convert to python. I am 
 
 Key tools used:
 
-- **write:** markdown docs using any editor and jupyter notebooks having yaml front matter
+* *write:** markdown docs using any editor and jupyter notebooks having yaml front matter.
+	* [obsidian](https://obsidian.md/) to edit markdown
+	* [vs code](https://code.visualstudio.com/docs/python/jupyter-support) for jupyter notebooks. Jupyter lab is ok in a pinch but it causes me more problems than not. My fav cloud alternative is [Deepnote](https://deepnote.com/).
 - **make the blog:** 
   -  [nbconvert](https://nbconvert.readthedocs.io/en/latest/)  to parse jupyter to markdown.
     - tried [nbdev](https://github.com/fastai/nbdev) but had too many problems, though it has a lot more blog friendly features.
@@ -51,6 +53,11 @@ I started with nbdev to convert notebooks to markdown, but it slowed down rebuil
 
 - [specify templates](https://stackoverflow.com/questions/64127278/what-is-the-proper-way-to-specify-a-custom-template-path-for-jupyter-nbconvert-v)
 
+I need to customize nbconvert so it implements some of the features from [fastpages](https://github.com/fastai/fastpages), namely:
+
+* renders output differently
+* collapses code cells if #hide is at the top
+
 
 ### code highlight
 
@@ -73,7 +80,7 @@ I'm no longer familiar with html, even though I build my first weblog on geociti
 
 ### css
 
-Frameworks I looked at:
+CSS is hard. So I want a simple to use framework, ended up looking at:
 
 - [https://tachyons.io/](https://tachyons.io/) 
 - [https://tailwindcss](https://tailwindcss.com/) - at first sight it looked horrible, with style mixed in with html, but once I thought about it some more, its beautiful. Everything is there visible in the one file and I hate css files anyways. So leaning towards using this, the only downside being is that you need npm to generate the final production tailwind css file. More to follow once I actually implement it...
@@ -85,15 +92,21 @@ Frameworks I looked at:
 - [concrete.css](https://concrete.style/) - very minimal
 - https://csslayout.io/ - examples of using css directly
 
+todo: decide on one. 
+
 ### Search
 
-Search. I want search. 
+Search. I want search.  This is pretty straightforward, we need a list of content and some javascript to do the searching.
 
-Considered at
+To just search post titles is pretty easy, from direct js to algolias [autocomplete library](https://github.com/algolia/autocomplete).
+
+Ideally I want to search across all the content is well, which takes some thinking as the output of jupyter notebooks can be huge, with all kinds of js embedded.
+
+Some things to look at:
 
 - [fusejs](https://fusejs.io/) - [blog post implementing this in hugo](https://gist.github.com/cmod/5410eae147e4318164258742dd053993#staticjsfastsearchjs) - used this first. It works and is pretty straightforward but has no python integration and I would like better examples as a js newbie.
 - [minisearch](https://lucaong.github.io/minisearch/)
-- consider [lunr.js](https://lunrjs.com/) as well as [lunr.py](https://github.com/yeraydiazdiaz/lunr.py) to pre generate the index.
+- [lunr.js](https://lunrjs.com/) as well as [lunr.py](https://github.com/yeraydiazdiaz/lunr.py) to pre generate the index.
 
 So step one is to build a search index - which my script does as a json file containing all the post attributes I want searched.
 
