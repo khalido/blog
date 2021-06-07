@@ -185,7 +185,6 @@ def md_to_post(p: Path, post_type=default_post_type, debug=False):
     if len(md.toc_tokens) > 0:  # just add toc anyways if more than 1 heading.
         toc = md.toc
     else:
-        print(f"{slug} toc not found, len of tock tokens is {len(md.toc_tokens)}")
         toc = False
 
     link = f"{tags[0]}/{slug}.html"
@@ -442,8 +441,8 @@ def get_parser():
         help="start local website server, defaults to False",
     )
     parser.add_argument(
-        "-c",
-        "--cache",
+        "-bn",
+        "--buildnotebooks",
         action="store_true",
         help="use cached markdown files for jupyter notebooks by default",
     )
@@ -461,14 +460,11 @@ def app():
 
     args = get_parser().parse_args()
 
-    if args.cache:
-        print("using previously converted markdown files for notebooks.")
-        # build_notebooks = False
-        # pass this to use the notebook markdown folder
-
     if args.posts:
+        if args.buildnotebooks:
+            print("using previously converted markdown files for notebooks.")
         # get posts
-        posts, postsdict, tags = get_posts(build_notebooks=args.cache)
+        posts, postsdict, tags = get_posts(build_notebooks=args.buildnotebooks)
 
         # copy static files over to the publish dir
         copy_static()

@@ -1,3 +1,5 @@
+![Blog built and deployed](https://github.com/khalido/blog/blob/master/.github/workflows/build.yml/badge.svg)
+
 Blog content + a simple python blogging engine
 
 - `bloggy` python code which converts content to html

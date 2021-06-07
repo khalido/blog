@@ -1,7 +1,6 @@
 # ignore these folders as i don't want to sync this to github
 public/
 tmp/
-nb2md/
 .obsidian
 
 # misc stuff
