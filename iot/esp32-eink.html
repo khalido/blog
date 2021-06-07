@@ -31,19 +31,7 @@
         </header>
 
 <article>
-        <h1>Lilygo ttgo t5</h1>
 
-    <div class="meta">
-        posted <time>2021-01-18</time>, updated <time>2021-05-24</time><br>
-        tagged: 
-        <a href="/iot">iot</a>
-        
-        <p>
-            <a href="https://github.com/khalido/blog/blob/master/posts/esp32-eink.md">github</a>
-        </p>
-    
-    </div>
-    
     <details open>
         <summary>Table of contents.</summary>
         <div class="toc">
@@ -102,6 +90,17 @@ esptool.py --chip esp32 --port /dev/ttyUSB1 --baud 460800 write_flash -z 0x1000 
 </ul>
 <p>Micropython executes <code>boot.py</code> on startup, then runs <code>main.py</code> if found. So my code should go inside a main.py file. Mu should be able to see and write to the board, but its grayed out. </p>
 <p>todo: find a easy solution to write files to the board.</p>
+
+    <div class="meta">
+        posted <time>2021-01-18</time>, updated <time>2021-06-07</time><br>
+        tagged: 
+        <a href="/iot">iot</a>
+        
+        <p>
+            <a href="https://github.com/khalido/blog/blob/master/posts/esp32-eink.md">github</a>
+        </p>
+    
+    </div>
 </article>
 
 <script>hljs.initHighlightingOnLoad();</script>

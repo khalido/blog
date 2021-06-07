@@ -31,19 +31,7 @@
         </header>
 
 <article>
-        <h1>how the blog was built</h1>
 
-    <div class="meta">
-        posted <time>2020-11-11</time>, updated <time>2021-05-24</time><br>
-        tagged: 
-        <a href="/python">python</a>
-        
-        <p>
-            <a href="https://github.com/khalido/blog/blob/master/posts/building_this_blog.md">github</a>
-        </p>
-    
-    </div>
-    
     <details open>
         <summary>Table of contents.</summary>
         <div class="toc">
@@ -78,20 +66,19 @@
 <p>Its straightforward to read a set of markdown posts and convert to python. I am using python to read the posts with <a href="https://python-markdown.github.io/">python-markdown</a> to parse them into html, complete with inline syntax highlighting.</p>
 <p>Key tools used:</p>
 <ul>
-<li><em>write:</em>* markdown docs using any editor and jupyter notebooks having yaml front matter.<ul>
+<li><strong>write:</strong> markdown docs using any editor and jupyter notebooks having yaml front matter.<ul>
 <li><a href="https://obsidian.md/">obsidian</a> to edit markdown</li>
 <li><a href="https://code.visualstudio.com/docs/python/jupyter-support">vs code</a> for jupyter notebooks. Jupyter lab is ok in a pinch but it causes me more problems than not. My fav cloud alternative is <a href="https://deepnote.com/">Deepnote</a>.</li>
 </ul>
 </li>
-<li><strong>make the blog:</strong> </li>
-<li><a href="https://nbconvert.readthedocs.io/en/latest/">nbconvert</a>  to parse jupyter to markdown.<ul>
+<li><strong>make the blog:</strong> <ul>
+<li><a href="https://nbconvert.readthedocs.io/en/latest/">nbconvert</a>  to parse jupyter to markdown.</li>
 <li>tried <a href="https://github.com/fastai/nbdev">nbdev</a> but had too many problems, though it has a lot more blog friendly features.</li>
-</ul>
-</li>
 <li>python to read all the markdown files using <a href="https://python-markdown.github.io/">python markdown</a> and <a href="https://pyyaml.org/wiki/PyYAMLDocumentation">yaml</a>. </li>
 <li>finally, writing html pages for index, tags and posts using <a href="https://www.makotemplates.org/">mako</a> for python friendly templates.</li>
+</ul>
+</li>
 <li><strong>search:</strong> <a href="https://fusejs.io/">fusejs</a> to make a in browser search engine</li>
-<li>every time a post is added or updated, the whole site needs to be rebuilt and redeployed. </li>
 <li><strong>build site:</strong> every time I commit to my blog repo, a github action is triggered which rebuilds the sites and saves the output to a <code>public</code> folder.</li>
 <li><strong>hosting:</strong> the site is hosted on the gh-pages of my blog repository, which github pages auto republishes. I am using a <a href="https://github.com/peaceiris/actions-gh-pages">github action</a> to deploy output files from the <code>public</code> folder to gh-pages on every commit to the main branch.</li>
 <li><strong>local sever</strong>: running the script with <code>--serve</code> flag starts a local python server.</li>
@@ -199,6 +186,17 @@ for post in posts:
     path.write_text(html)
     print(f&quot;wrote {post.slug} to {path}&quot;)
 </code></pre>
+
+    <div class="meta">
+        posted <time>2020-11-11</time>, updated <time>2021-06-07</time><br>
+        tagged: 
+        <a href="/python">python</a>
+        
+        <p>
+            <a href="https://github.com/khalido/blog/blob/master/posts/building_this_blog.md">github</a>
+        </p>
+    
+    </div>
 </article>
 
 <script>hljs.initHighlightingOnLoad();</script>

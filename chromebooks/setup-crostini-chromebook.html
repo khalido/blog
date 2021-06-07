@@ -31,20 +31,34 @@
         </header>
 
 <article>
-        <h1>Setting up Linux on a Chromebook with Crostini</h1>
 
-    <div class="meta">
-        posted <time>2018-08-24</time>, updated <time>2020-01-07</time><br>
-        tagged: 
-        <a href="/chromebooks">chromebooks</a>
-        <a href="/linux">linux</a>
-        
-        <p>
-            <a href="https://github.com/khalido/blog/blob/master/posts/setup-crostini-chromebook.md">github</a>
-        </p>
-    
-    </div>
-    
+    <details open>
+        <summary>Table of contents.</summary>
+        <div class="toc">
+<ul>
+<li><a href="#install-all-the-apps">Install all the apps</a><ul>
+<li><a href="#flatpak">flatpak</a></li>
+<li><a href="#vs-code">vs code</a></li>
+<li><a href="#markdown-app">markdown app</a></li>
+</ul>
+</li>
+<li><a href="#install-anaconda-for-a-better-python">install anaconda for a better python</a><ul>
+<li><a href="#jupyter-lab">jupyter lab</a></li>
+<li><a href="#install-a-r-kernel">install a R kernel</a></li>
+</ul>
+</li>
+<li><a href="#make-the-terminal-nicer-to-use">make the terminal nicer to use</a><ul>
+<li><a href="#fix-window-shortcuts">fix window shortcuts</a></li>
+<li><a href="#multiplex-all-the-things">multiplex all the things</a></li>
+<li><a href="#jazz-up-the-shell">jazz up the shell</a></li>
+<li><a href="#setup-vim-proper-like">setup vim proper like</a></li>
+</ul>
+</li>
+<li><a href="#download-all-my-git-repos">Download all my git repos</a></li>
+</ul>
+</div>
+
+    </details>
     
     <hr>
     
@@ -189,6 +203,18 @@ set linebreak
 <p>This command will grab json output of the first (or last?) 200 repos in my github and git clone them all one by one into the directory this command was run.</p>
 <pre><code class="language-bash">curl -s https://api.github.com/users/khalido/repos?per_page=200 | grep \&quot;clone_url\&quot; | awk '{print $2}' | sed -e 's/&quot;//g' -e 's/,//g' | xargs -n1 git clone
 </code></pre>
+
+    <div class="meta">
+        posted <time>2018-08-24</time>, updated <time>2020-01-07</time><br>
+        tagged: 
+        <a href="/chromebooks">chromebooks</a>
+        <a href="/linux">linux</a>
+        
+        <p>
+            <a href="https://github.com/khalido/blog/blob/master/posts/setup-crostini-chromebook.md">github</a>
+        </p>
+    
+    </div>
 </article>
 
 <script>hljs.initHighlightingOnLoad();</script>

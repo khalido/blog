@@ -31,19 +31,18 @@
         </header>
 
 <article>
-        <h1>Apache Spark</h1>
 
-    <div class="meta">
-        posted <time>2016-01-01</time>, updated <time>2021-05-24</time><br>
-        tagged: 
-        <a href="/untagged">untagged</a>
-        
-        <p>
-            <a href="https://github.com/khalido/blog/blob/master/posts/apache-spark.md">github</a>
-        </p>
-    
-    </div>
-    
+    <details open>
+        <summary>Table of contents.</summary>
+        <div class="toc">
+<ul>
+<li><a href="#rdd">RDD</a></li>
+<li><a href="#map-all-the-things-to-something-else">map all the things to something else</a></li>
+<li><a href="#install-spark-on-your-local-machine">install spark on your local machine</a></li>
+</ul>
+</div>
+
+    </details>
     
     <hr>
     
@@ -66,6 +65,17 @@ counts = pairs.reduceByKey(lambda a, b: a + b)
 <p>Spark needs Java, so to install it properly it needs a lot of installation. So to avoid all that I'm using a <a href="https://docs.docker.com/get-started/">docker</a> image with spark preinstalled: <a href="http://jupyter-docker-stacks.readthedocs.io/en/latest/using/selecting.html#jupyter-pyspark-notebook">jupyter/pyspark-notebook</a></p>
 <p><code>docker run -d -P --name notebook jupyter/pyspark-notebook</code></p>
 <p>Note: use <code>-v</code> to mount the current directory in the docker container.</p>
+
+    <div class="meta">
+        posted <time>2016-01-01</time>, updated <time>2021-06-07</time><br>
+        tagged: 
+        <a href="/untagged">untagged</a>
+        
+        <p>
+            <a href="https://github.com/khalido/blog/blob/master/posts/apache-spark.md">github</a>
+        </p>
+    
+    </div>
 </article>
 
 <script>hljs.initHighlightingOnLoad();</script>

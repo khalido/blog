@@ -31,19 +31,18 @@
         </header>
 
 <article>
-        <h1>Jupyter Lab tips and tricks</h1>
 
-    <div class="meta">
-        posted <time>2019-08-04</time>, updated <time>2021-05-24</time><br>
-        tagged: 
-        <a href="/jupyter">jupyter</a>
-        
-        <p>
-            <a href="https://github.com/khalido/blog/blob/master/posts/jupyterlab.md">github</a>
-        </p>
-    
-    </div>
-    
+    <details open>
+        <summary>Table of contents.</summary>
+        <div class="toc">
+<ul>
+<li><a href="#magic-commands">magic commands</a></li>
+<li><a href="#extensions">Extensions</a></li>
+<li><a href="#blog-with-jupyter-notebooks">blog with jupyter notebooks</a></li>
+</ul>
+</div>
+
+    </details>
     
     <hr>
     
@@ -101,6 +100,17 @@ print(f&quot;Converted {len(ipynb_files)} jupter notebooks to markdown.&quot;)
 <p><code>c.NbConvertApp.output_files_dir = '{notebook_name}'</code></p>
 <p>This saves the output file in a folder which is the same as the notebook name - I've found that way then the netlify webserver just serves up the image files without having to rewrite the image path inside the markdown file.</p>
 <p><em>Note: this post is a work in progress...</em></p>
+
+    <div class="meta">
+        posted <time>2019-08-04</time>, updated <time>2021-06-07</time><br>
+        tagged: 
+        <a href="/jupyter">jupyter</a>
+        
+        <p>
+            <a href="https://github.com/khalido/blog/blob/master/posts/jupyterlab.md">github</a>
+        </p>
+    
+    </div>
 </article>
 
 <script>hljs.initHighlightingOnLoad();</script>

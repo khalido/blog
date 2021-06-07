@@ -20,7 +20,7 @@
       href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.4.0/styles/default.min.css">
         <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.4.0/highlight.min.js"></script>
 
-        <title>Googles Best Practices for ML Engineering</title>
+        <title>do we need ML?</title>
     </head>
 
     <body>
@@ -31,19 +31,82 @@
         </header>
 
 <article>
-        <h1>Googles Best Practices for ML Engineering</h1>
 
-    <div class="meta">
-        posted <time>2019-03-02</time>, updated <time>2021-05-24</time><br>
-        tagged: 
-        <a href="/ml">ml</a>
-        
-        <p>
-            <a href="https://github.com/khalido/blog/blob/master/posts/google-ml-best-practice.md">github</a>
-        </p>
-    
-    </div>
-    
+    <details open>
+        <summary>Table of contents.</summary>
+        <div class="toc">
+<ul>
+<li><a href="#do-we-need-ml">do we need ML?</a><ul>
+<li><a href="#rule-1-dont-do-ml-unless-there-is-enough-data-and-ml-is-actually-needed">Rule 1: don't do ML unless there is enough data and ML is actually needed.</a></li>
+<li><a href="#rule-2-first-write-down-what-you-want-the-ml-to-do-and-what-data-you-might-want">Rule 2: first write down what you want the ML to do and what data you might want.</a></li>
+<li><a href="#rule-3-use-ml-over-complex-heristics">Rule 3: Use ML over complex heristics.</a></li>
+</ul>
+</li>
+<li><a href="#ml-phase-1-pipelines-and-infrastructure">ML Phase 1: Pipelines and infrastructure</a><ul>
+<li><a href="#rule-4-start-with-simple-ml-and-concentrate-on-infrastructure">Rule 4: Start with simple ML and concentrate on infrastructure:</a></li>
+<li><a href="#rule-5-test-data-flows-and-infrastructure-seperately-from-ml">Rule 5: Test data flows and infrastructure seperately from ML</a></li>
+<li><a href="#rule-6-dont-drop-data-if-copying-pipelines">Rule 6: don't drop data if copying pipelines</a></li>
+<li><a href="#rule-7-use-existing-knowledge">Rule 7: use existing knowledge</a></li>
+</ul>
+</li>
+<li><a href="#monitering">Monitering</a><ul>
+<li><a href="#rule-8-freshness">Rule 8: freshness</a></li>
+<li><a href="#rule-9-sanity-check-models-before-using">Rule 9: sanity check models before using</a></li>
+<li><a href="#rule-10-watch-for-silent-failures">Rule 10: watch for silent failures</a></li>
+<li><a href="#rule-11-document-features-and-assign-owners">Rule 11: document features and assign owners</a></li>
+</ul>
+</li>
+<li><a href="#first-objectives">First Objectives</a><ul>
+<li><a href="#rule-12-dont-overthink-which-objective-to-optimize">Rule 12: dont overthink which objective to optimize</a></li>
+<li><a href="#rule-13-use-a-simple-observable-and-attributtable-metric-as-a-first-objective">Rule 13: Use a simple, observable and attributtable metric as a first objective</a></li>
+<li><a href="#rule-14-start-with-an-interpretable-model-to-make-debugging-easier">Rule 14: Start with an interpretable model to make debugging easier</a></li>
+<li><a href="#rule-15-seperate-spam-filtering-and-quality-ranking">Rule 15: Seperate spam filtering and quality ranking</a></li>
+</ul>
+</li>
+<li><a href="#ml-phase-ii-feature-engineering">ML Phase II: Feature Engineering</a><ul>
+<li><a href="#rule-16-launch-and-iterate">Rule 16: Launch and iterate</a></li>
+<li><a href="#rule-17-start-with-directly-observed-and-reported-features-as-opposed-to-learned-features">Rule 17: Start with directly observed and reported features as opposed to learned features</a></li>
+<li><a href="#rule-18-explore-with-features-of-content-that-generalizes-across-contexts">Rule 18: Explore with features of content that generalizes across contexts</a></li>
+<li><a href="#rule-19-user-very-specific-features-when-you-can">Rule 19: User very specific features when you can</a></li>
+<li><a href="#rule-20-combine-and-modify-existing-features-to-create-new-features-in-human-understandable-ways">Rule 20: combine and modify existing features to create new features in human understandable ways</a></li>
+<li><a href="#rule-21-number-of-feature-weights-is-roughly-proportional-to-the-amount-of-data">Rule 21: number of feature weights is roughly proportional to the amount of data</a></li>
+<li><a href="#rule-22-clean-up-features-no-longer-in-use">Rule 22: clean up features no longer in use</a></li>
+</ul>
+</li>
+<li><a href="#human-analysis-of-the-system">Human analysis of the System</a><ul>
+<li><a href="#rule-23-youre-not-a-typical-end-user">Rule 23: you're not a typical end user</a></li>
+<li><a href="#rule-24-measure-the-dela-within-models">Rule 24: measure the dela within models</a></li>
+<li><a href="#rule-25-utilitarian-performance-trumps-predictive-power">Rule 25: utilitarian performance trumps predictive power</a></li>
+<li><a href="#rule-26-look-for-patterns-in-the-measured-errors-and-create-new-features">Rule 26: look for patterns in the measured errors and create new features</a></li>
+<li><a href="#rule-27-try-to-quantify-observed-behaviour">Rule 27: try to quantify observed behaviour</a></li>
+<li><a href="#rule-28-be-aware-that-identical-short-term-behaviour-does-not-imply-identical-long-term-behaviour">Rule 28: be aware that identical short-term behaviour does not imply identical long-term behaviour</a></li>
+</ul>
+</li>
+<li><a href="#training-serving-skew">Training-Serving Skew</a><ul>
+<li><a href="#rule-29-best-way-to-make-sure-you-train-like-you-serve-is-to-save-the-set-of-features-used-at-serving-time-and-pipe-those-features-to-a-log-to-use-them-at-training-time">Rule 29: best way to make sure you train like you serve is to save the set of features used at serving time and pipe those features to a log to use them at training time</a></li>
+<li><a href="#rule-30-importance-weight-sampled-data-dont-arbitarily-drop-it">Rule 30: Importance-weight sampled data, don't arbitarily drop it</a></li>
+<li><a href="#rule-31-beware-if-you-join-data-from-a-table-at-training-and-serving-time-the-data-in-the-table-may-change">Rule 31: beware if you join data from a table at training and serving time, the data in the table may change</a></li>
+<li><a href="#rule-32-reuse-code-bw-training-and-serviing-pipelines-whenever-possible">Rule 32: reuse code b/w training and serviing pipelines whenever possible</a></li>
+<li><a href="#rule-33-if-you-make-a-model-on-data-till-jan-5th-test-it-on-data-after-jan-6th">Rule 33: if you make a model on data till Jan 5th, test it on data after Jan 6th</a></li>
+<li><a href="#rule-34-in-binary-classification-for-filtering-make-small-short-term-sacrifices-in-performance-for-very-clean-data">Rule 34: in binary classification for filtering make small short-term sacrifices in performance for very clean data</a></li>
+<li><a href="#rule-35-beware-of-inherent-skew-in-ranking-problems">Rule 35: Beware of inherent skew in ranking problems</a></li>
+<li><a href="#rule-36-aviod-feedback-loops-with-positional-features">Rule 36: Aviod feedback loops with positional features</a></li>
+<li><a href="#rule-37-measure-trainingserving-skew">Rule 37: Measure Training/Serving skew</a></li>
+</ul>
+</li>
+<li><a href="#ml-phase-iii-slowed-growth-optimization-refinement-and-complex-models">ML Phase III: Slowed Growth, Optimization Refinement, and Complex Models</a><ul>
+<li><a href="#rule-38-dont-waste-time-on-new-features-if-unaligined-objectives-have-become-the-issue">Rule 38: don't waste time on new features if unaligined objectives have become the issue</a></li>
+<li><a href="#rule-39-launch-decisions-are-a-proxy-for-long-term-product-goals">Rule 39: launch decisions are a proxy for long-term product goals</a></li>
+<li><a href="#rule-40-keep-ensembles-simple">Rule 40: Keep ensembles simple</a></li>
+<li><a href="#rule-41-when-performance-plateaus-look-for-qualitatively-new-sources-of-information-to-add-rather-than-refining-existing-signals">Rule 41: When performance plateaus, look for qualitatively new sources of information to add rather than refining existing signals.</a></li>
+<li><a href="#rule-42-dont-expect-diversity-personalization-or-relevance-to-be-as-correlated-with-popularity-as-you-think-they-are">Rule 42: Don’t expect diversity, personalization, or relevance to be as correlated with popularity as you think they are.</a></li>
+<li><a href="#rule-43-your-friends-tend-to-be-the-same-across-different-products-your-interests-tend-not-to-be">Rule 43: Your friends tend to be the same across different products. Your interests tend not to be.</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+    </details>
     
     <hr>
     
@@ -215,6 +278,17 @@
 <p>Postprocessing can help, or directly modifing the objective to increase diversity or relevance.</p>
 <h2 id="rule-43-your-friends-tend-to-be-the-same-across-different-products-your-interests-tend-not-to-be">Rule 43: Your friends tend to be the same across different products. Your interests tend not to be.</h2>
 <p>While one thing might be close to another, doesn't mean it applies across products.</p>
+
+    <div class="meta">
+        posted <time>2019-03-02</time>, updated <time>2021-06-07</time><br>
+        tagged: 
+        <a href="/ml">ml</a>
+        
+        <p>
+            <a href="https://github.com/khalido/blog/blob/master/posts/google-ml-best-practice.md">github</a>
+        </p>
+    
+    </div>
 </article>
 
 <script>hljs.initHighlightingOnLoad();</script>

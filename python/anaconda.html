@@ -31,23 +31,12 @@
         </header>
 
 <article>
-        <h1>Using Anaconda</h1>
 
-    <div class="meta">
-        posted <time>2021-01-02</time>, updated <time>2021-05-24</time><br>
-        tagged: 
-        <a href="/python">python</a>
-        
-        <p>
-            <a href="https://github.com/khalido/blog/blob/master/posts/anaconda.md">github</a>
-        </p>
-    
-    </div>
-    
     <details open>
         <summary>Table of contents.</summary>
         <div class="toc">
 <ul>
+<li><a href="#using-anaconda">Using Anaconda</a><ul>
 <li><a href="#install-anaconda">Install Anaconda</a></li>
 <li><a href="#using-environments">Using environments</a><ul>
 <li><a href="#write-the-packages-in-use-to-disk">Write the packages in use to disk:</a></li>
@@ -55,13 +44,17 @@
 </li>
 <li><a href="#jupyter-lab">Jupyter lab</a></li>
 </ul>
+</li>
+</ul>
 </div>
 
     </details>
     
     <hr>
     
-    <h2 id="install-anaconda">Install Anaconda</h2>
+    <h1 id="using-anaconda">Using Anaconda</h1>
+<p>Testing heading parsing here.</p>
+<h2 id="install-anaconda">Install Anaconda</h2>
 <p>There seems to be two main ways to handle python packaging, pip with pipenv and conda. I've gone with conda, though it turns out I often have to use pip inside conda. Anyways, <a href="https://conda.io/docs/_downloads/conda-cheatsheet.pdf">there is a cheatsheet</a>, but here's all I use:</p>
 <ul>
 <li>download and install <a href="https://www.anaconda.com/download">anaconda from here</a>.</li>
@@ -73,7 +66,7 @@
 </ul>
 <p>And python + jupyter lab + a bunch of other packages should be up and running!</p>
 <h2 id="using-environments">Using environments</h2>
-<p>Protip: install pip inside a conda enviroment if planning to ever use pip install. Otherwise pip installs inside an environment use the main pip and that is NOT GOOD. </p>
+<p>Protip: install pip inside a conda enviroment if planning to ever use pip install. Otherwise pip installs inside an environment use the main pip and that is NOT GOOD.</p>
 <p>So here we create a new environment which will use Python 3.9x and pip.</p>
 <p><code>conda create -n py39 python=3.9 pip</code></p>
 <p>Use this environment:</p>
@@ -94,9 +87,20 @@
 <h2 id="jupyter-lab">Jupyter lab</h2>
 <p>Jupyter lab is the new hotness and is ready to rock out of the box with anaconda. to make it easy to select from all the environments installed, in the main anaconda env (i.e not inside an env) run:</p>
 <p><code>conda install nb_conda</code></p>
-<p>This should ideally let the conda env with jupyter lab see all the other kernels. </p>
+<p>This should ideally let the conda env with jupyter lab see all the other kernels.</p>
 <p>Anaconda itself has an older version of jupyter lab, so lately I have take to installing it the updated version directly in a conda env:</p>
 <p><code>conda install -c conda-forge jupyterlab</code></p>
+
+    <div class="meta">
+        posted <time>2021-01-02</time>, updated <time>2021-06-07</time><br>
+        tagged: 
+        <a href="/python">python</a>
+        
+        <p>
+            <a href="https://github.com/khalido/blog/blob/master/posts/anaconda.md">github</a>
+        </p>
+    
+    </div>
 </article>
 
 <script>hljs.initHighlightingOnLoad();</script>
