@@ -6,6 +6,7 @@ nb2md/
 
 # misc stuff
 .vscode
+.DS_Store
 
 # python
 **/.ipynb_checkpoints/
