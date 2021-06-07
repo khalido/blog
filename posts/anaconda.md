@@ -1,10 +1,13 @@
 ---
-title: Using Anaconda
 date: 2021-01-02
 tags:
-- python
+  - python
 toc: true
 ---
+
+# Using Anaconda
+
+Testing heading parsing here.
 
 ## Install Anaconda
 
@@ -21,7 +24,7 @@ And python + jupyter lab + a bunch of other packages should be up and running!
 
 ## Using environments
 
-Protip: install pip inside a conda enviroment if planning to ever use pip install. Otherwise pip installs inside an environment use the main pip and that is NOT GOOD. 
+Protip: install pip inside a conda enviroment if planning to ever use pip install. Otherwise pip installs inside an environment use the main pip and that is NOT GOOD.
 
 So here we create a new environment which will use Python 3.9x and pip.
 
@@ -59,7 +62,7 @@ Jupyter lab is the new hotness and is ready to rock out of the box with anaconda
 
 `conda install nb_conda`
 
-This should ideally let the conda env with jupyter lab see all the other kernels. 
+This should ideally let the conda env with jupyter lab see all the other kernels.
 
 Anaconda itself has an older version of jupyter lab, so lately I have take to installing it the updated version directly in a conda env:
 

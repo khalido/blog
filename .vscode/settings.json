@@ -1,5 +1,5 @@
 {
-    "python.pythonPath": "/home/ko/anaconda3/envs/blog/bin/python",
+    "python.pythonPath": "/Users/ko/anaconda3/envs/py39/bin/python",
     "python.linting.pylintEnabled": true,
     "python.linting.enabled": true,
     "jupyter.jupyterServerType": "local"

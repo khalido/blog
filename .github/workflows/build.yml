@@ -15,16 +15,16 @@ jobs:
     - name: Setup python
       uses: actions/setup-python@v2
       with:
-        python-version: 3.8 # install this version
+        python-version: 3.9 # install this version
 
     - name: Install dependencies
       run: |
-        python -m pip install --upgrade wheel
+        python -m pip install --upgrade wheel # is this needed
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
     - name: Build blog 
       run: |
-        python ./blog.py
+        python -m bloggy
 
     - name: Deploy public folder to gh-pages 🚀
       uses: peaceiris/actions-gh-pages@v3

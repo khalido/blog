@@ -5,6 +5,8 @@ tags:
 - recipes
 ---
 
+# Paneer Karhai
+
 Home made recipe from FDT. This is a basic desi karhai receipe which can be used as the base for anything.
 
 ## ingredients

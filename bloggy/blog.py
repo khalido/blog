@@ -104,7 +104,10 @@ lookup = TemplateLookup(directories=["templates"])
 
 
 def convert_notebooks_to_md():
-    # emptying tmp so don't end up with old md files here
+    """converts jupter notebooks to markdown files and saves them in the path
+    specified in config file.
+    """
+    # removing previously converted notebooks
     shutil.rmtree("nb2md", ignore_errors=True)
 
     # am I using nbconvert here?
@@ -144,8 +147,7 @@ def convert_notebooks_to_md():
 
 
 def md_to_post(p: Path, post_type=default_post_type, debug=False):
-    """takes in a path to md file  and returns a Post obj
-    """
+    """takes in a path to md file  and returns a Post obj"""
 
     try:
         all_txt = p.read_text()
@@ -157,7 +159,6 @@ def md_to_post(p: Path, post_type=default_post_type, debug=False):
     fm = yaml.load(all_txt[:n], Loader=yaml.FullLoader)  # front matter dict
     txt = all_txt[n + 3 :].strip()  # text excluding front matter
 
-    title = fm.get("title", default_post_title)
     _post_type = fm.get("type", post_type)  # defaults to post
     slug = fm.get("slug", p.name.split(".")[0])  # todo: check repeated slugs
     dt = fm.get("date", datetime.fromtimestamp(p.stat().st_ctime).date())
@@ -170,9 +171,22 @@ def md_to_post(p: Path, post_type=default_post_type, debug=False):
 
     html = md.convert(txt)
 
-    # enable toc for posts if toc: True in front matter
-    if (toc := fm.get("toc", False)) :
+    # if first header is h1 override the titile from front matter
+    title = fm.get("title", default_post_title)
+    try:
+        if md.toc_tokens[0]["level"] == 1:
+            title = md.toc_tokens[0]["name"]
+    except:
+        pass
+
+    # enable toc for posts if more than 1 heading or toc: True in front matter
+    # if (toc := fm.get("toc", False)) :
+    #    toc = md.toc
+    if len(md.toc_tokens) > 0:  # just add toc anyways if more than 1 heading.
         toc = md.toc
+    else:
+        print(f"{slug} toc not found, len of tock tokens is {len(md.toc_tokens)}")
+        toc = False
 
     link = f"{tags[0]}/{slug}.html"
 
@@ -200,6 +214,8 @@ def get_posts(debug=False, build_notebooks=True):
     # convert notebooks to md and save in a tmp folder
     if build_notebooks:
         convert_notebooks_to_md()
+    else:
+        print("Using cached markdown files for jupyter notebooks")
 
     # lists of md files and notebooks to convert
     md_paths = [f for f in path_md.rglob("*.md")]
@@ -290,7 +306,7 @@ def search_json(posts, path=path_publish):
 
 def write_posts(posts, tmpl: str = "post.html"):
     """makes a html page for each post using list of posts passed in
-    
+
     Args:
         tmpl: name of templete
         posts: list of posts
@@ -326,7 +342,7 @@ def write_posts(posts, tmpl: str = "post.html"):
 
 def write_index_page(posts, tags=None, tmpl: str = "index.html", foldername=None):
     """makes a html index page in the foldername using list of posts passed in
-    
+
     Args:
         tmpl: name of templete
         foldername: name of folder to create
@@ -391,7 +407,7 @@ def copy_static():
     print(f"TODO: copied notebook files over to {path_publish}")
 
 
-def start_server(directory="public", PORT=8001):
+def start_server(directory="public", PORT=8000):
     """runs basic python server, serving up the public dir"""
     import http.server
     import socketserver
@@ -404,8 +420,12 @@ def start_server(directory="public", PORT=8001):
     )
 
     with socketserver.TCPServer(("", PORT), Handler) as httpd:
-        print("serving at port", PORT)
-        httpd.serve_forever()
+        try:
+            print("serving at port", PORT)
+            httpd.serve_forever()
+        except KeyboardInterrupt:
+            print(f"stopping localhost websert at port {PORT}")
+            httpd.shutdown()
 
 
 def get_parser():
@@ -416,31 +436,52 @@ def get_parser():
         description="build html site from posts and notebooks, and optionally, serve website."
     )
     parser.add_argument(
-        "-s", "--serve", action="store_true", help="start local website server"
+        "-s",
+        "--serve",
+        action="store_true",
+        help="start local website server, defaults to False",
     )
     parser.add_argument(
-        "-c", "--cache", action="store_false", help="don't build jupyter notebooks"
+        "-c",
+        "--cache",
+        action="store_true",
+        help="use cached markdown files for jupyter notebooks by default",
+    )
+    parser.add_argument(
+        "-p",
+        "--posts",
+        action="store_false",
+        help="don't build posts, defaults to building",
     )
     return parser
 
 
-if __name__ == "__main__":
+def app():
+    """pulls in all the things to build the blog"""
+
     args = get_parser().parse_args()
 
     if args.cache:
         print("using previously converted markdown files for notebooks.")
-        build_notebooks = False
+        # build_notebooks = False
         # pass this to use the notebook markdown folder
 
-    # get posts
-    posts, postsdict, tags = get_posts(build_notebooks=args.cache)
-    # copy static files over to the publish dir
-    copy_static()
-    # write all the things to the publish dir
-    write_all(posts, tags)
+    if args.posts:
+        # get posts
+        posts, postsdict, tags = get_posts(build_notebooks=args.cache)
 
-    print("Website generated.")
+        # copy static files over to the publish dir
+        copy_static()
+
+        # write all the things to the publish dir
+        write_all(posts, tags)
+
+        print("Website generated.")
 
     if args.serve:
         print(f"Starting server in dir {path_publish}")
         start_server()
+
+
+if __name__ == "__main__":
+    app()

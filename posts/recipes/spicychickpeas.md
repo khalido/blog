@@ -5,6 +5,10 @@ tags:
 - recipes
 ---
 
+# Chana Masala
+
+aka spicy chickpeas with a ton of ginger.
+
 ## Spices (put aside in small bowl)
 
 - 1 tsp red chilli powder 

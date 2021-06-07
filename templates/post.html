@@ -6,10 +6,17 @@
 args="title=post.title, header=header, header_text=header_text"/>
 
 <article>
-    ## title is taken from yaml meta data currently
-    % if post.title:
-        <h1>${post.title}</h1>
+
+    % if post.toc:
+    <details open>
+        <summary>Table of contents.</summary>
+        ${post.toc}
+    </details>
     % endif
+    
+    <hr>
+    
+    ${post.html}
 
     <div class="meta">
         posted <time>${post.date}</time>, updated <time>${post.lastmod}</time><br>
@@ -23,8 +30,10 @@ args="title=post.title, header=header, header_text=header_text"/>
         % if post.type == "notebook":
             <a href="https://github.com/khalido/blog/blob/master/notebooks/${post.slug}.ipynb">github</a>, 
             <a href="https://colab.research.google.com/github/khalido/blog/blob/master/notebooks/${post.slug}.ipynb">
-                colab
-            </a>
+                colab2
+            </a>,
+            <a href="https://deepnote.com/viewer/github/khalido/blog/blob/master/notebooks/${post.slug}.ipynb">deepnote</a>
+
         
         % elif post.type == "post":
             <a href="https://github.com/khalido/blog/blob/master/posts/${post.slug}.md">github</a>
@@ -34,17 +43,6 @@ args="title=post.title, header=header, header_text=header_text"/>
         </p>
     
     </div>
-    
-    % if post.toc:
-    <details open>
-        <summary>Table of contents.</summary>
-        ${post.toc}
-    </details>
-    % endif
-    
-    <hr>
-    
-    ${post.html}
 </article>
 
 <script>hljs.initHighlightingOnLoad();</script>

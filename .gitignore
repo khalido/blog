@@ -2,6 +2,7 @@
 public/
 tmp/
 nb2md/
+.obsidian
 
 # misc stuff
 .vscode

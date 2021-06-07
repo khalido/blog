@@ -5,6 +5,8 @@ tags:
 - recipes
 ---
 
+# Vegan shami kebab
+
 Makes kebabs for frying or grilling. Goes well in burgers.
 
 ## Ingredients

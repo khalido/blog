@@ -18,17 +18,16 @@ Its straightforward to read a set of markdown posts and convert to python. I am 
 
 Key tools used:
 
-* *write:** markdown docs using any editor and jupyter notebooks having yaml front matter.
+* **write:** markdown docs using any editor and jupyter notebooks having yaml front matter.
 	* [obsidian](https://obsidian.md/) to edit markdown
 	* [vs code](https://code.visualstudio.com/docs/python/jupyter-support) for jupyter notebooks. Jupyter lab is ok in a pinch but it causes me more problems than not. My fav cloud alternative is [Deepnote](https://deepnote.com/).
-- **make the blog:** 
-  -  [nbconvert](https://nbconvert.readthedocs.io/en/latest/)  to parse jupyter to markdown.
-    - tried [nbdev](https://github.com/fastai/nbdev) but had too many problems, though it has a lot more blog friendly features.
-  - python to read all the markdown files using [python markdown](https://python-markdown.github.io/) and [yaml](https://pyyaml.org/wiki/PyYAMLDocumentation). 
-  - finally, writing html pages for index, tags and posts using [mako](https://www.makotemplates.org/) for python friendly templates.
-- **search:** [fusejs](https://fusejs.io/) to make a in browser search engine
-- every time a post is added or updated, the whole site needs to be rebuilt and redeployed. 
-  - **build site:** every time I commit to my blog repo, a github action is triggered which rebuilds the sites and saves the output to a `public` folder.
+* **make the blog:** 
+	* [nbconvert](https://nbconvert.readthedocs.io/en/latest/)  to parse jupyter to markdown.
+	* tried [nbdev](https://github.com/fastai/nbdev) but had too many problems, though it has a lot more blog friendly features.
+	* python to read all the markdown files using [python markdown](https://python-markdown.github.io/) and [yaml](https://pyyaml.org/wiki/PyYAMLDocumentation). 
+	* finally, writing html pages for index, tags and posts using [mako](https://www.makotemplates.org/) for python friendly templates.
+* **search:** [fusejs](https://fusejs.io/) to make a in browser search engine
+*  **build site:** every time I commit to my blog repo, a github action is triggered which rebuilds the sites and saves the output to a `public` folder.
   - **hosting:** the site is hosted on the gh-pages of my blog repository, which github pages auto republishes. I am using a [github action](https://github.com/peaceiris/actions-gh-pages) to deploy output files from the `public` folder to gh-pages on every commit to the main branch.
 - **local sever**: running the script with `--serve` flag starts a local python server.
 
