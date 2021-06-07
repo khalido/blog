@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!--temp stylesheet, customize my own one later.
+        https://github.com/kognise/water.css-->
+        
+        
+        <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.3/new.min.css">
+
+        <link rel="stylesheet" type="text/css" href="/codestyles.css">
+        
+        
+
+        <link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.4.0/styles/default.min.css">
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.4.0/highlight.min.js"></script>
+
+        <title>Advent of Code 2020</title>
+    </head>
+
+    <body>
+ 
+        <header>
+            <a href="/">"khalido.org"</a> <br>
+            "some subheader text."
+        </header>
+
+<article>
+
+    <details open>
+        <summary>Table of contents.</summary>
+        <div class="toc">
+<ul>
+<li><a href="#day-1-report-repair">Day 1: Report Repair</a></li>
+<li><a href="#day-2-password-policy">Day 2: Password policy</a></li>
+<li><a href="#day-3-toboggan-trajectory">Day 3: Toboggan Trajectory</a></li>
+<li><a href="#day-4-passport-processing">Day 4: Passport Processing</a></li>
+<li><a href="#day-5-binary-boarding">Day 5: Binary Boarding</a></li>
+</ul>
+</div>
+
+    </details>
+    
+    <hr>
+    
+    <p>The following is a write up of how to solve and the stuff I learved while doing so, thus some of the code is spelled out and slow! So look at the <a href="https://www.reddit.com/r/adventofcode/">AOC reddit site</a> for ninja level solutions.</p>
+<p>The first pass at a solution is <a href="https://github.com/khalido/adventofcode/tree/master/advent2020">on my adventofcode repo</a> and this here post will contain a cleaned up version.</p>
+<p>I am trying to</p>
+<ul>
+<li>code in a readable fashion, avoiding shortcuts (easier said then done!)</li>
+<li>make visuals as many problems as possible.</li>
+<li>not <a href="https://docs.google.com/presentation/d/1n2RlMdmv1p25Xy5thJUhkKGvjtV-dkAIsUXP-AL4ffI/edit?usp=sharing">mangle up jupyter notebooks too badly</a>. Real code is written using a text editor! Unless you are <a href="https://netflixtechblog.com/notebook-innovation-591ee3221233">Netflix</a>, or course, or using <a href="https://yihui.org/en/2018/09/xfun-pkg-attach/">rmarkdown</a>.</li>
+</ul>
+<p>First up, I'm importing all the libs I'll use up here:</p>
+<pre><code class="language-python"># python essentials
+import os
+import re
+import hashlib
+import math
+from pathlib import Path
+from typing import List
+from collections import defaultdict, namedtuple, Counter
+import itertools
+
+# useful external libs
+#import numpy as np
+#import pandas as pd
+
+# misc utils
+#import requests
+#from tqdm.notebook import trange, tqdm # progress bars for slow funcs
+#from functools import reduce 
+
+# for plots, cause visuals
+import matplotlib.pyplot as plt # goto python viz lib
+#import seaborn as sns # prettify matplotlib
+from IPython.display import display, Markdown
+
+# javascript plotting for interactive graphs
+#import altair as alt
+#import plotly.express as px
+</code></pre>
+<p>Some helper functions to avoid rewriting the same code for all the problems:</p>
+<pre><code class="language-python">input_path = Path(&quot;data&quot;) / &quot;advent-of-code-2020&quot;
+github_url = url = &quot;https://github.com/khalido/adventofcode/raw/master/inputs&quot;
+
+def get_input(day:int=1, splitlines=True):
+    &quot;&quot;&quot;takes in the day, year and date, returns the input&quot;&quot;&quot;
+
+    try:    # load from local disk
+        with open(input_path / f&quot;{day}.txt&quot;) as f:
+            data = f.read().strip()
+    except: # else load from github repo
+        print(f&quot;Failed to load {year}/{day}.txt from disk&quot;)
+
+    if splitlines: data = data.splitlines()
+
+    return data 
+
+def printmd(txt=&quot;## testing&quot;):
+    display(Markdown(txt))
+</code></pre>
+<p>Some generic plotting tools:</p>
+<pre><code class="language-python">def plot_grid(grid, positions):
+    &quot;&quot;&quot;plots a text grid and highlights positions passed in&quot;&quot;&quot;
+    binary_grid = [[c==&quot;#&quot; for c in row] for row in [row for row in grid]]
+    fig = plt.figure(figsize=(6,6))
+    plt.imshow(binary_grid, alpha=0.3)
+    plt.axis('off')
+
+    # plot position marker
+    yy, xx = zip(*positions)
+    plt.scatter(xx, yy, marker=&quot;x&quot;, s=500, alpha=0.8)
+
+    # anootate positions
+    for x, y in zip(xx,yy):
+        plt.annotate(f&quot;({x},{y})&quot;, (x-0.25,y))
+
+    plt.show()
+</code></pre>
+<h2 id="day-1-report-repair">Day 1: Report Repair</h2>
+<p><a href="https://adventofcode.com/2020/day/1">#</a> We have a list of numbers and need to find the two numbers that add up to 2020, and multiple them to get the answer.</p>
+<pre><code class="language-python">test1 = &quot;&quot;&quot;1721
+979
+366
+299
+675
+1456&quot;&quot;&quot;.splitlines()
+
+inp1 = get_input(1)
+
+def parse_1(inp): 
+    return [int(i) for i in inp]
+
+def solve_1(inp, numbers=2):
+    # get the first nums which add up to 2020
+    nums = [i for i in itertools.combinations(parse_1(inp), numbers) if sum(i)==2020][0]
+    ans = math.prod(nums)
+    return ans
+
+assert solve_1(test1) == 514579
+printmd(f&quot;Day 1A: **{solve_1(inp1)}**&quot;)
+</code></pre>
+<p>Day 1A: <strong>878724</strong></p>
+<p>Now, whats a AOC challange if you don't eyeball it:</p>
+<pre><code class="language-python"># the points to scatter
+nums = [i for i in itertools.combinations(parse_1(inp1), 2)]
+x, y = zip(*nums)
+
+# the winning point
+X, Y = [i for i in nums if sum(i)==2020][0]
+
+# the bingo line
+lx = list(range(250,2020))
+ly = list(range(2020-250, 0,-1))
+
+fig = plt.figure(figsize=(10,6))
+plt.title(&quot;Number pairs&quot;)
+plt.scatter(x, y, alpha=0.4, s=3)
+plt.scatter(X, Y, color=&quot;red&quot;, s=140, alpha=0.5)
+plt.plot(lx, ly, lw=5, alpha=0.2, color=&quot;green&quot;);
+</code></pre>
+<p><img alt="svg" src="advent-of-code-2020_files/advent-of-code-2020_10_0.svg" /></p>
+<p>That is a lot of points, might be handy to stop it once it finds the right one. So switch from a list comprehension to a for loop which stops once the numbers summing to 2020 are found.</p>
+<p><strong>Part 2:</strong> Now we want to find the three numbers which sum to 2020 and return the multiple.</p>
+<p>Since I made a general func to solve for 1, this is just rerunning the above with numbers set to 3.</p>
+<pre><code class="language-python">assert solve_1(test1, 3) == 241861950
+printmd(f&quot;Day 1B: **{solve_1(inp1, 3)}**&quot;)
+</code></pre>
+<p>Day 1B: <strong>201251610</strong></p>
+<h2 id="day-2-password-policy">Day 2: Password policy</h2>
+<p><a href="https://adventofcode.com/2020/day/2">#</a>. We have a list of passwords in the form: <code>password policy: password</code>, where the first two numbers give a range of acceptable repeats for a character. Each policy has <code>"lo", "hi", "letter", "password"</code> which can be saved directly as a namedtuple.</p>
+<pre><code class="language-python">test2 = &quot;&quot;&quot;1-3 a: abcde
+1-3 b: cdefg
+2-9 c: ccccccccc&quot;&quot;&quot;.splitlines()
+
+inp2 = get_input(2)
+
+Policy = namedtuple(&quot;Policy&quot;, [&quot;lo&quot;, &quot;hi&quot;, &quot;letter&quot;, &quot;password&quot;])
+
+def parse_2(inp):
+    data = []
+
+    for pol in [pol.split() for pol in inp]:
+        lo, hi = map(int, pol[0].split(&quot;-&quot;))
+        letter = pol[1].strip(&quot;:&quot;)
+        password = pol[2]
+        data.append(Policy(lo, hi, letter, password))
+
+    return data
+
+parse_2(test2) # eyeballing to see it works:
+</code></pre>
+<pre><code>[Policy(lo=1, hi=3, letter='a', password='abcde'),
+ Policy(lo=1, hi=3, letter='b', password='cdefg'),
+ Policy(lo=2, hi=9, letter='c', password='ccccccccc')]
+</code></pre>
+<p>To solve this is straightforward, we just make sure the count of the given char is within the acceptable range, which python makes easy by being able to easily check a number is within a range: <code>lo &lt;= num &lt;= hi</code>.</p>
+<pre><code class="language-python">def solve_2(inp=test2):
+    total = 0
+    for pol in parse_2(inp):
+        if pol.lo &lt;= pol.password.count(pol.letter) &lt;= pol.hi:
+            total += 1
+
+    return total
+
+assert solve_2() == 2
+printmd(f&quot;Day 2A: **{solve_2(inp2)}**&quot;)
+
+</code></pre>
+<p>Day 2A: <strong>424</strong></p>
+<p>Sadly, its not so easy to eyeball this, though a realworld solution bould be a cli script listing all the pw with the <a href="https://github.com/willmcgugan/rich">rich lib</a> to highlight bad passwords and where they fail the policy.</p>
+<p><strong>Part 2:</strong> Now the two nums in the beginning are positions, starting from 1. (no zero index). Only one of those positions can have the given letter.</p>
+<p>This is simple than part 1, just needs some uderstanding of logical operators:</p>
+<pre><code class="language-python">def solve_2b(inp=test2):
+    total = 0
+    for pol in parse_2(inp):
+        char1 = pol.password[pol.lo-1]
+        char2 = pol.password[pol.hi-1]
+        if (pol.letter == char1) != (pol.letter == char2):
+            total += 1
+    return total
+
+assert solve_2b() == 1
+printmd(f&quot;Day 2B: **{solve_2b(inp2)}**&quot;)
+</code></pre>
+<p>Day 2B: <strong>747</strong></p>
+<h2 id="day-3-toboggan-trajectory">Day 3: Toboggan Trajectory</h2>
+<p><a href="https://adventofcode.com/2020/day/3">#</a>. We have a grid with open squares <code>.</code> and trees <code>#</code>, which repeat infinitely on the right.</p>
+<p>We start at the top left and have to reach the bottom. We can move right 3, down 1 only. Following this trajectory, who many trees do we encounter?</p>
+<pre><code class="language-python">test3 = &quot;&quot;&quot;..##.......
+#...#...#..
+.#....#..#.
+..#.#...#.#
+.#...##..#.
+..#.##.....
+.#.#.#....#
+.#........#
+#.##...#...
+#...##....#
+.#..#...#.#&quot;&quot;&quot;.splitlines()
+
+inp3 = get_input(3)
+</code></pre>
+<pre><code class="language-python">def solve_3(grid=test3, slope=(3,1), start_pos=(0,0)):
+    &quot;&quot;&quot;returns a number of trees encountered on a given slope/grid/start_pos&quot;&quot;&quot;
+    x,y = start_pos
+    X,Y = slope
+
+    # get positions our tobaggan travels through
+    positions = []
+    for i in range(len(grid)-1):
+        x += X
+        y += Y
+        if y &lt;= len(grid):
+            positions.append((x,y))
+
+    # count trees
+    trees = 0
+    l = len(grid[0])
+    for x, y in positions:
+        if grid[y][x%l] == &quot;#&quot;:
+            trees += 1
+
+    return trees
+
+assert solve_3(test3) == 7
+printmd(f&quot;Day 3A: {solve_3(inp3)}&quot;)
+</code></pre>
+<p>Day 3A: 272</p>
+<p><strong>Part 2:</strong> We have a number of different slopes to check the trees encountered.</p>
+<pre><code class="language-python">slopes = [(1, 1), (3,1), (5,1), (7,1), (1,2)]
+
+def solve_3b(inp=test3):
+    num_trees = []
+
+    for slope in slopes:
+        trees = get_trees(inp, slope=slope)
+        num_trees.append(trees)
+
+    return math.prod(num_trees)
+
+assert solve_3b() == 336
+printmd(f&quot;Day 3B: {solve_3b(inp3)}&quot;)
+</code></pre>
+<p>Day 3B: 3898725600</p>
+<h2 id="day-4-passport-processing">Day 4: Passport Processing</h2>
+<p><a href="https://adventofcode.com/2020/day/4">#</a>. We have password data in the form:</p>
+<table>
+<thead>
+<tr>
+<th>code</th>
+<th>name</th>
+<th>comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>byr</td>
+<td>(Birth Year)</td>
+<td></td>
+</tr>
+<tr>
+<td>iyr</td>
+<td>(Issue Year)</td>
+<td></td>
+</tr>
+<tr>
+<td>eyr</td>
+<td>(Expiration Year)</td>
+<td></td>
+</tr>
+<tr>
+<td>hgt</td>
+<td>(Height)</td>
+<td></td>
+</tr>
+<tr>
+<td>hcl</td>
+<td>(Hair Color)</td>
+<td></td>
+</tr>
+<tr>
+<td>ecl</td>
+<td>(Eye Color)</td>
+<td></td>
+</tr>
+<tr>
+<td>pid</td>
+<td>(Passport ID)</td>
+<td></td>
+</tr>
+<tr>
+<td>cid</td>
+<td>(Country ID)</td>
+<td>ignored</td>
+</tr>
+</tbody>
+</table>
+<p>For part 1, only the <strong>cid</strong> field can be missing, the other seven have to be present for the data to be valid.</p>
+<p>This is interesting becuase we basically have to write a data parser. So once again I'll use a named tuple, though a data class might be better as that has built in validation features.</p>
+<p>Note: this one is too versbose, make the solution nicer!</p>
+<pre><code class="language-python">test4 = &quot;&quot;&quot;ecl:gry pid:860033327 eyr:2020 hcl:#fffffd
+byr:1937 iyr:2017 cid:147 hgt:183cm
+
+iyr:2013 ecl:amb cid:350 eyr:2023 pid:028048884
+hcl:#cfa07d byr:1929
+
+hcl:#ae17e1 iyr:2013
+eyr:2024
+ecl:brn pid:760753108 byr:1931
+hgt:179cm
+
+hcl:#cfa07d eyr:2025 pid:166559648
+iyr:2011 ecl:brn hgt:59in&quot;&quot;&quot;
+
+inp4 = get_input(4, splitlines=False)
+</code></pre>
+<pre><code class="language-python">passport_fields = [&quot;byr&quot;, &quot;iyr&quot;, &quot;eyr&quot;, &quot;hgt&quot;, &quot;hcl&quot;, &quot;ecl&quot;, &quot;pid&quot;, &quot;cid&quot;]
+# the defaults apply from the left
+Passport = namedtuple(&quot;Passport&quot;, passport_fields, defaults=[&quot;&quot;])
+</code></pre>
+<pre><code class="language-python">inp = inp4
+passports = []
+
+for line in inp.split(&quot;\n\n&quot;):
+    data = [&quot;&quot; for i in range(8)]
+    line = line.replace(&quot;\n&quot;, &quot; &quot;).split(&quot; &quot;)
+
+    for field in line:
+        key, val = field.split(&quot;:&quot;)
+
+        idx = passport_fields.index(key)
+        data[idx] = val
+
+    p = Passport(*data)
+    passports.append(p)
+
+passports[:3]
+</code></pre>
+<pre><code>[Passport(byr='2027', iyr='1928', eyr='2039', hgt='190', hcl='a5ac0f', ecl='#25f8d2', pid='476113241', cid='150'),
+ Passport(byr='1929', iyr='2013', eyr='2026', hgt='168cm', hcl='#fffffd', ecl='hzl', pid='920076943', cid='169'),
+ Passport(byr='1948', iyr='2011', eyr='2023', hgt='156cm', hcl='#6b5442', ecl='brn', pid='328412891', cid='')]
+</code></pre>
+<p>So now to check that the first seven fields are present. First to double check that an empty string evaluates to false then to check which ones are valid:</p>
+<pre><code class="language-python">assert all([&quot;test&quot;, &quot;&quot;]) is False
+sum([all(p[:7])for p in passports])
+</code></pre>
+<pre><code>190
+</code></pre>
+<p><strong>Part 2:</strong></p>
+<p>Now we need to validate data ranges - the table from above becomes:. </p>
+<table>
+<thead>
+<tr>
+<th>code</th>
+<th>name</th>
+<th>range</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>byr</td>
+<td>(Birth Year)</td>
+<td>4 digits, 1920-2020</td>
+</tr>
+<tr>
+<td>iyr</td>
+<td>(Issue Year)</td>
+<td>4 digits, 2010-2020</td>
+</tr>
+<tr>
+<td>eyr</td>
+<td>(Expiration Year)</td>
+<td>4 digits, 2020-2030</td>
+</tr>
+<tr>
+<td>hgt</td>
+<td>(Height)</td>
+<td>num, cm 150-193, in 59-63</td>
+</tr>
+<tr>
+<td>hcl</td>
+<td>(Hair Color)</td>
+<td># followed by six chars 0-9 or a-f</td>
+</tr>
+<tr>
+<td>ecl</td>
+<td>(Eye Color)</td>
+<td>one of amb blu brn gry grn hzl oth</td>
+</tr>
+<tr>
+<td>pid</td>
+<td>(Passport ID)</td>
+<td>nine digit num including leading zeros</td>
+</tr>
+<tr>
+<td>cid</td>
+<td>(Country ID)</td>
+<td>ignored</td>
+</tr>
+</tbody>
+</table>
+<p>We already have a list of passports so I'll reuse that.</p>
+<p>First up writing some helper functions to validate specific passport fields:</p>
+<pre><code class="language-python">def valid_height(txt):
+    num, system = txt[:-2], txt[-2:]
+    try:
+        num = float(num)
+    except:
+        return False
+    if system == &quot;cm&quot;:
+        return 150 &lt;= num &lt;= 193
+    elif system == &quot;in&quot;:
+        return 59 &lt;= num &lt;= 76
+    else:
+        return False
+
+valid_height(p.hgt)
+</code></pre>
+<pre><code>False
+</code></pre>
+<pre><code class="language-python">def valid_range(txt, lo=1920, hi=2002, num_digits=4):
+    if len(txt) != num_digits:
+        return False
+    return lo &lt;= int(txt) &lt;= hi
+
+valid_range(p.byr)
+</code></pre>
+<pre><code>True
+</code></pre>
+<pre><code class="language-python">valid_eyes = &quot;amb blu brn gry grn hzl oth&quot;.split(&quot; &quot;)
+valid_eyes
+</code></pre>
+<pre><code>['amb', 'blu', 'brn', 'gry', 'grn', 'hzl', 'oth']
+</code></pre>
+<pre><code class="language-python">def valid_hair(txt):
+    if re.match(r&quot;^#[0-9a-f]{6}$&quot;, txt):
+        return True
+    else:
+        return False
+
+valid_hair(&quot;#abc123&quot;)
+</code></pre>
+<pre><code>True
+</code></pre>
+<pre><code class="language-python">def valid_passport(p):
+    return (valid_range(p.byr) &amp;
+            valid_range(p.iyr, 2010, 2020) &amp; 
+            valid_range(p.eyr, 2020, 2030) &amp; 
+            valid_height(p.hgt) &amp;
+            valid_hair(p.hcl) &amp;
+            (p.ecl in valid_eyes) &amp;
+            bool(re.match(&quot;^\d{9}$&quot;,p.pid))
+    )
+
+sum([valid_passport(p) for p in passports])
+</code></pre>
+<pre><code>121
+</code></pre>
+<h2 id="day-5-binary-boarding">Day 5: Binary Boarding</h2>
+<p><a href="https://adventofcode.com/2020/day/5">#</a> We need to parse a string representation in the form <code>FBFBBFFRLR</code> of a boarding pass to figure out its actual seat number.</p>
+<p>The first 7 chars are <code>F</code> of <code>B</code> and binary partition the <strong>128</strong> rows on a plane, numbered <code>0-127</code> and the last chars <code>R</code> or <code>L</code> partition the <strong>8</strong> columns.</p>
+<pre><code class="language-python">test5 = [&quot;FBFBBFFRLR&quot;, &quot;BFFFBBFRRR&quot;, &quot;FFFBBBFRRR&quot;, &quot;BBFFBBFRLL&quot;]
+inp5 = get_input(5, splitlines=True)
+</code></pre>
+<pre><code class="language-python">def get_row(inp, lo=0, hi=127, verbose=False):
+
+    for char in inp[:7]:
+        if char == &quot;F&quot;:
+            hi = -1 + (lo + hi+1) // 2
+        elif char == &quot;B&quot;:
+            lo = (lo+1 + hi) // 2
+        if verbose: print(char, (lo, hi))
+
+    return lo if char == &quot;F&quot; else hi
+
+def get_col(inp, lo=0, hi=7, verbose=False):
+
+    for char in inp[-3:]:
+        if char == &quot;L&quot;:
+            hi = -1 + (lo + hi+1) // 2
+        elif char == &quot;R&quot;:
+            lo = (lo+1 + hi) // 2
+        if verbose: print(char, (lo, hi))
+
+    return lo if char == &quot;L&quot; else hi
+
+def get_seat_id(inp):
+    row = get_row(inp)
+    col = get_col(inp)
+    return row * 8 + col
+
+for inp in test5:
+    print(get_seat_id(inp)) # 357, 567, 119, 820
+</code></pre>
+<pre><code>357
+567
+119
+820
+</code></pre>
+<pre><code class="language-python">max([get_seat_id(inp) for inp in inp5]) 
+</code></pre>
+<pre><code>922
+</code></pre>
+<p><strong>Part 2:</strong> </p>
+<p>The flight is full besides your seat, but some of the very front and back seats don't exist.</p>
+<p>Seats with IDs +1 and -1 from mine should be in the list. So this just means finding the seat id just above and below:</p>
+<pre><code class="language-python">seats = sorted([get_seat_id(inp) for inp in inp5])
+
+for i, n in enumerate(seats[:-1]):
+    if seats[i+1] - n == 2:
+        print(n+1)
+</code></pre>
+<pre><code>747
+</code></pre>
+<p>to be continued....</p>
+
+    <div class="meta">
+        posted <time>2020-12-01</time>, updated <time>2020-12-01</time><br>
+        tagged: 
+        <a href="/python">python</a>
+        
+        <p>
+            <a href="https://github.com/khalido/blog/blob/master/notebooks/advent-of-code-2020.ipynb">github</a>, 
+            <a href="https://colab.research.google.com/github/khalido/blog/blob/master/notebooks/advent-of-code-2020.ipynb">
+                colab2
+            </a>,
+            <a href="https://deepnote.com/viewer/github/khalido/blog/blob/master/notebooks/advent-of-code-2020.ipynb">deepnote</a>
+
+        
+        </p>
+    
+    </div>
+</article>
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<hr>
+<footer>
+    This is a footer. One day some footery text will go here. 
+</footer>
+
+
+
+</body>
+
+</html>
