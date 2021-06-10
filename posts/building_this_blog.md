@@ -6,6 +6,8 @@ tags:
 toc: true
 ---
 
+# blogging in python
+
 There are many excellent blog engines out there, but to customise any of them takes so much understanding of how they work, the template and theme engines they use, that its easier to just use them exactly as is with an existing theme. 
 
 I wanted my own custom static blog, which played well with jupyter notebooks and markdown files, as well as a reason to do some python coding, so here goes yet another python blogging engine.

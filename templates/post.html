@@ -5,16 +5,14 @@
 <%include file="header.html" 
 args="title=post.title, header=header, header_text=header_text"/>
 
-<article>
-
-    % if post.toc:
-    <details open>
+% if post.toc:
+    <details open class="toc">
         <summary>Table of contents.</summary>
         ${post.toc}
     </details>
-    % endif
-    
-    <hr>
+% endif
+
+<article>
     
     ${post.html}
 

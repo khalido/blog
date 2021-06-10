@@ -7,6 +7,8 @@ tags:
 - data science
 ---
 
+Notes for Harvard's Cs109 data science class
+
 These are my notes for [Harvard's 2015 CS109 class](http://cs109.github.io/2015/), which i went through with Sydney Machine Learning's [study group](https://sydneymachinelearningblog.wordpress.com/cs-109-study-group/) from Ausgust to October 2017 at Amazon Web Service's sydney office.
  
 **Why CS109?** This class was recommended at Quora and a few other places as being a good resource for practical data science, so here goes. These notes are updated as I work through the [course syllabus](http://cs109.github.io/2015/pages/schedule.html) and the [labs and homeworks](https://porter.io/github.com/cs109/content).

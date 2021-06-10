@@ -6,6 +6,8 @@ tags:
 - meetup
 ---
 
+# DSS-2018-07: Michael Allwright and Inna Kolyshkina
+
 Data Science Sydney's [2018-07 meetup](https://www.meetup.com/Data-Science-Sydney/events/252700977).
 
 - data literacy is important for senior execs who data scientists are workng for - there are courses out there for them

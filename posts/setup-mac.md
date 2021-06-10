@@ -6,6 +6,8 @@ tags:
 - mac
 ---
 
+# MacOS
+
 ## Install the latest macOS
 
 If starting with a old mac, I recommend doing a factory reset and installing the latest macos.

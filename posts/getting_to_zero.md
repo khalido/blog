@@ -7,7 +7,9 @@ tags:
 - energy
 ---
 
-This [QE](https://www.quarterlyessay.com.au/essay/2021/03/getting-to-zero) gently and clearly explains the current scientific consensus on global warming and that it is an urgent crisis which Australia needs to tackle. Some notes from the book.
+# Quarterly Essay 81: Getting to Zero - Australia’s Energy Transition
+
+This [QE](https://www.quarterlyessay.com.au/essay/2021/03/getting-to-zero) gently and clearly explains the current scientific consensus on global warming and that it is an urgent crisis which Australia needs to tackle. It then lays out specific ways using today's tech (solar, wind, storage and gas) by which the transition can occur.
 
 ## global warming
 

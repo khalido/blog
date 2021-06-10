@@ -7,6 +7,8 @@ tags:
 - data science
 ---
 
+# SML 2018-08: Deep Reinforcement Learning
+
 SML's [2018-08 meetup](https://www.meetup.com/Sydney-Machine-Learning/events/252760610/).
 
 - launching StarAI Deep Reinforcement Learning Course

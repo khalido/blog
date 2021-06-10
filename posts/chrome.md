@@ -6,6 +6,8 @@ tags:
 - apps
 ---
 
+# Google Chrome
+
 Notes on making Google chrome work for me. Needs updating for 2020.
 
 The two top things:

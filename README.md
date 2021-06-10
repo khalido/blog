@@ -1,4 +1,4 @@
-![Blog built and deployed](https://github.com/khalido/blog/blob/master/.github/workflows/build.yml/badge.svg)
+![Blog built and deployed](https://github.com/khalido/blog/actions/workflows/build.yml/badge.svg)
 
 Blog content + a simple python blogging engine
 

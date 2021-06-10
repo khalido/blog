@@ -5,6 +5,8 @@ tags:
 - fitness
 ---
 
+Exercise
+
 Many ways to get fit. This is mine.
 
 ## At home routine

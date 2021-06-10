@@ -7,6 +7,8 @@ tags:
 - books
 ---
 
+# Grokking Deep Learning by Andrew Trask
+
 Andrew Trask is an AI superstar, having come up with the idea for Generative Adverserial Networks (GANS) - one of the most exicting new AI techniques today - in a bar.
 
 In this book he comes down to earth and explains neural networks from scratch to mere mortals. The book is still being written, but whats there so far is a really good easy to understand introduction to neural networks.

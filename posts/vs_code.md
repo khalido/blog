@@ -7,6 +7,8 @@ tags:
 draft: true
 ---
 
+# Visual Studio Code
+
 VS Code has so many extensions and stuff, that this is an evoloving list of useful things I've found for it.
 
 [Sanddance](https://marketplace.visualstudio.com/items?itemName=msrvida.vscode-sanddance - this is great, point it at a csv file and boom! you can see your data. [website](https://sanddance.js.org/)

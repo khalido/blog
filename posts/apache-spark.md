@@ -6,6 +6,8 @@ date: 2016-01-01
 toc: false
 ---
 
+# Apache Spark
+
 Way back in the good old days Google came up with mapreduce to store and crunch data scattered on disks across multiple machines. The world looked at mapreduce and thought it good, and made an open source implementation called Hadoop.
 
 Ppl wanted more, and faster, and luckily memory prices went down. And thus Apache Spark was born at UC Berkely. Spark stores data across a bunch of machines in memory. This makes it easy and fast to data scientist all the data.

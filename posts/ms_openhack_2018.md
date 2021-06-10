@@ -8,6 +8,8 @@ tags:
 - meetup
 ---
 
+# Microsoft OpenHack 2018 Sydney
+
 My first ever hackathon! Or so it was called. Notes:
 
 ## Day One: Azure basics

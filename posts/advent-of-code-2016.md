@@ -8,6 +8,8 @@ tags:
 - python
 ---
 
+# Advent of Code 2016
+
 todo: convert this into a jupyter notebook and repost.
 
 Notes for the [Advent of Code 2016](http://adventofcode.com/2016) programming challange.

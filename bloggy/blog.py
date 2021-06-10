@@ -184,6 +184,8 @@ def md_to_post(p: Path, post_type=default_post_type, debug=False):
     #    toc = md.toc
     if len(md.toc_tokens) > 0:  # just add toc anyways if more than 1 heading.
         toc = md.toc
+        if len(md.toc_tokens) == 1 and len(md.toc_tokens[0]["children"]) == 0:
+            toc = False
     else:
         toc = False
 

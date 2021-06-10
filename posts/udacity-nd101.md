@@ -8,6 +8,8 @@ layout: post
 toc: true
 ---
 
+# Udacity ND101: Deep Learning Nanodegree
+
 My notes & files for [Udacity's Deep Learning intro course](https://www.udacity.com/course/deep-learning-nanodegree-foundation--nd101).
 
 ## Before the course starts:

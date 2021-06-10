@@ -6,6 +6,8 @@ tags:
 - courses
 ---
 
+# deeplearning.ai: Neural Networks and Deep Learning
+
 It had been a while since I finished Udacity's Deep Learning course, so as a refresher I signed up for Andrew NG's [deeplearning.ai](https://www.deeplearning.ai/) course.
 
 These are my notes for the first course in the series: [Neural Networks and Deep Learning](https://www.coursera.org/learn/neural-networks-deep-learning).

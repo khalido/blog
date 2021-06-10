@@ -7,6 +7,8 @@ toc: false
 date: 2019-03-04
 ---
 
+# Data Science blogs
+
 Blogs on data science, AI, machine learning etc etc. which I liked.
 
 [Chris Albon's notes on data science and ai](https://chrisalbon.com/)

@@ -6,6 +6,7 @@ tags:
 - linux
 ---
 
+# Linux setup
 
 # Evnironment
 

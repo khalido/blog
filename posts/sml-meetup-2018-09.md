@@ -7,6 +7,8 @@ tags:
 - data science
 ---
 
+# SML 2018-09: Deep Reinforcement Learning
+
 SML's [2018-09 meetup](https://www.meetup.com/Sydney-Machine-Learning/events/253797245/).
 
 - [STEM Careers expo on Thu 6th Sep](https://www.eventbrite.com.au/e/emerge-2018-stem-careers-expo-tickets-46959173151)

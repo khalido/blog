@@ -6,6 +6,8 @@ tags:
 - python
 ---
 
+# PyCon Australia 2019
+
 _update this post to fix youtube video links_
 
 My notes for the [PyConAU 2019 talks](https://2019.pycon-au.org) I went to. This blog is an attempt to try and capture some useful info from the talks.

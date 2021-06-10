@@ -8,6 +8,8 @@ draft: false
 toc: true
 ---
 
+# Testing note in a subfolder
+
 This note is inside a subfolder.
 
 ## twitter embed

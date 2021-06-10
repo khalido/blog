@@ -5,6 +5,8 @@ tags:
 - jupyter
 ---
 
+# Jupyter Lab tips and tricks
+
 My collection of tips and tricks for using jupyter lab.
 
 [Jupyterlab](https://jupyterlab.readthedocs.io/en/stable/) is already installed with [Anaconda](https://www.anaconda.com/distribution/), but if using miniconda install it by:

@@ -5,6 +5,8 @@ tags:
 - windows
 ---
 
+# Windows 10
+
 ## Factory reset
 
 Windows 10 gets slow and crufty over time. So once every few years, its good to start afresh. 
