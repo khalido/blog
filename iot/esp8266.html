@@ -13,6 +13,8 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.3/new.min.css">
 
         <link rel="stylesheet" type="text/css" href="/codestyles.css">
+
+        <link rel="stylesheet" type="text/css" href="/ko.css">
         
         
 
@@ -30,12 +32,11 @@
             "some subheader text."
         </header>
 
-<article>
-
-    <details open>
+    <details open class="toc">
         <summary>Table of contents.</summary>
         <div class="toc">
 <ul>
+<li><a href="#starting-out-with-micropython-on-a-esp8266">starting out with micropython on a esp8266</a><ul>
 <li><a href="#initial-steps">Initial steps</a><ul>
 <li><a href="#installing-micropython">Installing micropython</a></li>
 </ul>
@@ -53,13 +54,16 @@
 <li><a href="#do-something">Do something</a></li>
 <li><a href="#resources">Resources</a></li>
 </ul>
+</li>
+</ul>
 </div>
 
     </details>
+
+<article>
     
-    <hr>
-    
-    <p>I've been wanting to try out a IOT board to do something for a while, and somebody lent me a mystery ESP8266 based board.</p>
+    <h1 id="starting-out-with-micropython-on-a-esp8266">starting out with micropython on a esp8266</h1>
+<p>I've been wanting to try out a IOT board to do something for a while, and somebody lent me a mystery ESP8266 based board.</p>
 <p>So, this is a log of my journey from never using an IOT device to making it blink lights or something.</p>
 <p>Note: most of the below is unneeded with Mu 1.1, it autofinds the board, flashes it and makes it easy to run code on the board itself.</p>
 <h2 id="initial-steps">Initial steps</h2>
@@ -203,7 +207,7 @@ wifi = do_connect() # use wifi.isconnected() as needed
 </ul>
 
     <div class="meta">
-        posted <time>2021-01-08</time>, updated <time>2021-06-07</time><br>
+        posted <time>2021-01-08</time>, updated <time>2021-06-10</time><br>
         tagged: 
         <a href="/iot">iot</a>
         

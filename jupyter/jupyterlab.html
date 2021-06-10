@@ -13,6 +13,8 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.3/new.min.css">
 
         <link rel="stylesheet" type="text/css" href="/codestyles.css">
+
+        <link rel="stylesheet" type="text/css" href="/ko.css">
         
         
 
@@ -30,23 +32,25 @@
             "some subheader text."
         </header>
 
-<article>
-
-    <details open>
+    <details open class="toc">
         <summary>Table of contents.</summary>
         <div class="toc">
 <ul>
+<li><a href="#jupyter-lab-tips-and-tricks">Jupyter Lab tips and tricks</a><ul>
 <li><a href="#magic-commands">magic commands</a></li>
 <li><a href="#extensions">Extensions</a></li>
 <li><a href="#blog-with-jupyter-notebooks">blog with jupyter notebooks</a></li>
 </ul>
+</li>
+</ul>
 </div>
 
     </details>
+
+<article>
     
-    <hr>
-    
-    <p>My collection of tips and tricks for using jupyter lab.</p>
+    <h1 id="jupyter-lab-tips-and-tricks">Jupyter Lab tips and tricks</h1>
+<p>My collection of tips and tricks for using jupyter lab.</p>
 <p><a href="https://jupyterlab.readthedocs.io/en/stable/">Jupyterlab</a> is already installed with <a href="https://www.anaconda.com/distribution/">Anaconda</a>, but if using miniconda install it by:</p>
 <p><code>conda install -c conda-forge jupyterlab ipywidgets</code></p>
 <h2 id="magic-commands">magic commands</h2>
@@ -102,7 +106,7 @@ print(f&quot;Converted {len(ipynb_files)} jupter notebooks to markdown.&quot;)
 <p><em>Note: this post is a work in progress...</em></p>
 
     <div class="meta">
-        posted <time>2019-08-04</time>, updated <time>2021-06-07</time><br>
+        posted <time>2019-08-04</time>, updated <time>2021-06-10</time><br>
         tagged: 
         <a href="/jupyter">jupyter</a>
         

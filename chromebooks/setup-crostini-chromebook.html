@@ -13,6 +13,8 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.3/new.min.css">
 
         <link rel="stylesheet" type="text/css" href="/codestyles.css">
+
+        <link rel="stylesheet" type="text/css" href="/ko.css">
         
         
 
@@ -30,12 +32,11 @@
             "some subheader text."
         </header>
 
-<article>
-
-    <details open>
+    <details open class="toc">
         <summary>Table of contents.</summary>
         <div class="toc">
 <ul>
+<li><a href="#setting-up-linux-on-a-chromebook-with-crostini">Setting up Linux on a Chromebook with Crostini</a><ul>
 <li><a href="#install-all-the-apps">Install all the apps</a><ul>
 <li><a href="#flatpak">flatpak</a></li>
 <li><a href="#vs-code">vs code</a></li>
@@ -56,13 +57,16 @@
 </li>
 <li><a href="#download-all-my-git-repos">Download all my git repos</a></li>
 </ul>
+</li>
+</ul>
 </div>
 
     </details>
+
+<article>
     
-    <hr>
-    
-    <p>ChromeOS supports a built in Linux - running inside a container running insde a VM. Turn it on by going to settings and pressing the on button for Linux (beta). This gives us a bare bones Linux install running Debian 10 (formerly known as buster). So here goes all the things I did to customize it.</p>
+    <h1 id="setting-up-linux-on-a-chromebook-with-crostini">Setting up Linux on a Chromebook with Crostini</h1>
+<p>ChromeOS supports a built in Linux - running inside a container running insde a VM. Turn it on by going to settings and pressing the on button for Linux (beta). This gives us a bare bones Linux install running Debian 10 (formerly known as buster). So here goes all the things I did to customize it.</p>
 <p>Most of these tips are from the <a href="https://www.reddit.com/r/Crostini/wiki/index">reddit crostini wiki</a>, I've put all the ones I'm using in one page for a handy reference.</p>
 <h2 id="install-all-the-apps">Install all the apps</h2>
 <h3 id="flatpak">flatpak</h3>

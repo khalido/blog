@@ -13,6 +13,8 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.3/new.min.css">
 
         <link rel="stylesheet" type="text/css" href="/codestyles.css">
+
+        <link rel="stylesheet" type="text/css" href="/ko.css">
         
         
 
@@ -30,23 +32,25 @@
             "some subheader text."
         </header>
 
-<article>
-
-    <details open>
+    <details open class="toc">
         <summary>Table of contents.</summary>
         <div class="toc">
 <ul>
+<li><a href="#apache-spark">Apache Spark</a><ul>
 <li><a href="#rdd">RDD</a></li>
 <li><a href="#map-all-the-things-to-something-else">map all the things to something else</a></li>
 <li><a href="#install-spark-on-your-local-machine">install spark on your local machine</a></li>
 </ul>
+</li>
+</ul>
 </div>
 
     </details>
+
+<article>
     
-    <hr>
-    
-    <p>Way back in the good old days Google came up with mapreduce to store and crunch data scattered on disks across multiple machines. The world looked at mapreduce and thought it good, and made an open source implementation called Hadoop.</p>
+    <h1 id="apache-spark">Apache Spark</h1>
+<p>Way back in the good old days Google came up with mapreduce to store and crunch data scattered on disks across multiple machines. The world looked at mapreduce and thought it good, and made an open source implementation called Hadoop.</p>
 <p>Ppl wanted more, and faster, and luckily memory prices went down. And thus Apache Spark was born at UC Berkely. Spark stores data across a bunch of machines in memory. This makes it easy and fast to data scientist all the data.</p>
 <h2 id="rdd">RDD</h2>
 <p>The key buzzword here is RDD which stands for resilient distributed data set. Spark has a <code>SparkContext</code> object which manages the connection to clusters and how processes are run on those clusters. So we call it using code like <code>data = sc.textFile(``'``name_of_text_file.txt``'``)</code>. With text data, this just becomes a list of strings - one per each line in the text file which is accessed using <code>sc.take(num_of_lines)</code>.</p>
@@ -67,7 +71,7 @@ counts = pairs.reduceByKey(lambda a, b: a + b)
 <p>Note: use <code>-v</code> to mount the current directory in the docker container.</p>
 
     <div class="meta">
-        posted <time>2016-01-01</time>, updated <time>2021-06-07</time><br>
+        posted <time>2016-01-01</time>, updated <time>2021-06-10</time><br>
         tagged: 
         <a href="/untagged">untagged</a>
         

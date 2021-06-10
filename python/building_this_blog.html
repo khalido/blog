@@ -13,6 +13,8 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.3/new.min.css">
 
         <link rel="stylesheet" type="text/css" href="/codestyles.css">
+
+        <link rel="stylesheet" type="text/css" href="/ko.css">
         
         
 
@@ -20,7 +22,7 @@
       href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.4.0/styles/default.min.css">
         <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.4.0/highlight.min.js"></script>
 
-        <title>how the blog was built</title>
+        <title>blogging in python</title>
     </head>
 
     <body>
@@ -30,12 +32,11 @@
             "some subheader text."
         </header>
 
-<article>
-
-    <details open>
+    <details open class="toc">
         <summary>Table of contents.</summary>
         <div class="toc">
 <ul>
+<li><a href="#blogging-in-python">blogging in python</a><ul>
 <li><a href="#blog-engine">blog engine</a><ul>
 <li><a href="#parsing-markdown">parsing markdown</a></li>
 <li><a href="#notebooks-to-markdown">notebooks to markdown</a></li>
@@ -53,13 +54,16 @@
 </ul>
 </li>
 </ul>
+</li>
+</ul>
 </div>
 
     </details>
+
+<article>
     
-    <hr>
-    
-    <p>There are many excellent blog engines out there, but to customise any of them takes so much understanding of how they work, the template and theme engines they use, that its easier to just use them exactly as is with an existing theme. </p>
+    <h1 id="blogging-in-python">blogging in python</h1>
+<p>There are many excellent blog engines out there, but to customise any of them takes so much understanding of how they work, the template and theme engines they use, that its easier to just use them exactly as is with an existing theme. </p>
 <p>I wanted my own custom static blog, which played well with jupyter notebooks and markdown files, as well as a reason to do some python coding, so here goes yet another python blogging engine.</p>
 <p>This post documents the process of building this blog. The main goal is to put markdown and jupyter notebooks in a folder, and build a static site which gets autoupdated on <a href="https://pages.github.com/">github pages</a> or <a href="https://www.netlify.com/">netlify</a>. Just like <a href="https://gohugo.io/">hugo</a>, <a href="https://jekyllrb.com/">jekyll</a>, <a href="https://www.gatsbyjs.org/">gatsby</a> and so many others!</p>
 <h2 id="blog-engine">blog engine</h2>
@@ -188,7 +192,7 @@ for post in posts:
 </code></pre>
 
     <div class="meta">
-        posted <time>2020-11-11</time>, updated <time>2021-06-07</time><br>
+        posted <time>2020-11-11</time>, updated <time>2021-06-10</time><br>
         tagged: 
         <a href="/python">python</a>
         

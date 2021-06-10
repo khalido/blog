@@ -13,6 +13,8 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.3/new.min.css">
 
         <link rel="stylesheet" type="text/css" href="/codestyles.css">
+
+        <link rel="stylesheet" type="text/css" href="/ko.css">
         
         
 
@@ -30,12 +32,11 @@
             "some subheader text."
         </header>
 
-<article>
-
-    <details open>
+    <details open class="toc">
         <summary>Table of contents.</summary>
         <div class="toc">
 <ul>
+<li><a href="#macos">MacOS</a><ul>
 <li><a href="#install-the-latest-macos">Install the latest macOS</a></li>
 <li><a href="#interface-tweaks">Interface tweaks</a><ul>
 <li><a href="#manual-tweaks">manual tweaks</a></li>
@@ -52,15 +53,18 @@
 <li><a href="#cli-apps">cli apps</a></li>
 </ul>
 </li>
+</ul>
+</li>
 <li><a href="#links">links</a></li>
 </ul>
 </div>
 
     </details>
+
+<article>
     
-    <hr>
-    
-    <h2 id="install-the-latest-macos">Install the latest macOS</h2>
+    <h1 id="macos">MacOS</h1>
+<h2 id="install-the-latest-macos">Install the latest macOS</h2>
 <p>If starting with a old mac, I recommend doing a factory reset and installing the latest macos.</p>
 <p>Power on the mac and keep holding down <code>Option/Alt + Command + R</code> until a spinning globe appears. This boots you into recovery mode and offers to reinstall the latest version of OSX, which for me is <a href="https://www.apple.com/au/macos/big-sur/">Big Sur</a>.</p>
 <p>I had to format the disk before installing as the installer wasn't recognizing it. The eraser defaulted to the old MAC disk format, change that to <code>AFPS</code> with scheme <code>GUID Partition Map</code>. </p>
@@ -142,7 +146,7 @@ conda init zsh
 </ul>
 
     <div class="meta">
-        posted <time>2020-01-20</time>, updated <time>2021-06-07</time><br>
+        posted <time>2020-01-20</time>, updated <time>2021-06-10</time><br>
         tagged: 
         <a href="/mac">mac</a>
         
