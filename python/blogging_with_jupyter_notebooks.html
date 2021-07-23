@@ -18,9 +18,7 @@
         
         
 
-        <link rel="stylesheet"
-      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.4.0/styles/default.min.css">
-        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.4.0/highlight.min.js"></script>
+        <script src="https://unpkg.com/htmx.org"></script>
 
         <title>Blogging with Jupyter notebooks</title>
     </head>
@@ -36,6 +34,7 @@
         <summary>Table of contents.</summary>
         <div class="toc">
 <ul>
+<li><a href="#blogging-with-jupyter-notebooks">Blogging with Jupyter notebooks</a><ul>
 <li><a href="#viz">Viz</a><ul>
 <li><a href="#altair">Altair</a></li>
 <li><a href="#matplotlib">Matplotlib</a></li>
@@ -46,13 +45,17 @@
 </ul>
 </li>
 </ul>
+</li>
+</ul>
 </div>
 
     </details>
 
 <article>
     
-    <pre><code class="language-python">import pandas as pd
+    <h1 id="blogging-with-jupyter-notebooks">Blogging with Jupyter notebooks</h1>
+<p>Testing out all the features when blogging with Jupyter notebooks</p>
+<pre><code class="language-python">import pandas as pd
 import altair as alt
 #from vega_datasets import data
 import matplotlib.pyplot as plt
@@ -354,7 +357,7 @@ fig, ax = plt.subplots(figsize=(10,4))
 ax.set_title(&quot;Line with CI&quot;)
 sns.lineplot(x=&quot;Year&quot;, y=&quot;Miles_per_Gallon&quot;, ci=95, data=df, ax=ax);
 </code></pre>
-<p><img alt="svg" src="blogging_with_jupyter_notebooks_files/blogging_with_jupyter_notebooks_9_0.svg" /></p>
+<p><img alt="svg" src="blogging_with_jupyter_notebooks_files/blogging_with_jupyter_notebooks_10_0.svg" /></p>
 <h2 id="other-stuff">Other Stuff</h2>
 <p>Emojis:</p>
 <ul>
@@ -365,7 +368,7 @@ sns.lineplot(x=&quot;Year&quot;, y=&quot;Miles_per_Gallon&quot;, ci=95, data=df,
 <p><img alt="" src="https://media.giphy.com/media/10zxDv7Hv5RF9C/giphy.gif" title="Caption: you can caption stuff!" /></p>
 
     <div class="meta">
-        posted <time>2020-08-09</time>, updated <time>2021-06-10</time><br>
+        posted <time>2020-08-09</time>, updated <time>2021-07-23</time><br>
         tagged: 
         <a href="/python">python</a>
         

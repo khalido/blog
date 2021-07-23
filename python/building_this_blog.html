@@ -18,9 +18,7 @@
         
         
 
-        <link rel="stylesheet"
-      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.4.0/styles/default.min.css">
-        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.4.0/highlight.min.js"></script>
+        <script src="https://unpkg.com/htmx.org"></script>
 
         <title>blogging in python</title>
     </head>
@@ -41,9 +39,11 @@
 <li><a href="#parsing-markdown">parsing markdown</a></li>
 <li><a href="#notebooks-to-markdown">notebooks to markdown</a></li>
 <li><a href="#code-highlight">code highlight</a></li>
+</ul>
+</li>
 <li><a href="#html">html</a></li>
 <li><a href="#css">css</a></li>
-<li><a href="#search">Search</a></li>
+<li><a href="#search">Search</a><ul>
 <li><a href="#github-actions">Github actions</a></li>
 </ul>
 </li>
@@ -113,13 +113,13 @@
 </code></pre>
 <p>But on second thought decided to can this and go with <a href="https://highlightjs.org/">highlightjs</a> for now as it speeds up builds and keeps the html clean (at the cost of loading more javascript). </p>
 <p>One thing to investigate is how to make the output cells of jupyter notebooks blend into the main website. This seems to require some css trickery.</p>
-<h3 id="html">html</h3>
+<h2 id="html">html</h2>
 <p>I'm no longer familiar with html, even though I build my first weblog on geocities way back in 1997/8. So we have now reached html5.</p>
 <ul>
 <li><a href="https://github.com/joshbuchea/HEAD">what to put in the head of a html page</a></li>
 <li>https://htmldom.dev/</li>
 </ul>
-<h3 id="css">css</h3>
+<h2 id="css">css</h2>
 <p>CSS is hard. So I want a simple to use framework, ended up looking at:</p>
 <ul>
 <li><a href="https://tachyons.io/">https://tachyons.io/</a> </li>
@@ -133,8 +133,12 @@
 <li>https://csslayout.io/ - examples of using css directly</li>
 </ul>
 <p>todo: decide on one. </p>
-<h3 id="search">Search</h3>
-<p>Search. I want search.  This is pretty straightforward, we need a list of content and some javascript to do the searching.</p>
+<p>Things to implement using css:</p>
+<ul>
+<li>a floating toc, like so many websites have it these days. I like tocs.</li>
+</ul>
+<h2 id="search">Search</h2>
+<p>Search. I want search.  This is pretty straightforward, we need a list of content and some javascript to do the searching. Jupyter notebooks mess this up as the converted markdown files have a bunch of js and other cruft.</p>
 <p>To just search post titles is pretty easy, from direct js to algolias <a href="https://github.com/algolia/autocomplete">autocomplete library</a>.</p>
 <p>Ideally I want to search across all the content is well, which takes some thinking as the output of jupyter notebooks can be huge, with all kinds of js embedded.</p>
 <p>Some things to look at:</p>
@@ -192,7 +196,7 @@ for post in posts:
 </code></pre>
 
     <div class="meta">
-        posted <time>2020-11-11</time>, updated <time>2021-06-10</time><br>
+        posted <time>2020-11-11</time>, updated <time>2021-07-23</time><br>
         tagged: 
         <a href="/python">python</a>
         

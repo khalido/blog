@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!--temp stylesheet, customize my own one later.
+        https://github.com/kognise/water.css-->
+        
+        
+        <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.3/new.min.css">
+
+        <link rel="stylesheet" type="text/css" href="/codestyles.css">
+
+        <link rel="stylesheet" type="text/css" href="/ko.css">
+        
+        
+
+        <script src="https://unpkg.com/htmx.org"></script>
+
+        <title>Covid in NSW, 2021 edition</title>
+    </head>
+
+    <body>
+ 
+        <header>
+            <a href="/">"khalido.org"</a> <br>
+            "some subheader text."
+        </header>
+
+    <details open class="toc">
+        <summary>Table of contents.</summary>
+        <div class="toc">
+<ul>
+<li><a href="#covid-in-nsw-2021-edition">Covid in NSW, 2021 edition</a><ul>
+<li><a href="#nsw-data">NSW data</a><ul>
+<li><a href="#total-covid-cases">Total covid cases</a></li>
+<li><a href="#wild-cases">Wild Cases</a></li>
+<li><a href="#final-data">Final data</a></li>
+</ul>
+</li>
+<li><a href="#graphs">Graphs</a></li>
+<li><a href="#extrapolation">Extrapolation</a></li>
+<li><a href="#a-simple-r-calculation">A simple R calculation</a></li>
+<li><a href="#sir-model-todo">SIR Model TODO</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+    </details>
+
+<article>
+    
+    <h1 id="covid-in-nsw-2021-edition">Covid in NSW, 2021 edition</h1>
+<p>work in progress, this is basi</p>
+<pre><code class="language-python">import datetime
+
+# viz stuff
+import matplotlib.dates as mdates
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+from matplotlib.dates import DateFormatter
+from numpy.polynomial import Polynomial
+
+# import plotly.express as px
+# import plotly.graph_objects as go
+</code></pre>
+<h2 id="nsw-data">NSW data</h2>
+<p>https://data.nsw.gov.au/nsw-covid-19-data</p>
+<h3 id="total-covid-cases">Total covid cases</h3>
+<p>Modify this to start from first date.</p>
+<p><a href="https://covidlive.com.au/report/daily-source-overseas/nsw">covidlive</a> gives the total local cases - the <strong>net</strong> column is the local cases only.</p>
+<pre><code class="language-python">def get_total_cases(start_date: str=&quot;27 June 2021&quot;):
+    &quot;&quot;&quot;gets total local cases&quot;&quot;&quot;
+    start_date = pd.to_datetime(start_date, dayfirst=True)
+
+    df = pd.read_html(&quot;https://covidlive.com.au/report/daily-source-overseas/nsw&quot;)[1]
+
+    df.columns = df.columns.str.title()  # hate caps
+    df[&quot;Date&quot;] = pd.to_datetime(df[&quot;Date&quot;], dayfirst=True)  # need dates
+    df = df.query(&quot;Date &gt;= @start_date&quot;)  # only want dates for current spread
+
+    df = df.sort_values(by=&quot;Date&quot;, ignore_index=True)  # sorted properly
+
+    df = df[[&quot;Date&quot;, &quot;Net&quot;, &quot;Net2&quot;]]
+    df = df.rename(columns={&quot;Net&quot;: &quot;Local_cases&quot;, &quot;Net2&quot;: &quot;Overseas_cases&quot;})
+    return df
+
+df_total = get_total_cases()
+print(df_total.shape)
+df_total.tail(3)
+</code></pre>
+<pre><code>(27, 3)
+</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Date</th>
+      <th>Local_cases</th>
+      <th>Overseas_cases</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>24</th>
+      <td>2021-07-21</td>
+      <td>110</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>2021-07-22</td>
+      <td>124</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>2021-07-23</td>
+      <td>136</td>
+      <td>5</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h3 id="wild-cases">Wild Cases</h3>
+<pre><code class="language-python">def get_wild_cases():
+    &quot;&quot;&quot;returns df of infectious cases in the community&quot;&quot;&quot;
+    try:
+        df = pd.read_html(&quot;https://covidlive.com.au/report/daily-wild-cases/nsw&quot;)[1]
+    except:
+        print(f&quot;something went wrong trying to access the data&quot;)
+        return False
+
+    df.columns = df.columns.str.title()  # hate caps
+    df[&quot;Date&quot;] = pd.to_datetime(df[&quot;Date&quot;], dayfirst=True)  # need dates
+    df = df.sort_values(by=&quot;Date&quot;, ignore_index=True)  # sorted properly
+
+    row = df.iloc[-1] 
+    if any(row[[&quot;Full&quot;, &quot;Part&quot;, &quot;Unkn&quot;]] == &quot;-&quot;):
+        print(f&quot;{row.Date:%d %b} is being updated&quot;)
+
+    return df
+
+
+df_wild = get_wild_cases()
+print(df_wild.shape)
+df_wild.tail(3)
+</code></pre>
+<pre><code>(27, 6)
+</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Date</th>
+      <th>Full</th>
+      <th>Part</th>
+      <th>Unkn</th>
+      <th>Total</th>
+      <th>Iso</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>24</th>
+      <td>2021-07-21</td>
+      <td>43</td>
+      <td>17</td>
+      <td>13</td>
+      <td>73</td>
+      <td>34%</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>2021-07-22</td>
+      <td>48</td>
+      <td>22</td>
+      <td>17</td>
+      <td>87</td>
+      <td>30%</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>2021-07-23</td>
+      <td>53</td>
+      <td>17</td>
+      <td>13</td>
+      <td>83</td>
+      <td>39%</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h3 id="final-data">Final data</h3>
+<p>This is the dataset I'm using to make graphs prediction etc.</p>
+<p>For smoothing, see <a href="https://towardsdatascience.com/five-wrong-ways-to-do-covid-19-data-smoothing-1538db6ff182">this</a>.</p>
+<pre><code class="language-python">def get_data():
+    &quot;&quot;&quot;returns cleaned and joined data&quot;&quot;&quot;
+    df_wild = get_wild_cases()
+    df_total = get_total_cases()
+
+    assert df_wild.shape[0] == df_total.shape[0]
+
+    df = pd.merge(df_wild, df_total, on=[&quot;Date&quot;])
+    df[&quot;Isolating&quot;] = df.Local_cases - df.Total
+
+    # some stats
+    for col in [&quot;Full&quot;, &quot;Part&quot;, &quot;Unkn&quot;, &quot;Total&quot;, &quot;Isolating&quot;, &quot;Local_cases&quot;]:
+        # exponential weighted avg
+        df[f&quot;{col}_ewa&quot;] = df[col].ewm(span=7, adjust=False).mean()
+
+        # rolling mean, though ideally add some forward prediction
+        df[f&quot;{col}_roll&quot;] = df[col].rolling(7, center=True, min_periods=4).mean()
+
+    return df
+
+df = get_data()
+print(df.shape)
+df.tail(3)
+</code></pre>
+<pre><code>(27, 21)
+</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Date</th>
+      <th>Full</th>
+      <th>Part</th>
+      <th>Unkn</th>
+      <th>Total</th>
+      <th>Iso</th>
+      <th>Local_cases</th>
+      <th>Overseas_cases</th>
+      <th>Isolating</th>
+      <th>Full_ewa</th>
+      <th>...</th>
+      <th>Part_ewa</th>
+      <th>Part_roll</th>
+      <th>Unkn_ewa</th>
+      <th>Unkn_roll</th>
+      <th>Total_ewa</th>
+      <th>Total_roll</th>
+      <th>Isolating_ewa</th>
+      <th>Isolating_roll</th>
+      <th>Local_cases_ewa</th>
+      <th>Local_cases_roll</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>24</th>
+      <td>2021-07-21</td>
+      <td>43</td>
+      <td>17</td>
+      <td>13</td>
+      <td>73</td>
+      <td>34%</td>
+      <td>110</td>
+      <td>2</td>
+      <td>37</td>
+      <td>28.642206</td>
+      <td>...</td>
+      <td>11.877540</td>
+      <td>14.666667</td>
+      <td>8.021302</td>
+      <td>10.666667</td>
+      <td>48.541048</td>
+      <td>60.666667</td>
+      <td>46.076770</td>
+      <td>47.833333</td>
+      <td>94.617817</td>
+      <td>108.5</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>2021-07-22</td>
+      <td>48</td>
+      <td>22</td>
+      <td>17</td>
+      <td>87</td>
+      <td>30%</td>
+      <td>124</td>
+      <td>0</td>
+      <td>37</td>
+      <td>33.481654</td>
+      <td>...</td>
+      <td>14.408155</td>
+      <td>16.200000</td>
+      <td>10.265976</td>
+      <td>12.400000</td>
+      <td>58.155786</td>
+      <td>65.600000</td>
+      <td>43.807577</td>
+      <td>43.600000</td>
+      <td>101.963363</td>
+      <td>109.2</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>2021-07-23</td>
+      <td>53</td>
+      <td>17</td>
+      <td>13</td>
+      <td>83</td>
+      <td>39%</td>
+      <td>136</td>
+      <td>5</td>
+      <td>53</td>
+      <td>38.361241</td>
+      <td>...</td>
+      <td>15.056116</td>
+      <td>16.000000</td>
+      <td>10.949482</td>
+      <td>13.750000</td>
+      <td>64.366839</td>
+      <td>71.000000</td>
+      <td>46.105683</td>
+      <td>41.000000</td>
+      <td>110.472522</td>
+      <td>112.0</td>
+    </tr>
+  </tbody>
+</table>
+<p>3 rows × 21 columns</p>
+</div>
+
+<h2 id="graphs">Graphs</h2>
+<p>First up, to eyeball what is happening</p>
+<pre><code class="language-python">def get_label(col):
+    if &quot;_roll&quot; in col:
+        col = col.split(&quot;_roll&quot;)[0]
+
+    labels = {
+        &quot;Full&quot;: &quot;Fully infectious\n(Glady's number)&quot;,
+        &quot;Part&quot;: &quot;Partly infections WTF&quot;,
+        &quot;Unkn&quot;: &quot;Unknown, or we don't know&quot;,
+        &quot;Total&quot;: &quot;Infectious in the community\n(real number)&quot;,
+        &quot;Local_cases&quot;: &quot;All cases\nisolating + infectious&quot;,
+        &quot;Isolating&quot;: &quot;iso All cases, isolating + infectious&quot;
+    }
+
+    return labels[col]
+</code></pre>
+<pre><code class="language-python">fig, ax = plt.subplots(figsize=(12, 8))
+fig.suptitle(&quot;NSW&quot;)
+ax.set_title(
+    f&quot;Covid cases in NSW {df.Date.min():%b-%d} to {df.Date.max():%b-%d}&quot;,
+    fontsize=14)
+
+ax.set_ylabel(&quot;Infectious Cases&quot;)
+ax.set_xlabel(&quot;Date&quot;)
+
+X = df.Date
+colors = {}
+
+# draw smoothed lines
+cols=[&quot;Local_cases&quot;, &quot;Total&quot;, &quot;Full&quot;]
+for i, col in enumerate(cols[::-1]):
+    Y = df[col]
+    Y_roll = df[f&quot;{col}_roll&quot;]
+    bottom = None if (i-1)&lt;0 else df[cols[i-1]]
+
+    # draw line
+    line = ax.plot(X, Y_roll,
+        lw=1.8, linestyle=&quot;--&quot;, alpha=0.88,
+        color = &quot;red&quot; if col == &quot;Total&quot; else None)
+
+    color = line[0].get_color()
+    colors[col] = color
+
+    # label line at its end
+    xy = X.iloc[-1] + pd.DateOffset(days=1), Y_roll.values[-1]
+    ax.annotate(get_label(col), xy=xy, fontsize=15,
+                color=color)
+
+# step
+#ax.step(df.Date, df.Total, &quot;o--&quot;, alpha=0.35, color=colors[&quot;Total&quot;])    
+
+# stacked bar chart
+alpha=0.05
+full = ax.bar(df.Date, df.Full, label=&quot;Fully Isolating&quot;, alpha=alpha)
+part = ax.bar(df.Date, df.Part, bottom=df.Full, label=&quot;Partially Isolating&quot;, alpha=alpha)
+unkn = ax.bar(df.Date, df.Unkn, bottom=df.Full + df.Part, label=&quot;Not telling us&quot;, alpha=0.1)
+isolating = ax.bar(df.Date, df.Isolating, bottom=df.Total, label=&quot;Isolating&quot;,
+           color=colors[&quot;Local_cases&quot;], alpha=alpha) # only drawing for labels
+
+for rect in [full, part, unkn, isolating]: # label the bars in the center
+    ax.bar_label(rect, label_type='center', alpha=0.4)
+
+# label totals by making a invisible total bar 
+r = ax.bar(df.Date, df.Total, alpha=0) # only drawing for labels
+ax.bar_label(r, alpha=0.8, padding=5, fontsize=14, color=colors[&quot;Total&quot;])
+
+ax.bar_label(isolating, alpha=0.8, padding=5, fontsize=12, color=colors[&quot;Local_cases&quot;])
+
+# final plot tweaks
+date_form = mdates.DateFormatter(&quot;%m/%d&quot;)
+ax.xaxis.set_major_formatter(date_form)
+ax.legend(loc=&quot;upper left&quot;, fontsize=13)
+
+
+plt.show()
+</code></pre>
+<p><img alt="png" src="covid_nsw_2021_files/covid_nsw_2021_12_0.png" /></p>
+<h2 id="extrapolation">Extrapolation</h2>
+<p>Now to use a simple fit to extend cases out 5 days.</p>
+<pre><code class="language-python">from numpy.polynomial import Polynomial
+from scipy.optimize import curve_fit
+from sklearn import linear_model
+</code></pre>
+<pre><code class="language-python">DEG = 2
+DAYS = 10
+FORECAST = 5 # num of days to look ahead
+
+fig, axs = plt.subplots(2,2, figsize=(12,8), sharex=True, sharey=True)
+fig.suptitle(&quot;np polyfit&quot;)
+
+for ax, DAYS in zip(axs.flat, [4, 7, 10, 14]):
+    y = df.tail(DAYS).Total_roll.values
+    x = np.arange(len(y))
+    xx = np.arange(max(x)+FORECAST)
+
+    ax.set_title(f&quot;{DAYS} days of data&quot;)
+    ax.plot(x, y, &quot;o-&quot;, label=&quot;actual&quot;, alpha=0.58)
+
+    for DEG in [1,2]:
+        p = Polynomial.fit(x, y, DEG)
+        line = ax.plot(xx, p(xx), &quot;--&quot;, label=f&quot;deg_{DEG}&quot;, alpha=0.8
+                      )
+        ax.annotate(f&quot;{DEG}&quot;, xy=(xx[-1], p(xx)[-1]), 
+                    color=line[0].get_color())
+
+ax.legend();
+</code></pre>
+<p><img alt="png" src="covid_nsw_2021_files/covid_nsw_2021_15_0.png" /></p>
+<pre><code class="language-python">DEG = 2
+DAYS = 10
+FORECAST = 5 # num of days to look ahead
+
+y = y = df.tail(DAYS).Total_roll.values
+x = np.arange(len(y))
+xx = np.arange(max(x), max(x)+FORECAST)
+p = Polynomial.fit(x, y, DEG)
+
+plt.plot(x, y, &quot;o-&quot;, label = &quot;actual&quot;)
+plt.plot(xx, p(xx), &quot;o-&quot;, label=&quot;forecast&quot;)
+plt.legend();
+</code></pre>
+<p><img alt="png" src="covid_nsw_2021_files/covid_nsw_2021_16_0.png" /></p>
+<h2 id="a-simple-r-calculation">A simple R calculation</h2>
+<pre><code class="language-python">cases = np.concatenate((df.Total_roll.values, p(xx)))
+</code></pre>
+<pre><code class="language-python">T = 5 # doubling time
+
+r = (cases[T:] / cases[:-T])
+R = r[-1]
+print(f&quot;R estimate: {R:.2f}&quot;)
+plt.plot(r);
+</code></pre>
+<pre><code>R estimate: 1.52
+</code></pre>
+<p><img alt="png" src="covid_nsw_2021_files/covid_nsw_2021_19_1.png" /></p>
+<p>To project forwards from R, a super simple thingamajig:</p>
+<pre><code class="language-python">start_date = df.Date.iloc[-1]
+end_date = start_date + pd.DateOffset(days=15)
+#end_date = pd.to_datetime(&quot;15 December 2021&quot;, dayfirst=True)
+x_future = pd.date_range(start_date, end_date, freq=pd.DateOffset(days=1))
+
+c = df.Total_roll.values[-1]
+y_pred = [c * (R**(t/T)) for t in np.arange(1, len(x_future)+1)]
+y_pred[0] = df.Total_roll.values[-1] # to make the plot pretty
+
+y_pred_plus = [c * (R*1.2)**(t/T) for t in np.arange(1, len(x_future)+1)]
+y_pred_minus = [c * (R*0.80)**(t/T) for t in np.arange(1, len(x_future)+1)]
+</code></pre>
+<pre><code class="language-python">fig, ax = plt.subplots(figsize=(12, 6))
+fig.suptitle(
+    f&quot;R against total cases {df.Date.min():%b-%d} to {df.Date.max():%b-%d}&quot;)
+ax.set_title(
+    f&quot;left axis: cases right axis: R value&quot;)
+
+ax2.set_ylabel(&quot;Infectious Cases&quot;)
+ax.set_xlabel(&quot;Date&quot;)
+ax.axis(xmin=min(df.Date), xmax=max(x_future))
+
+# plot R on first axis
+ax.set_ylim([0,6])
+ax.set_ylabel(&quot;Reff&quot;)
+ax.fill_between(df.Date, r, np.zeros_like(r), label=&quot;R&quot;, alpha=0.07)
+ax.legend()
+
+# plot cases on right y axis
+ax2 = ax.twinx()
+ax2.set_yscale(&quot;log&quot;)
+ax2.set_ylabel(&quot;Infectious Cases&quot;)
+
+act = ax2.step(df.Date, df.Total, alpha=0.16, color=&quot;red&quot;, label=&quot;Infectious cases&quot;)
+
+# smoothing lines
+ax2.plot(df.Date, df.Total_roll, label=&quot;Infectious cases smoothed&quot;,
+       linewidth=1.5, linestyle=&quot;-&quot;, color=&quot;red&quot;, alpha=0.5)
+
+# projection
+ax2.plot(x_future, y_pred, &quot;--&quot;, color=&quot;red&quot;, label=&quot;Cases projection&quot;)
+ax2.plot(x_future, y_pred_minus, &quot;--&quot;, alpha = 0.1)
+ax2.plot(x_future, y_pred_plus, &quot;--&quot;, alpha = 0.1)
+ax2.fill_between(x_future, y_pred_plus, y_pred_minus, 
+                color=&quot;red&quot;, alpha=0.05, label=&quot;Uncertainity&quot;)
+
+ax2.legend();
+</code></pre>
+<p><img alt="png" src="covid_nsw_2021_files/covid_nsw_2021_22_0.png" /></p>
+<p>Note: fix this right now it is way too simple</p>
+<h2 id="sir-model-todo">SIR Model TODO</h2>
+<p>This has 4 states:</p>
+<ul>
+<li>S: susceptible</li>
+<li>E: Exposed</li>
+<li>I: Infected</li>
+<li>R: Removed (recovered or dead, assumed to be immune either way)</li>
+</ul>
+<p>the states progress: <code>s -&gt; E -&gt; I -&gt; R</code></p>
+<pre><code class="language-python">from scipy.integrate import odeint
+</code></pre>
+<pre><code class="language-python">pop_size = 8.16e6
+pop_sydney = 5.36e6
+f&quot;NSW: {pop_size:,} Greater Sydney: {pop_sydney:,}&quot;
+</code></pre>
+<pre><code>'NSW: 8,160,000.0 Greater Sydney: 5,360,000.0'
+</code></pre>
+<pre><code class="language-python"># fixed parameters, from observations in the real world
+recovery_rate = 1 / 18   # γ, avg illness duration
+infection_rate = 1 / 5.2 # σ, avg incubation period
+</code></pre>
+<pre><code class="language-python">vax_date = pd.to_datetime(&quot;15 December 2021&quot;, dayfirst=True)
+V1 = 0.34
+V2 = 0.14
+
+X = pd.date_range(start_date, vax_date, freq=pd.DateOffset(days=1))
+</code></pre>
+
+    <div class="meta">
+        posted <time>2021-07-13</time>, updated <time>2021-07-23</time><br>
+        tagged: 
+        <a href="/python">python</a>
+        
+        <p>
+            <a href="https://github.com/khalido/blog/blob/master/notebooks/covid_nsw_2021.ipynb">github</a>, 
+            <a href="https://colab.research.google.com/github/khalido/blog/blob/master/notebooks/covid_nsw_2021.ipynb">
+                colab2
+            </a>,
+            <a href="https://deepnote.com/viewer/github/khalido/blog/blob/master/notebooks/covid_nsw_2021.ipynb">deepnote</a>
+
+        
+        </p>
+    
+    </div>
+</article>
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<hr>
+<footer>
+    This is a footer. One day some footery text will go here. 
+</footer>
+
+
+
+</body>
+
+</html>

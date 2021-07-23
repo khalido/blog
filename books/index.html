@@ -18,9 +18,7 @@
         
         
 
-        <link rel="stylesheet"
-      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.4.0/styles/default.min.css">
-        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.4.0/highlight.min.js"></script>
+        <script src="https://unpkg.com/htmx.org"></script>
 
         <title>"This is a blog"</title>
     </head>
@@ -37,9 +35,13 @@
 
     <input type="text" id="postSearch" placeholder="Search posts...">
     <ul id="searchresults">
+            <li><a href="/books/too_migrant_too_muslim_too_loud.html">Too Migrant, Too Muslim, Too Loud</a></li>
+            <li><a href="/books/the_uninhabitable_earth.html">The Uninhabitable Earth</a></li>
             <li><a href="/books/getting_to_zero.html">Quarterly Essay 81: Getting to Zero - Australia’s Energy Transition</a></li>
             <li><a href="/books/stats-done-wrong-book.html">Statistics Done Wrong: The Woefully Complete Guide</a></li>
             <li><a href="/books/grokking-deep-learning-book.html">Grokking Deep Learning by Andrew Trask</a></li>
+            <li><a href="/books/the_fifth_risk.html">The Fifth Risk</a></li>
+            <li><a href="/books/freedom_at_midnight.html">Freedom at Midnight</a></li>
     </ul>
     
 
@@ -48,7 +50,7 @@
     <script>
         // load json from disk instead of passing in python array
 
-        const searchList = [{"title": "Quarterly Essay 81: Getting to Zero - Australia\u2019s Energy Transition", "tags": ["books", "energy"], "link": "books/getting_to_zero.html"}, {"title": "Statistics Done Wrong: The Woefully Complete Guide", "tags": ["books", "statistics"], "link": "books/stats-done-wrong-book.html"}, {"title": "Grokking Deep Learning by Andrew Trask", "tags": ["books"], "link": "books/grokking-deep-learning-book.html"}]
+        const searchList = [{"title": "Too Migrant, Too Muslim, Too Loud", "tags": ["books", "nonfiction", "australia"], "link": "books/too_migrant_too_muslim_too_loud.html"}, {"title": "The Uninhabitable Earth", "tags": ["books", "nonfiction", "climate change"], "link": "books/the_uninhabitable_earth.html"}, {"title": "Quarterly Essay 81: Getting to Zero - Australia\u2019s Energy Transition", "tags": ["books", "energy"], "link": "books/getting_to_zero.html"}, {"title": "Statistics Done Wrong: The Woefully Complete Guide", "tags": ["books", "statistics"], "link": "books/stats-done-wrong-book.html"}, {"title": "Grokking Deep Learning by Andrew Trask", "tags": ["books"], "link": "books/grokking-deep-learning-book.html"}, {"title": "The Fifth Risk", "tags": ["books", "nonfiction"], "link": "books/the_fifth_risk.html"}, {"title": "Freedom at Midnight", "tags": ["books", "nonfiction"], "link": "books/freedom_at_midnight.html"}]
 
         const options = {
             includeScore: false,
