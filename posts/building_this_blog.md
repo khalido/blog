@@ -72,14 +72,14 @@ But on second thought decided to can this and go with [highlightjs](https://high
 
 One thing to investigate is how to make the output cells of jupyter notebooks blend into the main website. This seems to require some css trickery.
 
-### html
+## html
 
 I'm no longer familiar with html, even though I build my first weblog on geocities way back in 1997/8. So we have now reached html5.
 
 - [what to put in the head of a html page](https://github.com/joshbuchea/HEAD)
 - https://htmldom.dev/
 
-### css
+## css
 
 CSS is hard. So I want a simple to use framework, ended up looking at:
 
@@ -95,9 +95,13 @@ CSS is hard. So I want a simple to use framework, ended up looking at:
 
 todo: decide on one. 
 
-### Search
+Things to implement using css:
 
-Search. I want search.  This is pretty straightforward, we need a list of content and some javascript to do the searching.
+- a floating toc, like so many websites have it these days. I like tocs.
+
+## Search
+
+Search. I want search.  This is pretty straightforward, we need a list of content and some javascript to do the searching. Jupyter notebooks mess this up as the converted markdown files have a bunch of js and other cruft.
 
 To just search post titles is pretty easy, from direct js to algolias [autocomplete library](https://github.com/algolia/autocomplete).
 

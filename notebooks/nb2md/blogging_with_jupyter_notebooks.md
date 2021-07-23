@@ -1,11 +1,13 @@
 ---
-title: Blogging with Jupyter notebooks
-descrition: Testing out all the features when blogging with Jupyter notebooks
-toc: True
 date: 2020-08-09
 tags:
 - python
 ---
+
+# Blogging with Jupyter notebooks
+
+Testing out all the features when blogging with Jupyter notebooks
+
 
 
 ```python
@@ -357,7 +359,7 @@ sns.lineplot(x="Year", y="Miles_per_Gallon", ci=95, data=df, ax=ax);
 
 
     
-![svg](blogging_with_jupyter_notebooks_files/blogging_with_jupyter_notebooks_9_0.svg)
+![svg](blogging_with_jupyter_notebooks_files/blogging_with_jupyter_notebooks_10_0.svg)
     
 
 

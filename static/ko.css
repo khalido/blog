@@ -1,7 +1,32 @@
+/* scrolls to toc links in page instead of jumping */
 html {
   scroll-behavior: smooth;
 }
 
+/* 
 .toc {
   background-color: #fcfdfdfa;
+}
+*/
+
+
+/* ---------------------------------------------------------
+Code
+---------------------------------------------------------*/
+
+pre code{
+  color:#747474;
+}
+
+pre {
+  padding: .5em;
+  display: block;
+  margin-bottom: .5em;
+  font-size: .85em;
+}
+
+.highlight pre{
+  border: 1px solid #ccc;
+  line-height: 1.42857143;
+  padding: 1em;
 }
