@@ -1,12 +1,12 @@
 ---
-date: 2021-07-13
+date: 2021-07-23
 tags:
 - python
 ---
 
 # Covid in NSW, 2021 edition
 
-work in progress, this is basi
+work in progress, just wanted to see the nsw covid numbers all in one graph.
 
 
 ```python
@@ -57,7 +57,7 @@ print(df_total.shape)
 df_total.tail(3)
 ```
 
-    (27, 3)
+    (31, 3)
 
 
 
@@ -88,22 +88,22 @@ df_total.tail(3)
   </thead>
   <tbody>
     <tr>
-      <th>24</th>
-      <td>2021-07-21</td>
-      <td>110</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>25</th>
-      <td>2021-07-22</td>
-      <td>124</td>
+      <th>28</th>
+      <td>2021-07-25</td>
+      <td>141</td>
       <td>0</td>
     </tr>
     <tr>
-      <th>26</th>
-      <td>2021-07-23</td>
-      <td>136</td>
-      <td>5</td>
+      <th>29</th>
+      <td>2021-07-26</td>
+      <td>145</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>2021-07-27</td>
+      <td>172</td>
+      <td>3</td>
     </tr>
   </tbody>
 </table>
@@ -112,6 +112,11 @@ df_total.tail(3)
 
 
 ### Wild Cases
+
+
+```python
+from datetime import datetime
+```
 
 
 ```python
@@ -133,13 +138,12 @@ def get_wild_cases():
         
     return df
 
-
 df_wild = get_wild_cases()
 print(df_wild.shape)
 df_wild.tail(3)
 ```
 
-    (27, 6)
+    (31, 6)
 
 
 
@@ -173,31 +177,31 @@ df_wild.tail(3)
   </thead>
   <tbody>
     <tr>
-      <th>24</th>
-      <td>2021-07-21</td>
-      <td>43</td>
-      <td>17</td>
-      <td>13</td>
-      <td>73</td>
-      <td>34%</td>
+      <th>28</th>
+      <td>2021-07-25</td>
+      <td>38</td>
+      <td>24</td>
+      <td>14</td>
+      <td>76</td>
+      <td>46%</td>
     </tr>
     <tr>
-      <th>25</th>
-      <td>2021-07-22</td>
-      <td>48</td>
-      <td>22</td>
-      <td>17</td>
+      <th>29</th>
+      <td>2021-07-26</td>
+      <td>51</td>
+      <td>25</td>
+      <td>11</td>
       <td>87</td>
-      <td>30%</td>
+      <td>40%</td>
     </tr>
     <tr>
-      <th>26</th>
-      <td>2021-07-23</td>
-      <td>53</td>
-      <td>17</td>
-      <td>13</td>
-      <td>83</td>
-      <td>39%</td>
+      <th>30</th>
+      <td>2021-07-27</td>
+      <td>60</td>
+      <td>19</td>
+      <td>32</td>
+      <td>111</td>
+      <td>35%</td>
     </tr>
   </tbody>
 </table>
@@ -238,7 +242,7 @@ print(df.shape)
 df.tail(3)
 ```
 
-    (27, 21)
+    (31, 21)
 
 
 
@@ -287,76 +291,76 @@ df.tail(3)
   </thead>
   <tbody>
     <tr>
-      <th>24</th>
-      <td>2021-07-21</td>
-      <td>43</td>
-      <td>17</td>
-      <td>13</td>
-      <td>73</td>
-      <td>34%</td>
-      <td>110</td>
-      <td>2</td>
-      <td>37</td>
-      <td>28.642206</td>
-      <td>...</td>
-      <td>11.877540</td>
-      <td>14.666667</td>
-      <td>8.021302</td>
-      <td>10.666667</td>
-      <td>48.541048</td>
-      <td>60.666667</td>
-      <td>46.076770</td>
-      <td>47.833333</td>
-      <td>94.617817</td>
-      <td>108.5</td>
-    </tr>
-    <tr>
-      <th>25</th>
-      <td>2021-07-22</td>
-      <td>48</td>
-      <td>22</td>
-      <td>17</td>
-      <td>87</td>
-      <td>30%</td>
-      <td>124</td>
+      <th>28</th>
+      <td>2021-07-25</td>
+      <td>38</td>
+      <td>24</td>
+      <td>14</td>
+      <td>76</td>
+      <td>46%</td>
+      <td>141</td>
       <td>0</td>
-      <td>37</td>
-      <td>33.481654</td>
+      <td>65</td>
+      <td>39.515698</td>
       <td>...</td>
-      <td>14.408155</td>
-      <td>16.200000</td>
-      <td>10.265976</td>
-      <td>12.400000</td>
-      <td>58.155786</td>
-      <td>65.600000</td>
-      <td>43.807577</td>
-      <td>43.600000</td>
-      <td>101.963363</td>
-      <td>109.2</td>
+      <td>19.344065</td>
+      <td>22.166667</td>
+      <td>13.221584</td>
+      <td>17.666667</td>
+      <td>72.081347</td>
+      <td>89.0</td>
+      <td>54.090697</td>
+      <td>56.0</td>
+      <td>126.172044</td>
+      <td>145.0</td>
     </tr>
     <tr>
-      <th>26</th>
-      <td>2021-07-23</td>
-      <td>53</td>
-      <td>17</td>
-      <td>13</td>
-      <td>83</td>
-      <td>39%</td>
-      <td>136</td>
-      <td>5</td>
-      <td>53</td>
-      <td>38.361241</td>
+      <th>29</th>
+      <td>2021-07-26</td>
+      <td>51</td>
+      <td>25</td>
+      <td>11</td>
+      <td>87</td>
+      <td>40%</td>
+      <td>145</td>
+      <td>6</td>
+      <td>58</td>
+      <td>42.386773</td>
       <td>...</td>
-      <td>15.056116</td>
-      <td>16.000000</td>
-      <td>10.949482</td>
-      <td>13.750000</td>
-      <td>64.366839</td>
-      <td>71.000000</td>
-      <td>46.105683</td>
-      <td>41.000000</td>
-      <td>110.472522</td>
-      <td>112.0</td>
+      <td>20.758049</td>
+      <td>22.200000</td>
+      <td>12.666188</td>
+      <td>17.800000</td>
+      <td>75.811010</td>
+      <td>89.4</td>
+      <td>55.068022</td>
+      <td>59.8</td>
+      <td>130.879033</td>
+      <td>149.2</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>2021-07-27</td>
+      <td>60</td>
+      <td>19</td>
+      <td>32</td>
+      <td>111</td>
+      <td>35%</td>
+      <td>172</td>
+      <td>3</td>
+      <td>61</td>
+      <td>46.790080</td>
+      <td>...</td>
+      <td>20.318537</td>
+      <td>23.500000</td>
+      <td>17.499641</td>
+      <td>19.000000</td>
+      <td>84.608258</td>
+      <td>91.0</td>
+      <td>56.551017</td>
+      <td>63.0</td>
+      <td>141.159275</td>
+      <td>154.0</td>
     </tr>
   </tbody>
 </table>
@@ -426,8 +430,8 @@ for i, col in enumerate(cols[::-1]):
 
 # stacked bar chart
 alpha=0.05
-full = ax.bar(df.Date, df.Full, label="Fully Isolating", alpha=alpha)
-part = ax.bar(df.Date, df.Part, bottom=df.Full, label="Partially Isolating", alpha=alpha)
+full = ax.bar(df.Date, df.Full, label="Fully Infectious", alpha=alpha)
+part = ax.bar(df.Date, df.Part, bottom=df.Full, label="Partially Infectious", alpha=alpha)
 unkn = ax.bar(df.Date, df.Unkn, bottom=df.Full + df.Part, label="Not telling us", alpha=0.1)
 isolating = ax.bar(df.Date, df.Isolating, bottom=df.Total, label="Isolating",
            color=colors["Local_cases"], alpha=alpha) # only drawing for labels
@@ -452,7 +456,7 @@ plt.show()
 
 
     
-![png](covid_nsw_2021_files/covid_nsw_2021_12_0.png)
+![png](covid_nsw_2021_files/covid_nsw_2021_13_0.png)
     
 
 
@@ -496,7 +500,7 @@ ax.legend();
 
 
     
-![png](covid_nsw_2021_files/covid_nsw_2021_15_0.png)
+![png](covid_nsw_2021_files/covid_nsw_2021_16_0.png)
     
 
 
@@ -518,7 +522,7 @@ plt.legend();
 
 
     
-![png](covid_nsw_2021_files/covid_nsw_2021_16_0.png)
+![png](covid_nsw_2021_files/covid_nsw_2021_17_0.png)
     
 
 
@@ -526,20 +530,39 @@ plt.legend();
 
 
 ```python
-cases = np.concatenate((df.Total_roll.values, p(xx)))
+def get_R(col:str = "Total_roll", T=5):
+    """col: column to look at
+       T: doubling time"""
+    
+    DEG = 2
+    DAYS = 10
+    FORECAST = 5 # num of days to look ahead
+
+    y = y = df.tail(DAYS).Local_cases_roll.values
+    x = np.arange(len(y))
+    xx = np.arange(max(x), max(x)+FORECAST)
+    p = Polynomial.fit(x, y, DEG)
+
+    cases = np.concatenate((df[col].values, p(xx)))
+
+    r = (cases[T:] / cases[:-T])
+    R = r[-1]
+    print(f"R estimate: {R:.2f}")
+
+    fig, (ax, ax1) = plt.subplots(1,2, figsize=(12,6))
+    ax.plot(r)
+    
+    ax1.plot(x, y, "o-", label = "actual")
+    ax1.plot(xx, p(xx), "o-", label="forecast")
+    ax1.legend()
+    plt.show()
+
+    return R
+
+get_R("Local_cases_roll")
 ```
 
-
-```python
-T = 5 # doubling time
-
-r = (cases[T:] / cases[:-T])
-R = r[-1]
-print(f"R estimate: {R:.2f}")
-plt.plot(r);
-```
-
-    R estimate: 1.52
+    R estimate: 1.26
 
 
 
@@ -548,22 +571,35 @@ plt.plot(r);
     
 
 
-To project forwards from R, a super simple thingamajig:
+
+
+
+    1.2580412233938458
+
+
 
 
 ```python
-start_date = df.Date.iloc[-1]
-end_date = start_date + pd.DateOffset(days=15)
-#end_date = pd.to_datetime("15 December 2021", dayfirst=True)
-x_future = pd.date_range(start_date, end_date, freq=pd.DateOffset(days=1))
+def predict(col="Total_roll"):
+    start_date = df.Date.iloc[-1]
+    end_date = start_date + pd.DateOffset(days=15)
+    #end_date = pd.to_datetime("15 December 2021", dayfirst=True)
+    x_future = pd.date_range(start_date, end_date, freq=pd.DateOffset(days=1))
 
-c = df.Total_roll.values[-1]
-y_pred = [c * (R**(t/T)) for t in np.arange(1, len(x_future)+1)]
-y_pred[0] = df.Total_roll.values[-1] # to make the plot pretty
+    c = df[col].values[-1]
+    y_pred = [c * (R**(t/T)) for t in np.arange(1, len(x_future)+1)]
+    y_pred[0] = df[col].values[-1] # to make the plot pretty
 
-y_pred_plus = [c * (R*1.2)**(t/T) for t in np.arange(1, len(x_future)+1)]
-y_pred_minus = [c * (R*0.80)**(t/T) for t in np.arange(1, len(x_future)+1)]
+    y_high = [c * (R*1.2)**(t/T) for t in np.arange(1, len(x_future)+1)]
+    y_low = [c * (R*0.80)**(t/T) for t in np.arange(1, len(x_future)+1)]
+    print(col, len(x_future), len(y_low), len(y_pred), len(y_high))
+    return y_low, y, y_high
+    
+_ = predict("Total_roll")
 ```
+
+    Total_roll 16 16 16 16
+
 
 
 ```python
@@ -595,18 +631,200 @@ ax2.plot(df.Date, df.Total_roll, label="Infectious cases smoothed",
        linewidth=1.5, linestyle="-", color="red", alpha=0.5)
 
 # projection
-ax2.plot(x_future, y_pred, "--", color="red", label="Cases projection")
-ax2.plot(x_future, y_pred_minus, "--", alpha = 0.1)
-ax2.plot(x_future, y_pred_plus, "--", alpha = 0.1)
-ax2.fill_between(x_future, y_pred_plus, y_pred_minus, 
-                color="red", alpha=0.05, label="Uncertainity")
+for col in ["Total_roll", "Local_cases_roll"]:
+    x_future = pd.date_range(start_date, end_date, freq=pd.DateOffset(days=1))
+    print(len(x_future))
+    y_low, y_pred, y_high = predict(col)
+    print(len(x_future), len(y_low), len(y_pred), len(y_high))
+    #ax2.plot(x_future, y_pred, "--", color="red", label=f"{col} projection")
+    ax2.plot(x_future, y_low, "--", alpha = 0.1)
+    ax2.plot(x_future, y_high, "--", alpha = 0.1)
+    ax2.fill_between(x_future, y_pred_plus, y_pred_minus, 
+                    color="red", alpha=0.05, label="Uncertainity")
 
 ax2.legend();
 ```
 
 
+    ---------------------------------------------------------------------------
+
+    TypeError                                 Traceback (most recent call last)
+
+    <ipython-input-688-495e77ab8328> in <module>
+         12 ax.set_ylim([0,6])
+         13 ax.set_ylabel("Reff")
+    ---> 14 ax.fill_between(df.Date, r, np.zeros_like(r), label="R", alpha=0.07)
+         15 ax.legend()
+         16 
+
+
+    ~/anaconda3/envs/py39/lib/python3.9/site-packages/matplotlib/__init__.py in inner(ax, data, *args, **kwargs)
+       1359     def inner(ax, *args, data=None, **kwargs):
+       1360         if data is None:
+    -> 1361             return func(ax, *map(sanitize_sequence, args), **kwargs)
+       1362 
+       1363         bound = new_sig.bind(ax, *args, **kwargs)
+
+
+    ~/anaconda3/envs/py39/lib/python3.9/site-packages/matplotlib/axes/_axes.py in fill_between(self, x, y1, y2, where, interpolate, step, **kwargs)
+       5384     def fill_between(self, x, y1, y2=0, where=None, interpolate=False,
+       5385                      step=None, **kwargs):
+    -> 5386         return self._fill_between_x_or_y(
+       5387             "x", x, y1, y2,
+       5388             where=where, interpolate=interpolate, step=step, **kwargs)
+
+
+    ~/anaconda3/envs/py39/lib/python3.9/site-packages/matplotlib/axes/_axes.py in _fill_between_x_or_y(self, ind_dir, ind, dep1, dep2, where, interpolate, step, **kwargs)
+       5290 
+       5291         # Handle united data, such as dates
+    -> 5292         ind, dep1, dep2 = map(
+       5293             ma.masked_invalid, self._process_unit_info(
+       5294                 [(ind_dir, ind), (dep_dir, dep1), (dep_dir, dep2)], kwargs))
+
+
+    ~/anaconda3/envs/py39/lib/python3.9/site-packages/numpy/ma/core.py in masked_invalid(a, copy)
+       2363         cls = type(a)
+       2364     else:
+    -> 2365         condition = ~(np.isfinite(a))
+       2366         cls = MaskedArray
+       2367     result = a.view(cls)
+
+
+    TypeError: ufunc 'isfinite' not supported for the input types, and the inputs could not be safely coerced to any supported types according to the casting rule ''safe''
+
+
+
     
-![png](covid_nsw_2021_files/covid_nsw_2021_22_0.png)
+![png](covid_nsw_2021_files/covid_nsw_2021_21_1.png)
+    
+
+
+
+```python
+fig, ax = plt.subplots(figsize=(12, 8))
+fig.suptitle("NSW")
+ax.set_title(
+    f"Covid cases in NSW {df.Date.min():%b-%d} to {df.Date.max():%b-%d}",
+    fontsize=14)
+
+ax.set_ylabel("Infectious Cases")
+ax.set_xlabel("Date")
+
+X = df.Date
+colors = {}
+
+# draw smoothed lines
+cols=["Local_cases", "Total", "Full"]
+for i, col in enumerate(cols[::-1]):
+    Y = df[col]
+    Y_roll = df[f"{col}_roll"]
+    bottom = None if (i-1)<0 else df[cols[i-1]]
+
+    # draw line
+    line = ax.plot(X, Y_roll,
+        lw=1.8, linestyle="--", alpha=0.88,
+        color = "red" if col == "Total" else None)
+
+    color = line[0].get_color()
+    colors[col] = color
+
+    # label line at its end
+    xy = X.iloc[-1] + pd.DateOffset(days=1), Y_roll.values[-1]
+    ax.annotate(get_label(col), xy=xy, fontsize=15,
+                color=color)
+
+# step
+#ax.step(df.Date, df.Total, "o--", alpha=0.35, color=colors["Total"])    
+
+# stacked bar chart
+alpha=0.05
+full = ax.bar(df.Date, df.Full, label="Fully Isolating", alpha=alpha)
+part = ax.bar(df.Date, df.Part, bottom=df.Full, label="Partially Isolating", alpha=alpha)
+unkn = ax.bar(df.Date, df.Unkn, bottom=df.Full + df.Part, label="Not telling us", alpha=0.1)
+isolating = ax.bar(df.Date, df.Isolating, bottom=df.Total, label="Isolating",
+           color=colors["Local_cases"], alpha=alpha) # only drawing for labels
+
+for rect in [full, part, unkn, isolating]: # label the bars in the center
+    ax.bar_label(rect, label_type='center', alpha=0.4)
+
+# label totals by making a invisible total bar 
+r = ax.bar(df.Date, df.Total, alpha=0) # only drawing for labels
+ax.bar_label(r, alpha=0.8, padding=5, fontsize=14, color=colors["Total"])
+
+ax.bar_label(isolating, alpha=0.8, padding=5, fontsize=12, color=colors["Local_cases"])
+
+
+# projection
+ax.set_yscale("log")
+for col, c in zip(["Total_roll", "Local_cases_roll"], ("red", "orange")):
+    x_future = pd.date_range(start_date, end_date, freq=pd.DateOffset(days=1))
+    print(len(x_future))
+    y_low, y_pred, y_high = predict(col)
+    print(col, len(x_future), len(y_low), len(y_pred), len(y_high))
+    ax.plot(x_future, y_pred, "--", color="red", label=f"{col} projection")
+    ax.plot(x_future, y_low, "--", alpha = 0.1)
+    ax.plot(x_future, y_high, "--", alpha = 0.1)
+    ax.fill_between(x_future, y_low, y_high, 
+                    color=c, alpha=0.02, label="Uncertainity")
+
+
+# final plot tweaks
+date_form = mdates.DateFormatter("%m/%d")
+ax.xaxis.set_major_formatter(date_form)
+ax.legend(loc="upper left", fontsize=13)
+
+
+plt.show()
+```
+
+    16
+    Total_roll 16 16 16 16
+    Total_roll 16 16 10 16
+
+
+
+    ---------------------------------------------------------------------------
+
+    ValueError                                Traceback (most recent call last)
+
+    <ipython-input-689-21b282b06708> in <module>
+         59     y_low, y_pred, y_high = predict(col)
+         60     print(col, len(x_future), len(y_low), len(y_pred), len(y_high))
+    ---> 61     ax.plot(x_future, y_pred, "--", color="red", label=f"{col} projection")
+         62     ax.plot(x_future, y_low, "--", alpha = 0.1)
+         63     ax.plot(x_future, y_high, "--", alpha = 0.1)
+
+
+    ~/anaconda3/envs/py39/lib/python3.9/site-packages/matplotlib/axes/_axes.py in plot(self, scalex, scaley, data, *args, **kwargs)
+       1603         """
+       1604         kwargs = cbook.normalize_kwargs(kwargs, mlines.Line2D)
+    -> 1605         lines = [*self._get_lines(*args, data=data, **kwargs)]
+       1606         for line in lines:
+       1607             self.add_line(line)
+
+
+    ~/anaconda3/envs/py39/lib/python3.9/site-packages/matplotlib/axes/_base.py in __call__(self, data, *args, **kwargs)
+        313                 this += args[0],
+        314                 args = args[1:]
+    --> 315             yield from self._plot_args(this, kwargs)
+        316 
+        317     def get_next_color(self):
+
+
+    ~/anaconda3/envs/py39/lib/python3.9/site-packages/matplotlib/axes/_base.py in _plot_args(self, tup, kwargs, return_kwargs)
+        499 
+        500         if x.shape[0] != y.shape[0]:
+    --> 501             raise ValueError(f"x and y must have same first dimension, but "
+        502                              f"have shapes {x.shape} and {y.shape}")
+        503         if x.ndim > 2 or y.ndim > 2:
+
+
+    ValueError: x and y must have same first dimension, but have shapes (16,) and (10,)
+
+
+
+    
+![png](covid_nsw_2021_files/covid_nsw_2021_22_2.png)
     
 
 
