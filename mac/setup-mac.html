@@ -35,10 +35,11 @@
         <div class="toc">
 <ul>
 <li><a href="#macos">MacOS</a><ul>
-<li><a href="#install-the-latest-macos">Install the latest macOS</a></li>
-<li><a href="#interface-tweaks">Interface tweaks</a><ul>
+<li><a href="#do-the-setup">Do the setup</a></li>
+<li><a href="#_1"></a></li>
+<li><a href="#install-the-latest-macos-if-needed">Install the latest macOS (if needed)</a></li>
+<li><a href="#old-stuff-below">old stuff below</a><ul>
 <li><a href="#manual-tweaks">manual tweaks</a></li>
-<li><a href="#finder">Finder</a></li>
 </ul>
 </li>
 <li><a href="#app-setup">App setup</a><ul>
@@ -46,11 +47,6 @@
 </ul>
 </li>
 <li><a href="#essential-apps">essential apps</a></li>
-<li><a href="#dev-setup">Dev setup</a><ul>
-<li><a href="#terminal-setup">terminal setup</a></li>
-<li><a href="#cli-apps">cli apps</a></li>
-</ul>
-</li>
 </ul>
 </li>
 <li><a href="#links">links</a></li>
@@ -62,15 +58,24 @@
 <article>
     
     <h1 id="macos">MacOS</h1>
-<h2 id="install-the-latest-macos">Install the latest macOS</h2>
-<p>If starting with a old mac, I recommend doing a factory reset and installing the latest macos.</p>
-<p>Power on the mac and keep holding down <code>Option/Alt + Command + R</code> until a spinning globe appears. This boots you into recovery mode and offers to reinstall the latest version of OSX, which for me is <a href="https://www.apple.com/au/macos/big-sur/">Big Sur</a>.</p>
+<p>If  a new mac, just copy paste the script below and go, otherwise consider a re-install if on a crusty handmedown.</p>
+<h2 id="do-the-setup">Do the setup</h2>
+<p>copy paste this line into terminal on any mac big sur or newer and it will setup and install almost all the things:</p>
+<pre><code class="language-bash">sh -c &quot;$(curl -fsSL https://raw.githubusercontent.com/khalido/dotfiles/master/setup_mac.sh)&quot;
+</code></pre>
+<p>And thats it! After a restart it should be ready to go. The  <a href="https://github.com/khalido/dotfiles/blob/master/setup_mac.sh">setup script</a> is pretty self explanatory.</p>
+<p>The only thing I left out was python, which I'm installing through <a href="https://github.com/conda-forge/miniforge#mambaforge">mambaforge</a> if necessary.</p>
+<h2 id="_1"></h2>
+<h2 id="install-the-latest-macos-if-needed">Install the latest macOS (if needed)</h2>
+<p>If starting with an old mac, I recommend doing a factory reset and installing the latest macOS.</p>
+<p>Power on the mac and keep holding down <code>Option/Alt + Command + R</code> until a spinning globe appears. This boots you into recovery mode and offers to reinstall the latest version of OSX, which for me is <a href="https://www.apple.com/au/macos/big-sur/">Big Sur</a>, with <a href="https://www.macrumors.com/roundup/macos-12/">Monterey</a> dropping in late '21.</p>
 <p>I had to format the disk before installing as the installer wasn't recognizing it. The eraser defaulted to the old MAC disk format, change that to <code>AFPS</code> with scheme <code>GUID Partition Map</code>. </p>
 <p>Also see:</p>
 <ul>
 <li><a href="https://support.apple.com/en-au/HT204904">Apple reset page</a> and <a href="https://support.apple.com/en-au/HT201314">recovery page</a>.</li>
 </ul>
-<h2 id="interface-tweaks">Interface tweaks</h2>
+<h2 id="old-stuff-below">old stuff below</h2>
+<p>Older notes below, no longer needed as the setup file does all this.</p>
 <h3 id="manual-tweaks">manual tweaks</h3>
 <ul>
 <li>autohide the dock: Its just a waste of space. No one should be looking or clicking on the dock anyways.</li>
@@ -78,8 +83,6 @@
 <li><a href="https://support.apple.com/en-za/HT204609">three finger drag</a> is awesome. 
 Accessibility -&gt; Mouse &amp; Trackpad -&gt; Options -&gt; Enable dragging (choose 3 finger drag) </li>
 </ul>
-<h3 id="finder">Finder</h3>
-<p>New finder window open in home dir.</p>
 <h2 id="app-setup">App setup</h2>
 <h4 id="homebrew-aka-easy-install-apps">homebrew aka easy install apps</h4>
 <p><a href="https://brew.sh/">homebrew</a> installs all the packages.</p>
@@ -87,56 +90,16 @@ Accessibility -&gt; Mouse &amp; Trackpad -&gt; Options -&gt; Enable dragging (ch
 <ul>
 <li><code>/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"</code> downloads and installs xcode cli tools and brew.</li>
 </ul>
-<p>Most cli tools are installed by: <code>brew install wget</code> and gui apps by: <code>brew cask install firefox</code>.</p>
-<p>Other useful commands:</p>
-<ul>
-<li><code>brew update</code> updates brew itself and all the packages it can install</li>
-<li><code>brew upgrade</code> upgrades all packages installed by homebrew</li>
-</ul>
 <h2 id="essential-apps">essential apps</h2>
 <ul>
-<li><a href="https://github.com/rxhanson/Rectangle">Rectangle</a> window manager, cause life is too short to use a mouse to resize windows.</li>
 <li><a href="https://karabiner-elements.pqrs.org/">Karabiner Elements</a> to modify keyboard shortcuts, in particular make the capslock key into a super key which can launch alred.</li>
-<li><a href="https://www.alfredapp.com/">Alfred</a> is a super duper launcher for macos. I remap capslock to launching it. Even though spotlight is getting better, alfred is faster and more configurable.</li>
+<li><a href="https://raycast.com/">Raycast</a> is a super duper launcher for macos. I remapped capslock to launch it. Even though spotlight is getting better, raycast is faster and lots more configurable.</li>
 <li><a href="https://code.visualstudio.com/">Visual Studio code</a> is my cross-platform editor of choice. its awesome.</li>
-<li><a href="">slack</a> gotta talk to all the work colleages</li>
-<li><a href="https://www.spotify.com">spotify</a> gotten listen to music</li>
-<li><a href="https://zoom.us/">zoom</a> - video chat service of choice in 2021, even for companies paying tons of money to other companies for video calls!  </li>
+<li><a href="https://www.microsoft.com/en-au/microsoft-teams/group-chat-software">Microsoft Teams</a> gotta talk to all the work people.</li>
+<li><a href="https://www.spotify.com">Spotify</a> gotten listen to music</li>
+<li><a href="https://zoom.us/">Zoom</a> - video chat service of choice in 2021, even for companies paying tons of money to other companies for video calls!  </li>
 </ul>
-<p>This installs them all in one fell swoop.</p>
-<pre><code>brew install --cask \
-    rectangle \
-    karabiner-elements \
-    alfred \
-    google-chrome \
-    visual-studio-code \
-    slack \
-    spotify \
-    zoomus
-</code></pre>
-<h2 id="dev-setup">Dev setup</h2>
-<p>Big sur has python installed, but I prefer <a href="https://khalido.org/python/anaconda.html">Anaconda</a>.</p>
-<pre><code class="language-bash">git config --global user.name &quot;khalido&quot;
-git config --global user.email &quot;myname@gmail.com&quot;
-#git config --global color.ui auto
-</code></pre>
-<h3 id="terminal-setup">terminal setup</h3>
-<p><a href="https://github.com/ohmyzsh/ohmyzsh">ohmyzsh</a>: jazz up the shell.</p>
-<pre><code>sh -c &quot;$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)&quot;
-</code></pre>
-<p>This zapped the conda settings for me, so fix those by:</p>
-<pre><code class="language-bash">source /Users/ko/anaconda3//bin/activate
-conda init zsh 
-</code></pre>
-<h3 id="cli-apps">cli apps</h3>
-<ul>
-<li><a href="https://github.com/dylanaraps/neofetch">neofetch</a> displays nifty info about your system in the terminal. Don't install this using brew as that installs way too much stuff.</li>
-<li><a href="https://github.com/sharkdp/bat">bat</a> - heaps better cat replacemet.</li>
-</ul>
-<pre><code>brew install \
-    neofetch \
-    bat
-</code></pre>
+<p>My script above installs them all in one go.</p>
 <h1 id="links">links</h1>
 <ul>
 <li><a href="https://github.com/nicolashery/mac-dev-setup">setup mac for dev</a></li>
@@ -144,7 +107,7 @@ conda init zsh
 </ul>
 
     <div class="meta">
-        posted <time>2020-01-20</time>, updated <time>2021-07-28</time><br>
+        posted <time>2021-07-26</time>, updated <time>2021-07-29</time><br>
         tagged: 
         <a href="/mac">mac</a>
         

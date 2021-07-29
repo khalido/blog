@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!--temp stylesheet, customize my own one later.
+        https://github.com/kognise/water.css-->
+        
+        
+        <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.3/new.min.css">
+
+        <link rel="stylesheet" type="text/css" href="/codestyles.css">
+
+        <link rel="stylesheet" type="text/css" href="/ko.css">
+        
+        
+
+        <script src="https://unpkg.com/htmx.org"></script>
+
+        <title>Sveltekit with TailwindCSS</title>
+    </head>
+
+    <body>
+ 
+        <header>
+            <a href="/">"khalido.org"</a> <br>
+            "some subheader text."
+        </header>
+
+    <details open class="toc">
+        <summary>Table of contents.</summary>
+        <div class="toc">
+<ul>
+<li><a href="#sveltekit-with-tailwindcss">Sveltekit with TailwindCSS</a><ul>
+<li><a href="#sveltekit">Sveltekit</a><ul>
+<li><a href="#pages-or-routes">Pages (or routes)</a></li>
+<li><a href="#layouts">Layouts</a></li>
+<li><a href="#sveltekit-targets">sveltekit targets</a></li>
+</ul>
+</li>
+<li><a href="#tailwindcss">Tailwindcss</a><ul>
+<li><a href="#icons-styled-with-css-oh-my">icons, styled with css, oh my!</a></li>
+</ul>
+</li>
+<li><a href="#setting-up-all-the-things">Setting up all the things</a><ul>
+<li><a href="#install-svelte-and-tailwind">Install svelte and tailwind</a></li>
+</ul>
+</li>
+<li><a href="#to-look-at-later">To look  at later</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+    </details>
+
+<article>
+    
+    <h1 id="sveltekit-with-tailwindcss">Sveltekit with TailwindCSS</h1>
+<p>I wanted to setup a simple interactive website, and <a href="https://reactjs.org/">react</a> is so 2019 and verbose, so I <a href="https://news.ycombinator.com/item?id=26693959">looked around</a> and svelte looked awesome, especially the <a href="https://svelte.dev/tutorial/basics">tutorial</a> which is a work of art.</p>
+<p><a href="https://svelte.dev/">Svelte</a> is a JS framework which puts html, css and javascript inside a .svelte file. It aims to stick mostly to basic html/css/js, so is easier to use than the more complicated frameworks like react which essentially are their own language. A good <a href="https://youtu.be/qSfdtmcZ4d0">intro video</a>.</p>
+<p>Each .svelte file can be thought of as a component, and you use them like lego to build an app. Svelte files can contain javascript, html and css like so:</p>
+<pre><code class="language-html">// javascript goes here
+&lt;script&gt;
+  let name = &quot;KO&quot;;
+  let img = &quot;testpic.gif&quot;
+&lt;/script&gt;
+
+// content goes here, curly brackets are javascript
+&lt;h1&gt;Hello {name.toUpperCase()}!&lt;/h1&gt;
+&lt;img src={img} alt=&quot;alt text&quot;&gt;
+
+// css goes here, scoped only to this file
+&lt;style&gt;
+  h1 {color: purple}
+&lt;/style&gt;
+</code></pre>
+<p>While it’s possible to build an entire app inside a single .svelte file, we’re better off with making multiple components each doing one thing and import them as needed.</p>
+<p>First, make a basic component containing just a para, and save it as <code>nested.svelte</code>.</p>
+<pre><code class="language-html">&lt;p&gt;This is another paragraph.&lt;/p&gt;
+</code></pre>
+<p>Then another svelte file can import and use it:</p>
+<pre><code class="language-html">&lt;script&gt;
+  import Nested from './nested.svelte';
+&lt;/script&gt;
+
+&lt;p&gt;This is a paragraph.&lt;/p&gt;
+
+// runs whatever is inside the nested.svelte file
+&lt;Nested/&gt; 
+</code></pre>
+<p>Note: svelte uses capitalcase for component names to not confuse them with html tags.</p>
+<p>and thats the basics of svelte! Its actually pretty straightforward.</p>
+<h2 id="sveltekit">Sveltekit</h2>
+<p><a href="https://kit.svelte.dev/">Sveltekit</a> is a framework for svelte which transforms svelte files into a static or interactive web app.</p>
+<h3 id="pages-or-routes">Pages (or routes)</h3>
+<p>Svelte kit looks at the folder <code>src/routes</code> and turns every svelte file into a page.  The entry point of the app is of course <code>src/routes/index.svelte</code>.</p>
+<p>So, <code>src/routes/about.svelte</code> becomes the <code>/about</code> page, or alternatively, if the about page contains other files and stuff, we can put all in a sub directory: <code>src/routes/about/index.svelte</code>.</p>
+<h3 id="layouts">Layouts</h3>
+<p>i.e shared components, like a header visible on each page. This file applies to ever page: <code>src/routes/__layout.svelte</code>. Layouts can be nested, so subfolders can contain a <code>__layout.svelte</code> file which only applies to the pages in that subfolder.</p>
+<p>Put <code>__layout.reset.svelte</code> in any subfolder where you don’t want the pages to inherit layouts.</p>
+<h3 id="sveltekit-targets">sveltekit targets</h3>
+<p>Sveltekit sites can run on node server, or be pre-rendered to to run on any web server as static web pages. The following two adapters seem production ready:</p>
+<ul>
+<li><a href="https://github.com/sveltejs/kit/tree/master/packages/adapter-static">adaptor-static</a> - static site, suitable for github pages or anywhere really</li>
+<li><a href="https://github.com/sveltejs/kit/tree/master/packages/adapter-vercel">adapter-vercel</a> - dynamic server rendering</li>
+</ul>
+<p>These two are listed as experimental, so ignoring for now:</p>
+<ul>
+<li><a href="https://github.com/sveltejs/kit/tree/master/packages/adapter-netlify">adapter-netlify</a> - dynamic server renering</li>
+<li><a href="https://github.com/sveltejs/kit/tree/master/packages/adapter-cloudflare-workers">adapter-cloudflare-workers</a> - suitable for sites needing dynamic server rendering</li>
+</ul>
+<h2 id="tailwindcss">Tailwindcss</h2>
+<p>Css is so complex that using it directly is akin to programming in C. So there are a ton of css frameworks which do the heavy lifting. But all of them require separating the content (html) from design (css), and going back and forth can be a pain.</p>
+<p>Tailwind provides a ton of helper styles to use directly inside html. This makes it easier to just modify things  directly all in one file. This made sense to me with svelte as that puts content, code and style all in the one svelte file  anyways.</p>
+<h3 id="icons-styled-with-css-oh-my">icons, styled with css, oh my!</h3>
+<p><a href="https://heroicons.com">tailwind has made svg icons</a> which can be styled with css directly.</p>
+<pre><code>&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; class=&quot;h-6 w-6&quot; fill=&quot;none&quot; viewBox=&quot;0 0 24 24&quot; stroke=&quot;currentColor&quot;&gt;
+  &lt;path stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; stroke-width=&quot;2&quot; d=&quot;M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z&quot; /&gt;
+&lt;/svg&gt;
+</code></pre>
+<h2 id="setting-up-all-the-things">Setting up all the things</h2>
+<p>This is the complex part. So I’m laying it out here step by step for my future self.</p>
+<ol>
+<li>install node using brew (mac) or <a href="https://github.com/nvm-sh/nvm">nvm</a> (cross platform, probably better) or <a href="https://github.com/Schniz/fnm">fnm</a>.</li>
+<li>install VS code and these extensions:<ol>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode">svelte vs code</a></li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss">tailwindcss</a> </li>
+</ol>
+</li>
+</ol>
+<p>Note: tailwindcss wasn't auto-completing so I had to update this vscode setting:</p>
+<pre><code class="language-json">&quot;editor.quickSuggestions&quot;: {
+  &quot;strings&quot;: true
+}
+</code></pre>
+<h3 id="install-svelte-and-tailwind">Install svelte and tailwind</h3>
+<pre><code class="language-bash">npm init svelte@next myapp
+cd myappp
+npx svelte-add tailwindcss --jit
+npm install
+</code></pre>
+<p>This will have installed and configured sveltekit and tailwindcss. To run:</p>
+<pre><code class="language-bash">npm run dev -- --open
+</code></pre>
+<p>Optionally, add the <a href="https://github.com/tailwindlabs/tailwindcss-typography">tailwind typography plugin</a>: <code>npm install @tailwindcss/typography</code> and update the plugins section in <code>tailwind.config.js</code> to include this:</p>
+<pre><code>plugins: [
+        require('@tailwindcss/typography'),
+    ],
+</code></pre>
+<p>Now adding the prose class to any html will style it nicely, though ideally you still need a <code>div</code> class around everything to set margins for the page.</p>
+<pre><code class="language-html">&lt;article class=&quot;prose lg:prose-xl&quot;&gt;
+    &lt;h1&gt;some heading&lt;/h1&gt;
+    &lt;p&gt;some text.... &lt;/p&gt;
+&lt;/article&gt;
+</code></pre>
+<p>A good starting container - the outside div colours everything, and the inside pads and centers.</p>
+<pre><code class="language-html">&lt;div class=&quot;bg-yellow-100&quot;&gt; 
+&lt;div
+    class=&quot;px-4 py-10 max-w-3xl mx-auto sm:px-6 sm:py-12 lg:max-w-4xl lg:py-16 lg:px-8 xl:max-w-6xl bg-gray-50&quot;
+&gt;
+    &lt;!-- content goes here --&gt;
+&lt;/div&gt;&lt;/div&gt;
+</code></pre>
+<p>I've put up all this in a github repo: <strong>TODO</strong></p>
+<h2 id="to-look-at-later">To look  at later</h2>
+<ul>
+<li>https://storybook.js.org/blog/storybook-for-svelte/</li>
+</ul>
+
+    <div class="meta">
+        posted <time>2021-07-29</time>, updated <time>2021-07-29</time><br>
+        tagged: 
+        <a href="/web">web</a>
+        
+        <p>
+            <a href="https://github.com/khalido/blog/blob/master/posts/sveltekit_tailwindcss.md">github</a>
+        </p>
+    
+    </div>
+</article>
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<hr>
+<footer>
+    This is a footer. One day some footery text will go here. 
+</footer>
+
+
+
+</body>
+
+</html>
