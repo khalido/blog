@@ -6,30 +6,20 @@
 
 <%include file="header.html"/ args="title=title, header=header, header_text=header_text"/>
 
-
     % if tags:
-        <p class="pb-3">
+        <p>tags: 
             % for tag in sorted(tags.keys()):
-                <a class="no-underline opacity-90 text-purple-500 hover:underline hover:bg-yellow-200" href="/${tag}">${tag}</a> 
+                <a href="/${tag}">${tag}</a> 
             % endfor
         </p>
     % endif
 
-    <!-- search box -->
-    <input class="px-4 py-3 w-80 text-xl" type="text" id="postSearch" placeholder="Search">
+    <p>The search bar searches only the posts for that particular index page.</p>
 
-    
-    <ul id="searchresults" class="list-none text-lg pt-4 pb-2 px-2">
+    <input type="text" id="postSearch" placeholder="Search posts...">
+    <ul id="searchresults">
         % for post in posts:
-            <li class="py-0.5"><a class="no-underline hover:underline text-gray-800" href="/${post.link}">${post.title}</a>
-                
-            <span class="align-middle pl-4 py-0.5">
-                % for tag in sorted(post.tags):
-                <a class="no-underline opacity-50 text-purple-400 text-sm hover:underline hover:bg-yellow-200" href="/${tag}">${tag}</a>
-                %endfor
-            </span>
-                
-            </li>
+            <li><a href="/${post.link}">${post.title}</a></li>
         % endfor
     </ul>
     

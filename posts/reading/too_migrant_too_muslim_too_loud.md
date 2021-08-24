@@ -1,5 +1,6 @@
 ---
 date: 2021-07-08
+rating: 5
 tags:
   - books
   - nonfiction

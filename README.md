@@ -32,7 +32,7 @@ to use the script:
 
 ## Content
 
-Mardown files are processed from the `posts` directory, and jupyter notebooks from the `notebooks` directory. This makes it easy to treat them differently. 
+Markdown files are processed from the `posts` directory, and jupyter notebooks from the `notebooks` directory. This makes it easy to treat them differently. 
 
 At some point I probably need a pages directory too. At which point I might as well have a contents folder with posts, notebooks, pages, etc.
 

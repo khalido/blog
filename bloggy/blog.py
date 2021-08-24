@@ -42,6 +42,7 @@ class Post:
     """class to store each individual posts data"""
 
     title: str
+    title_id: str
     type: str  # type of content post, notebook, link, etc
     slug: str
     link: str  # relative link to post in form tag/slug.html
@@ -169,13 +170,22 @@ def md_to_post(p: Path, post_type=default_post_type, debug=False):
 
     tags = fm.get("tags", ["untagged"])
 
+    # remove the first h1 line from text?
+    # regex to grab md "^# .+\n"gm
+    # regex to grab html h1: "^<h1>.+</h1>"gm
+    # warning: this is hacky fix later
     html = md.convert(txt)
+    regex = re.compile("^<h1 .+</h1>")
+    html = re.sub(regex, "", html, count=1)
+    if debug: print(html[:100])
 
-    # if first header is h1 override the titile from front matter
+    # if first header is h1 override the title from front matter
     title = fm.get("title", default_post_title)
+    title_id = None
     try:
         if md.toc_tokens[0]["level"] == 1:
             title = md.toc_tokens[0]["name"]
+            title_id = md.toc_tokens[0]["id"]
     except:
         pass
 
@@ -193,6 +203,7 @@ def md_to_post(p: Path, post_type=default_post_type, debug=False):
 
     post = Post(
         title=title,
+        title_id=title_id,
         type=_post_type,
         slug=slug,
         link=link,

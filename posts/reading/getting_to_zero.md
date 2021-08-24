@@ -2,6 +2,7 @@
 title: "Quarterly Essay 81: Getting to Zero - Australia’s Energy Transition"
 date: 2021-06-02
 description: notes
+rating: 3
 tags:
 - books
 - energy

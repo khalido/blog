@@ -5,32 +5,27 @@
 <%include file="header.html" 
 args="title=post.title, header=header, header_text=header_text"/>
 
-
-<article class="prose md:prose-lg lg:prose-xl">
-    <h1 id=${post.title_id}>${post.title}</h1>
-
-    % if post.toc:
-    <details close class="fixed top-0 right-0 text-sm text-gray-500">
+% if post.toc:
+    <details open class="toc">
         <summary>Table of contents.</summary>
         ${post.toc}
     </details>
 % endif
+
+<article>
     
     ${post.html}
 
-    <!-- post meta info div-->
-    <div class="text-gray-600 text-base">
+    <div class="meta">
         posted <time>${post.date}</time>, updated <time>${post.lastmod}</time><br>
         tagged: 
         % for tag in post.tags:
-        <a href="/${tag}"
-        class="text-pink-500 bg-transparent hover:bg-pink-500 hover:text-white active:bg-pink-600 font-bold rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
-        ${tag}</a>
+        <a href="/${tag}">${tag}</a>
         % endfor
-
+        
+        <p>
         ## edit links    
         % if post.type == "notebook":
-        View on: 
             <a href="https://github.com/khalido/blog/blob/master/notebooks/${post.slug}.ipynb">github</a>, 
             <a href="https://colab.research.google.com/github/khalido/blog/blob/master/notebooks/${post.slug}.ipynb">
                 colab2
@@ -39,15 +34,16 @@ args="title=post.title, header=header, header_text=header_text"/>
 
         
         % elif post.type == "post":
-            View on: <a href="https://github.com/khalido/blog/blob/master/posts/${post.slug}.md"
-            class="text-purple-500 hover:bg-purple-500 hover:text-white active:bg-purple-600 font-bold rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
-            github</a>
+            <a href="https://github.com/khalido/blog/blob/master/posts/${post.slug}.md">github</a>
         % else:
             pass
         % endif
+        </p>
     
     </div>
 </article>
 
-<script>hljs.highlightAll();</script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
 <%include file="footer.html"/>

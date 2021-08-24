@@ -1,0 +1,15 @@
+/* trying out tailwindcss with a cli */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* sample btn component */
+@layer components {
+  .btn {
+    @apply px-4 py-2 bg-blue-600 text-white rounded;
+  }
+}
+
+/* I want to style code components without a class specifiying a language */
+/* jupyter notebooks should give a languge class to all code cells by default */
+

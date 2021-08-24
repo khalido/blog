@@ -2,11 +2,19 @@
 public/
 tmp/
 .obsidian
+.nota
 
 # misc stuff
+.env
 .vscode
 .DS_Store
 
 # python
 **/.ipynb_checkpoints/
 **/__pycache__/
+
+# node stuff
+node_modules
+build
+npm-debug.log
+package-lock.json

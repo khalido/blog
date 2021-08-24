@@ -1,5 +1,6 @@
 ---
 date: 2013-05-13
+rating: 1
 tags:
   - books
   - nonfiction

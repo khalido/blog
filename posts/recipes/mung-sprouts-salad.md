@@ -18,14 +18,15 @@ A very tasty salad, suitable for a side dish or an easy lunch.
 - coriander, finely chopped
 - 2 cm ginger, peeled and tiny diced
 - radishes (a bunch or 8ish), finely sliced
-mung beans 
+
 ### Dressing
 
-- 2 tsp whole grain mustard (or dijon, or normal, not too strong)
+- 1.5 tsp whole grain mustard (or dijon, or normal, not too strong)
+- 1.5 tsp dijon mustard (smooth and mild)
 - 1 tsp salt
 - 1  tsp sugar
 - 2 tbsp olive oil 
-- 1/2 - 1 lemon juice
+- 1/2 lemon 
 - ground black pepper, tiny bit
 
 ## Directions
