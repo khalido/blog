@@ -4,33 +4,45 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="/tailwind.css" rel="stylesheet">
 
-        <!--temp stylesheet, customize my own one later.
-        https://github.com/kognise/water.css-->
-        
-        
-        <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.3/new.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/a11y-dark.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
 
-        <link rel="stylesheet" type="text/css" href="/codestyles.css">
-
-        <link rel="stylesheet" type="text/css" href="/ko.css">
-        
-        
-
-        <script src="https://unpkg.com/htmx.org"></script>
+        <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
         <title>Googles Best Practices for ML Engineering</title>
     </head>
 
-    <body>
- 
-        <header>
-            <a href="/">"khalido.org"</a> <br>
-            "some subheader text."
+    <body class="bg-yellow-100">
+
+        <header class="bg-yellow-400 p-4 sm:p-6 md:p-8 lg:p-10 xl:p-12">
+            <a href="/" 
+            class="text-3xl font-mono tracking-wider font-extrabold"
+            >khalido.org</a>
+            <br>
+            <p>every blog needs subheader text</p>
         </header>
 
-    <details open class="toc">
+        <!--container setting paddings-->
+        <div
+    class="max-w-3xl
+      mx-auto
+      px-4 py-5
+      sm:px-6 
+      md:px-7 
+      lg:max-w-4xl lg:px-8
+      xl:max-w-5xl xl:px-9
+      bg-gray-50"
+      >
+ 
+        
+
+
+<article class="prose md:prose-lg lg:prose-xl">
+    <h1 id=googles-best-practices-for-ml-engineering>Googles Best Practices for ML Engineering</h1>
+
+    <details close class="fixed top-0 right-0 text-sm text-gray-500">
         <summary>Table of contents.</summary>
         <div class="toc">
 <ul>
@@ -106,10 +118,8 @@
 </div>
 
     </details>
-
-<article>
     
-    <h1 id="googles-best-practices-for-ml-engineering">Googles Best Practices for ML Engineering</h1>
+    
 <p>Notes on <a href="https://developers.google.com/machine-learning/guides/rules-of-ml/">Google's best practices guide for ML engineering</a>:</p>
 <blockquote>
 <p>This document is intended to help those with a basic knowledge of machine learning get the benefit of Google's best practices in machine learning.</p>
@@ -279,27 +289,31 @@
 <h2 id="rule-43-your-friends-tend-to-be-the-same-across-different-products-your-interests-tend-not-to-be">Rule 43: Your friends tend to be the same across different products. Your interests tend not to be.</h2>
 <p>While one thing might be close to another, doesn't mean it applies across products.</p>
 
-    <div class="meta">
-        posted <time>2019-03-02</time>, updated <time>2021-08-03</time><br>
+    <!-- post meta info div-->
+    <div class="text-gray-600 text-base">
+        posted <time>2019-03-02</time>, updated <time>2021-08-24</time><br>
         tagged: 
-        <a href="/ml">ml</a>
-        
-        <p>
-            <a href="https://github.com/khalido/blog/blob/master/posts/google-ml-best-practice.md">github</a>
-        </p>
+        <a href="/ml"
+        class="text-pink-500 bg-transparent hover:bg-pink-500 hover:text-white active:bg-pink-600 font-bold rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
+        ml</a>
+
+            View on: <a href="https://github.com/khalido/blog/blob/master/posts/google-ml-best-practice.md"
+            class="text-purple-500 hover:bg-purple-500 hover:text-white active:bg-purple-600 font-bold rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
+            github</a>
     
     </div>
 </article>
 
-<script>hljs.initHighlightingOnLoad();</script>
-
+<script>hljs.highlightAll();</script>
+</div> <!-- closes first div after body -->
 
 <hr>
-<footer>
-    This is a footer. One day some footery text will go here. 
+<footer class="px-4 py-8 content-center text-center">
+    <p class="text-sm text-gray-300 pb-2">
+        <a href="https://github.com/khalido/blog">#</a>
+        <a href="https://twitter.com/KO">@ko</a>
+    </p>
 </footer>
-
-
 
 </body>
 
