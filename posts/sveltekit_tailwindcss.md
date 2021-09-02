@@ -3,16 +3,16 @@ title: "Sveltekit with Tailwindcss"
 description: "building an interactive website"
 date: 2021-08-24
 tags:
-- web
+- webdev
 ---
 
 # Sveltekit with TailwindCSS
 
-I wanted to setup a simple interactive website, and [react](https://reactjs.org/) is so 2019 and verbose, so I [looked around](https://news.ycombinator.com/item?id=26693959) and svelte looked awesome, especially the [tutorial](https://svelte.dev/tutorial/basics) which is a work of art.
+I wanted to learn how to setup a simple interactive website, and [react](https://reactjs.org/) is so 2019 and verbose, so I [looked around](https://news.ycombinator.com/item?id=26693959) and svelte looked awesome, especially the [tutorial](https://svelte.dev/tutorial/basics) which is a work of art.
 
-[Svelte](https://svelte.dev/) is a JS framework which puts html, css and javascript inside a .svelte file. It aims to stick mostly to basic html/css/js, so is easier to use than the more complicated frameworks like react which essentially are their own language. A good [intro video](https://youtu.be/qSfdtmcZ4d0).
+[Svelte](https://svelte.dev/) is a JS framework which puts html, css and javascript inside a `.svelte` file. It aims to stick mostly to basic html/css/js, so is easier to use than the more complicated frameworks like react which essentially are their own language. A good [intro video](https://youtu.be/qSfdtmcZ4d0).
 
-Each .svelte file can be thought of as a component, and you use them like lego to build an app. A very basic svelte file is just js, html and css - try it out in the [svelte repl](https://svelte.dev/repl). A sample component (i.e a svelte file to be reused elsewhere) looks like:
+Each `.svelte` file can be thought of as a component, and you use them like lego to build an app. A very basic svelte file is just js, html and css - try it out in the [svelte repl](https://svelte.dev/repl). A sample component (i.e a svelte file to be reused elsewhere) looks like:
 
 ```html
 <!-- saved as nested.svelte -->
@@ -68,9 +68,9 @@ Thats the basics of svelte! Its actually pretty straightforward. For simple apps
 
 ### Pages (or routes)
 
-Sveltekit uses a file based router, which is fancy speak for saying it looks at the folder `src/routes` and turns every svelte file into a page.  The entry point of the app is of course `src/routes/index.svelte`.
+Sveltekit uses a file based router, which is fancy speak for saying it looks at the folder `src/routes` and turns every svelte file into a page.  The entry point of the app is `src/routes/index.svelte`.
 
-So, `src/routes/about.svelte` becomes the `/about` page, or alternatively, if the about page contains other files and stuff, we can put all in a sub directory: `src/routes/about/index.svelte`.
+So, `src/routes/about.svelte` becomes the `/about` page, or alternatively, if the about page refers to other files and stuff, we can put all in a sub directory: `src/routes/about/index.svelte` to keep them contained.
 
 ### Layouts
 
@@ -83,9 +83,9 @@ Put `__layout.reset.svelte` in any subfolder where you don’t want the pages to
 Sveltekit sites can run on node server, or be pre-rendered to to run on any web server as static web pages. The following two adapters seem production ready:
 
 - [adaptor-static](https://github.com/sveltejs/kit/tree/master/packages/adapter-static) - static site, suitable for github pages or anywhere really
-- [adapter-vercel](https://github.com/sveltejs/kit/tree/master/packages/adapter-vercel) - dynamic server rendering
+- [adapter-vercel](https://github.com/sveltejs/kit/tree/master/packages/adapter-vercel) - dynamic server rendering, so you can have functions which run on the server returning fresh data or something.
 
-These two are listed as experimental, so ignoring for now:
+These two are listed as experimental:
 
 - [adapter-netlify](https://github.com/sveltejs/kit/tree/master/packages/adapter-netlify) - dynamic server renering
 - [adapter-cloudflare-workers](https://github.com/sveltejs/kit/tree/master/packages/adapter-cloudflare-workers) - suitable for sites needing dynamic server rendering
@@ -120,6 +120,8 @@ Note: tailwindcss wasn't auto-completing so I had to update this vscode setting:
 
 ### Install svelte and tailwind
 
+See [sveltekit docs](https://kit.svelte.dev/docs) and [svelte-add](https://github.com/svelte-add/tailwindcss) for more.
+
 ```bash
 npm init svelte@next myapp
 cd myappp
@@ -131,7 +133,7 @@ The install script asks for options, I choose:
 
 - Template: Skeleton project
 - Use Typescript: No
-- Use ESlint: No
+- Use ESlint: Yes
 - Add Prettier: Yes
 
 This will have installed and configured sveltekit and tailwindcss. To run:
@@ -139,6 +141,8 @@ This will have installed and configured sveltekit and tailwindcss. To run:
 ```bash
 npm run dev -- --open
 ```
+
+Additionally, add the `--host` flag to expose the site to the local network, handy for testing it on your phone and other computers. If on a laptop, since the page reloads automagically on change, you can prop up an ipad or something with the output open.
 
 Optionally, add the [tailwind typography plugin](https://github.com/tailwindlabs/tailwindcss-typography): 
 
@@ -169,7 +173,7 @@ If the above chunk is styled, and updates in the browser preview, then everythin
 
 Time to setup an adaptor to publish this to the web. Initially I tried [adaptor-static](https://github.com/sveltejs/kit/tree/master/packages/adapter-static) to deploy to github pages, but kept running into errors. Now the simplest thing is to build the static site locally, and use github pages to deploy the already built site, but this requires a working local dev env for any changes and thats so last year.
 
-So I went with [the vercel adaptor](https://github.com/sveltejs/kit/tree/master/packages/adapter-vercel) - this worked pretty painlessly out of the box, since essentially there is no local build step - you just run a local dev server: `npm run dev -- --open` and push to github once done.
+So I went with [the vercel adaptor](https://github.com/sveltejs/kit/tree/master/packages/adapter-vercel) - this worked pretty painlessly out of the box, since essentially there is no local build step - you just run a local dev server: `npm run dev -- --open` to develop, and push to github once done.
 
 ### Vercel 
 

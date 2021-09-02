@@ -27,7 +27,7 @@ tags:
 to use the script:
 
 - `python -m bloggy` builds site, saves html output to public dir.
-- `python -m bloggy --serve` builds site and starts a [local server](http://localhost:8001/) at port 8001. 
+- `python -m bloggy --serve` builds site and starts a [local server](http://localhost:8001/) at port 8000. 
 - `python -m bloggy --buildnotebooks` also converts jupyter notebook to markdown, by default skips as this is a slow process with even a few notebooks. Currently I run this once in awhile, the output is saved to `notebooks/nb2md` folder and sync'd to github. I don't update notebooks often so this is good enough. 
 
 ## Content
@@ -42,10 +42,11 @@ At some point I probably need a pages directory too. At which point I might as w
 
 ### todo
 
-- [x] convert notebooks to markdown manually, since those are only updated infrequently. Should save a lot of time in the github build action.
+- [ ] figure out how to use alpinejs for some interactivityu
+- [ ] convert notebooks to markdown manually, since those are only updated infrequently. Should save a lot of time in the github build action.
 - [ ] only convert jupyter notebooks if they have been changed since the last conversion or the output file doesn't exist.
 - [ ] store post images in the posts folder itself? Have a think. Whats the easiest way to insert images in a markdown post?
-- [ ] Fix the lastmod issue, since github clones over the folder the file datestamp becomes the clone time instead of the last time the file was changed.
+- [ ] Fix the lastmod issue, since github clones over the folder the file datestamp becomes the clone time instead of the last time the file was changed. Probably just ignore this, and only do a lastmod if set in the frontmatter.
 - [ ] Fix the local server so it rebuilds the blog on changes. Threading or async should do this? One thread to run the server the other to watch the posts folder. Use a delay as Vscode says files every few miliseconds.
 
 ## Shoutouts
