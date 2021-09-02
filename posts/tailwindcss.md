@@ -1,7 +1,7 @@
 ---
 title: TailwindCss
 date: 2021-08-07
-tags:s
+tags:
 - webdev
 ---
 
