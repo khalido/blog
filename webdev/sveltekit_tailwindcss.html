@@ -71,9 +71,9 @@
     </details>
     
     
-<p>I wanted to setup a simple interactive website, and <a href="https://reactjs.org/">react</a> is so 2019 and verbose, so I <a href="https://news.ycombinator.com/item?id=26693959">looked around</a> and svelte looked awesome, especially the <a href="https://svelte.dev/tutorial/basics">tutorial</a> which is a work of art.</p>
-<p><a href="https://svelte.dev/">Svelte</a> is a JS framework which puts html, css and javascript inside a .svelte file. It aims to stick mostly to basic html/css/js, so is easier to use than the more complicated frameworks like react which essentially are their own language. A good <a href="https://youtu.be/qSfdtmcZ4d0">intro video</a>.</p>
-<p>Each .svelte file can be thought of as a component, and you use them like lego to build an app. A very basic svelte file is just js, html and css - try it out in the <a href="https://svelte.dev/repl">svelte repl</a>. A sample component (i.e a svelte file to be reused elsewhere) looks like:</p>
+<p>I wanted to learn how to setup a simple interactive website, and <a href="https://reactjs.org/">react</a> is so 2019 and verbose, so I <a href="https://news.ycombinator.com/item?id=26693959">looked around</a> and svelte looked awesome, especially the <a href="https://svelte.dev/tutorial/basics">tutorial</a> which is a work of art.</p>
+<p><a href="https://svelte.dev/">Svelte</a> is a JS framework which puts html, css and javascript inside a <code>.svelte</code> file. It aims to stick mostly to basic html/css/js, so is easier to use than the more complicated frameworks like react which essentially are their own language. A good <a href="https://youtu.be/qSfdtmcZ4d0">intro video</a>.</p>
+<p>Each <code>.svelte</code> file can be thought of as a component, and you use them like lego to build an app. A very basic svelte file is just js, html and css - try it out in the <a href="https://svelte.dev/repl">svelte repl</a>. A sample component (i.e a svelte file to be reused elsewhere) looks like:</p>
 <pre><code class="language-html">&lt;!-- saved as nested.svelte --&gt;
 &lt;script&gt;
     export let a_variable = &quot;you can pass in your own value!&quot;;
@@ -118,8 +118,8 @@
 <h2 id="sveltekit">Sveltekit</h2>
 <p><a href="https://kit.svelte.dev/">Sveltekit</a> is a framework for svelte which transforms svelte files into a static or interactive web app.</p>
 <h3 id="pages-or-routes">Pages (or routes)</h3>
-<p>Sveltekit uses a file based router, which is fancy speak for saying it looks at the folder <code>src/routes</code> and turns every svelte file into a page.  The entry point of the app is of course <code>src/routes/index.svelte</code>.</p>
-<p>So, <code>src/routes/about.svelte</code> becomes the <code>/about</code> page, or alternatively, if the about page contains other files and stuff, we can put all in a sub directory: <code>src/routes/about/index.svelte</code>.</p>
+<p>Sveltekit uses a file based router, which is fancy speak for saying it looks at the folder <code>src/routes</code> and turns every svelte file into a page.  The entry point of the app is <code>src/routes/index.svelte</code>.</p>
+<p>So, <code>src/routes/about.svelte</code> becomes the <code>/about</code> page, or alternatively, if the about page refers to other files and stuff, we can put all in a sub directory: <code>src/routes/about/index.svelte</code> to keep them contained.</p>
 <h3 id="layouts">Layouts</h3>
 <p>i.e shared components, like a header visible on each page. This file applies to ever page: <code>src/routes/__layout.svelte</code>. Layouts can be nested, so subfolders can contain a <code>__layout.svelte</code> file which only applies to the pages in that subfolder.</p>
 <p>Put <code>__layout.reset.svelte</code> in any subfolder where you don’t want the pages to inherit layouts.</p>
@@ -127,9 +127,9 @@
 <p>Sveltekit sites can run on node server, or be pre-rendered to to run on any web server as static web pages. The following two adapters seem production ready:</p>
 <ul>
 <li><a href="https://github.com/sveltejs/kit/tree/master/packages/adapter-static">adaptor-static</a> - static site, suitable for github pages or anywhere really</li>
-<li><a href="https://github.com/sveltejs/kit/tree/master/packages/adapter-vercel">adapter-vercel</a> - dynamic server rendering</li>
+<li><a href="https://github.com/sveltejs/kit/tree/master/packages/adapter-vercel">adapter-vercel</a> - dynamic server rendering, so you can have functions which run on the server returning fresh data or something.</li>
 </ul>
-<p>These two are listed as experimental, so ignoring for now:</p>
+<p>These two are listed as experimental:</p>
 <ul>
 <li><a href="https://github.com/sveltejs/kit/tree/master/packages/adapter-netlify">adapter-netlify</a> - dynamic server renering</li>
 <li><a href="https://github.com/sveltejs/kit/tree/master/packages/adapter-cloudflare-workers">adapter-cloudflare-workers</a> - suitable for sites needing dynamic server rendering</li>
@@ -155,6 +155,7 @@
 }
 </code></pre>
 <h3 id="install-svelte-and-tailwind">Install svelte and tailwind</h3>
+<p>See <a href="https://kit.svelte.dev/docs">sveltekit docs</a> and <a href="https://github.com/svelte-add/tailwindcss">svelte-add</a> for more.</p>
 <pre><code class="language-bash">npm init svelte@next myapp
 cd myappp
 npx svelte-add tailwindcss --jit
@@ -164,12 +165,13 @@ npm install
 <ul>
 <li>Template: Skeleton project</li>
 <li>Use Typescript: No</li>
-<li>Use ESlint: No</li>
+<li>Use ESlint: Yes</li>
 <li>Add Prettier: Yes</li>
 </ul>
 <p>This will have installed and configured sveltekit and tailwindcss. To run:</p>
 <pre><code class="language-bash">npm run dev -- --open
 </code></pre>
+<p>Additionally, add the <code>--host</code> flag to expose the site to the local network, handy for testing it on your phone and other computers. If on a laptop, since the page reloads automagically on change, you can prop up an ipad or something with the output open.</p>
 <p>Optionally, add the <a href="https://github.com/tailwindlabs/tailwindcss-typography">tailwind typography plugin</a>: </p>
 <pre><code class="language-bash">npm install -D @tailwindcss/typography
 </code></pre>
@@ -187,7 +189,7 @@ npm install
 <p>If the above chunk is styled, and updates in the browser preview, then everything is setup fine and working. </p>
 <h2 id="deploying">Deploying</h2>
 <p>Time to setup an adaptor to publish this to the web. Initially I tried <a href="https://github.com/sveltejs/kit/tree/master/packages/adapter-static">adaptor-static</a> to deploy to github pages, but kept running into errors. Now the simplest thing is to build the static site locally, and use github pages to deploy the already built site, but this requires a working local dev env for any changes and thats so last year.</p>
-<p>So I went with <a href="https://github.com/sveltejs/kit/tree/master/packages/adapter-vercel">the vercel adaptor</a> - this worked pretty painlessly out of the box, since essentially there is no local build step - you just run a local dev server: <code>npm run dev -- --open</code> and push to github once done.</p>
+<p>So I went with <a href="https://github.com/sveltejs/kit/tree/master/packages/adapter-vercel">the vercel adaptor</a> - this worked pretty painlessly out of the box, since essentially there is no local build step - you just run a local dev server: <code>npm run dev -- --open</code> to develop, and push to github once done.</p>
 <h3 id="vercel">Vercel</h3>
 <p>The exciting part about <a href="https://vercel.com/docs/build-step#framework-preset">using vercel to deploy</a> is how easy it is:</p>
 <blockquote>
@@ -212,11 +214,11 @@ npm install
 
     <!-- post meta info div-->
     <div class="text-gray-600 text-base">
-        posted <time>2021-08-24</time>, updated <time>2021-08-24</time><br>
+        posted <time>2021-08-24</time>, updated <time>2021-09-02</time><br>
         tagged: 
-        <a href="/web"
+        <a href="/webdev"
         class="text-pink-500 bg-transparent hover:bg-pink-500 hover:text-white active:bg-pink-600 font-bold rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
-        web</a>
+        webdev</a>
 
             View on: <a href="https://github.com/khalido/blog/blob/master/posts/sveltekit_tailwindcss.md"
             class="text-purple-500 hover:bg-purple-500 hover:text-white active:bg-purple-600 font-bold rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
