@@ -74,8 +74,9 @@
     </details>
     
     
-<p>ChromeOS supports a built in Linux - running inside a container running insde a VM. Turn it on by going to settings and pressing the on button for Linux (beta). This gives us a bare bones Linux install running Debian 10 (formerly known as buster). So here goes all the things I did to customize it.</p>
+<p>ChromeOS supports a built in Linux - running inside a container running insde a VM. Turn it on by going to settings and pressing the on button for Linux (beta). This gives us a bare bones Linux install running Debian 11. So here goes all the things I did to customize it.</p>
 <p>Most of these tips are from the <a href="https://www.reddit.com/r/Crostini/wiki/index">reddit crostini wiki</a>, I've put all the ones I'm using in one page for a handy reference.</p>
+<p>By default, the linux user has no password. Some installations require you to enter a password so xix this by switching to root <code>sudo su</code> and then running <code>passwd username</code>.</p>
 <h2 id="install-all-the-apps">Install all the apps</h2>
 <h3 id="flatpak">flatpak</h3>
 <p>the debian repos often have older packages, so for really new versions use flatpak.</p>
