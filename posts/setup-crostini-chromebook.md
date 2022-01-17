@@ -9,9 +9,11 @@ tags:
 
 # Setting up Linux on a Chromebook with Crostini
 
-ChromeOS supports a built in Linux - running inside a container running insde a VM. Turn it on by going to settings and pressing the on button for Linux (beta). This gives us a bare bones Linux install running Debian 10 (formerly known as buster). So here goes all the things I did to customize it.
+ChromeOS supports a built in Linux - running inside a container running insde a VM. Turn it on by going to settings and pressing the on button for Linux (beta). This gives us a bare bones Linux install running Debian 11. So here goes all the things I did to customize it.
 
 Most of these tips are from the [reddit crostini wiki](https://www.reddit.com/r/Crostini/wiki/index), I've put all the ones I'm using in one page for a handy reference.
+
+By default, the linux user has no password. Some installations require you to enter a password so xix this by switching to root `sudo su` and then running `passwd username`.
 
 ## Install all the apps
 
@@ -20,7 +22,6 @@ Most of these tips are from the [reddit crostini wiki](https://www.reddit.com/r/
 the debian repos often have older packages, so for really new versions use flatpak.
 
 Install flatpak: `sudo apt install flatpak`
-
 
 Add the flatpak repo:
 

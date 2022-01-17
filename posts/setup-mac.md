@@ -21,7 +21,7 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/khalido/dotfiles/master/se
 And thats it! After a restart it should be ready to go. The  [setup script](https://github.com/khalido/dotfiles/blob/master/setup_mac.sh) is pretty self explanatory.
 
 The only thing I left out was python, which I'm installing through [mambaforge](https://github.com/conda-forge/miniforge#mambaforge) if necessary.
-## 
+
 ## Install the latest macOS (if needed)
 
 If starting with an old mac, I recommend doing a factory reset and installing the latest macOS.

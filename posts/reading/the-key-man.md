@@ -26,7 +26,7 @@ There is a bit too much moralizing and not enough finance thoughout the book. Si
 
 When you're talking about ppl managing billions of dollars its besides the point to that they spend money on travel and expensive dinners, and to keep comparing the cost of hosting a prime minster to dinner to the yearly income of 20 poor ppl. Didn't want to bring up the racism word, but in the dozens of other similar books about white financiers, this doesn't happen after every few pages. 
 
-You don't learn998 much about Abraaj and how it did stuff - too much of the detail about Abraaj in the book is basically a summary of Arif's numerous speeches around the world.
+You don't learn much about Abraaj and how it did stuff - too much of the detail is basically a summary of Arif's numerous speeches around the world.
 
 I feel the journalists hit upon a super hot story - that a big PE fund was a failing, and concentrated all their firepower into getting out that story. This book - is just an extended version of that, and doesn't do the actual rise any justice, and thus misses out on an exciting story.
 
