@@ -16,20 +16,24 @@ A vegetable biryani. Cooked using a [round cast iron enamelled casserole](https:
 3. 2 medium size beetroots (1.5 if large)
 4. 5-6 tomatoes
 5. Chickpea can 400g, drained and rinsed
-6. 250g hard paneer, cut into cubes
+6. 250g [indian paneer](https://sharmaskitchen.com.au/), cut into cubes
 7. 2 large onions, finely sliced
 8. Cashews, small handful
 
 ### Oil for pouring over veggies
 
-1. 6tbsp rapeseed oil
+Mix together well:
+
+1. 6tbsp oil
 2. 1.5 tsp salt
 3. 1 1/4 tsp chilli powder
 4. 1 1/4 tsp ground cumin
-5. 2 tsp garam masala
+5. 2 tsp garam masala 
 6. 1.5 lemon juice, freshly squeezed
 
 ### Coconut coriander sauce
+
+Mix all this in a glass blender:
 
 1. Coconut milk 400g, make sure its not a cheap watered down one
 2. Fresh coriander x 2, roughly chopped
