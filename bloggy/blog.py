@@ -54,6 +54,7 @@ class Post:
     lastmod: datetime
     toc: Optional[str]
     draft: bool = False
+    github_link: str = None  # link to original markdown file on github
 
 
 ##################
@@ -177,7 +178,8 @@ def md_to_post(p: Path, post_type=default_post_type, debug=False):
     html = md.convert(txt)
     regex = re.compile("^<h1 .+</h1>")
     html = re.sub(regex, "", html, count=1)
-    if debug: print(html[:100])
+    if debug:
+        print(html[:100])
 
     # if first header is h1 override the title from front matter
     title = fm.get("title", default_post_title)
