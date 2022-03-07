@@ -230,7 +230,8 @@ def get_posts(debug=False, build_notebooks=True):
         print("Using cached markdown files for jupyter notebooks")
 
     # lists of md files and notebooks to convert
-    md_paths = [f for f in path_md.rglob("*.md")]
+    # ignore files starting README
+    md_paths = [f for f in path_md.rglob("*.md") if not f.name.startswith("README")]
 
     try:
         nb_paths = [f for f in path_nb2md.rglob("*.md")]

@@ -11,7 +11,7 @@ A vegetable biryani. Cooked using a [round cast iron enamelled casserole](https:
 
 ## Ingredients
 
-1. 2.5-3 cups basmati rice (500-600g) - parboiled basmati works well
+1. 2 1/2 cups basmati rice (500-600g), make it 3 cups if more ppl - parboiled basmati works well
 2. 400g sweet potato
 3. 2 medium size beetroots (1.5 if large)
 4. 5-6 tomatoes
@@ -24,7 +24,7 @@ A vegetable biryani. Cooked using a [round cast iron enamelled casserole](https:
 
 Mix together well:
 
-1. 6tbsp oil
+1. 6 tbsp oil
 2. 1.5 tsp salt
 3. 1 1/4 tsp chilli powder
 4. 1 1/4 tsp ground cumin
