@@ -93,9 +93,18 @@ Step 1: install [nvm](https://github.com/nvm-sh/nvm#install--update-script), a s
 
 `curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash`
 
-step 2: install nodejs itself by:
+step 2: install nodejs using [volta](https://volta.sh/):
 
-`nvm install node`
+```bash
+# install Volta
+curl https://get.volta.sh | bash
+
+# install Node
+volta install node
+
+# start using Node
+node
+```
 
 
 Some seful jupyterlab extensions:

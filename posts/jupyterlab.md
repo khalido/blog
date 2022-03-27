@@ -29,13 +29,18 @@ My shortlist:
 
 [Jupyterlab extensions](https://www.npmjs.com/search?q=keywords:jupyterlab-extension) are built using nodejs, so install that by:
 
-Step 1: install [nvm](https://github.com/nvm-sh/nvm#install--update-script), a script to install nodejs:
+Step 1: install nodejs using [volta](https://volta.sh/):
 
-`curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash`
+```bash
+# install Volta
+curl https://get.volta.sh | bash
 
-step 2: install nodejs itself by:
+# install Node
+volta install node
 
-`nvm install node`
+# start using Node
+node
+```
 
 Install all the extensions then build in one go by:
 

@@ -28,11 +28,17 @@ Protip: install pip inside a conda enviroment if planning to ever use pip instal
 
 So here we create a new environment which will use Python 3.9x and pip.
 
-`conda create -n py39 python=3.9 pip`
+`conda create -n py310 python=3.10 pip`
+
+If you need the latest version of python use conda-forge:
+
+```bash
+conda create -n py310 -c conda-forge python=3.10 pip
+```
 
 Use this environment:
 
-`conda activate py39`
+`conda activate py310`
 
 And a few basic commands:
 
@@ -44,17 +50,23 @@ Shows all conda envs:
 
 Delete an environment:
 
-`conda env remove -n py39 --all`
+`conda env remove -n py310 --all`
+
+Install packages from a file:
+
+```bash
+conda install -c conda-forge --file requirements.txt
+```
 
 ### Write the packages in use to disk:
 
 This will include both the conda and pip installed packeges in an environment, long as pip was installed inside the environment.
 
-`conda list --explicit > py39.txt`
+`conda list --explicit > py310.txt`
 
 Now if I git clone this repo somewhere else, I can recreate the environment by:
 
-`conda env create --file py39.txt`
+`conda env create --file py310.txt`
 
 ## Jupyter lab
 
