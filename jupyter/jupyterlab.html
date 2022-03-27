@@ -74,10 +74,16 @@
 <li><a href="https://github.com/krassowski/jupyterlab-go-to-definition">Go to Definition</a> - <code>ctrl-alt-b</code> jumps to the point in the notebok the variable or function is defined</li>
 </ul>
 <p><a href="https://www.npmjs.com/search?q=keywords:jupyterlab-extension">Jupyterlab extensions</a> are built using nodejs, so install that by:</p>
-<p>Step 1: install <a href="https://github.com/nvm-sh/nvm#install--update-script">nvm</a>, a script to install nodejs:</p>
-<p><code>curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash</code></p>
-<p>step 2: install nodejs itself by:</p>
-<p><code>nvm install node</code></p>
+<p>Step 1: install nodejs using <a href="https://volta.sh/">volta</a>:</p>
+<pre><code class="language-bash"># install Volta
+curl https://get.volta.sh | bash
+
+# install Node
+volta install node
+
+# start using Node
+node
+</code></pre>
 <p>Install all the extensions then build in one go by:</p>
 <pre><code>jupyter labextension install @jupyter-widgets/jupyterlab-manager --no-build &amp;&amp; \
 jupyter labextension install @jupyterlab/toc --no-build &amp;&amp; \
@@ -115,7 +121,7 @@ print(f&quot;Converted {len(ipynb_files)} jupter notebooks to markdown.&quot;)
 
     <!-- post meta info div-->
     <div class="text-gray-600 text-base">
-        posted <time>2019-08-04</time>, updated <time>2022-03-07</time><br>
+        posted <time>2019-08-04</time>, updated <time>2022-03-27</time><br>
         tagged: 
         <a href="/jupyter"
         class="text-pink-500 bg-transparent hover:bg-pink-500 hover:text-white active:bg-pink-600 font-bold rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">

@@ -76,9 +76,12 @@
 <h2 id="using-environments">Using environments</h2>
 <p>Protip: install pip inside a conda enviroment if planning to ever use pip install. Otherwise pip installs inside an environment use the main pip and that is NOT GOOD.</p>
 <p>So here we create a new environment which will use Python 3.9x and pip.</p>
-<p><code>conda create -n py39 python=3.9 pip</code></p>
+<p><code>conda create -n py310 python=3.10 pip</code></p>
+<p>If you need the latest version of python use conda-forge:</p>
+<pre><code class="language-bash">conda create -n py310 -c conda-forge python=3.10 pip
+</code></pre>
 <p>Use this environment:</p>
-<p><code>conda activate py39</code></p>
+<p><code>conda activate py310</code></p>
 <p>And a few basic commands:</p>
 <ul>
 <li><code>conda list</code> - shows all packages installed in the active env</li>
@@ -86,12 +89,15 @@
 <p>Shows all conda envs:</p>
 <p><code>conda env list</code></p>
 <p>Delete an environment:</p>
-<p><code>conda env remove -n py39 --all</code></p>
+<p><code>conda env remove -n py310 --all</code></p>
+<p>Install packages from a file:</p>
+<pre><code class="language-bash">conda install -c conda-forge --file requirements.txt
+</code></pre>
 <h3 id="write-the-packages-in-use-to-disk">Write the packages in use to disk:</h3>
 <p>This will include both the conda and pip installed packeges in an environment, long as pip was installed inside the environment.</p>
-<p><code>conda list --explicit &gt; py39.txt</code></p>
+<p><code>conda list --explicit &gt; py310.txt</code></p>
 <p>Now if I git clone this repo somewhere else, I can recreate the environment by:</p>
-<p><code>conda env create --file py39.txt</code></p>
+<p><code>conda env create --file py310.txt</code></p>
 <h2 id="jupyter-lab">Jupyter lab</h2>
 <p>Jupyter lab is the new hotness and is ready to rock out of the box with anaconda. to make it easy to select from all the environments installed, in the main anaconda env (i.e not inside an env) run:</p>
 <p><code>conda install nb_conda</code></p>
@@ -101,7 +107,7 @@
 
     <!-- post meta info div-->
     <div class="text-gray-600 text-base">
-        posted <time>2021-01-02</time>, updated <time>2022-03-07</time><br>
+        posted <time>2021-01-02</time>, updated <time>2022-03-27</time><br>
         tagged: 
         <a href="/python"
         class="text-pink-500 bg-transparent hover:bg-pink-500 hover:text-white active:bg-pink-600 font-bold rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">

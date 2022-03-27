@@ -121,8 +121,16 @@ sudo apt install typora
 <p>To install <a href="https://github.com/mauhai/awesome-jupyterlab">extensions</a>, first install nodejs:</p>
 <p>Step 1: install <a href="https://github.com/nvm-sh/nvm#install--update-script">nvm</a>, a script to install nodejs</p>
 <p><code>curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash</code></p>
-<p>step 2: install nodejs itself by:</p>
-<p><code>nvm install node</code></p>
+<p>step 2: install nodejs using <a href="https://volta.sh/">volta</a>:</p>
+<pre><code class="language-bash"># install Volta
+curl https://get.volta.sh | bash
+
+# install Node
+volta install node
+
+# start using Node
+node
+</code></pre>
 <p>Some seful jupyterlab extensions:</p>
 <p>See https://github.com/mauhai/awesome-jupyterlab</p>
 <ul>
