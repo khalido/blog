@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="/tailwind.css" rel="stylesheet">
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/a11y-dark.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
+
+        <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+        <title>This is a blog</title>
+    </head>
+
+    <body class="bg-yellow-100">
+
+        <header class="bg-yellow-400 p-4 sm:p-6 md:p-8 lg:p-10 xl:p-12">
+            <a href="/" 
+            class="text-3xl font-mono tracking-wider font-extrabold"
+            >khalido.org</a>
+            <br>
+            <p>every blog needs subheader text</p>
+        </header>
+
+        <!--container setting paddings-->
+        <div
+    class="max-w-3xl
+      mx-auto
+      px-4 py-5
+      sm:px-6 
+      md:px-7 
+      lg:max-w-4xl lg:px-8
+      xl:max-w-5xl xl:px-9
+      bg-gray-50"
+      >
+ 
+        
+
+
+
+    <!-- search box -->
+    <input class="px-4 py-3 w-80 text-xl" type="text" id="postSearch" placeholder="Search">
+
+    
+    <ul id="searchresults" class="list-none text-lg pt-4 pb-2 px-2">
+            <li class="py-0.5"><a class="no-underline hover:underline text-gray-800" href="/books/termination-shock.html">Termination Shock</a>
+                
+            <span class="align-middle pl-4 py-0.5">
+                <a class="no-underline opacity-50 text-purple-400 text-sm hover:underline hover:bg-yellow-200" href="/books">books</a>
+                <a class="no-underline opacity-50 text-purple-400 text-sm hover:underline hover:bg-yellow-200" href="/climate">climate</a>
+            </span>
+                
+            </li>
+    </ul>
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
+
+    <script>
+        // load json from disk instead of passing in python array
+
+        const searchList = [{"title": "Termination Shock", "tags": ["books", "climate"], "link": "books/termination-shock.html"}]
+
+        const options = {
+            includeScore: false,
+            threshold: 0.3,
+            // Search in `title` and in `tags` array, add posts as well
+            // default weight is 1
+            keys: [{ name: 'title', weight: 2 },
+                'tags']
+        }
+
+        const fuse = new Fuse(searchList, options)
+        const input = document.getElementById("postSearch")
+
+        input.oninput = (event) => {
+            const results = fuse.search(event.target.value)
+
+            document.getElementById("searchresults").innerHTML = "";
+
+            for (result of results) {
+                //console.log(result.item.title, result.item.tags)
+                document.getElementById('searchresults').innerHTML += '<li>' + '<a href ="' + result.item.link + '">' + result.item.title + '</a></li>'
+            }
+
+            // if no input show all the posts
+            if (input.value == "") {
+                for (result of searchList) {
+                    //console.log(result.item.title, result.item.tags)
+                    document.getElementById('searchresults').innerHTML += '<li>' + '<a href ="' + result.link + '">' + result.title + '</a></li>'
+                }
+            }
+
+        }
+
+    </script>
+    
+
+
+</div> <!-- closes first div after body -->
+
+<hr>
+<footer class="px-4 py-8 content-center text-center">
+    <p class="text-sm text-gray-300 pb-2">
+        <a href="https://github.com/khalido/blog">#</a>
+        <a href="https://twitter.com/KO">@ko</a>
+    </p>
+</footer>
+
+</body>
+
+</html>

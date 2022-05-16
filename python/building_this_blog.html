@@ -60,6 +60,7 @@
 </ul>
 </li>
 <li><a href="#misc-stuff">Misc stuff</a><ul>
+<li><a href="#embed-media">embed media</a></li>
 <li><a href="#emoji">emoji</a></li>
 <li><a href="#twitter-embed">twitter embed</a></li>
 <li><a href="#testing-syntax-highlight">testing syntax highlight</a></li>
@@ -166,6 +167,17 @@
 <li>install dependencies as defined in requirements.txt</li>
 </ul>
 <h2 id="misc-stuff">Misc stuff</h2>
+<h3 id="embed-media">embed media</h3>
+<p>The <a href="https://oembed.com/">oEmbed</a> specifies how companies like youtube, twitter provide information about their content. </p>
+<p>Calling youtube like so: <code>https://www.youtube.com/oembed?url=https://youtu.be/48A-7GBxZco</code> returns a json like:</p>
+<pre><code class="language-json">{&quot;title&quot;:&quot;Anthony Hyman Memorial Lecture 2022: The Refugee Crisis and Afghanistan&quot;,&quot;author_name&quot;:&quot;SOAS University of London&quot;,&quot;author_url&quot;:&quot;https://www.youtube.com/c/SoasAcUk&quot;,&quot;type&quot;:&quot;video&quot;,&quot;height&quot;:113,&quot;width&quot;:200,&quot;version&quot;:&quot;1.0&quot;,&quot;provider_name&quot;:&quot;YouTube&quot;,&quot;provider_url&quot;:&quot;https://www.youtube.com/&quot;,&quot;thumbnail_height&quot;:360,&quot;thumbnail_width&quot;:480,&quot;thumbnail_url&quot;:&quot;https://i.ytimg.com/vi/48A-7GBxZco/hqdefault.jpg&quot;,&quot;html&quot;:&quot;\u003ciframe width=\u0022200\u0022 height=\u0022113\u0022 src=\u0022https://www.youtube.com/embed/48A-7GBxZco?feature=oembed\u0022 frameborder=\u00220\u0022 allow=\u0022accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\u0022 allowfullscreen\u003e\u003c/iframe\u003e&quot;}
+</code></pre>
+<p>The <code>html</code> key is the html code to embed the video.</p>
+<p>Twitter also <a href="https://developer.twitter.com/en/docs/twitter-for-websites/oembed-api">has an oembed api</a>, called like so:</p>
+<pre><code>curl --request GET --url 'https://publish.twitter.com/oembed?url=https%3A%2F%2Ftwitter.com%2FInterior%2Fstatus%2F507185938620219395'
+</code></pre>
+<p>and this too returns a json, with the <code>html</code> key being the embed code.</p>
+<p>Sadly all the python wrappers are old and abandoned, so I need a tiny wrapper to do this myself.  </p>
 <h3 id="emoji">emoji</h3>
 <p>Some unicode fonts have emojis built in, so ways to enable emoji is:</p>
 <ul>
@@ -207,7 +219,7 @@ for post in posts:
 
     <!-- post meta info div-->
     <div class="text-gray-600 text-base">
-        posted <time>2020-11-11</time>, updated <time>2022-03-27</time><br>
+        posted <time>2020-11-11</time>, updated <time>2022-05-16</time><br>
         tagged: 
         <a href="/python"
         class="text-pink-500 bg-transparent hover:bg-pink-500 hover:text-white active:bg-pink-600 font-bold rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
