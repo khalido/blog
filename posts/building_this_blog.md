@@ -1,5 +1,5 @@
 ---
-title: "how the blog was built"
+title: "how the blog was built, python edition"
 date: 2020-11-11
 tags:
 - python
@@ -126,6 +126,26 @@ Github actions add superpowers to a repo - they can be set to be triggered at a 
 
 
 ## Misc stuff
+### embed media
+The [oEmbed](https://oembed.com/) specifies how companies like youtube, twitter provide information about their content. 
+
+Calling youtube like so: `https://www.youtube.com/oembed?url=https://youtu.be/48A-7GBxZco` returns a json like:
+
+```json
+{"title":"Anthony Hyman Memorial Lecture 2022: The Refugee Crisis and Afghanistan","author_name":"SOAS University of London","author_url":"https://www.youtube.com/c/SoasAcUk","type":"video","height":113,"width":200,"version":"1.0","provider_name":"YouTube","provider_url":"https://www.youtube.com/","thumbnail_height":360,"thumbnail_width":480,"thumbnail_url":"https://i.ytimg.com/vi/48A-7GBxZco/hqdefault.jpg","html":"\u003ciframe width=\u0022200\u0022 height=\u0022113\u0022 src=\u0022https://www.youtube.com/embed/48A-7GBxZco?feature=oembed\u0022 frameborder=\u00220\u0022 allow=\u0022accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\u0022 allowfullscreen\u003e\u003c/iframe\u003e"}
+```
+
+The `html` key is the html code to embed the video.
+
+Twitter also [has an oembed api](https://developer.twitter.com/en/docs/twitter-for-websites/oembed-api), called like so:
+
+```
+curl --request GET --url 'https://publish.twitter.com/oembed?url=https%3A%2F%2Ftwitter.com%2FInterior%2Fstatus%2F507185938620219395'
+```
+
+and this too returns a json, with the `html` key being the embed code.
+
+Sadly all the python wrappers are old and abandoned, so I need a tiny wrapper to do this myself.  
 
 ### emoji
 

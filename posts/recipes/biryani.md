@@ -11,7 +11,7 @@ A vegetable biryani. Cooked using a [round cast iron enamelled casserole](https:
 
 ## Ingredients
 
-1. 2 1/2 cups basmati rice (500-600g), make it 3 cups if more ppl - parboiled basmati works well
+1. 3 cups basmati rice (500-600g), add 1/2 cup if more ppl - parboiled basmati works great.
 2. 400g sweet potato
 3. 2 medium size beetroots (1.5 if large)
 4. 5-6 tomatoes
@@ -54,7 +54,7 @@ Mix all this in a glass blender:
 4. Mix the oil well and spoon over the veggies. 
 5. Place all the veggies in the oven, with paneer at the top, bake for 40 minutes (check and stir after 20 minutes)
 
-If the cashews are roasted, no need to bake, but if they are raw:
+If the cashews are roasted, no need to bake, just add them to the paneer baking tray for the last 5 minutes. If they are raw:
 
 - get a small tray, mix in a tiny bit of the veggie oil and bake for 10-15m minutes.
 
@@ -63,15 +63,15 @@ If the cashews are roasted, no need to bake, but if they are raw:
 Once the veggies are in the oven, start on this:
 
 1. wash rice in cold water and leave to soak 5-10 minutes
-2. put 3 tbsp oil in casserole and fry onions for 15-20 min until soft, brown and caramalized, stirring regularly. Remove to a bowl and put aside.
-3. While onions are cooking, place all the coconut sace ingredients in a blender and whiz fine. Pour into a saucepan on medium heat and cook for 10 minutes, stirring every now and then
+2. put 3 tbsp oil in casserole and fry onions for 15-20 min until soft, brown and caramelized, stirring regularly. Remove to a bowl and put aside.
+3. While onions are cooking, place all the coconut sauce ingredients in a blender and whiz fine. Pour into a saucepan on medium heat and cook for 10 minutes, stirring every now and then
 4. Drain rice, cover with cold water and bring it to boil in a deep saucepan, then simmer for 10 minutes, or until rice is al dente. Drain well and leave aside. Don't cook fully as it will cook a little bit more in the oven later.
 
 ### Put it all together
 
 Now to layer the biryani:
 
-1. put half the tomotoe/paneer/chickpea mix in the bottom of the biryani dish
+1. put half the tomatoe/paneer/chickpea mix in the bottom of the biryani dish
 2. quarter rice and quarter onions, some of the cashews
 3. half the coconut sauce and half beetroot and sweet potatoes
 4. quarter rice and quarter onions, rest of the cashews
@@ -81,7 +81,7 @@ Save a bit of the coconut sauce to put on top. Make sure cashews aren't peeking 
 
 Now cover the dish and bake for 30-35 minutes
 
-Serve with cucumber + mint raita. (Note: add receipe for that)
+Serve with cucumber + mint raita. (Note: add recipe for that)
 
 ---
 

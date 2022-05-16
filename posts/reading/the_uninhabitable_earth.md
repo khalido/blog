@@ -2,6 +2,7 @@
 date: 2021-07-08
 isbn: 9780141988870
 rating: 4.5
+author: David Wallace-Wells
 tags:
   - books
   - nonfiction
