@@ -1,3 +1,11 @@
+---
+title: "CLI tips"
+date: 2023-07-13
+description: "misc CLI stuff"
+tags:
+- dev
+---
+
 Useful CLI things
 
 Add environment variables:
