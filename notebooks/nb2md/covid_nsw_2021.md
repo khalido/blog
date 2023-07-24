@@ -10,7 +10,7 @@ work in progress, just wanted to see the nsw covid numbers all in one graph.
 
 
 ```python
-import datetime
+from datetime import datetime
 
 # viz stuff
 import matplotlib.dates as mdates
@@ -20,7 +20,7 @@ import pandas as pd
 from matplotlib.dates import DateFormatter
 from numpy.polynomial import Polynomial
 
-# import plotly.express as px
+import plotly.express as px
 # import plotly.graph_objects as go
 ```
 
@@ -57,7 +57,7 @@ print(df_total.shape)
 df_total.tail(3)
 ```
 
-    (31, 3)
+    (39, 3)
 
 
 
@@ -88,22 +88,22 @@ df_total.tail(3)
   </thead>
   <tbody>
     <tr>
-      <th>28</th>
-      <td>2021-07-25</td>
-      <td>141</td>
-      <td>0</td>
+      <th>36</th>
+      <td>2021-08-02</td>
+      <td>205</td>
+      <td>2</td>
     </tr>
     <tr>
-      <th>29</th>
-      <td>2021-07-26</td>
-      <td>145</td>
-      <td>6</td>
-    </tr>
-    <tr>
-      <th>30</th>
-      <td>2021-07-27</td>
-      <td>172</td>
+      <th>37</th>
+      <td>2021-08-03</td>
+      <td>198</td>
       <td>3</td>
+    </tr>
+    <tr>
+      <th>38</th>
+      <td>2021-08-04</td>
+      <td>233</td>
+      <td>1</td>
     </tr>
   </tbody>
 </table>
@@ -112,11 +112,6 @@ df_total.tail(3)
 
 
 ### Wild Cases
-
-
-```python
-from datetime import datetime
-```
 
 
 ```python
@@ -143,7 +138,7 @@ print(df_wild.shape)
 df_wild.tail(3)
 ```
 
-    (31, 6)
+    (39, 6)
 
 
 
@@ -177,31 +172,31 @@ df_wild.tail(3)
   </thead>
   <tbody>
     <tr>
-      <th>28</th>
-      <td>2021-07-25</td>
-      <td>38</td>
-      <td>24</td>
-      <td>14</td>
-      <td>76</td>
-      <td>46%</td>
-    </tr>
-    <tr>
-      <th>29</th>
-      <td>2021-07-26</td>
+      <th>36</th>
+      <td>2021-08-02</td>
       <td>51</td>
-      <td>25</td>
-      <td>11</td>
-      <td>87</td>
-      <td>40%</td>
+      <td>21</td>
+      <td>46</td>
+      <td>118</td>
+      <td>43%</td>
     </tr>
     <tr>
-      <th>30</th>
-      <td>2021-07-27</td>
-      <td>60</td>
-      <td>19</td>
+      <th>37</th>
+      <td>2021-08-03</td>
+      <td>50</td>
       <td>32</td>
-      <td>111</td>
+      <td>47</td>
+      <td>129</td>
       <td>35%</td>
+    </tr>
+    <tr>
+      <th>38</th>
+      <td>2021-08-04</td>
+      <td>47</td>
+      <td>21</td>
+      <td>73</td>
+      <td>141</td>
+      <td>39%</td>
     </tr>
   </tbody>
 </table>
@@ -227,14 +222,22 @@ def get_data():
     df = pd.merge(df_wild, df_total, on=["Date"])
     df["Isolating"] = df.Local_cases - df.Total
     
+    # splitting unknown cases by ratio
+    ratio = np.mean((df.Full + df.Part) / (df.Local_cases - df.Unkn))
+    df["Unkn_inf"] = np.ceil(ratio * df.Unkn)
+    df["Unkn_iso"] = df.Unkn - df.Unkn_inf
+    
+    df["Total_infectious"] = df.Full + df.Part + df.Unkn_inf
+    
     # some stats
-    for col in ["Full", "Part", "Unkn", "Total", "Isolating", "Local_cases"]:
+    for col in ["Full", "Part", "Unkn", "Unkn_inf", 
+                "Total_infectious", "Total", "Isolating", "Local_cases"]:
         # exponential weighted avg
         df[f"{col}_ewa"] = df[col].ewm(span=7, adjust=False).mean()
 
         # rolling mean, though ideally add some forward prediction
         df[f"{col}_roll"] = df[col].rolling(7, center=True, min_periods=4).mean()
-        
+    
     return df
 
 df = get_data()
@@ -242,7 +245,7 @@ print(df.shape)
 df.tail(3)
 ```
 
-    (31, 21)
+    (39, 28)
 
 
 
@@ -275,12 +278,12 @@ df.tail(3)
       <th>Local_cases</th>
       <th>Overseas_cases</th>
       <th>Isolating</th>
-      <th>Full_ewa</th>
+      <th>Unkn_inf</th>
       <th>...</th>
-      <th>Part_ewa</th>
-      <th>Part_roll</th>
-      <th>Unkn_ewa</th>
-      <th>Unkn_roll</th>
+      <th>Unkn_inf_ewa</th>
+      <th>Unkn_inf_roll</th>
+      <th>Total_infectious_ewa</th>
+      <th>Total_infectious_roll</th>
       <th>Total_ewa</th>
       <th>Total_roll</th>
       <th>Isolating_ewa</th>
@@ -291,80 +294,80 @@ df.tail(3)
   </thead>
   <tbody>
     <tr>
-      <th>28</th>
-      <td>2021-07-25</td>
-      <td>38</td>
-      <td>24</td>
-      <td>14</td>
-      <td>76</td>
-      <td>46%</td>
-      <td>141</td>
-      <td>0</td>
-      <td>65</td>
-      <td>39.515698</td>
-      <td>...</td>
-      <td>19.344065</td>
-      <td>22.166667</td>
-      <td>13.221584</td>
-      <td>17.666667</td>
-      <td>72.081347</td>
-      <td>89.0</td>
-      <td>54.090697</td>
-      <td>56.0</td>
-      <td>126.172044</td>
-      <td>145.0</td>
-    </tr>
-    <tr>
-      <th>29</th>
-      <td>2021-07-26</td>
+      <th>36</th>
+      <td>2021-08-02</td>
       <td>51</td>
-      <td>25</td>
-      <td>11</td>
+      <td>21</td>
+      <td>46</td>
+      <td>118</td>
+      <td>43%</td>
+      <td>205</td>
+      <td>2</td>
       <td>87</td>
-      <td>40%</td>
-      <td>145</td>
-      <td>6</td>
-      <td>58</td>
-      <td>42.386773</td>
+      <td>23.0</td>
       <td>...</td>
-      <td>20.758049</td>
-      <td>22.200000</td>
-      <td>12.666188</td>
-      <td>17.800000</td>
-      <td>75.811010</td>
-      <td>89.4</td>
-      <td>55.068022</td>
-      <td>59.8</td>
-      <td>130.879033</td>
-      <td>149.2</td>
+      <td>32.001948</td>
+      <td>35.833333</td>
+      <td>94.362833</td>
+      <td>97.00</td>
+      <td>127.030620</td>
+      <td>134.00</td>
+      <td>70.255616</td>
+      <td>74.666667</td>
+      <td>197.286236</td>
+      <td>208.666667</td>
     </tr>
     <tr>
-      <th>30</th>
-      <td>2021-07-27</td>
-      <td>60</td>
-      <td>19</td>
+      <th>37</th>
+      <td>2021-08-03</td>
+      <td>50</td>
       <td>32</td>
-      <td>111</td>
+      <td>47</td>
+      <td>129</td>
       <td>35%</td>
-      <td>172</td>
+      <td>198</td>
       <td>3</td>
-      <td>61</td>
-      <td>46.790080</td>
+      <td>69</td>
+      <td>23.0</td>
       <td>...</td>
-      <td>20.318537</td>
-      <td>23.500000</td>
-      <td>17.499641</td>
-      <td>19.000000</td>
-      <td>84.608258</td>
-      <td>91.0</td>
-      <td>56.551017</td>
-      <td>63.0</td>
-      <td>141.159275</td>
-      <td>154.0</td>
+      <td>29.751461</td>
+      <td>37.800000</td>
+      <td>97.022124</td>
+      <td>100.80</td>
+      <td>127.522965</td>
+      <td>139.80</td>
+      <td>69.941712</td>
+      <td>76.600000</td>
+      <td>197.464677</td>
+      <td>216.400000</td>
+    </tr>
+    <tr>
+      <th>38</th>
+      <td>2021-08-04</td>
+      <td>47</td>
+      <td>21</td>
+      <td>73</td>
+      <td>141</td>
+      <td>39%</td>
+      <td>233</td>
+      <td>1</td>
+      <td>92</td>
+      <td>36.0</td>
+      <td>...</td>
+      <td>31.313596</td>
+      <td>32.500000</td>
+      <td>98.766593</td>
+      <td>103.25</td>
+      <td>130.892224</td>
+      <td>136.75</td>
+      <td>75.456284</td>
+      <td>81.500000</td>
+      <td>206.348508</td>
+      <td>218.250000</td>
     </tr>
   </tbody>
 </table>
-<p>3 rows × 21 columns</p>
+<p>3 rows × 28 columns</p>
 </div>
 
 
@@ -383,7 +386,10 @@ def get_label(col):
         "Full": "Fully infectious\n(Glady's number)",
         "Part": "Partly infections WTF",
         "Unkn": "Unknown, or we don't know",
-        "Total": "Infectious in the community\n(real number)",
+        "Unkn_iso": "unkown cases likely isolating",
+        "Unkn_inf": "Unknow Infectious in the community\nUnknown cases split by historical ratio",
+        "Total_infectious": "Infectious in the community\n(with unknown cases split by historical ratio)",
+        "Total": "All infectious + unknown cases",
         "Local_cases": "All cases\nisolating + infectious",
         "Isolating": "iso All cases, isolating + infectious"
     }
@@ -406,7 +412,7 @@ X = df.Date
 colors = {}
 
 # draw smoothed lines
-cols=["Local_cases", "Total", "Full"]
+cols=["Local_cases", "Total_infectious", "Full"]
 for i, col in enumerate(cols[::-1]):
     Y = df[col]
     Y_roll = df[f"{col}_roll"]
@@ -415,7 +421,7 @@ for i, col in enumerate(cols[::-1]):
     # draw line
     line = ax.plot(X, Y_roll,
         lw=1.8, linestyle="--", alpha=0.88,
-        color = "red" if col == "Total" else None)
+        color = "red" if col == "Total_infectious" else None)
 
     color = line[0].get_color()
     colors[col] = color
@@ -424,26 +430,38 @@ for i, col in enumerate(cols[::-1]):
     xy = X.iloc[-1] + pd.DateOffset(days=1), Y_roll.values[-1]
     ax.annotate(get_label(col), xy=xy, fontsize=15,
                 color=color)
+    
+# color the infectious range
+#ax.fill_between(X, df.Total_roll, df.Full_roll + df.Part_roll,
+#                alpha=0.15, color="red", hatch="/")
 
+#ax.plot(X, df.Infectious_likely_roll, label="test")
 # step
 #ax.step(df.Date, df.Total, "o--", alpha=0.35, color=colors["Total"])    
 
 # stacked bar chart
 alpha=0.05
-full = ax.bar(df.Date, df.Full, label="Fully Infectious", alpha=alpha)
-part = ax.bar(df.Date, df.Part, bottom=df.Full, label="Partially Infectious", alpha=alpha)
-unkn = ax.bar(df.Date, df.Unkn, bottom=df.Full + df.Part, label="Not telling us", alpha=0.1)
-isolating = ax.bar(df.Date, df.Isolating, bottom=df.Total, label="Isolating",
+full = ax.bar(df.Date, df.Full, label="Fully Infectious", alpha=0.25, color="red")
+part = ax.bar(df.Date, df.Part, bottom=df.Full, label="Partially Infectious", 
+              alpha=0.25, color="orange")
+unkn_inf = ax.bar(df.Date, df.Unkn_inf, bottom=df.Full + df.Part, label="Unknowly Infectious", 
+                  color="red", alpha=0.15)
+unkn_iso = ax.bar(df.Date, df.Unkn_iso, bottom=df.Total_infectious, label="Unkn Isolating",
            color=colors["Local_cases"], alpha=alpha) # only drawing for labels
 
-for rect in [full, part, unkn, isolating]: # label the bars in the center
-    ax.bar_label(rect, label_type='center', alpha=0.4)
+iso = ax.bar(df.Date, df.Isolating, bottom=df.Total, label="Isolating",
+           color=None, alpha=alpha) # only drawing for labels
 
-# label totals by making a invisible total bar 
-r = ax.bar(df.Date, df.Total, alpha=0) # only drawing for labels
-ax.bar_label(r, alpha=0.8, padding=5, fontsize=14, color=colors["Total"])
+#for rect in [full, part, unkn_inf, unkn_iso, iso]: # label the bars in the center
+#    ax.bar_label(rect, label_type='center', alpha=0.4)
 
-ax.bar_label(isolating, alpha=0.8, padding=5, fontsize=12, color=colors["Local_cases"])
+# label totals by making a invisible total bar
+for col in ["Local_cases", "Total_infectious"]:
+    r = ax.bar(df.Date, df[col], alpha=0) # only drawing for labels
+    ax.bar_label(r, alpha=0.8, padding=5, fontsize=12, color=colors[col])
+
+
+#ax.bar_label(isolating, alpha=0.8, padding=5, fontsize=12, color=colors["Local_cases"])
 
 # final plot tweaks
 date_form = mdates.DateFormatter("%m/%d")
@@ -456,9 +474,74 @@ plt.show()
 
 
     
+![png](covid_nsw_2021_files/covid_nsw_2021_12_0.png)
+    
+
+
+
+```python
+def isolation_ratio():
+    ratio = np.mean((df.Full_roll + df.Part_roll) / (df.Local_cases_roll - df.Unkn_roll))
+    probable = np.ceil(ratio * df.Isolating_roll)
+    
+    plt.plot(df.Full_roll + df.Part_roll + probable, label="Infectious")
+    plt.legend()
+    plt.show()
+    
+    
+
+isolation_ratio()
+    
+```
+
+
+    
 ![png](covid_nsw_2021_files/covid_nsw_2021_13_0.png)
     
 
+
+Now to make a plotly version...
+
+
+```python
+fig = px.bar(df, x="Date", y=["Full", "Part", "Unkn", "Isolating"],
+            title="NSW Covid test")
+
+fig
+```
+
+
+<div>                            <div id="1703bd2d-1fee-4d75-8918-d3474c9e1f73" class="plotly-graph-div" style="height:525px; width:100%;"></div>            <script type="text/javascript">                require(["plotly"], function(Plotly) {                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("1703bd2d-1fee-4d75-8918-d3474c9e1f73")) {                    Plotly.newPlot(                        "1703bd2d-1fee-4d75-8918-d3474c9e1f73",                        [{"alignmentgroup":"True","hovertemplate":"variable=Full<br>Date=%{x}<br>value=%{y}<extra></extra>","legendgroup":"Full","marker":{"color":"#636efa","pattern":{"shape":""}},"name":"Full","offsetgroup":"Full","orientation":"v","showlegend":true,"textposition":"auto","type":"bar","x":["2021-06-27T00:00:00","2021-06-28T00:00:00","2021-06-29T00:00:00","2021-06-30T00:00:00","2021-07-01T00:00:00","2021-07-02T00:00:00","2021-07-03T00:00:00","2021-07-04T00:00:00","2021-07-05T00:00:00","2021-07-06T00:00:00","2021-07-07T00:00:00","2021-07-08T00:00:00","2021-07-09T00:00:00","2021-07-10T00:00:00","2021-07-11T00:00:00","2021-07-12T00:00:00","2021-07-13T00:00:00","2021-07-14T00:00:00","2021-07-15T00:00:00","2021-07-16T00:00:00","2021-07-17T00:00:00","2021-07-18T00:00:00","2021-07-19T00:00:00","2021-07-20T00:00:00","2021-07-21T00:00:00","2021-07-22T00:00:00","2021-07-23T00:00:00","2021-07-24T00:00:00","2021-07-25T00:00:00","2021-07-26T00:00:00","2021-07-27T00:00:00","2021-07-28T00:00:00","2021-07-29T00:00:00","2021-07-30T00:00:00","2021-07-31T00:00:00","2021-08-01T00:00:00","2021-08-02T00:00:00"],"xaxis":"x","y":[11,6,9,6,12,12,9,2,7,2,7,11,19,26,33,34,21,24,28,29,29,27,20,21,43,48,53,45,38,51,60,46,66,42,21,26,51],"yaxis":"y"},{"alignmentgroup":"True","hovertemplate":"variable=Part<br>Date=%{x}<br>value=%{y}<extra></extra>","legendgroup":"Part","marker":{"color":"#EF553B","pattern":{"shape":""}},"name":"Part","offsetgroup":"Part","orientation":"v","showlegend":true,"textposition":"auto","type":"bar","x":["2021-06-27T00:00:00","2021-06-28T00:00:00","2021-06-29T00:00:00","2021-06-30T00:00:00","2021-07-01T00:00:00","2021-07-02T00:00:00","2021-07-03T00:00:00","2021-07-04T00:00:00","2021-07-05T00:00:00","2021-07-06T00:00:00","2021-07-07T00:00:00","2021-07-08T00:00:00","2021-07-09T00:00:00","2021-07-10T00:00:00","2021-07-11T00:00:00","2021-07-12T00:00:00","2021-07-13T00:00:00","2021-07-14T00:00:00","2021-07-15T00:00:00","2021-07-16T00:00:00","2021-07-17T00:00:00","2021-07-18T00:00:00","2021-07-19T00:00:00","2021-07-20T00:00:00","2021-07-21T00:00:00","2021-07-22T00:00:00","2021-07-23T00:00:00","2021-07-24T00:00:00","2021-07-25T00:00:00","2021-07-26T00:00:00","2021-07-27T00:00:00","2021-07-28T00:00:00","2021-07-29T00:00:00","2021-07-30T00:00:00","2021-07-31T00:00:00","2021-08-01T00:00:00","2021-08-02T00:00:00"],"xaxis":"x","y":[3,3,2,5,3,3,3,1,4,5,7,9,8,11,9,12,9,0,7,17,10,7,17,8,17,22,17,26,24,25,19,22,22,10,11,35,21],"yaxis":"y"},{"alignmentgroup":"True","hovertemplate":"variable=Unkn<br>Date=%{x}<br>value=%{y}<extra></extra>","legendgroup":"Unkn","marker":{"color":"#00cc96","pattern":{"shape":""}},"name":"Unkn","offsetgroup":"Unkn","orientation":"v","showlegend":true,"textposition":"auto","type":"bar","x":["2021-06-27T00:00:00","2021-06-28T00:00:00","2021-06-29T00:00:00","2021-06-30T00:00:00","2021-07-01T00:00:00","2021-07-02T00:00:00","2021-07-03T00:00:00","2021-07-04T00:00:00","2021-07-05T00:00:00","2021-07-06T00:00:00","2021-07-07T00:00:00","2021-07-08T00:00:00","2021-07-09T00:00:00","2021-07-10T00:00:00","2021-07-11T00:00:00","2021-07-12T00:00:00","2021-07-13T00:00:00","2021-07-14T00:00:00","2021-07-15T00:00:00","2021-07-16T00:00:00","2021-07-17T00:00:00","2021-07-18T00:00:00","2021-07-19T00:00:00","2021-07-20T00:00:00","2021-07-21T00:00:00","2021-07-22T00:00:00","2021-07-23T00:00:00","2021-07-24T00:00:00","2021-07-25T00:00:00","2021-07-26T00:00:00","2021-07-27T00:00:00","2021-07-28T00:00:00","2021-07-29T00:00:00","2021-07-30T00:00:00","2021-07-31T00:00:00","2021-08-01T00:00:00","2021-08-02T00:00:00"],"xaxis":"x","y":[0,0,1,0,0,5,0,0,0,0,0,1,7,0,3,18,4,6,1,5,3,2,7,12,13,17,13,19,14,11,32,62,70,53,120,98,46],"yaxis":"y"},{"alignmentgroup":"True","hovertemplate":"variable=Isolating<br>Date=%{x}<br>value=%{y}<extra></extra>","legendgroup":"Isolating","marker":{"color":"#ab63fa","pattern":{"shape":""}},"name":"Isolating","offsetgroup":"Isolating","orientation":"v","showlegend":true,"textposition":"auto","type":"bar","x":["2021-06-27T00:00:00","2021-06-28T00:00:00","2021-06-29T00:00:00","2021-06-30T00:00:00","2021-07-01T00:00:00","2021-07-02T00:00:00","2021-07-03T00:00:00","2021-07-04T00:00:00","2021-07-05T00:00:00","2021-07-06T00:00:00","2021-07-07T00:00:00","2021-07-08T00:00:00","2021-07-09T00:00:00","2021-07-10T00:00:00","2021-07-11T00:00:00","2021-07-12T00:00:00","2021-07-13T00:00:00","2021-07-14T00:00:00","2021-07-15T00:00:00","2021-07-16T00:00:00","2021-07-17T00:00:00","2021-07-18T00:00:00","2021-07-19T00:00:00","2021-07-20T00:00:00","2021-07-21T00:00:00","2021-07-22T00:00:00","2021-07-23T00:00:00","2021-07-24T00:00:00","2021-07-25T00:00:00","2021-07-26T00:00:00","2021-07-27T00:00:00","2021-07-28T00:00:00","2021-07-29T00:00:00","2021-07-30T00:00:00","2021-07-31T00:00:00","2021-08-01T00:00:00","2021-08-02T00:00:00"],"xaxis":"x","y":[16,10,7,11,9,11,23,13,24,11,13,17,10,13,32,48,55,67,29,46,69,69,54,37,37,37,47,68,65,57,61,46,79,65,57,78,87],"yaxis":"y"}],                        {"barmode":"relative","legend":{"title":{"text":"variable"},"tracegroupgap":0},"template":{"data":{"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"choropleth":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"choropleth"}],"contour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"contour"}],"contourcarpet":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"contourcarpet"}],"heatmap":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmap"}],"heatmapgl":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmapgl"}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"histogram2d":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2d"}],"histogram2dcontour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2dcontour"}],"mesh3d":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"mesh3d"}],"parcoords":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"parcoords"}],"pie":[{"automargin":true,"type":"pie"}],"scatter":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatter"}],"scatter3d":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatter3d"}],"scattercarpet":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattercarpet"}],"scattergeo":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergeo"}],"scattergl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergl"}],"scattermapbox":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermapbox"}],"scatterpolar":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolar"}],"scatterpolargl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolargl"}],"scatterternary":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterternary"}],"surface":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"surface"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}]},"layout":{"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"autotypenumbers":"strict","coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]],"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]},"colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"geo":{"bgcolor":"white","lakecolor":"white","landcolor":"#E5ECF6","showlakes":true,"showland":true,"subunitcolor":"white"},"hoverlabel":{"align":"left"},"hovermode":"closest","mapbox":{"style":"light"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"bgcolor":"#E5ECF6","radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","gridwidth":2,"linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white"},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","gridwidth":2,"linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white"},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","gridwidth":2,"linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white"}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"ternary":{"aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"bgcolor":"#E5ECF6","caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"title":{"x":0.05},"xaxis":{"automargin":true,"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","zerolinewidth":2},"yaxis":{"automargin":true,"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","zerolinewidth":2}}},"title":{"text":"NSW Covid test"},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"Date"}},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"value"}}},                        {"responsive": true}                    ).then(function(){
+
+var gd = document.getElementById('1703bd2d-1fee-4d75-8918-d3474c9e1f73');
+var x = new MutationObserver(function (mutations, observer) {{
+        var display = window.getComputedStyle(gd).display;
+        if (!display || display === 'none') {{
+            console.log([gd, 'removed!']);
+            Plotly.purge(gd);
+            observer.disconnect();
+        }}
+}});
+
+// Listen for the removal of the full notebook cells
+var notebookContainer = gd.closest('#notebook-container');
+if (notebookContainer) {{
+    x.observe(notebookContainer, {childList: true});
+}}
+
+// Listen for the clearing of the current output cell
+var outputEl = gd.closest('.output');
+if (outputEl) {{
+    x.observe(outputEl, {childList: true});
+}}
+
+                        })                };                });            </script>        </div>
+
+
+
+```python
+fig.
+```
 
 ## Extrapolation
 
@@ -500,7 +583,7 @@ ax.legend();
 
 
     
-![png](covid_nsw_2021_files/covid_nsw_2021_16_0.png)
+![png](covid_nsw_2021_files/covid_nsw_2021_19_0.png)
     
 
 
@@ -522,7 +605,7 @@ plt.legend();
 
 
     
-![png](covid_nsw_2021_files/covid_nsw_2021_17_0.png)
+![png](covid_nsw_2021_files/covid_nsw_2021_20_0.png)
     
 
 
@@ -567,7 +650,7 @@ get_R("Local_cases_roll")
 
 
     
-![png](covid_nsw_2021_files/covid_nsw_2021_19_1.png)
+![png](covid_nsw_2021_files/covid_nsw_2021_22_1.png)
     
 
 
@@ -695,7 +778,7 @@ ax2.legend();
 
 
     
-![png](covid_nsw_2021_files/covid_nsw_2021_21_1.png)
+![png](covid_nsw_2021_files/covid_nsw_2021_24_1.png)
     
 
 
@@ -824,7 +907,7 @@ plt.show()
 
 
     
-![png](covid_nsw_2021_files/covid_nsw_2021_22_2.png)
+![png](covid_nsw_2021_files/covid_nsw_2021_25_2.png)
     
 
 
@@ -874,4 +957,334 @@ V1 = 0.34
 V2 = 0.14
 
 X = pd.date_range(start_date, vax_date, freq=pd.DateOffset(days=1))
+```
+
+# Vaccine
+
+
+```python
+df = pd.read_csv("https://vaccinedata.covid19nearme.com.au/data/air.csv")
+print(f"{df.shape}")
+df.head()
+```
+
+    (32, 240)
+
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>DATE_AS_AT</th>
+      <th>AIR_95_PLUS_FIRST_DOSE_COUNT</th>
+      <th>AIR_95_PLUS_FIRST_DOSE_PCT</th>
+      <th>AIR_95_PLUS_SECOND_DOSE_COUNT</th>
+      <th>AIR_95_PLUS_SECOND_DOSE_PCT</th>
+      <th>AIR_95_PLUS_FEMALE_PCT</th>
+      <th>AIR_95_PLUS_MALE_PCT</th>
+      <th>AIR_90_94_FIRST_DOSE_COUNT</th>
+      <th>AIR_90_94_FIRST_DOSE_PCT</th>
+      <th>AIR_90_94_SECOND_DOSE_COUNT</th>
+      <th>...</th>
+      <th>AIR_AUS_50_PLUS_SECOND_DOSE_COUNT</th>
+      <th>AIR_AUS_50_PLUS_SECOND_DOSE_PCT</th>
+      <th>AIR_AUS_50_PLUS_POPULATION</th>
+      <th>AIR_AUS_70_PLUS_FIRST_DOSE_COUNT</th>
+      <th>AIR_AUS_70_PLUS_FIRST_DOSE_PCT</th>
+      <th>AIR_AUS_70_PLUS_SECOND_DOSE_COUNT</th>
+      <th>AIR_AUS_70_PLUS_SECOND_DOSE_PCT</th>
+      <th>AIR_AUS_70_PLUS_POPULATION</th>
+      <th>VALIDATED</th>
+      <th>URL</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2021-06-30</td>
+      <td>35527</td>
+      <td>67.1</td>
+      <td>20311</td>
+      <td>38.4</td>
+      <td>69.2</td>
+      <td>61.8</td>
+      <td>112809</td>
+      <td>71.2</td>
+      <td>47267</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Y</td>
+      <td>https://www.health.gov.au/sites/default/files/...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2021-07-01</td>
+      <td>35706</td>
+      <td>67.5</td>
+      <td>20643</td>
+      <td>39.0</td>
+      <td>69.5</td>
+      <td>62.1</td>
+      <td>113516</td>
+      <td>71.7</td>
+      <td>48748</td>
+      <td>...</td>
+      <td>873372.0</td>
+      <td>9.98</td>
+      <td>8749703.0</td>
+      <td>2056873.0</td>
+      <td>70.09</td>
+      <td>487223.0</td>
+      <td>16.60</td>
+      <td>2934706.0</td>
+      <td>Y</td>
+      <td>https://www.health.gov.au/sites/default/files/...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2021-07-02</td>
+      <td>35886</td>
+      <td>67.8</td>
+      <td>20974</td>
+      <td>39.6</td>
+      <td>69.8</td>
+      <td>62.5</td>
+      <td>114158</td>
+      <td>72.1</td>
+      <td>50057</td>
+      <td>...</td>
+      <td>920300.0</td>
+      <td>10.52</td>
+      <td>8749703.0</td>
+      <td>2069603.0</td>
+      <td>70.52</td>
+      <td>516252.0</td>
+      <td>17.59</td>
+      <td>2934706.0</td>
+      <td>Y</td>
+      <td>https://www.health.gov.au/sites/default/files/...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2021-07-03</td>
+      <td>35979</td>
+      <td>68.0</td>
+      <td>21139</td>
+      <td>40.0</td>
+      <td>70.0</td>
+      <td>62.7</td>
+      <td>114463</td>
+      <td>72.3</td>
+      <td>50750</td>
+      <td>...</td>
+      <td>943860.0</td>
+      <td>10.79</td>
+      <td>8749703.0</td>
+      <td>2074921.0</td>
+      <td>70.70</td>
+      <td>530572.0</td>
+      <td>18.08</td>
+      <td>2934706.0</td>
+      <td>Y</td>
+      <td>https://www.health.gov.au/sites/default/files/...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2021-07-04</td>
+      <td>36030</td>
+      <td>68.1</td>
+      <td>21211</td>
+      <td>40.1</td>
+      <td>70.1</td>
+      <td>62.8</td>
+      <td>114566</td>
+      <td>72.3</td>
+      <td>50994</td>
+      <td>...</td>
+      <td>952509.0</td>
+      <td>10.89</td>
+      <td>8749703.0</td>
+      <td>2076737.0</td>
+      <td>70.76</td>
+      <td>535877.0</td>
+      <td>18.26</td>
+      <td>2934706.0</td>
+      <td>Y</td>
+      <td>https://www.health.gov.au/sites/default/files/...</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 240 columns</p>
+</div>
+
+
+
+
+```python
+df = pd.read_csv("https://covidbaseau.com/vaccinations/download/")
+print(f"{df.shape}")
+df.head()
+```
+
+
+    ---------------------------------------------------------------------------
+
+    HTTPError                                 Traceback (most recent call last)
+
+    /var/folders/52/11vzrbln5j32pw5j6hqfc3p40000gn/T/ipykernel_12315/1812066370.py in <module>
+    ----> 1 df = pd.read_csv("https://covidbaseau.com/vaccinations/download/")
+          2 print(f"{df.shape}")
+          3 df.head()
+
+
+    /usr/local/Caskroom/mambaforge/base/envs/py39/lib/python3.9/site-packages/pandas/io/parsers.py in read_csv(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, squeeze, prefix, mangle_dupe_cols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, skipfooter, nrows, na_values, keep_default_na, na_filter, verbose, skip_blank_lines, parse_dates, infer_datetime_format, keep_date_col, date_parser, dayfirst, cache_dates, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, doublequote, escapechar, comment, encoding, dialect, error_bad_lines, warn_bad_lines, delim_whitespace, low_memory, memory_map, float_precision, storage_options)
+        608     kwds.update(kwds_defaults)
+        609 
+    --> 610     return _read(filepath_or_buffer, kwds)
+        611 
+        612 
+
+
+    /usr/local/Caskroom/mambaforge/base/envs/py39/lib/python3.9/site-packages/pandas/io/parsers.py in _read(filepath_or_buffer, kwds)
+        460 
+        461     # Create the parser.
+    --> 462     parser = TextFileReader(filepath_or_buffer, **kwds)
+        463 
+        464     if chunksize or iterator:
+
+
+    /usr/local/Caskroom/mambaforge/base/envs/py39/lib/python3.9/site-packages/pandas/io/parsers.py in __init__(self, f, engine, **kwds)
+        817             self.options["has_index_names"] = kwds["has_index_names"]
+        818 
+    --> 819         self._engine = self._make_engine(self.engine)
+        820 
+        821     def close(self):
+
+
+    /usr/local/Caskroom/mambaforge/base/envs/py39/lib/python3.9/site-packages/pandas/io/parsers.py in _make_engine(self, engine)
+       1048             )
+       1049         # error: Too many arguments for "ParserBase"
+    -> 1050         return mapping[engine](self.f, **self.options)  # type: ignore[call-arg]
+       1051 
+       1052     def _failover_to_python(self):
+
+
+    /usr/local/Caskroom/mambaforge/base/envs/py39/lib/python3.9/site-packages/pandas/io/parsers.py in __init__(self, src, **kwds)
+       1865 
+       1866         # open handles
+    -> 1867         self._open_handles(src, kwds)
+       1868         assert self.handles is not None
+       1869         for key in ("storage_options", "encoding", "memory_map", "compression"):
+
+
+    /usr/local/Caskroom/mambaforge/base/envs/py39/lib/python3.9/site-packages/pandas/io/parsers.py in _open_handles(self, src, kwds)
+       1360         Let the readers open IOHanldes after they are done with their potential raises.
+       1361         """
+    -> 1362         self.handles = get_handle(
+       1363             src,
+       1364             "r",
+
+
+    /usr/local/Caskroom/mambaforge/base/envs/py39/lib/python3.9/site-packages/pandas/io/common.py in get_handle(path_or_buf, mode, encoding, compression, memory_map, is_text, errors, storage_options)
+        556 
+        557     # open URLs
+    --> 558     ioargs = _get_filepath_or_buffer(
+        559         path_or_buf,
+        560         encoding=encoding,
+
+
+    /usr/local/Caskroom/mambaforge/base/envs/py39/lib/python3.9/site-packages/pandas/io/common.py in _get_filepath_or_buffer(filepath_or_buffer, encoding, compression, mode, storage_options)
+        287                 "storage_options passed with file object or non-fsspec file path"
+        288             )
+    --> 289         req = urlopen(filepath_or_buffer)
+        290         content_encoding = req.headers.get("Content-Encoding", None)
+        291         if content_encoding == "gzip":
+
+
+    /usr/local/Caskroom/mambaforge/base/envs/py39/lib/python3.9/site-packages/pandas/io/common.py in urlopen(*args, **kwargs)
+        193     import urllib.request
+        194 
+    --> 195     return urllib.request.urlopen(*args, **kwargs)
+        196 
+        197 
+
+
+    /usr/local/Caskroom/mambaforge/base/envs/py39/lib/python3.9/urllib/request.py in urlopen(url, data, timeout, cafile, capath, cadefault, context)
+        212     else:
+        213         opener = _opener
+    --> 214     return opener.open(url, data, timeout)
+        215 
+        216 def install_opener(opener):
+
+
+    /usr/local/Caskroom/mambaforge/base/envs/py39/lib/python3.9/urllib/request.py in open(self, fullurl, data, timeout)
+        521         for processor in self.process_response.get(protocol, []):
+        522             meth = getattr(processor, meth_name)
+    --> 523             response = meth(req, response)
+        524 
+        525         return response
+
+
+    /usr/local/Caskroom/mambaforge/base/envs/py39/lib/python3.9/urllib/request.py in http_response(self, request, response)
+        630         # request was successfully received, understood, and accepted.
+        631         if not (200 <= code < 300):
+    --> 632             response = self.parent.error(
+        633                 'http', request, response, code, msg, hdrs)
+        634 
+
+
+    /usr/local/Caskroom/mambaforge/base/envs/py39/lib/python3.9/urllib/request.py in error(self, proto, *args)
+        559         if http_err:
+        560             args = (dict, 'default', 'http_error_default') + orig_args
+    --> 561             return self._call_chain(*args)
+        562 
+        563 # XXX probably also want an abstract factory that knows when it makes
+
+
+    /usr/local/Caskroom/mambaforge/base/envs/py39/lib/python3.9/urllib/request.py in _call_chain(self, chain, kind, meth_name, *args)
+        492         for handler in handlers:
+        493             func = getattr(handler, meth_name)
+    --> 494             result = func(*args)
+        495             if result is not None:
+        496                 return result
+
+
+    /usr/local/Caskroom/mambaforge/base/envs/py39/lib/python3.9/urllib/request.py in http_error_default(self, req, fp, code, msg, hdrs)
+        639 class HTTPDefaultErrorHandler(BaseHandler):
+        640     def http_error_default(self, req, fp, code, msg, hdrs):
+    --> 641         raise HTTPError(req.full_url, code, msg, hdrs, fp)
+        642 
+        643 class HTTPRedirectHandler(BaseHandler):
+
+
+    HTTPError: HTTP Error 403: Forbidden
+
+
+
+```python
+
 ```

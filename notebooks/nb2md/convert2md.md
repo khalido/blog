@@ -19,7 +19,8 @@ Later on could add an option to the config to either build notebooks on each bui
 #collapse-hide
 import os
 from pathlib import Path
-from nbdev.export2html import convert_md
+from nbdev.export2html import convert_md, notebook2html
+from nbdev import export2html
 import yaml
 
 import khalido as ko # my helper utils
@@ -53,6 +54,54 @@ def make_folder(path, debug: bool = False):
 ## nbdev
 
 NBdev comes with a number of helpful extra features, so first up using that:
+
+
+```python
+nb_paths = [
+        f for f in path_nb.rglob("*.ipynb") if ".ipynb_checkpoints" not in str(f)
+    ]
+nb_paths
+```
+
+
+
+
+    [Path('books.ipynb'),
+     Path('convert2md.ipynb'),
+     Path('quicksort.ipynb'),
+     Path('flood_fill.ipynb'),
+     Path('blogging_with_jupyter_notebooks.ipynb'),
+     Path('pinboard.ipynb'),
+     Path('monte_carlo_pi.ipynb'),
+     Path('knn.ipynb'),
+     Path('advent-of-code-2020.ipynb'),
+     Path('covid_nsw_2021.ipynb'),
+     Path('Advent-of-Code-2015.ipynb'),
+     Path('monty_hall.ipynb')]
+
+
+
+
+```python
+p = nb_paths[-1]
+p.absolute()
+```
+
+
+
+
+    Path('/Users/ko/code/blog/notebooks/monty_hall.ipynb')
+
+
+
+
+```python
+export2html.notebook2html(p, dest="nbdev", template_file="fastpages.tpl", 
+                          execute=False, force_all=True)
+```
+
+    converting: monty_hall.ipynb
+
 
 
 ```python
@@ -203,7 +252,7 @@ Image(data=resources['outputs']['output_3_0.png'], format='png')
 
 
     
-![png](convert2md_files/convert2md_14_0.png)
+![png](convert2md_files/convert2md_17_0.png)
     
 
 
